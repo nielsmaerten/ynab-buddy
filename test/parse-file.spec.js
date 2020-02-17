@@ -12,7 +12,9 @@ describe("parser.file()", () => {
   it("accepts a file path", () => {
     Proxy.parser.file(getFilePath(testFiles[0]));
   });
+
   it("returns a parseResult", () => {
     let result = Proxy.parser.file(getFilePath(testFiles[0]));
+    expect(result).to.not.equal(undefined);
   });
 });

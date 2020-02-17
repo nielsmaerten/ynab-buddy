@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "reformat": "prettier {src,test}**/*.js --write --print-width 120"
+    "reformat": "prettier {src,test}/**/*.js --write --print-width 120",
+    "postinstall": "npm run update-bank2ynab",
+    "update-bank2ynab": "node ./src/bank2ynab/run-updater"
   },
   "keywords": [],
   "author": {

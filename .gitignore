@@ -163,3 +163,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/node,macos,windows
+
+# bank2ynab
+bank2ynab.conf

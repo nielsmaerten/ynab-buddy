@@ -14,7 +14,7 @@ describe("Parser result", () => {
   it("has a name property", () => {
     expect(result).to.haveOwnProperty("name");
   });
-  
+
   it("has a transactions array", () => {
     expect(result).to.haveOwnProperty("transactions");
     expect(result.transactions).to.be.an("array");
