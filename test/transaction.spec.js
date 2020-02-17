@@ -8,12 +8,15 @@ describe("Transaction", () => {
   it("has a 'Date' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Date");
   });
+
   it("has a 'Payee' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Payee");
   });
+
   it("has a 'Memo' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Memo");
   });
+  
   it("has either 'Outflow' and 'Inflow'; or 'Amount' properties", () => {
     let hasAmount = result.transactions[0].hasOwnProperty("Amount");
     let hasInflow = result.transactions[0].hasOwnProperty("Inflow");
