@@ -1,6 +1,12 @@
 module.exports = (csv, filename = null) => {
   let now = new Date();
-  // TODO
+  // TODO(next)
+
+  // Use the filename to find a matching config
+
+  // Parse the csv string to 'Transactions'
+
+  // Return the results object
   return {
     error: "oops",
     success: true,
