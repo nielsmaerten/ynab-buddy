@@ -1,0 +1,22 @@
+{
+  "name": "proxy-for-ynab",
+  "version": "1.0.0",
+  "description": "Javascript parser and importer on top of bank2ynab",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "reformat": "prettier {src,test}**/*.js --write --print-width 120"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Niels Maerten",
+    "url": "https://github.com/nielsmaerten"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.0.1",
+    "prettier": "^1.19.1",
+    "sinon": "^8.1.1"
+  }
+}
