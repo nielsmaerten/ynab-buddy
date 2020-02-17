@@ -2,7 +2,7 @@ const chai = require("chai");
 const expect = chai.expect;
 const Proxy = require("../src");
 
-const testData = require("./test-data")
+const testData = require("./test-data");
 
 describe("parser.csv()", () => {
   it("accepts a CSV string", () => {
