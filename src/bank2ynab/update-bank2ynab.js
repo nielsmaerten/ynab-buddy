@@ -13,7 +13,7 @@ const configFilePath = path.resolve("./src/bank2ynab/bank2ynab.conf");
 /**
  * Downloads and writes the current version of bank2ynab.conf to configFilePath
  */
-const update = (overrideUrl) =>
+const update = overrideUrl =>
   new Promise(resolve => {
     console.log("Updating bank2ynab.conf ...");
     https.get(overrideUrl || configUrl).on("response", function(response) {

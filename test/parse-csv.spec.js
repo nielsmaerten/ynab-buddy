@@ -4,10 +4,6 @@ const Proxy = require("../src");
 const testData = require("./test-data");
 
 describe("parser.csv()", () => {
-  it("accepts a CSV string", () => {
-    Proxy.parser.csv(testData.csvString);
-  });
-
   it("accepts a CSV string + filename", () => {
     Proxy.parser.csv(testData.csvString, "my-test-file");
   });

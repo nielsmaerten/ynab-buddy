@@ -1,5 +1,4 @@
-module.exports = (csv, filename = null) => {
-  let now = new Date();
+module.exports = (csv, filename) => {
   // TODO(next)
 
   // Use the filename to find a matching config
@@ -10,7 +9,7 @@ module.exports = (csv, filename = null) => {
   return {
     error: "oops",
     success: true,
-    name: filename || `ynab-${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}.csv`,
+    name: filename,
     transactions: [
       {
         Amount: 420.69,
