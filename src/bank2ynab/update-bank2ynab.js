@@ -8,10 +8,20 @@ const configUrl = "https://raw.githubusercontent.com/bank2ynab/bank2ynab/develop
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
-const configFilePath = path.resolve("./src/bank2ynab/bank2ynab.conf");
+const outputPath = path.resolve("./src/bank2ynab/");
+
+const filenames = {
+  conf: "bank2ynab.conf",
+  json: "bank2ynab.json"
+};
+
+const getJsonConfig = () => {
+  return JSON.stringify(require("./bank2ynab-parser").getBank2YnabConfig());
+};
 
 /**
- * Downloads and writes the current version of bank2ynab.conf to configFilePath
+ * Downloads and writes the current version of bank2ynab.conf to
+ * bank2ynab.conf and bank2ynab.json
  */
 const update = overrideUrl =>
   new Promise(resolve => {
@@ -22,8 +32,10 @@ const update = overrideUrl =>
         body += chunk;
       });
       response.on("end", function() {
-        console.log("bank2ynab.conf update success.");
-        fs.writeFileSync(configFilePath, body);
+        fs.writeFileSync(path.join(outputPath, filenames.conf), body);
+        fs.writeFileSync(path.join(outputPath, filenames.json), getJsonConfig());
+
+        console.log("bank2ynab update success.");
         resolve();
       });
     });
