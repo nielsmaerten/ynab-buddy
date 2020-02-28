@@ -1,5 +1,5 @@
-const parsingTools = require("./parsing-tools");
-const bank2ynab_configs = require("./bank2ynab").getConfigs();
+const validateConfig = require("./validate-config");
+const bank2ynab_configs = require("../bank2ynab").getConfigs();
 
 /**
  * Find a bank2ynab configuration that can be used to parse the CSV
@@ -16,7 +16,7 @@ const detectConfig = (csvString, filename) => {
 
   // Test each Candidate to see if it produces a valid Transaction
   let compatible_config = candidates.find(candidate => {
-    return parsingTools.isConfigCompatible(csvString, candidate);
+    return validateConfig(csvString, candidate);
   });
 
   return compatible_config;

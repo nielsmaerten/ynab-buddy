@@ -1,4 +1,5 @@
 module.exports = {
-  isConfigCompatible: require("./test-config"),
-  parse: require("./parse")
+  parse: require("./parse"),
+  validateConfig: require("./validate-config"),
+  detectConfig: require("./detect-config")
 };

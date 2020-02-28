@@ -1,4 +1,4 @@
-const detectConfig = require("../src/detect-config");
+const detectConfig = require("../src/parsing-tools/detect-config");
 const path = require("path");
 const fs = require("fs");
 const chai = require("chai");
@@ -14,7 +14,7 @@ describe("Config detector", () => {
       let contents = fs.readFileSync(getFilePath(filename)).toString();
       let result = detectConfig(contents, filename);
 
-      expect(result.error).to.not.equal("found_no_matching_config", `Unable to detect config of: ${filename}`);
+      expect(result).to.not.equal(undefined, `Unable to detect config of: ${filename}`);
     });
   });
 });

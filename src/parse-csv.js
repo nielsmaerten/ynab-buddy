@@ -1,5 +1,4 @@
 const parsingTools = require("./parsing-tools");
-const detectConfig = require("./detect-config");
 
 /**
  * Turn CSV content into YNAB compatible Transactions
@@ -7,7 +6,7 @@ const detectConfig = require("./detect-config");
  * @param {string} filename The name of the bank export file. Required
  */
 const parseCsv = (csvString, filename) => {
-  let config = detectConfig(csvString, filename);
+  let config = parsingTools.detectConfig(csvString, filename);
 
   if (!config) {
     return {
