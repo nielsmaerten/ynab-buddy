@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const testData = require("./test-data");
 
 describe("Transaction", () => {
-  let result = Proxy.parser.csv(testData.csvStrings.example);
+  let result = Proxy.parser.csv(testData.csvStrings.valid, testData.csvStrings.validFilename);
 
   it("has a 'Date' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Date");
