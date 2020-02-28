@@ -1,29 +1,34 @@
+const Papa = require("papaparse");
+
 module.exports = (csvString, config) => {
-  // TODO: Next
-  // Checks if the config can be used to parse this CSV string
-  // It should be faster than actually parsing the whole file
-  // For example, only parse the first line, and see if it's a valid Transaction?
+  // Parse the first line of the CSV string
+  let parsed = Papa.parse(csvString, {
+    preview: 1 + config.headerRows,
+    // Papa will guess delimiter if undefined
+    delimiter: config.delimiter,
+    dynamicTyping: false
+  });
 
-  return true;
-};
-
-/**
- *    {
-        "name": "Chase Credit Card 2019",
-        "country": "us",
-        "filenamePattern": "Chase[0-9]{4}_Activity[0-9]{8}(_[0-9]{8})*\\.CSV",
-        "filenameExtension": "csv",
-        "inputColumns": [
-            "skip",
-            "Date",
-            "skip",
-            "Memo",
-            "skip",
-            "skip",
-            "Inflow"
-        ],
-        "dateFormat": "%m/%d/%Y",
-        "headerRows": 1,
-        "footerRows": 0
+  // Build Transaction object from parsed data
+  let transaction = {};
+  let csvTransaction = parsed.data[parsed.data.length - 1];
+  config.inputColumns.forEach((column, i) => {
+    if (column !== "skip") {
+      transaction[column] = csvTransaction[i];
     }
- */
+  });
+
+  // Validate the resulting Transaction object
+  let hasDate = transaction.hasOwnProperty("Date");
+  let hasAmount = transaction.hasOwnProperty("Amount");
+  let hasInflow = transaction.hasOwnProperty("Inflow");
+  let hasOutflow = transaction.hasOwnProperty("Outflow");
+
+  let isValidTransaction = hasDate && (hasInflow || hasOutflow || hasAmount);
+
+  // FIXME: Some files still fall through the cracks,
+  // It might be useful to have a 'nuclear' option here,
+  // which will just try all configs and pick one that
+  // manages to deliver a valid transaction?
+  return isValidTransaction;
+};
