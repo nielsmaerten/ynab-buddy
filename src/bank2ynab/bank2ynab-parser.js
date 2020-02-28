@@ -62,7 +62,8 @@ const filteredConfig = config =>
       inputColumns: c["Input Columns"].split(","),
       dateFormat: c["Date Format"],
       headerRows: Number(c["Header Rows"] || "1"),
-      footerRows: Number(c["Footer Rows"] || "0")
+      footerRows: Number(c["Footer Rows"] || "0"),
+      delimiter: c["Source CSV Delimiter"]
     }));
 
 const getBank2YnabConfig = () => {
