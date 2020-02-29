@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const testData = require("./test-data");
 
 describe("Transaction", () => {
-  let result = Proxy.parser.csv(testData.csvStrings.valid, testData.csvStrings.validFilename);
+  let result = Proxy.parser.csv(testData.valid.csvString, testData.valid.filename);
 
   it("has a 'Date' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Date");
@@ -17,12 +17,12 @@ describe("Transaction", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Memo");
   });
 
-  it("has either 'Outflow' and 'Inflow'; or 'Amount' properties", () => {
+  it("has 'Outflow', 'Inflow' or 'Amount' properties", () => {
     let hasAmount = result.transactions[0].hasOwnProperty("Amount");
     let hasInflow = result.transactions[0].hasOwnProperty("Inflow");
     let hasOutflow = result.transactions[0].hasOwnProperty("Outflow");
 
-    let testPassed = hasAmount || (hasInflow && hasOutflow);
+    let testPassed = hasAmount || hasInflow || hasOutflow;
     expect(testPassed).to.equal(true);
   });
 });

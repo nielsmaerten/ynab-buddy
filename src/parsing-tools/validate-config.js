@@ -1,28 +1,17 @@
 const Papa = require("papaparse");
+const parse = require("./parse");
 
-module.exports = (csvString, config) => {
-  // Parse the first line of the CSV string
-  let parsed = Papa.parse(csvString, {
-    preview: 1 + config.headerRows,
-    // Papa will guess delimiter if undefined
-    delimiter: config.delimiter,
-    dynamicTyping: false
-  });
+/**
+ * Quickly tests if a config manages to parse valid Transactions from a csvString
+ */
+const validate = (csvString, config) => {
+  let transactions = parse(csvString, config, true);
+  if (transactions.length === 0) return false;
 
-  // Build Transaction object from parsed data
-  let transaction = {};
-  let csvTransaction = parsed.data[parsed.data.length - 1];
-  config.inputColumns.forEach((column, i) => {
-    if (column !== "skip") {
-      transaction[column] = csvTransaction[i];
-    }
-  });
-
-  // Validate the resulting Transaction object
-  let hasDate = transaction.hasOwnProperty("Date");
-  let hasAmount = transaction.hasOwnProperty("Amount");
-  let hasInflow = transaction.hasOwnProperty("Inflow");
-  let hasOutflow = transaction.hasOwnProperty("Outflow");
+  let hasDate = transactions[0].hasOwnProperty("Date");
+  let hasAmount = transactions[0].hasOwnProperty("Amount");
+  let hasInflow = transactions[0].hasOwnProperty("Inflow");
+  let hasOutflow = transactions[0].hasOwnProperty("Outflow");
 
   let isValidTransaction = hasDate && (hasInflow || hasOutflow || hasAmount);
 
@@ -32,3 +21,5 @@ module.exports = (csvString, config) => {
   // manages to deliver a valid transaction?
   return isValidTransaction;
 };
+
+module.exports = validate;

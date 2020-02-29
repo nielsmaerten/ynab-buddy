@@ -9,7 +9,7 @@ describe("parser.csv()", () => {
   });
 
   it("returns a parseResult", () => {
-    let result = Proxy.parser.csv(testData.csvStrings.valid, testData.csvStrings.validFilename);
+    let result = Proxy.parser.csv(testData.valid.csvString, testData.valid.filename);
     expect(result).to.not.equal(undefined);
   });
 });
