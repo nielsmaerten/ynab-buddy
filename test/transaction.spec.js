@@ -7,6 +7,7 @@ describe("Transaction", () => {
 
   it("has a 'Date' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Date");
+    expect(result.transactions[0].Date).to.be.a("Date");
   });
 
   it("has a 'Payee' property", () => {
@@ -23,6 +24,10 @@ describe("Transaction", () => {
     let hasOutflow = result.transactions[0].hasOwnProperty("Outflow");
 
     let testPassed = hasAmount || hasInflow || hasOutflow;
+
+    if (hasAmount) expect(result.transactions[0].Amount).to.be.a("Number");
+    if (hasInflow) expect(result.transactions[0].Inflow).to.be.a("Number");
+    if (hasOutflow) expect(result.transactions[0].Outflow).to.be.a("Number");
     expect(testPassed).to.equal(true);
   });
 });

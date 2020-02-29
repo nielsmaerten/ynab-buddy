@@ -10,10 +10,15 @@ describe("All test files", () => {
   let getFilePath = fileName => path.resolve(testDataPath, fileName);
 
   it("are parsed successfully", () => {
-    testFiles.forEach(fileName => {
-      let testFilePath = getFilePath(fileName);
+    let errors = [];
+
+    testFiles.forEach(filename => {
+      let testFilePath = getFilePath(filename);
       let result = Proxy.parser.file(testFilePath);
-      expect(result).to.haveOwnProperty("success", true);
+      if (!result.success) errors.push(filename);
     });
+
+    let msg = `Failed to parse: \n- ${errors.join("\n- ")}\n`;
+    expect(errors).to.be.of.length(0, msg);
   });
 });

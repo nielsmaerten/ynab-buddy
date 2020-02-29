@@ -10,11 +10,15 @@ describe("Config detector", () => {
   let getFilePath = fileName => path.resolve(testDataPath, fileName);
 
   it("can find a config for each test file", () => {
+    let errors = [];
+
     testFiles.forEach(filename => {
       let contents = fs.readFileSync(getFilePath(filename)).toString();
       let result = detectConfig(contents, filename);
-
-      expect(result).to.not.equal(undefined, `Unable to detect config of: ${filename}`);
+      if (!result) errors.push(filename);
     });
+
+    let msg = `Failed to detect configs of: \n- ${errors.join("\n- ")}\n`;
+    expect(errors).to.be.of.length(0, msg);
   });
 });
