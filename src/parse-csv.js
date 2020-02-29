@@ -19,4 +19,4 @@ const parseCsv = (csvString, filename) => {
   return parsingTools.parse(csvString, filename, config);
 };
 
-module.exports = parseCsv
+module.exports = parseCsv;

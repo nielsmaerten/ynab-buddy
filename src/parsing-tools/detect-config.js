@@ -22,4 +22,4 @@ const detectConfig = (csvString, filename) => {
   return compatible_config;
 };
 
-module.exports = detectConfig
+module.exports = detectConfig;
