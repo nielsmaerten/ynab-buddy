@@ -25,13 +25,13 @@ const parseCsv = (csvString, filename) => {
  * @param {string} filename
  * @param {any[]} transactions
  */
-function result(error, filename, transactions) {
+const result = (error, filename, transactions) => {
   return {
     error,
     success: !error,
     name: filename,
     transactions: transactions || []
   };
-}
+};
 
 module.exports = parseCsv;
