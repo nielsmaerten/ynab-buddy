@@ -1,4 +1,5 @@
 const detectConfig = require("../src/parsing-tools/detect-config");
+const testData = require("./test-data");
 const path = require("path");
 const fs = require("fs");
 const chai = require("chai");
@@ -6,9 +7,10 @@ const expect = chai.expect;
 
 describe("Config detector", () => {
   let testDataPath = path.resolve("./test/test-files");
-  let testFiles = fs.readdirSync(testDataPath);
+  let testFiles = testData.files.withValidDefaultConfigs;
   let getFilePath = fileName => path.resolve(testDataPath, fileName);
 
+  console.log(`['${testFiles.join("'],\n")}]`);
   it("can find a config for each test file", () => {
     let errors = [];
 
