@@ -22,13 +22,17 @@ const parse = (csvString, config, preview) => {
   parsed.data.splice(parsed.data.length - config.footerRows, config.footerRows);
 
   // Map each CSV line to a Transaction object
-  let transactions = parsed.data.map(csv => {
+  let transactions = parsed.data
+  
+  .map(csv => {
     let newTransaction = {};
     config.inputColumns.forEach((column, i) => {
       if (column !== "skip" && csv[i] !== undefined) newTransaction[column] = csv[i].trim();
     });
-    return fixTypes(newTransaction, config);
-  });
+    return newTransaction
+  })
+  .filter(t => t.hasOwnProperty("Date"))
+  .map(t => fixTypes(t, config));
 
   return transactions;
 };

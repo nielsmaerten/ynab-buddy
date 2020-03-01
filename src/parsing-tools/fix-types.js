@@ -14,7 +14,7 @@ const fixTypes = (transaction, config) => {
 };
 
 const fixDate = (value, config) => {
-  if (typeof value !== "Date") {
+  if (typeof value === "string" && config.dateFormat) {
     return parseDate(value, getDateFormat(config));
   } else return value;
 };
