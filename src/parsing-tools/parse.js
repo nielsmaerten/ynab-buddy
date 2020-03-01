@@ -16,6 +16,10 @@ const parse = (csvString, config, preview) => {
   // If undefined, Papa will try to guess the delimiter
   let delimiter = config.delimiter;
 
+  // Verify inputColumns are present
+  let inputColumns = config.inputColumns;
+  if (!inputColumns) throw new Error(`Config object ${JSON.stringify(config)} must have inputColumns`);
+
   // Parse csv and remove header/footer rows if present
   let parsed = Papa.parse(csvString, { preview: pr, delimiter, skipEmptyLines: true });
   parsed.data.splice(0, config.headerRows);
@@ -23,16 +27,16 @@ const parse = (csvString, config, preview) => {
 
   // Map each CSV line to a Transaction object
   let transactions = parsed.data
-  
-  .map(csv => {
-    let newTransaction = {};
-    config.inputColumns.forEach((column, i) => {
-      if (column !== "skip" && csv[i] !== undefined) newTransaction[column] = csv[i].trim();
-    });
-    return newTransaction
-  })
-  .filter(t => t.hasOwnProperty("Date"))
-  .map(t => fixTypes(t, config));
+
+    .map(csv => {
+      let newTransaction = {};
+      inputColumns.forEach((column, i) => {
+        if (column !== "skip" && csv[i] !== undefined) newTransaction[column] = csv[i].trim();
+      });
+      return newTransaction;
+    })
+    .filter(t => t.hasOwnProperty("Date"))
+    .map(t => fixTypes(t, config));
 
   return transactions;
 };

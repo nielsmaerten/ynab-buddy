@@ -1,7 +1,7 @@
 const fs = require("fs");
-const parse = require("./parse-csv");
+const parseCsv = require("./parse-csv");
 
 module.exports = (filepath, customConfig) => {
   let contents = fs.readFileSync(filepath).toString();
-  return parse(contents, filepath, customConfig);
+  return parseCsv(contents, filepath, customConfig);
 };

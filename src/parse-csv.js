@@ -11,9 +11,10 @@ const parseCsv = (csvString, filename, customConfig) => {
   if (!csvString || !filename) return result("required_param_missing", filename);
 
   // Find a matching bank2ynab config
-  let config = parsingTools.detectConfig(csvString, filename) || {};
-  Object.assign(config, customConfig || {});
-  if (config === {}) return result("no_matching_config", filename);
+  let config = parsingTools.detectConfig(csvString, filename);
+  if (!config && customConfig) config = customConfig;
+  else if (config && customConfig) Object.assign(config, customConfig);
+  if (!config) return result("no_matching_config", filename);
 
   // Parse Transactions
   let transactions = parsingTools.parse(csvString, config);
