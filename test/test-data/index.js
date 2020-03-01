@@ -35,11 +35,33 @@ const testData = {
     ]
   },
   customConfigs: {
-    "20180226_12345678.csv": {},
-    "kta_ei.dat": {},
-    "MS_JANE_SMITH_01-12-2019_14-12-2019.csv": {},
-    "TransactionHistory_20180418043121.csv": {},
-    "W80844_EBH_201945.202122.csv": {}
+    "20180226_12345678.csv": {
+      inputColumns: ["Date", "Memo", "Amount", "Balance"],
+      dateFormat: undefined,
+      // Not providing a dateFormat will return dates as strings
+      // this is OK for file export, but not for uploading to the ynab api
+      headerRows: 1
+    },
+    "kta_ei.dat": {
+      separator: '|',
+      dateFormat: "%Y%m%d",
+      headerRows: 1,
+      inputColumns: ["skip", "skip", "Date", "Memo", "Amount"]
+    },
+    "MS_JANE_SMITH_01-12-2019_14-12-2019.csv": {
+      inputColumns: ["Date", "Memo", "Outflow"],
+      headerRows: 1,
+      dateFormat: "%d-%b-%Y"
+      // Not all transactions have a date in this file. They will get date: null
+      // When saving to file or uploading to API, transactions with no date should be skipped
+    },
+    "test_delimiter_tab.csv": {
+     // separator: "\t", // Use auto separator detection
+      dateFormat: "%d.%m.%Y",
+      inputColumns: ["Date", "Memo", "skip", "skip", "Amount"]
+    },
+   // "TransactionHistory_20180418043121.csv": {},
+   // "W80844_EBH_201945.202122.csv": {}
   }
 };
 

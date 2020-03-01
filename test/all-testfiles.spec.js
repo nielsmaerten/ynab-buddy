@@ -3,6 +3,7 @@ const expect = chai.expect;
 const Proxy = require("../src");
 const path = require("path");
 const fs = require("fs");
+const customConfigs = require("./test-data").customConfigs;
 
 describe("All test files", () => {
   let testDataPath = path.resolve("./test/test-files");
@@ -14,7 +15,7 @@ describe("All test files", () => {
 
     testFiles.forEach(filename => {
       let testFilePath = getFilePath(filename);
-      let result = Proxy.parser.file(testFilePath);
+      let result = Proxy.parser.file(testFilePath, customConfigs[filename]);
       if (!result.success) errors.push(filename);
     });
 
