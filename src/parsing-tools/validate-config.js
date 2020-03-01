@@ -7,10 +7,10 @@ const validate = (csvString, config) => {
   let transactions = parse(csvString, config, true);
   if (transactions.length === 0) return false;
 
-  let hasDate = checkProperty(transactions[0], "Date", "Date");
-  let hasAmount = checkProperty(transactions[0], "Amount", "Number");
-  let hasInflow = checkProperty(transactions[0], "Inflow", "Number");
-  let hasOutflow = checkProperty(transactions[0], "Outflow", "Number");
+  let hasDate = checkProperty(transactions[0], "Date", Date);
+  let hasAmount = checkProperty(transactions[0], "Amount", "number");
+  let hasInflow = checkProperty(transactions[0], "Inflow", "number");
+  let hasOutflow = checkProperty(transactions[0], "Outflow", "number");
 
   let isValidTransaction = hasDate && (hasInflow || hasOutflow || hasAmount);
 
@@ -23,8 +23,15 @@ const validate = (csvString, config) => {
 
 const checkProperty = (transaction, propName, type) => {
   let hasProperty = transaction.hasOwnProperty(propName);
-  let isRightType = typeof transaction[propName] === type;
-  return hasProperty && isRightType;
+  let property = transaction[propName];
+
+  let isCorrectType = false;
+  if (typeof type === "function") {
+    isCorrectType = property instanceof type;
+  } else {
+    isCorrectType = typeof property === type;
+  }
+  return hasProperty && isCorrectType;
 };
 
 module.exports = validate;

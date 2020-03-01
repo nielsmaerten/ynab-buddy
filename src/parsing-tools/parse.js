@@ -1,4 +1,5 @@
 const Papa = require("papaparse");
+const fixTypes = require("./fix-types");
 
 /**
  * Parse a raw CSV string to Transactions according to the Config object.
@@ -26,7 +27,7 @@ const parse = (csvString, config, preview) => {
     config.inputColumns.forEach((column, i) => {
       if (column !== "skip" && csv[i] !== undefined) newTransaction[column] = csv[i].trim();
     });
-    return newTransaction;
+    return fixTypes(newTransaction, config);
   });
 
   return transactions;
