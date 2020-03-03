@@ -1,7 +1,7 @@
 {
   "name": "to-ynab-lib",
   "version": "0.0.0",
-  "description": "Convert your bank's CSV files to YNAB-format, and auto-import transactions into your Budgets",
+  "description": "Library to parse CSV files from many banks to, and import transactions using YNAB API",
   "keywords": ["ynab", "parser", "importer", "bank2ynab"],
   "main": "index.js",
   "scripts": {
