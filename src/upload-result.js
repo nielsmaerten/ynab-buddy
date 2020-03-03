@@ -1,7 +1,6 @@
-module.exports = async (transactions, ynabToken, budgetId, accountId) => {
-  // Lazily require ynab JIT, so that Proxyquire has a change to stub it first
-  const ynab = require("ynab");
+const ynab = require("ynab");
 
+module.exports = async (transactions, ynabToken, budgetId, accountId) => {
   const api = new ynab.API(ynabToken);
   const data = prepForYnab(transactions, accountId);
   const apiResponse = await api.transactions.createTransactions(budgetId, data);
@@ -12,7 +11,8 @@ module.exports = async (transactions, ynabToken, budgetId, accountId) => {
 const prepForYnab = (transactions, account_id) => {
   return {
     transactions: transactions
-
+      
+      // Skip transactions that do not have a date
       .filter(t => t.Date)
 
       .map(t => {
@@ -28,6 +28,7 @@ const prepForYnab = (transactions, account_id) => {
         };
       })
 
+      // Add ids to prevent duplicate imports
       .map(addImportId)
   };
 };
@@ -41,7 +42,7 @@ const count = {};
  * the same day, it would have an Occurrence of 2.
  */
 const addImportId = t => {
-  // Build the first part of import_id (YNAB:date:amout)
+  // Build the first part of import_id (YNAB:date:amount)
   let milliunit_amount = t.amount;
   let iso_date = t.date;
   let amount_date = `YNAB:${milliunit_amount}:${iso_date}`;
