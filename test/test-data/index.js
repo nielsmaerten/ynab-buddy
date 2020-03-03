@@ -43,7 +43,7 @@ const testData = {
       headerRows: 1
     },
     "kta_ei.dat": {
-      separator: '|',
+      separator: "|",
       dateFormat: "%Y%m%d",
       headerRows: 1,
       inputColumns: ["skip", "skip", "Date", "Memo", "Amount"]
@@ -56,12 +56,12 @@ const testData = {
       // When saving to file or uploading to API, transactions with no date should be skipped
     },
     "test_delimiter_tab.csv": {
-     // separator: "\t", // Use auto separator detection
+      // separator: "\t", // Use auto separator detection
       dateFormat: "%d.%m.%Y",
       inputColumns: ["Date", "Memo", "skip", "skip", "Amount"]
-    },
-   // "TransactionHistory_20180418043121.csv": {},
-   // "W80844_EBH_201945.202122.csv": {}
+    }
+    // "TransactionHistory_20180418043121.csv": {},
+    // "W80844_EBH_201945.202122.csv": {}
   }
 };
 

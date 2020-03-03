@@ -10,7 +10,6 @@ describe("Config detector", () => {
   let testFiles = testData.files.withValidDefaultConfigs;
   let getFilePath = fileName => path.resolve(testDataPath, fileName);
 
-  console.log(`['${testFiles.join("'],\n")}]`);
   it("can find a config for each test file", () => {
     let errors = [];
 
