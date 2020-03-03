@@ -14,7 +14,7 @@ describe("saveResult()", () => {
     let output = path.resolve("test/.tmp/", `${r}.csv`);
 
     Proxy.saveResult(result, output);
-    expect(fs.existsSync(output)).to.equal(true);
+    expect(fs.existsSync(output)).to.equal(true, "Output file not found");
 
     fs.unlinkSync(output);
   });

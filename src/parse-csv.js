@@ -12,9 +12,13 @@ const parseCsv = (csvString, filename, customConfig) => {
 
   // Find a matching bank2ynab config
   let config = parsingTools.detectConfig(csvString, filename);
+
+  // No config, but customConfig present: use customConfig
   if (!config && customConfig) config = customConfig;
+  // Both config and customConfig: merge config + customConfig
   else if (config && customConfig) Object.assign(config, customConfig);
-  if (!config) return result("no_matching_config", filename);
+  // Neither config nor customConfig: abort
+  else if (!config) return result("no_matching_config", filename);
 
   // Parse Transactions
   let transactions = parsingTools.parse(csvString, config);
