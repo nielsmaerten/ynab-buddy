@@ -169,4 +169,4 @@ bank2ynab.conf
 bank2ynab.json
 
 # test files
-test/test-data/temp-output-test-*
+temp-output-test-*.csv
