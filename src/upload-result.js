@@ -1,3 +1,4 @@
 module.exports = () => {
-  throw "TODO";
+  // TODO
+  return {};
 };

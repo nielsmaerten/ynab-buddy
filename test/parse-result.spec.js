@@ -4,8 +4,8 @@ const chai = require("chai");
 const expect = chai.expect;
 
 describe("Parser result", () => {
-  let result = Proxy.parser.csv(testData.csvStrings.example);
-  let failedResult = Proxy.parser.csv(testData.csvStrings.invalid);
+  let result = Proxy.parser.csv(testData.valid.csvString, testData.valid.filename);
+  let failedResult = Proxy.parser.csv(testData.invalid.csvString, "");
 
   it("has a success property", () => {
     expect(result).to.haveOwnProperty("success");

@@ -3,7 +3,8 @@
 // If you want to use your own version of bank2ynab,
 // you can override the default url by calling: bank2ynab.update('https://my.custom.url')
 // Or, you can edit the following constant:
-const configUrl = "https://raw.githubusercontent.com/bank2ynab/bank2ynab/develop/bank2ynab.conf";
+const configUrl =
+  "https://raw.githubusercontent.com/bank2ynab/bank2ynab/develop/bank2ynab.conf";
 
 const fs = require("fs");
 const path = require("path");
