@@ -15,7 +15,14 @@ const fixTypes = (transaction, config) => {
 
 const fixDate = (value, config) => {
   if (typeof value === "string" && config.dateFormat) {
-    return parseDate(value, getDateFormat(config));
+    let localDate = parseDate(value, getDateFormat(config));
+    if (!localDate) return undefined;
+
+    let yyyy = localDate.getFullYear();
+    let mm = String(localDate.getMonth() + 1).padStart(2,0);
+    let dd = localDate.getDate();
+    
+    return `${yyyy}-${mm}-${dd}`;
   } else return value;
 };
 
