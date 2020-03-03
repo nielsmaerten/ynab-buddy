@@ -1,0 +1,30 @@
+{
+  "name": "to-ynab-lib",
+  "version": "0.0.0",
+  "description": "Convert your bank's CSV files to YNAB-format, and auto-import transactions into your Budgets",
+  "keywords": ["ynab", "parser", "importer", "bank2ynab"],
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "reformat": "prettier {src,test}/**/*.js --write --print-width 95",
+    "postinstall": "npm run update-bank2ynab",
+    "update-bank2ynab": "node ./src/bank2ynab/run-updater"
+  },
+  "author": {
+    "name": "Niels Maerten",
+    "url": "https://github.com/nielsmaerten"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.0.1",
+    "prettier": "^1.19.1",
+    "proxyquire": "^2.1.3",
+    "sinon": "^8.1.1"
+  },
+  "dependencies": {
+    "fecha": "^4.1.0",
+    "papaparse": "^5.1.1",
+    "ynab": "^1.17.0"
+  }
+}
