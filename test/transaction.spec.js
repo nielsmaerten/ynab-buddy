@@ -7,7 +7,7 @@ describe("Transaction", () => {
 
   it("has a 'Date' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Date");
-    expect(result.transactions[0].Date).to.be.a("Date");
+    expect(result.transactions[0].Date).to.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/g);
   });
 
   it("has a 'Payee' property", () => {
