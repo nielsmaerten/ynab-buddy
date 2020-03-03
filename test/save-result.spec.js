@@ -11,7 +11,7 @@ describe("saveResult()", () => {
   it("writes a parseResult to a YNAB CSV file", () => {
     let result = Proxy.parser.file(input);
     let r = Math.floor(Math.random() * 100000);
-    let output = path.resolve("test/.tmp/", `${r}.csv`);
+    let output = path.resolve("test/test-data", `temp-output-test-${r}.csv`);
 
     Proxy.saveResult(result, output);
     expect(fs.existsSync(output)).to.equal(true, "Output file not found");
