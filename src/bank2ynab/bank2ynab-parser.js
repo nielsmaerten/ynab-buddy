@@ -51,14 +51,24 @@ const parseConfig = config => {
 const filteredConfig = config =>
   Object.keys(config)
     .map(c => ({ ...config[c], Name: c }))
-    .filter(c => c.Name !== "DEFAULT" && !c.Plugin && c["Source Filename Pattern"] !== "unknown!" && c["Input Columns"])
+    .filter(
+      c =>
+        c.Name !== "DEFAULT" &&
+        !c.Plugin &&
+        c["Source Filename Pattern"] !== "unknown!" &&
+        c["Input Columns"]
+    )
     .map(c => ({
       name: c.Name.split(" ")
         .slice(1)
         .join(" "),
       country: c.Name.split(" ")[0].toLowerCase(),
-      filenamePattern: `${c["Source Filename Pattern"]}\\.${(c["Source Filename Extension"] || ".csv").substr(1)}`,
-      filenameExtension: (c["Source Filename Extension"] || "csv").toLowerCase().replace(".", ""),
+      filenamePattern: `${c["Source Filename Pattern"]}\\.${(
+        c["Source Filename Extension"] || ".csv"
+      ).substr(1)}`,
+      filenameExtension: (c["Source Filename Extension"] || "csv")
+        .toLowerCase()
+        .replace(".", ""),
       inputColumns: c["Input Columns"].split(","),
       dateFormat: c["Date Format"],
       headerRows: Number(c["Header Rows"] || "1"),

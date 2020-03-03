@@ -18,7 +18,8 @@ const parse = (csvString, config, preview) => {
 
   // Verify inputColumns are present
   let inputColumns = config.inputColumns;
-  if (!inputColumns) throw new Error(`Config object ${JSON.stringify(config)} must have inputColumns`);
+  if (!inputColumns)
+    throw new Error(`Config object ${JSON.stringify(config)} must have inputColumns`);
 
   // Parse csv and remove header/footer rows if present
   let parsed = Papa.parse(csvString, { preview: pr, delimiter, skipEmptyLines: true });
