@@ -1,5 +1,5 @@
 {
-  "name": "to-ynab",
+  "name": "ynab-buddy",
   "version": "0.0.0",
   "description": "Import and parse CSV files from many banks to YNAB",
   "keywords": [
@@ -21,7 +21,7 @@
     "inquirer": "^7.0.5",
     "minimatch": "^3.0.4",
     "open": "^7.0.2",
-    "to-ynab-lib": "0.0.0",
+    "ynab-buddy-core": "0.0.0",
     "yaml": "^1.7.2",
     "ynab": "^1.17.0"
   },

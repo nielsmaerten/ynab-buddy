@@ -1,7 +1,7 @@
 const utils = require("./utils");
 const fs = require("fs");
 const path = require("path");
-const client = require("to-ynab-lib");
+const client = require("ynab-buddy-core");
 
 (async () => {
   const program = utils.setupCommander();
@@ -15,7 +15,7 @@ const client = require("to-ynab-lib");
     program.outputHelp();
     return;
   } else {
-    console.log("TO-YNAB v" + opts.version, "- Welcome!");
+    console.log("ynab-buddy v" + opts.version, "- Welcome!");
     console.log("Use --help to learn more about this tool.\n");
   }
   //#endregion

@@ -12,7 +12,7 @@ module.exports = () => {
       "-u, --upload",
       "Upload transactions to YNAB after parsing. Default: off"
     )
-    .option("-c, --clear", "Refresh to-ynab.config.yaml file")
+    .option("-c, --clear", "Refresh ynab-buddy.config.yaml file")
     .option("-f, --force", "Don't ask confirmation when uploading to YNAB")
     .option("-v, --verbose", "Extra detailed logs");
 

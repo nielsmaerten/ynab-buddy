@@ -5,7 +5,7 @@ const yaml = require("yaml");
 
 const config_paths = {
   default: path.resolve("default-cli-config.yaml"),
-  own: path.resolve(os.homedir(), "to-ynab.config.yaml")
+  own: path.resolve(os.homedir(), "ynab-buddy.config.yaml")
 };
 
 const getConfig = () => {
