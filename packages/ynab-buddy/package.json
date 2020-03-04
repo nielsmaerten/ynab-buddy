@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/nielsmaerten/ynab-buddy/tree/master/packages/ynab-buddy",
   "main": "src/index.js",
+  "bin": "src/index.js",
   "author": {
     "name": "Niels Maerten",
     "url": "https://github.com/nielsmaerten"

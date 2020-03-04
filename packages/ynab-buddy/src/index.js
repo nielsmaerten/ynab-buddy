@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const utils = require("./utils");
 const fs = require("fs");
 const path = require("path");
