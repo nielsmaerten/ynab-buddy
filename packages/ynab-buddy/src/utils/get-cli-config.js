@@ -4,7 +4,7 @@ const fs = require("fs");
 const yaml = require("yaml");
 
 const config_paths = {
-  default: path.resolve("default-cli-config.yaml"),
+  default: path.resolve(__dirname, "../../default-cli-config.yaml"),
   own: path.resolve(os.homedir(), "ynab-buddy.config.yaml")
 };
 

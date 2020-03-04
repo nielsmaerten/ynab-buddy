@@ -64,6 +64,10 @@ const buddy = require("ynab-buddy-core");
   //#endregion
 
   if (!opts.upload) return;
+  else if (cliConfig["YNAB API Configuration"].token === "YOUR_YNAB_PERSONAL_ACCESS_TOKEN") {
+    console.warn("You first need to add your YNAB token to", utils.cliConfigPaths.own);
+    return;
+  }
   for (const r of allSuccessResults) {
     let ids =
       (await utils.autoDetectAccount(r.name, cliConfig, opts.force)) ||
