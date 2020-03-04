@@ -1,6 +1,6 @@
 {
   "name": "ynab-buddy",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "description": "Import and parse CSV files from many banks to YNAB",
   "keywords": [
     "ynab",
@@ -29,7 +29,7 @@
     "open": "^7.0.2",
     "yaml": "^1.7.2",
     "ynab": "^1.17.0",
-    "ynab-buddy-core": "^0.0.1-alpha.4"
+    "ynab-buddy-core": "^0.0.1-alpha.5"
   },
   "scripts": {
     "debug": "node --inspect-brk src/index.js --clear --upload --verbose C:/Users/niels/source/ynab/kbc-transaction-exports/2019/PRIVATE",

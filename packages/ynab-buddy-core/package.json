@@ -1,6 +1,6 @@
 {
   "name": "ynab-buddy-core",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "description": "Library to parse CSV files from many banks to, and import transactions using YNAB API",
   "keywords": [
     "ynab",
