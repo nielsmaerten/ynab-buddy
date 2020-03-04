@@ -18,9 +18,9 @@ const prepForYnab = (transactions, account_id) => {
       .map(t => {
         return {
           //category_id: "8d505bc0-efbe-4803-b8ef-0898213a1092",
-          //payee_id: null,
           //cleared: ynab.SaveTransaction.ClearedEnum.Cleared,
           //approved: true,
+          payee_id: t.Payee,
           account_id,
           date: t.Date,
           amount: Math.floor(getAmount(t)),
