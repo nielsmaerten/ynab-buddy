@@ -33,6 +33,7 @@
     "sinon": "^8.1.1"
   },
   "dependencies": {
+    "collapse-white-space": "^1.0.6",
     "fecha": "^4.1.0",
     "papaparse": "^5.1.1",
     "ynab": "^1.17.0"

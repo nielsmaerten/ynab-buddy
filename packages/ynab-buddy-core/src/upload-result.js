@@ -24,7 +24,7 @@ const prepForYnab = (transactions, account_id) => {
           account_id,
           date: t.Date,
           amount: Math.floor(getAmount(t)),
-          memo: t.Memo
+          memo: String(t.Memo).substring(0,200)
         };
       })
 

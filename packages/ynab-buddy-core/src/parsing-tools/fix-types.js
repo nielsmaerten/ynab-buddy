@@ -1,4 +1,5 @@
 const parseDate = require("fecha").parse;
+const collapse = require("collapse-white-space");
 
 /**
  * Converts dates and numbers in a Transaction object to strong types
@@ -10,6 +11,7 @@ const fixTypes = (transaction, config) => {
   if (transaction.Inflow) transaction.Inflow = fixNumber(transaction.Inflow);
   if (transaction.Outflow) transaction.Outflow = fixNumber(transaction.Outflow);
   if (transaction.Amount) transaction.Amount = fixNumber(transaction.Amount);
+  transaction.Memo = collapse(transaction.Memo);
   return transaction;
 };
 
