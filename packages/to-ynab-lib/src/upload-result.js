@@ -11,7 +11,7 @@ module.exports = async (transactions, ynabToken, budgetId, accountId) => {
 const prepForYnab = (transactions, account_id) => {
   return {
     transactions: transactions
-      
+
       // Skip transactions that do not have a date
       .filter(t => t.Date)
 
@@ -23,7 +23,7 @@ const prepForYnab = (transactions, account_id) => {
           //approved: true,
           account_id,
           date: t.Date,
-          amount: getAmount(t),
+          amount: Math.floor(getAmount(t)),
           memo: t.Memo
         };
       })
@@ -61,7 +61,7 @@ const addImportId = t => {
 };
 
 const getAmount = transaction => {
-  if (transaction.Inflow) return transaction.Inflow * 100;
-  if (transaction.Amount) return transaction.Amount * 100;
-  if (transaction.Outflow) return transaction.Outflow * 100 * -1;
+  if (transaction.Inflow) return transaction.Inflow * 1000;
+  if (transaction.Amount) return transaction.Amount * 1000;
+  if (transaction.Outflow) return transaction.Outflow * 1000 * -1;
 };

@@ -42,7 +42,7 @@ const stub_ynab = {
 };
 
 const uploadResult = proxyquire("../src/upload-result", {
-  // Stub require("ynab") with stub_ynab. 
+  // Stub require("ynab") with stub_ynab.
   // Comment this line out if you want to test against the real YNAB API
   ynab: stub_ynab
 });
