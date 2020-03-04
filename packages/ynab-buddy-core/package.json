@@ -19,6 +19,11 @@
     "name": "Niels Maerten",
     "url": "https://github.com/nielsmaerten"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nielsmaerten/ynab-buddy"
+  },
+  "homepage": "https://github.com/nielsmaerten/ynab-buddy/tree/master/packages/ynab-buddy-core",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
