@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Library to parse CSV files from many banks to, and import transactions using YNAB API",
   "keywords": ["ynab", "parser", "importer", "bank2ynab"],
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "mocha",
     "reformat": "prettier {src,test}/**/*.js --write --print-width 95",
