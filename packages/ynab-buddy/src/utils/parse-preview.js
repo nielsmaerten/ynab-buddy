@@ -1,8 +1,10 @@
-const Table = require("cli-table");
+const Table = require("cli-table3");
 
 const renderPreview = parseResult => {
   const previewTable = new Table({
-    head: ["Date", "Memo", "Inflow", "Outflow", "Amount"]
+    head: ["Date", "Memo", "Inflow", "Outflow", "Amount"],
+    colWidths: [undefined, 70, undefined, undefined,undefined],
+    wordWrap: true
   });
   parseResult.transactions
     .slice(0, 3)
