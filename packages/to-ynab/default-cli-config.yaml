@@ -1,0 +1,30 @@
+YNAB API Configuration:
+  # You can create a token here: https://app.youneedabudget.com/settings/developer
+  # Visit https://api.youneedabudget.com/#personal-access-tokens to learn more about tokens.
+  token: bee70bec2e90bd8b028c95ab23173c281cbbd3287f151a68826311d67ea318b0
+
+  # Here you can map which of your bank's files corresponds to which budget/account in YNAB.
+  # To find the IDs of an account, view it's transaction history in YNAB.
+  # Your URL will then look like this:
+  # https://app.youneedabudget.com/[BUDGET_ID]/accounts/[ACCOUNT_ID]
+  File Mappings:
+    - name: my_checking_account # Your account's name. You can choose any name here.
+      filename_glob: be_kbc_export_* # Files that match this glob will be uploaded to this account.
+      account_id: 0000
+      budget_id: 1111
+
+    - name: my_savings_account
+      filename_glob: export_BE*.csv
+      account_id: 2222
+      budget_id: 1111
+      # Optional field. The name of an item in the Custom Configurations section below.
+      custom_config: my_custom_config
+
+# to-ynab uses so called 'Configs' from the bank2ynab project (https://github.com/bank2ynab)
+# If there's no Config available for your bank's files, you can add it yourself here.
+# Or, if bank2ynab has a Config for your bank but you want to change something,
+# any setting you add here will override the default.
+Custom Configurations:
+  - name: my_custom_config
+    # All of these settings are optional:
+    inputColumns: ["skip", "skip", "Memo", "Date", "Amount"]

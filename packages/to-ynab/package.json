@@ -1,0 +1,35 @@
+{
+  "name": "to-ynab",
+  "version": "0.0.0",
+  "description": "Import and parse CSV files from many banks to YNAB",
+  "keywords": [
+    "ynab",
+    "cli",
+    "importer",
+    "parser"
+  ],
+  "main": "src/index.js",
+  "author": {
+    "name": "Niels Maerten",
+    "url": "https://github.com/nielsmaerten"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "colors": "^1.4.0",
+    "commander": "^4.1.1",
+    "inquirer": "^7.0.5",
+    "minimatch": "^3.0.4",
+    "open": "^7.0.2",
+    "to-ynab-lib": "0.0.0",
+    "yaml": "^1.7.2",
+    "ynab": "^1.17.0"
+  },
+  "scripts": {
+    "debug": "node --inspect-brk src/index.js --clear --upload --verbose C:/Users/niels/source/ynab/kbc-transaction-exports/2019/PRIVATE",
+    "reformat": "prettier --write **/*.{js,yaml}"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
