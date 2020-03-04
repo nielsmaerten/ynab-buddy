@@ -1,11 +1,11 @@
-const Proxy = require("../src");
+const buddy = require("../src");
 const testData = require("./test-data");
 const chai = require("chai");
 const expect = chai.expect;
 
 describe("Parser result", () => {
-  let result = Proxy.parser.csv(testData.valid.csvString, testData.valid.filename);
-  let failedResult = Proxy.parser.csv(testData.invalid.csvString, "");
+  let result = buddy.parser.csv(testData.valid.csvString, testData.valid.filename);
+  let failedResult = buddy.parser.csv(testData.invalid.csvString, "");
 
   it("has a success property", () => {
     expect(result).to.haveOwnProperty("success");

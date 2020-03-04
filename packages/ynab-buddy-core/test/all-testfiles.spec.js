@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Proxy = require("../src");
+const buddy = require("../src");
 const path = require("path");
 const fs = require("fs");
 const customConfigs = require("./test-data").customConfigs;
@@ -15,7 +15,7 @@ describe("All test files", () => {
 
     testFiles.forEach(filename => {
       let testFilePath = getFilePath(filename);
-      let result = Proxy.parser.file(testFilePath, customConfigs[filename]);
+      let result = buddy.parser.file(testFilePath, customConfigs[filename]);
       if (!result.success) errors.push(filename);
     });
 

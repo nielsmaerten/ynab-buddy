@@ -1,7 +1,7 @@
 const utils = require("./utils");
 const fs = require("fs");
 const path = require("path");
-const client = require("ynab-buddy-core");
+const buddy = require("ynab-buddy-core");
 
 (async () => {
   const program = utils.setupCommander();
@@ -47,9 +47,9 @@ const client = require("ynab-buddy-core");
     let outputfile = `ynab_${path.basename(filepath)}`;
     let outputpath = path.resolve(dir, outputfile);
     let customConfig = utils.getCustomConfig(f, cliConfig, opts.verbose);
-    let result = client.parser.file(filepath, customConfig);
+    let result = buddy.parser.file(filepath, customConfig);
 
-    if (result.success && client.saveResult(result, outputpath)) {
+    if (result.success && buddy.saveResult(result, outputpath)) {
       opts.verbose && console.log("Success:");
       opts.verbose && console.log("Input  :", f);
       console.log("Parsed:", outputfile);
@@ -70,7 +70,7 @@ const client = require("ynab-buddy-core");
 
     if (ids && ids.budget && ids.account) {
       console.log("Uploading:", r.name, "...");
-      await client
+      await buddy
         .uploadResult(
           r.transactions,
           cliConfig["YNAB API Configuration"].token,

@@ -1,9 +1,9 @@
-const Proxy = require("../src");
+const buddy = require("../src");
 const expect = require("chai").expect;
 const testData = require("./test-data");
 
 describe("Transaction", () => {
-  let result = Proxy.parser.csv(testData.valid.csvString, testData.valid.filename);
+  let result = buddy.parser.csv(testData.valid.csvString, testData.valid.filename);
 
   it("has a 'Date' property", () => {
     expect(result.transactions[0]).to.haveOwnProperty("Date");

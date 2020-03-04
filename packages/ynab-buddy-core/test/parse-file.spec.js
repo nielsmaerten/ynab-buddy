@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Proxy = require("../src");
+const buddy = require("../src");
 const path = require("path");
 const fs = require("fs");
 
@@ -10,11 +10,11 @@ describe("parser.file()", () => {
   let getFilePath = fileName => path.resolve(testDataPath, fileName);
 
   it("accepts a file path", () => {
-    Proxy.parser.file(getFilePath(testFiles[0]));
+    buddy.parser.file(getFilePath(testFiles[0]));
   });
 
   it("returns a parseResult", () => {
-    let result = Proxy.parser.file(getFilePath(testFiles[0]));
+    let result = buddy.parser.file(getFilePath(testFiles[0]));
     expect(result).to.not.equal(undefined);
   });
 });
