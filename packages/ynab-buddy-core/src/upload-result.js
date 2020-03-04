@@ -1,14 +1,14 @@
 const ynab = require("ynab");
 
-module.exports = async (transactions, ynabToken, budgetId, accountId) => {
+module.exports = async (transactions, ynabToken, budgetId, accountId, color) => {
   const api = new ynab.API(ynabToken);
-  const data = prepForYnab(transactions, accountId);
+  const data = prepForYnab(transactions, accountId, color);
   const apiResponse = await api.transactions.createTransactions(budgetId, data);
 
   return apiResponse;
 };
 
-const prepForYnab = (transactions, account_id) => {
+const prepForYnab = (transactions, account_id, color) => {
   return {
     transactions: transactions
 
@@ -23,6 +23,7 @@ const prepForYnab = (transactions, account_id) => {
           //approved: true,
           account_id,
           date: t.Date,
+          flag_color: color,
           amount: Math.floor(getAmount(t)),
           memo: String(t.Memo).substring(0,200)
         };

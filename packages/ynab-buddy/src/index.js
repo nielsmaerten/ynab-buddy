@@ -80,7 +80,8 @@ const buddy = require("ynab-buddy-core");
           r.transactions,
           cliConfig["YNAB API Configuration"].token,
           ids.budget,
-          ids.account
+          ids.account,
+          cliConfig["YNAB API Configuration"].flag_color
         )
         .then(() =>
           console.log(

@@ -2,6 +2,7 @@ YNAB API Configuration:
   # You can create a token here: https://app.youneedabudget.com/settings/developer
   # Visit https://api.youneedabudget.com/#personal-access-tokens to learn more about tokens.
   token: YOUR_YNAB_PERSONAL_ACCESS_TOKEN
+  flag_color: purple
 
   # Here you can map which of your bank's files corresponds to which budget/account in YNAB.
   # To find the IDs of an account, view it's transaction history in YNAB.
