@@ -16,10 +16,12 @@ const getConfig = () => {
   }
 
   const config_text = fs.readFileSync(config_paths.own).toString();
-  return yaml.parse(config_text);
+  const cliConfig = yaml.parse(config_text);
+  cliConfig.path = config_paths.own;
+  return cliConfig;
 };
 
 module.exports = {
   config_paths,
   getConfig
-}
+};

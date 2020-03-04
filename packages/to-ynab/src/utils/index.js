@@ -3,12 +3,6 @@ module.exports = {
   cliConfigPaths: require("./get-cli-config").config_paths,
   setupCommander: require("./setup-commander"),
   getCustomConfig: require("./get-custom-bank-config"),
-  autoDetectAccount: (filename, cliConfig) => {
-    debugger;
-    // TODO
-  },
-  getAccountInteractive: parseResult => {
-    debugger;
-    // TODO
-  }
+  autoDetectAccount: require("./auto-detect-account"),
+  getAccountInteractive: require("./get-account-interactive")
 };
