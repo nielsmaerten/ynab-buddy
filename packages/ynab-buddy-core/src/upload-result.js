@@ -19,13 +19,13 @@ const prepForYnab = (transactions, account_id, color) => {
         return {
           //category_id: "8d505bc0-efbe-4803-b8ef-0898213a1092",
           //payee_id: null,
-          //cleared: ynab.SaveTransaction.ClearedEnum.Cleared,
           //approved: true,
+          cleared: ynab.SaveTransaction.ClearedEnum.Cleared,
           account_id,
           date: t.Date,
           flag_color: color,
           amount: Math.floor(getAmount(t)),
-          memo: String(t.Memo).substring(0,200)
+          memo: String(t.Memo).substring(0, 200)
         };
       })
 
