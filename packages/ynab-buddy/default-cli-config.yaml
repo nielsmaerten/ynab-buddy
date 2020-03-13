@@ -31,8 +31,7 @@ Custom Configurations:
     inputColumns: ["skip", "skip", "Memo", "Date", "Amount"]
     filenamePattern: "Chase[0-9]{4}_Activity[0-9]{8}(_[0-9]{8})*\\.CSV"
     filenameExtension: csv
-    dateFormat: "%m/%d/%Y" 
-    delimiter: ','
+    dateFormat: "%m/%d/%Y"
+    delimiter: ","
     headerRows: 1
     footerRows: 0
-
