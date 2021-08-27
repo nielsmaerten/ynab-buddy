@@ -1,7 +1,7 @@
 export type Configuration = {
   importFolder: {
-    path: string,
-    exists: boolean
+    path: string;
+    exists: boolean;
   };
   parsers: Parser[];
   bankFiles: BankFile[];
@@ -9,14 +9,14 @@ export type Configuration = {
     token: string;
     upload: boolean;
   };
-  showConfigPrompt?: boolean
+  showConfigPrompt?: boolean;
 };
 
 export type BankFile = {
-    pattern: string;
-    parser: string;
-    name: string;
-}
+  pattern: string;
+  parser: string;
+  name: string;
+};
 
 export type Parser = {
   name: string;

@@ -1,8 +1,8 @@
-import { getConfiguration } from "./configurator"
+import { getConfiguration } from "./configurator";
 
 describe("Configurator", () => {
-    it("returns config object", () => {
-        const config = getConfiguration();
-        expect(config).toBeDefined();
-    })
-})
+  it("returns config object", () => {
+    const config = getConfiguration();
+    expect(config).toBeDefined();
+  });
+});

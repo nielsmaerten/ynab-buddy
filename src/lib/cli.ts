@@ -1,3 +1,3 @@
 export function displayWelcomeMessage(isFirstRun: boolean) {
-    console.log("todo");
+  console.log("todo");
 }

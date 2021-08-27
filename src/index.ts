@@ -3,7 +3,7 @@ import { displayWelcomeMessage } from "./lib/cli";
 import { getConfiguration } from "./lib/configurator";
 
 const config = getConfiguration();
-const isFirstRun = config?.showConfigPrompt === true
+const isFirstRun = config?.showConfigPrompt === true;
 displayWelcomeMessage(isFirstRun);
 if (isFirstRun) exit();
 

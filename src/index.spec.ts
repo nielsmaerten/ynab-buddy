@@ -1,4 +1,6 @@
-const getConfiguration_mock = jest.fn().mockReturnValue({showConfigPrompt: true});
+const getConfiguration_mock = jest
+  .fn()
+  .mockReturnValue({ showConfigPrompt: true });
 const displayWelcomeMessage_mock = jest.fn();
 const exit_mock = jest.fn();
 
@@ -12,20 +14,20 @@ describe("index.ts", () => {
   beforeAll(() => {
     jest.mock("./lib/configurator", () => {
       return {
-        getConfiguration: getConfiguration_mock
-      }
-    })
-  })
+        getConfiguration: getConfiguration_mock,
+      };
+    });
+  });
   it("gets configuration", () => {
     require("./index");
     expect(getConfiguration_mock).toHaveBeenCalled();
   });
 
-  it('displays welcome message according to firstRun', () => {
+  it("displays welcome message according to firstRun", () => {
     //expect(displayWelcomeMessage_mock).toHaveBeenCalled();
-  })
+  });
 
-  it('exits if firstRun is true', () => {
+  it("exits if firstRun is true", () => {
     //expect(exit_mock).toHaveBeenCalled();
-  })
+  });
 });

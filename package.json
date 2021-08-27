@@ -5,8 +5,8 @@
   "main": "dist/_index.js",
   "scripts": {
     "test": "jest",
-    "prettier": "yarn prettier ./src --write",
-    "prettier:check": "yarn prettier ./src --check",
+    "lint:fix": "yarn prettier ./src --write",
+    "lint": "yarn prettier ./src --check",
     "commit": "yarn cz"
   },
   "keywords": [],
