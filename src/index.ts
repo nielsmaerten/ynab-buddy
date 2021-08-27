@@ -1,6 +1,12 @@
-console.log("todo");
-// Pseudocode:
-// const config = getConfiguration();
+import { exit } from "process";
+import { displayWelcomeMessage } from "./lib/cli";
+import { getConfiguration } from "./lib/configurator";
+
+const config = getConfiguration();
+const isFirstRun = config?.showConfigPrompt === true
+displayWelcomeMessage(isFirstRun);
+if (isFirstRun) exit();
+
 // if (config === undefined) {
 //   displayWelcomeMessage({ firstRun: !config.exists });
 //   // Hi, I'm Ynab Buddy and I can help you import your bank's CSV files into YNAB
