@@ -1,10 +1,11 @@
 import { exit } from "process";
 import { Configuration } from "../types";
 import { displayWelcomeMessage } from "./cli";
-import { homedir } from "os";
 import { readFileSync, existsSync, copyFileSync } from "fs";
-import { join as joinPaths } from "path";
-import { CONFIG_FILENAME } from "../constants";
+import { resolve } from "path";
+import { CONFIG_PATH } from "../constants";
+import { load } from "js-yaml";
+import { homedir } from "os";
 
 /**
  * // TODO
@@ -19,13 +20,13 @@ export function getConfiguration(): Configuration {
   const configFilePath = getConfigPath();
   const configFileExists = existsSync(configFilePath);
   if (!configFileExists) createConfigFile();
+  return {} as Configuration;
 
   // Read and parse the config file
   const cfg: Configuration = readConfigFile();
 
-
   // TODO: read this from config file
-  const config = {
+  const config: Configuration = {
     importPath: "",
     bankFilePatterns: [],
     ynab: {
@@ -33,11 +34,11 @@ export function getConfiguration(): Configuration {
       upload: true,
     },
     parsers: [],
-    isFirstRun: false,
+    initializationDone: false,
   };
 
-  displayWelcomeMessage(config.isFirstRun);
-  if (config.isFirstRun) exit();
+  displayWelcomeMessage(config.initializationDone);
+  if (config.initializationDone) exit();
   else return config;
 }
 
@@ -45,20 +46,25 @@ export function getConfiguration(): Configuration {
  * Returns the full path to the config file: ~/ynab-buddy/config.yaml
  */
 const getConfigPath = () => {
-  return joinPaths(homedir(), CONFIG_FILENAME);
+  return resolve(CONFIG_PATH.replace("~", homedir()));
 };
 
 /**
  * Writes the default config file to the default location
  */
 const createConfigFile = () => {
-  return copyFileSync("../config/ynab-buddy.yaml", getConfigPath());
-}
+  const defaultConfigFilePath = resolve("./src/config/ynab-buddy.yaml");
+  const dest = getConfigPath();
+  return copyFileSync(defaultConfigFilePath, dest);
+};
 
 /**
  * Reads the config file from its default location
  */
-const readConfigFile = () => {
+const readConfigFile = (): Configuration => {
   const buffer = readFileSync(getConfigPath());
   const yamlText = buffer.toString();
-}
+  const rawConfig = load(yamlText);
+
+  throw "not implemented";
+};
