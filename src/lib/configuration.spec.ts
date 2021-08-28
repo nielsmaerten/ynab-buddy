@@ -41,7 +41,7 @@ describe("configuration.ts", () => {
     expect(fs.copyFileSync).toHaveBeenCalled();
 
     fs.copyFileSync = jest.fn();
-    fs.existsSync = jest.fn().mockRejectedValue(true);
+    fs.existsSync = jest.fn().mockReturnValue(true);
     getConfiguration();
     expect(fs.copyFileSync).not.toHaveBeenCalled();
   });
