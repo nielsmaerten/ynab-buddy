@@ -1,6 +1,6 @@
 import { Configuration } from "./types";
 
-let isFirstRun: any = "";
+let isFirstRun = false;
 let getConfiguration_mock: jest.Mock;
 const displayWelcomeMessage_mock = jest.fn();
 const exit_mock = jest.fn();
@@ -11,9 +11,7 @@ describe("index.ts", () => {
     jest.mock("./lib/configurator", () => {
       getConfiguration_mock = jest.fn().mockReturnValue({
         isFirstRun,
-        importFolder: {
-          exists: false,
-        },
+        importPath: '',
       } as Configuration);
       return {
         getConfiguration: getConfiguration_mock,
@@ -32,6 +30,7 @@ describe("index.ts", () => {
     });
   });
   afterEach(() => {
+    jest.resetModules();
     jest.resetAllMocks();
   });
 
@@ -42,7 +41,6 @@ describe("index.ts", () => {
 
   it("displays welcome message and exits if firstRun is true", () => {
     isFirstRun = true;
-    jest.resetModules();
     require("./index");
     expect(displayWelcomeMessage_mock).toHaveBeenCalledWith(isFirstRun);
     expect(exit_mock).toHaveBeenCalled();
@@ -50,13 +48,13 @@ describe("index.ts", () => {
 
   it("displays welcome message and does not exit if firstRun is false", () => {
     isFirstRun = false;
-    jest.resetModules();
     require("./index");
     expect(displayWelcomeMessage_mock).toHaveBeenCalledWith(isFirstRun);
     expect(exit_mock).not.toHaveBeenCalled();
   });
 
-  it("asks for an import folder if no default given", () => {
-    // TODO
+  it("asks to confirm import folder", () => {
+    require('./index');
+    expect(askImportFolder_mock).toHaveBeenCalled();
   })
 });

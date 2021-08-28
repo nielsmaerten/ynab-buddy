@@ -1,5 +1,5 @@
 export type Configuration = {
-  importFolder: ImportFolder
+  importPath?: string,
   parsers: Parser[];
   bankFiles: BankFile[];
   ynab: {
@@ -8,11 +8,6 @@ export type Configuration = {
   };
   isFirstRun?: boolean;
 };
-
-export type ImportFolder = {
-  exists: boolean;
-  path: string;
-}
 
 export type BankFile = {
   pattern: string;

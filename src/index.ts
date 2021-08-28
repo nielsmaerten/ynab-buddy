@@ -8,10 +8,9 @@ const isFirstRun = config?.isFirstRun === true;
 displayWelcomeMessage(isFirstRun);
 if (isFirstRun || !config) exit();
 
-// If no default importFolder is set up, ask user to provide it now
-if (!config.importFolder.exists) {
-    config.importFolder = askImportFolder();
-}
+// Confirm folder where the tool should look for bank files
+config.importPath = askImportFolder(config.importPath);
+
 
 // if (config.importFolder.exists === false) {
 //   // No default import folder set up. Where should ynab buddy look for your csv files?

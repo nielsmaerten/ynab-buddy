@@ -1,5 +1,3 @@
-import { ImportFolder } from "../types";
-
 export function displayWelcomeMessage(isFirstRun: boolean) {
   console.log("todo");
   // TODO
@@ -8,11 +6,8 @@ export function displayWelcomeMessage(isFirstRun: boolean) {
   //   // Please follow the instructions in the file c:/users/niels/ybuddy-config.yaml
 }
 
-export function askImportFolder(): ImportFolder {
+export function askImportFolder(defaultImportFolder: string | undefined): string {
   console.log("todo");
   // TODO
-  return {
-    exists: false,
-    path: "",
-  };
+  return '';
 }

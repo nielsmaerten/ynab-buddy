@@ -7,10 +7,7 @@ import { Configuration } from "../types";
 export function getConfiguration(): Configuration | undefined {
   // TODO: read from file or return empty if file is not found
   return {
-    importFolder: {
-      path: "",
-      exists: false,
-    },
+    importPath: '',
     bankFiles: [],
     ynab: {
       token: "ABC123",
