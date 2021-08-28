@@ -24,7 +24,7 @@ export function displayWelcomeMessage(isFirstRun: boolean) {
  * - the default path can be selected by just pressing enter
  * - if it the path is invalid or does not exist, we ask again
  * - no need to validate defaultpath upfront, just allow user to press enter and fail from there
- * 
+ *
  * Asks the user to confirm the folder where the tool should search for BankFiles.
  * If a default folder has been set in config the user can confirm by pressing ENTER,
  * or provide a new path. If no default is set, we use the current working directory
