@@ -1,0 +1,1 @@
+export const CONFIG_FILENAME = "ynab-buddy/config.yaml"
