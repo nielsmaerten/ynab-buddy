@@ -28,7 +28,7 @@ export function getConfiguration(): Configuration {
 /**
  * Returns the full path to the config file: ~/ynab-buddy/config.yaml
  */
-const getConfigPath = () => {
+export const getConfigPath = () => {
   return resolve(CONFIG_PATH.replace("~", homedir()));
 };
 
