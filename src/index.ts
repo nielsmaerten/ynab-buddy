@@ -1,19 +1,17 @@
 import { exit } from "process";
-import { displayWelcomeMessage } from "./lib/cli";
+import { displayWelcomeMessage, askImportFolder } from "./lib/cli";
 import { getConfiguration } from "./lib/configurator";
 
+// Display welcome message asking users to setup config if they haven't done so yet
 const config = getConfiguration();
-const isFirstRun = config?.showConfigPrompt === true;
+const isFirstRun = config?.isFirstRun === true;
 displayWelcomeMessage(isFirstRun);
-if (isFirstRun) exit();
+if (isFirstRun || !config) exit();
 
-// if (config === undefined) {
-//   displayWelcomeMessage({ firstRun: !config.exists });
-//   // Hi, I'm Ynab Buddy and I can help you import your bank's CSV files into YNAB
-//   // It looks like you haven't configured me yet.
-//   // Please follow the instructions in the file c:/users/niels/ybuddy-config.yaml
-//   return;
-// }
+// If no default importFolder is set up, ask user to provide it now
+if (!config.importFolder.exists) {
+    config.importFolder = askImportFolder();
+}
 
 // if (config.importFolder.exists === false) {
 //   // No default import folder set up. Where should ynab buddy look for your csv files?

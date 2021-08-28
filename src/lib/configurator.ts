@@ -17,6 +17,6 @@ export function getConfiguration(): Configuration | undefined {
       upload: true,
     },
     parsers: [],
-    showConfigPrompt: undefined,
+    isFirstRun: undefined,
   };
 }

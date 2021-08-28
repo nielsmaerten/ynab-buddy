@@ -1,16 +1,18 @@
 export type Configuration = {
-  importFolder: {
-    path: string;
-    exists: boolean;
-  };
+  importFolder: ImportFolder
   parsers: Parser[];
   bankFiles: BankFile[];
   ynab: {
     token: string;
     upload: boolean;
   };
-  showConfigPrompt?: boolean;
+  isFirstRun?: boolean;
 };
+
+export type ImportFolder = {
+  exists: boolean;
+  path: string;
+}
 
 export type BankFile = {
   pattern: string;
