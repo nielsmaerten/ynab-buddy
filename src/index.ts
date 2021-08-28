@@ -1,10 +1,15 @@
-import { confirmImportPath } from "./lib/cli";
+import { exit } from "process";
+import { confirmImportPath, displayWelcomeMessage } from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
 import { findBankFiles } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 
 // Ensure the tool has a valid configuration
 const config = getConfiguration();
+
+// Display welcome message, exit if initialization has not yet been completed
+displayWelcomeMessage(config.initializationDone);
+if (config.initializationDone === false) exit();
 
 // Confirm folder where the tool should look for bank files
 config.importPath = confirmImportPath(config.importPath);

@@ -6,7 +6,7 @@ export type Configuration = {
     token: string;
     upload: boolean;
   };
-  isFirstRun?: boolean;
+  initializationDone: boolean
 };
 
 export type BankFilePattern = {
