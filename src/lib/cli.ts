@@ -15,5 +15,5 @@ export function displayWelcomeMessage(isFirstRun: boolean) {
 export function confirmImportPath(defaultPath: string | undefined): string {
   console.log("todo");
   // TODO
-  return '';
+  return "";
 }

@@ -1,6 +1,4 @@
-import { exit } from "process";
 import { Configuration } from "../types";
-import { displayWelcomeMessage } from "./cli";
 import { readFileSync, existsSync, copyFileSync } from "fs";
 import { resolve } from "path";
 import { CONFIG_PATH } from "../constants";
@@ -8,38 +6,23 @@ import { load } from "js-yaml";
 import { homedir } from "os";
 
 /**
- * // TODO
  * Reads configuration from the default config file.
  * If the file does not exist yet, it is created.
  * After configuring the user should remove the 'showConfigPrompt' line
  * from the config file. If the line is still there and says 'true',
- * show the initial welcome message and exit the tool.
+ * initializationDone will be false
  */
 export function getConfiguration(): Configuration {
   // Verify the config file exists, otherwise create it
   const configFilePath = getConfigPath();
   const configFileExists = existsSync(configFilePath);
   if (!configFileExists) createConfigFile();
-  return {} as Configuration;
 
   // Read and parse the config file
-  const cfg: Configuration = readConfigFile();
+  const rawConfig = readConfigFile();
+  const config = parseRawConfig(rawConfig);
 
-  // TODO: read this from config file
-  const config: Configuration = {
-    importPath: "",
-    bankFilePatterns: [],
-    ynab: {
-      token: "ABC123",
-      upload: true,
-    },
-    parsers: [],
-    initializationDone: false,
-  };
-
-  displayWelcomeMessage(config.initializationDone);
-  if (config.initializationDone) exit();
-  else return config;
+  return config;
 }
 
 /**
@@ -61,10 +44,22 @@ const createConfigFile = () => {
 /**
  * Reads the config file from its default location
  */
-const readConfigFile = (): Configuration => {
+const readConfigFile = () => {
   const buffer = readFileSync(getConfigPath());
   const yamlText = buffer.toString();
   const rawConfig = load(yamlText);
+  return rawConfig;
+};
 
-  throw "not implemented";
+const parseRawConfig = (rawConfig: any): Configuration => {
+  return {
+    importPath: rawConfig.import_from,
+    bankFilePatterns: rawConfig.bank_transaction_files,
+    ynab: {
+      token: rawConfig.upload_to_ynab.ynab_token,
+      upload: rawConfig.upload_to_ynab.upload_transactions,
+    },
+    parsers: rawConfig.parsers,
+    initializationDone: !rawConfig.show_config_prompt,
+  };
 };

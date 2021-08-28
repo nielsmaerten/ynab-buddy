@@ -1,26 +1,18 @@
-/**
- * // TODO
- * Reads configuration from the default config file.
- * If the file does not exist yet, it is created.
- * After configuring the user should remove the 'showConfigPrompt' line
- * from the config file. If the line is still there and says 'true',
- * initializationDone should be false
- */
+import { readFileSync } from "fs";
+import { Configuration } from "../types";
+
 describe("configuration.ts", () => {
   beforeAll(() => {
+    const configFixture = getSampleConfig();
     jest.mock("fs", () => {
       return {
-        readFileSync: jest.fn().mockReturnValue("test"),
+        readFileSync: jest.fn().mockReturnValue(configFixture),
         copyFileSync: jest.fn(),
       };
     });
     jest.mock("../constants.ts", () => {
       return { CONFIG_PATH: "test/config/path" };
     });
-  });
-
-  afterEach(() => {
-    jest.resetAllMocks();
   });
 
   it("attempts to find the config file", () => {
@@ -47,6 +39,43 @@ describe("configuration.ts", () => {
   });
 
   it("parses the config file", () => {
-    throw "todo";
+    const actual: Configuration = require("./configuration").getConfiguration();
+    const expected: Configuration = {
+      bankFilePatterns: [
+        {
+          account_name: "BNP Checking Account",
+          ynab_account_id: "ABC1234",
+          ynab_budget_id: "XYZ7890",
+          ynab_flag_color: "purple",
+          parser: "bnp-checking-parser",
+          delete_original_file: true,
+          save_parsed_file: true,
+          upload: false,
+          pattern: "BNP-export-IBAN01233456789-*.csv",
+        },
+      ],
+      initializationDone: false,
+      parsers: [
+        {
+          columns: ["skip", "skip", "Memo", "Date", "Inflow", "skip"],
+          date_format: "%m/%d/%Y",
+          delimiter: ",",
+          footer_rows: 0,
+          header_rows: 2,
+          name: "bnp-checking-parser",
+        },
+      ],
+      importPath: "c:/users/test/downloads",
+      ynab: {
+        token: "ABC12345",
+        upload: false,
+      },
+    };
+    expect(actual).toMatchObject(expected);
+    expect(expected).toMatchObject(actual);
   });
 });
+
+const getSampleConfig = () => {
+  return readFileSync("./src/config/ynab-buddy.yaml").toString();
+};

@@ -18,9 +18,9 @@ config.importPath = confirmImportPath(config.importPath);
 const bankFiles = findBankFiles(config.importPath!);
 
 // Parse and convert bankFiles
-const parsedFiles = bankFiles.map(bankFile => {
-    parseBankFile(bankFile);
-})
+const parsedFiles = bankFiles.map((bankFile) => {
+  parseBankFile(bankFile);
+});
 
 // PSEUDOCODE
 // // Looking for csv files to convert in c:/users/downloads/ ...

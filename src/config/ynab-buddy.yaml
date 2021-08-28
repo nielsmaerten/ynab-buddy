@@ -1,40 +1,40 @@
 # If undefined, interactively ask for the folder or press enter to use working dir
-Import from: "c:/user/niels/downloads"
+import_from: "c:/users/test/downloads"
 
 # At least 1 of these is required
-Transaction files:
+bank_transaction_files:
   # the name is just for users, the script ignores it
-  - account-name: BNP Checking account
+  - account_name: BNP Checking Account
     # pattern is a glob pattern that will collect files from the import folder
     pattern: BNP-export-IBAN01233456789-*.csv
     ## parser tells which parser to use for any file that matches this pattern
     parser: bnp-checking-parser
 
     ## required to upload to ynab, ingored if the file isn't uploaded
-    ynab-account-id: ABC1234
-    ynab-budget-id: XYZ7890
-    ynab-flag-color: purple
+    ynab_account_id: ABC1234
+    ynab_budget_id: XYZ7890
+    ynab_flag_color: purple
 
     ## additional settings, not required
-    ## if undefined, default to 'upload-transactions' in the ynab section
-    auto-upload: false
+    ## if undefined, default to 'upload_transactions' in the ynab section
+    upload: false
     ## false by default, if true, save the parse result using a unique name
-    save-parsed-file: true
+    save_parsed_file: true
     ## false by default, if true, delete the original file after processing
     ## if true, either upload or save must be true, otherwise it will default back to false (don't delete)
-    delete-original-file: true
+    delete_original_file: true
 
-Parsers:
+parsers:
   - name: bnp-checking-parser
-    header-rows: 2
-    footer-rows: 0
+    header_rows: 2
+    footer_rows: 0
     delimiter: ","
     columns: [skip, skip, Memo, Date, Inflow, skip]
-    date-format: "%m/%d/%Y"
+    date_format: "%m/%d/%Y"
 
-Upload to YouNeedABudget:
-  upload-transactions: false
-  ynab-token: ABC12345
+upload_to_ynab:
+  upload_transactions: false
+  ynab_token: ABC12345
 
 # Delete the following line:
-Show configuration prompt: true
+show_config_prompt: true
