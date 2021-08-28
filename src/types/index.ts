@@ -1,7 +1,7 @@
 export type Configuration = {
   importPath?: string,
   parsers: Parser[];
-  bankFiles: BankFile[];
+  bankFilePatterns: BankFilePattern[];
   ynab: {
     token: string;
     upload: boolean;
@@ -9,7 +9,7 @@ export type Configuration = {
   isFirstRun?: boolean;
 };
 
-export type BankFile = {
+export type BankFilePattern = {
   pattern: string;
   parser: string;
   name: string;

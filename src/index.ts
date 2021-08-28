@@ -1,23 +1,18 @@
-import { exit } from "process";
-import { displayWelcomeMessage, askImportFolder } from "./lib/cli";
-import { getConfiguration } from "./lib/configurator";
+import { confirmImportPath } from "./lib/cli";
+import { getConfiguration } from "./lib/configuration";
+import { findBankFiles } from "./lib/filesystem";
 
-// Display welcome message asking users to setup config if they haven't done so yet
+// Ensure the tool has a valid configuration
 const config = getConfiguration();
-const isFirstRun = config?.isFirstRun === true;
-displayWelcomeMessage(isFirstRun);
-if (isFirstRun || !config) exit();
 
 // Confirm folder where the tool should look for bank files
-config.importPath = askImportFolder(config.importPath);
+config.importPath = confirmImportPath(config.importPath);
+
+// Find files eligible for conversion in the importPath
+const bankFiles = findBankFiles(config.importPath!);
 
 
-// if (config.importFolder.exists === false) {
-//   // No default import folder set up. Where should ynab buddy look for your csv files?
-//   // (press enter to search the current directory)
-//   config.importFolder = promptImportFolder();
-// }
-
+// PSEUDOCODE
 // // Looking for csv files to convert in c:/users/downloads/ ...
 // // Found 5 files eligible for conversion
 // const bankFiles = findBankFiles(import.importFolder);

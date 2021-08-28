@@ -1,60 +1,43 @@
 import { Configuration } from "./types";
 
-let isFirstRun = false;
-let getConfiguration_mock: jest.Mock;
-const displayWelcomeMessage_mock = jest.fn();
-const exit_mock = jest.fn();
-const askImportFolder_mock = jest.fn()
+const mock_importPath = "import/path/test";
+const mocks = {
+  getConfiguration: jest.fn().mockReturnValue({
+    importPath: mock_importPath
+  } as Configuration),
+  confirmImportPath: jest.fn().mockReturnValue(mock_importPath),
+  findBankFiles: jest.fn(),
+};
 
 describe("index.ts", () => {
-  beforeEach(() => {
-    jest.mock("./lib/configurator", () => {
-      getConfiguration_mock = jest.fn().mockReturnValue({
-        isFirstRun,
-        importPath: '',
-      } as Configuration);
+  beforeAll(() => {
+    jest.mock("./lib/configuration", () => {
       return {
-        getConfiguration: getConfiguration_mock,
+        getConfiguration: mocks.getConfiguration
       };
     });
     jest.mock("./lib/cli", () => {
       return {
-        displayWelcomeMessage: displayWelcomeMessage_mock,
-        askImportFolder: askImportFolder_mock
+        confirmImportPath: mocks.confirmImportPath
       };
     });
-    jest.mock("process", () => {
+    jest.mock("./lib/filesystem", () => {
       return {
-        exit: exit_mock,
-      };
-    });
-  });
-  afterEach(() => {
-    jest.resetModules();
-    jest.resetAllMocks();
-  });
-
-  it("gets configuration", () => {
+        findBankFiles: mocks.findBankFiles
+      }
+    })
     require("./index");
-    expect(getConfiguration_mock).toHaveBeenCalled();
   });
 
-  it("displays welcome message and exits if firstRun is true", () => {
-    isFirstRun = true;
-    require("./index");
-    expect(displayWelcomeMessage_mock).toHaveBeenCalledWith(isFirstRun);
-    expect(exit_mock).toHaveBeenCalled();
+  it("gets configuration object", () => {
+    expect(mocks.getConfiguration).toHaveBeenCalled();
   });
 
-  it("displays welcome message and does not exit if firstRun is false", () => {
-    isFirstRun = false;
-    require("./index");
-    expect(displayWelcomeMessage_mock).toHaveBeenCalledWith(isFirstRun);
-    expect(exit_mock).not.toHaveBeenCalled();
+  it("asks to confirm import path", () => {
+    expect(mocks.confirmImportPath).toHaveBeenCalledWith(mock_importPath);
   });
 
-  it("asks to confirm import folder", () => {
-    require('./index');
-    expect(askImportFolder_mock).toHaveBeenCalled();
-  })
+  it("looks for bank files in import path", () => {
+    expect(mocks.findBankFiles).toHaveBeenCalledWith(mock_importPath)
+  });
 });
