@@ -13,6 +13,8 @@
             "disableOptimisticBPs": true,
             "cwd": "${workspaceFolder}",
             "runtimeExecutable": "yarn",
+            "skipFiles": [
+            ],
             "args": [
                 "test",
                 "--runInBand",
