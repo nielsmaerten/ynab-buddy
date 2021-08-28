@@ -15,6 +15,12 @@ export type BankFilePattern = {
   name: string;
 };
 
+export type BankFile = {
+  // TODO: decide types
+  path: string;
+  parser: string;
+}
+
 export type Parser = {
   name: string;
   columns: string[];

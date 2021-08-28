@@ -1,6 +1,7 @@
 import { confirmImportPath } from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
 import { findBankFiles } from "./lib/filesystem";
+import { parseBankFile } from "./lib/parser";
 
 // Ensure the tool has a valid configuration
 const config = getConfiguration();
@@ -11,6 +12,10 @@ config.importPath = confirmImportPath(config.importPath);
 // Find files eligible for conversion in the importPath
 const bankFiles = findBankFiles(config.importPath!);
 
+// Parse and convert bankFiles
+const parsedFiles = bankFiles.map(bankFile => {
+    parseBankFile(bankFile);
+})
 
 // PSEUDOCODE
 // // Looking for csv files to convert in c:/users/downloads/ ...
