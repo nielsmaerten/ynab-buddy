@@ -1,5 +1,6 @@
 # If undefined, interactively ask for the folder or press enter to use working dir
 import_from: "c:/users/test/downloads"
+search_subfolders: false
 
 # At least 1 of these is required
 bank_transaction_files:
