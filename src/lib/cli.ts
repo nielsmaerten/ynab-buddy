@@ -1,20 +1,19 @@
-import { resolve } from "path";
-import { APP_NAME, APP_VERSION } from "../constants";
+import { existsSync } from "fs";
+import chalk from "chalk";
+import prompts from "prompts";
+import { APP_NAME, APP_VERSION, messages } from "../constants";
 import { getConfigPath } from "./configuration";
 
-export function displayWelcomeMessage(isFirstRun: boolean) {
-  console.log(`${APP_NAME} - v${APP_VERSION}`);
-  console.log("= = = = =");
+export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
+  const appVersion = chalk.bold.inverse(`${APP_NAME} [v${APP_VERSION}]\n`);
+  console.log(appVersion);
   if (isFirstRun) {
+    console.log(chalk.blue(messages.intro));
     console.log(
-      "Welcome to YNAB Buddy.",
-      "This tool can help you import your bank's CSV files into YNAB.",
-      "Looks like you haven't configured YNAB Buddy yet."
+      chalk.yellow(messages.notConfigured),
+      chalk.green(messages.gettingStarted),
+      chalk.green(getConfigPath())
     );
-    console.log(
-      "To get started, open the following file and follow the instructions:"
-    );
-    console.log(getConfigPath());
   }
 }
 
@@ -31,21 +30,15 @@ export function displayWelcomeMessage(isFirstRun: boolean) {
  * The function loops until a valid existing path is provided
  */
 export async function confirmImportPath(defaultPath: string | undefined) {
-  const prompt = new Input({
-    message: "Directory containing files to import/convert:",
-    initial: defaultPath || resolve(__dirname),
+  const response = await prompts({
+    type: "text",
+    name: "path",
+    initial: defaultPath,
+    message: "Directory containing files to import/convert",
+    validate: (value) => {
+      return existsSync(value);
+    },
   });
-
-  prompt
-    .run()
-    .then((answer: string) => console.log("Answer:", answer))
-    .catch(console.log);
-  console.log("Directory containing files to import/convert:");
-  let importPath = defaultPath?.toString();
-  if (!importPath) {
-    importPath = resolve(__dirname);
-  }
-
-  console.log(`{ENTER}: [${defaultPath}]`);
-  return "";
+  console.log("Proceeding with import path:", response.path);
+  return response.path;
 }
