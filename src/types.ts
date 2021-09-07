@@ -1,5 +1,6 @@
 export type Configuration = {
-  importPath?: string;
+  importPath?: string; // FIXME: Can i remove the '?' ?
+  searchSubDirectories: boolean;
   parsers: Parser[];
   bankFilePatterns: BankFilePattern[];
   ynab: {
@@ -23,8 +24,9 @@ export type BankFilePattern = {
 
 export type BankFile = {
   path: string;
+  isBankFile: boolean;
   matchedPattern: BankFilePattern;
-  matchedParser: Parser;
+  matchedParser: string;
 };
 
 export type ParsedBankFile = {
