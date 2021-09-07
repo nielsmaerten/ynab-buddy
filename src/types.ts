@@ -22,9 +22,23 @@ export type BankFilePattern = {
 };
 
 export type BankFile = {
-  // TODO: decide types
   path: string;
-  parser: string;
+  matchedPattern: BankFilePattern;
+  matchedParser: Parser;
+};
+
+export type ParsedBankFile = {
+  bankFile: BankFile;
+  transactions: Transaction[];
+};
+
+export type Transaction = {
+  // TODO: Finalize types
+  memo: string;
+  date: Date;
+  ynab_account_id: string;
+  ynab_budget_id: string;
+  ynab_flag_color: string;
 };
 
 export type Parser = {

@@ -1,6 +1,6 @@
-import { Parser } from "../types";
+import { BankFile, ParsedBankFile } from "../types";
 
-export function parseBankFile(path: string) {
+export function parseBankFile(input: BankFile): ParsedBankFile {
   // TODO
   throw "parseBankFile is not implemented";
 }
