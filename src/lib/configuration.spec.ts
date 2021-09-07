@@ -9,7 +9,7 @@ describe("configuration.ts", () => {
       return {
         readFileSync: jest.fn().mockReturnValue(configFixture),
         copyFileSync: jest.fn(),
-        mkdirSync: jest.fn()
+        mkdirSync: jest.fn(),
       };
     });
   });

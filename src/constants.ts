@@ -1,5 +1,5 @@
 export const CONFIG_DIR = "~/ynab-buddy";
-export const CONFIG_FILE ="config.yaml";
+export const CONFIG_FILE = "config.yaml";
 export const CONFIG_FILE_EXAMPLE = "src/config/example.yaml";
 export const APP_NAME = "YNAB Buddy";
 export const APP_VERSION = require("../package.json").version;
@@ -12,5 +12,5 @@ export const messages = {
     "To get started, open the following file and follow the instructions:",
   usingConfigPath: "Using configuration from:",
   importFolderPrompt: "Folder containing your bank's CSV files:",
-  folderNotFound: "Could not find folder:"
+  folderNotFound: "Could not find folder:",
 };

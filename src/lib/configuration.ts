@@ -40,8 +40,8 @@ export const getConfigPath = () => {
 const createConfigFile = () => {
   const defaultConfigFilePath = path.resolve("./src/config/example.yaml");
   const dest = getConfigPath();
-  const destDir = path.join(dest, '../');
-  if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, {recursive: true});
+  const destDir = path.join(dest, "../");
+  if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
   return fs.copyFileSync(defaultConfigFilePath, dest);
 };
 

@@ -9,7 +9,7 @@ import { parseBankFile } from "./lib/parser";
   const config = getConfiguration();
 
   // Display welcome message, exit if initialization has not yet been completed
-  displayWelcomeMessage({isFirstRun: !config.initializationDone});
+  displayWelcomeMessage({ isFirstRun: !config.initializationDone });
   if (config.initializationDone === false) exit();
 
   // Confirm folder where the tool should look for bank files
@@ -19,20 +19,9 @@ import { parseBankFile } from "./lib/parser";
   const bankFiles = findBankFiles(config.importPath!);
 
   // Parse and convert bankFiles
-  const parsedFiles = bankFiles.map((bankFile) => {
-    parseBankFile(bankFile);
-  });
+  const parsedFiles = bankFiles.map((bankFile) => parseBankFile(bankFile));
 
   // PSEUDOCODE
-  // // Looking for csv files to convert in c:/users/downloads/ ...
-  // // Found 5 files eligible for conversion
-  // const bankFiles = findBankFiles(import.importFolder);
-  // const parsedFiles = bankFiles.map((bankfile) =>
-  //   // Parsing "csvfile1.csv" as "parsername"
-  //   // Parsing "csvfile1.csv" as "parsername"
-  //   // Parsing "csvfile1.csv" as "parsername"
-  //   parseBankfile(bankfile, config)
-  // );
 
   // if (config.ynab.uploadTransactions !== false) {
   //   for (let i = 0; i < parsedFiles.length; i++) {
