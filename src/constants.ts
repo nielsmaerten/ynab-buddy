@@ -10,4 +10,7 @@ export const messages = {
   notConfigured: "It looks like YNAB Buddy is not yet configured.",
   gettingStarted:
     "To get started, open the following file and follow the instructions:",
+  usingConfigPath: "Using configuration from:",
+  importFolderPrompt: "Folder containing your bank's CSV files:",
+  folderNotFound: "Could not find folder:"
 };
