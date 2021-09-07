@@ -1,9 +1,9 @@
-import { Configuration } from "../types";
-import { readFileSync, existsSync, copyFileSync } from "fs";
-import { resolve } from "path";
-import { CONFIG_PATH } from "../constants";
-import { load } from "js-yaml";
+import fs from "fs";
+import path from "path";
 import { homedir } from "os";
+import { load } from "js-yaml";
+import { Configuration } from "../types";
+import { CONFIG_DIR, CONFIG_FILE } from "../constants";
 
 /**
  * Reads configuration from the default config file.
@@ -15,7 +15,7 @@ import { homedir } from "os";
 export function getConfiguration(): Configuration {
   // Verify the config file exists, otherwise create it
   const configFilePath = getConfigPath();
-  const configFileExists = existsSync(configFilePath);
+  const configFileExists = fs.existsSync(configFilePath);
   if (!configFileExists) createConfigFile();
 
   // Read and parse the config file
@@ -29,23 +29,27 @@ export function getConfiguration(): Configuration {
  * Returns the full path to the config file: ~/ynab-buddy/config.yaml
  */
 export const getConfigPath = () => {
-  return resolve(CONFIG_PATH.replace("~", homedir()));
+  const dir = path.resolve(CONFIG_DIR.replace("~", homedir()));
+  const file = CONFIG_FILE;
+  return path.join(dir, file);
 };
 
 /**
  * Writes the default config file to the default location
  */
 const createConfigFile = () => {
-  const defaultConfigFilePath = resolve("./src/config/ynab-buddy.yaml");
+  const defaultConfigFilePath = path.resolve("./src/config/example.yaml");
   const dest = getConfigPath();
-  return copyFileSync(defaultConfigFilePath, dest);
+  const destDir = path.join(dest, '../');
+  if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, {recursive: true});
+  return fs.copyFileSync(defaultConfigFilePath, dest);
 };
 
 /**
  * Reads the config file from its default location
  */
 const readConfigFile = () => {
-  const buffer = readFileSync(getConfigPath());
+  const buffer = fs.readFileSync(getConfigPath());
   const yamlText = buffer.toString();
   const rawConfig = load(yamlText);
   return rawConfig;

@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/_index.js",
   "scripts": {
+    "start": "ts-node ./src/index.ts",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check",
@@ -19,6 +20,7 @@
     "@types/jest": "^27.0.1",
     "@types/js-yaml": "^4.0.3",
     "@types/node": "^16.7.4",
+    "@types/prompts": "^2.0.14",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "jest": "^27.1.0",
@@ -33,6 +35,8 @@
     }
   },
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "chalk": "^4.1.2",
+    "js-yaml": "^4.1.0",
+    "prompts": "^2.4.1"
   }
 }

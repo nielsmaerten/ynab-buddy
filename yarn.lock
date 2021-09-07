@@ -884,6 +884,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prompts@npm:^2.0.14":
+  version: 2.4.0
+  resolution: "@types/prompts@npm:2.4.0"
+  checksum: ec75655f07fbc3cb2df60a3e3bdd13bfda0554a16f5541285c4b1cc0610756838a2863dccfc911cbb1385492054c07210512164e3dbef272ec638d631783b278
+  languageName: node
+  linkType: hard
+
 "@types/stack-utils@npm:^2.0.0":
   version: 2.0.1
   resolution: "@types/stack-utils@npm:2.0.1"
@@ -1341,7 +1348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0":
+"chalk@npm:^4.0.0, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -3830,7 +3837,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"prompts@npm:^2.0.1":
+"prompts@npm:^2.0.1, prompts@npm:^2.4.1":
   version: 2.4.1
   resolution: "prompts@npm:2.4.1"
   dependencies:
@@ -4804,11 +4811,14 @@ typescript@^4.4.2:
     "@types/jest": ^27.0.1
     "@types/js-yaml": ^4.0.3
     "@types/node": ^16.7.4
+    "@types/prompts": ^2.0.14
+    chalk: ^4.1.2
     commitizen: ^4.2.4
     cz-conventional-changelog: 3.3.0
     jest: ^27.1.0
     js-yaml: ^4.1.0
     prettier: 2.3.2
+    prompts: ^2.4.1
     ts-jest: ^27.0.5
     ts-node: ^10.2.1
     typescript: ^4.4.2

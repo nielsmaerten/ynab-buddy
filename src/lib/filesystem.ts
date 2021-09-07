@@ -1,4 +1,4 @@
 export function findBankFiles(path: string): any[] {
   // TODO
-  throw "not implemented";
+  throw "findBankFiles is not implemented";
 }

@@ -1,17 +1,16 @@
 import { readFileSync } from "fs";
+import { CONFIG_FILE_EXAMPLE } from "../constants";
 import { Configuration } from "../types";
 
 describe("configuration.ts", () => {
   beforeAll(() => {
-    const configFixture = getSampleConfig();
+    const configFixture = getExampleConfig();
     jest.mock("fs", () => {
       return {
         readFileSync: jest.fn().mockReturnValue(configFixture),
         copyFileSync: jest.fn(),
+        mkdirSync: jest.fn()
       };
-    });
-    jest.mock("../constants.ts", () => {
-      return { CONFIG_PATH: "test/config/path" };
     });
   });
 
@@ -76,6 +75,6 @@ describe("configuration.ts", () => {
   });
 });
 
-const getSampleConfig = () => {
-  return readFileSync("./src/config/ynab-buddy.yaml").toString();
+const getExampleConfig = () => {
+  return readFileSync(CONFIG_FILE_EXAMPLE).toString();
 };
