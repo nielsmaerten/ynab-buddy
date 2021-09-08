@@ -16,7 +16,7 @@ import { parseBankFile } from "./lib/parser";
   config.importPath = await confirmImportPath(config.importPath);
 
   // Find files eligible for conversion in the importPath
-  const bankFiles = findBankFiles(config.importPath!);
+  const bankFiles = findBankFiles(config.importPath!, config);
 
   // Parse and convert bankFiles
   const parsedFiles = bankFiles.map((bankFile) => parseBankFile(bankFile));

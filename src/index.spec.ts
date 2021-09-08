@@ -62,7 +62,10 @@ describe("index.ts", () => {
   });
 
   it("looks for bank files in import path", () => {
-    expect(mocks.findBankFiles).toHaveBeenCalledWith(mock_importPath);
+    expect(mocks.findBankFiles).toHaveBeenCalledWith(
+      mock_importPath,
+      mock_getConfiguration
+    );
   });
 
   it("attempts to parse every bankFile", () => {
