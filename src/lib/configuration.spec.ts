@@ -64,6 +64,7 @@ describe("configuration.ts", () => {
           name: "bnp-checking-parser",
         },
       ],
+      searchSubDirectories: false,
       importPath: "c:/users/test/downloads",
       ynab: {
         token: "ABC12345",

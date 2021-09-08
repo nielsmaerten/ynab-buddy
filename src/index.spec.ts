@@ -10,6 +10,7 @@ const mock_getConfiguration: Configuration = {
     upload: true,
   },
   importPath: mock_importPath,
+  searchSubDirectories: false,
   initializationDone: true,
 };
 const mocks = {
