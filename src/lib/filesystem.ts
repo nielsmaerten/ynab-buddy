@@ -19,7 +19,7 @@ export function findBankFiles(dir: string, config: Configuration): BankFile[] {
   const bankFiles = allFiles.map((file) => detectBank(file, bankFilePatterns));
 
   // Discard files that are not from banks
-  const cleanedBankFiles = bankFiles.filter((f) => f !== undefined);
+  const cleanedBankFiles = bankFiles.filter((f) => f.isBankFile);
   return cleanedBankFiles;
 }
 

@@ -1,4 +1,4 @@
-import { BankFilePattern } from "../types";
+import { BankFilePattern, Configuration } from "../types";
 
 // (Fake) paths to test files that will have to be matched to a pattern
 export const testFiles = {
@@ -17,7 +17,7 @@ const baseTestPattern: Partial<BankFilePattern> = {
   delete_original_file: true,
 };
 
-// Full BankFilePatterns
+// Unit test BankFilePatterns
 export const testBankFilePatterns = [
   {
     ...baseTestPattern,
@@ -32,3 +32,50 @@ export const testBankFilePatterns = [
     pattern: "savings/export.CSV",
   },
 ] as BankFilePattern[];
+
+// Live test BankFilePatterns
+export const liveBankFilePatterns = [
+  {
+    ...baseTestPattern,
+    account_name: "Bank A Savings",
+    parser: "bankA",
+    pattern: "bankA_*_savings.csv",
+  },
+  {
+    ...baseTestPattern,
+    account_name: "Bank A Checking",
+    parser: "bankA",
+    pattern: "bankA_*_checking.csv",
+  },
+  {
+    ...baseTestPattern,
+    account_name: "Bank B Checking",
+    parser: "bankB",
+    pattern: "bankB-CHECKING.csv",
+  },
+  {
+    ...baseTestPattern,
+    account_name: "Bank C Savings",
+    parser: "bankC",
+    pattern: "savings/export.csv",
+  },
+  {
+    ...baseTestPattern,
+    account_name: "Bank C Checking",
+    parser: "bankC",
+    pattern: "checking/export.csv",
+  },
+] as BankFilePattern[];
+
+// Live tests config
+export const liveConfig: Configuration = {
+  bankFilePatterns: liveBankFilePatterns,
+  initializationDone: true,
+  parsers: [],
+  searchSubDirectories: true,
+  ynab: {
+    token: "",
+    upload: false,
+  },
+  importPath: "",
+};
