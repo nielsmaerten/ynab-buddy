@@ -34,13 +34,15 @@ export type ParsedBankFile = {
   transactions: Transaction[];
 };
 
+/**
+ * A Transaction object compatible with the YNAB API
+ */
 export type Transaction = {
-  // TODO: Finalize types
   memo: string;
+  amount: number;
   date: Date;
-  ynab_account_id: string;
-  ynab_budget_id: string;
-  ynab_flag_color: string;
+  account_id?: string;
+  flag_color?: string;
 };
 
 export type Parser = {

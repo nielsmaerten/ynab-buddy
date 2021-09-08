@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.2",
+    "csv-parse": "^4.16.3",
     "glob": "^7.1.7",
     "js-yaml": "^4.1.0",
     "minimatch": "^3.0.4",
