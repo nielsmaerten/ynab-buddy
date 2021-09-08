@@ -25,8 +25,8 @@ export type BankFilePattern = {
 export type BankFile = {
   path: string;
   isBankFile: boolean;
-  matchedPattern: BankFilePattern;
-  matchedParser: string;
+  matchedPattern?: BankFilePattern;
+  matchedParser?: string;
 };
 
 export type ParsedBankFile = {
