@@ -873,6 +873,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/luxon@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@types/luxon@npm:2.0.3"
+  checksum: dce4b643783dbf7bd97e67197cacbe64a97fbc5c549545cf2d0d8a226f859fe6387bfec64e5a431bc307c9e397a4407d4a8a30b8eb39591e0462efa922f44fa1
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 3.0.5
   resolution: "@types/minimatch@npm:3.0.5"
@@ -3299,6 +3306,13 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
+"luxon@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "luxon@npm:2.0.2"
+  checksum: eb2e366cf41a129704ae3213e0aea3e1504390af2a84322a5bbb6a22c92d96c7cb70e58b941a109c5e1bfbed51784d08130278feeee6cdf169940af90a68ded5
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:^3.0.0":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
@@ -4835,6 +4849,7 @@ typescript@^4.4.2:
     "@types/glob": ^7.1.4
     "@types/jest": ^27.0.1
     "@types/js-yaml": ^4.0.3
+    "@types/luxon": ^2.0.3
     "@types/node": ^16.7.4
     "@types/prompts": ^2.0.14
     chalk: ^4.1.2
@@ -4844,6 +4859,7 @@ typescript@^4.4.2:
     glob: ^7.1.7
     jest: ^27.1.0
     js-yaml: ^4.1.0
+    luxon: ^2.0.2
     minimatch: ^3.0.4
     prettier: 2.3.2
     prompts: ^2.4.1
