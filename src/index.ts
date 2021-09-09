@@ -3,6 +3,7 @@ import { confirmImportPath, displayWelcomeMessage } from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
 import { findBankFiles } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
+import { BankFile } from "./types";
 
 (async () => {
   // Ensure the tool has a valid configuration
@@ -19,7 +20,8 @@ import { parseBankFile } from "./lib/parser";
   const bankFiles = findBankFiles(config.importPath!, config);
 
   // Parse and convert bankFiles
-  const parsedFiles = bankFiles.map((bankFile) => parseBankFile(bankFile));
+  const doParsing = (bf: BankFile) => parseBankFile(bf, config.parsers);
+  const parsedFiles = bankFiles.map(doParsing);
 
   // PSEUDOCODE
 
