@@ -43,7 +43,7 @@ enum csvFixtures {
   // Indexes on the csv fixtures array in parser.spec.fixtures
   customDelimiter = 0,
   headerFooterEmptyLines = 1,
-  decimalCommas = 2
+  decimalCommas = 2,
 }
 
 const validateTransaction = (tx: Transaction) => {
