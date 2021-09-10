@@ -11,7 +11,7 @@ bank_transaction_files:
     ## parser tells which parser to use for any file that matches this pattern
     parser: bnp-checking-parser
 
-    ## required to upload to ynab, ingored if the file isn't uploaded
+    ## required to upload to ynab, ignored if the file isn't uploaded
     ynab_account_id: ABC1234
     ynab_budget_id: XYZ7890
     ynab_flag_color: purple
