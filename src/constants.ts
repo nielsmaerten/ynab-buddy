@@ -13,4 +13,5 @@ export const messages = {
   usingConfigPath: "Using configuration file:",
   importFolderPrompt: "Where are your bank's files located?",
   folderNotFound: "Could not find folder:",
+  parsingDone: "Found %s transactions in %s",
 };

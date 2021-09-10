@@ -3,6 +3,9 @@ import parseCsv from "csv-parse/lib/sync";
 import { Options as parseOptions } from "csv-parse";
 import { DateTime } from "luxon";
 import fs from "fs";
+import chalk from "chalk";
+import { messages } from "../constants";
+import path from "path";
 
 export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const csv = fs.readFileSync(source.path);
@@ -21,6 +24,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   records = records.slice(startRow, endRow);
 
   const transactions = records.map((tx) => buildTransaction(tx, parser));
+  logResult(transactions.length, source.path);
   return {
     transactions,
     source,
@@ -49,6 +53,12 @@ function parseAmount(record: any): number {
   }
 
   return value;
+}
+
+function logResult(txCount: number, sourcePath: string) {
+  const txCountLabel = chalk.blueBright(txCount);
+  const sourceLabel = chalk.blueBright(path.basename(sourcePath));
+  console.log(messages.parsingDone, txCountLabel, sourceLabel);
 }
 
 function noDuplicates<T>(value: T, index: number, self: Array<T>) {
