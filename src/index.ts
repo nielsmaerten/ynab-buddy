@@ -29,7 +29,12 @@ import { BankFile } from "./types";
   // Save parsed files, delete original files
   parsedFiles.forEach(exportCsv);
   parsedFiles.forEach(cleanup);
-  parsedFiles.forEach((parsedFile) => upload(parsedFile, config));
+
+  // Upload to YNAB
+  console.log("");
+  const uploads = parsedFiles.map((parsedFile) => upload(parsedFile, config));
+  await Promise.all(uploads);
+
 
   console.log("All done.");
 

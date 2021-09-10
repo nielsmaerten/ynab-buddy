@@ -21,4 +21,10 @@ export const messages = {
     "The expected date format was: '%s'.",
     "You may want to check the format in your config.yaml file.",
   ],
+  uploadError: [
+    "Error while uploading transactions to YNAB.",
+    "Ensure your config file has a valid token, budgetID and accountID",
+    "Error detail: %s"
+  ],
+  uploadSuccess: "Success: %s transactions uploaded to YNAB."
 };
