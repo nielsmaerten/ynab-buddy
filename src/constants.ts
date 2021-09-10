@@ -27,4 +27,9 @@ export const messages = {
     "Error detail: %s",
   ],
   uploadSuccess: "Success: %s transactions uploaded to YNAB.",
+  goodbye:
+    "🎉 All done! Open YNAB to categorize your newly imported transactions.",
+  sponsor:
+    "Did this tool just save you some time? Then maybe consider buying me a coffee:",
+  sponsorLink: "https://go.niels.me/coffee",
 };

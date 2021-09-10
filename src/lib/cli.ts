@@ -26,6 +26,15 @@ export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
   console.log("");
 }
 
+export function displayGoodbyeMessage() {
+  console.log("");
+  console.log(chalk.yellow(messages.goodbye));
+  console.log("");
+  console.log(messages.sponsor);
+  console.log(chalk.bgBlueBright(messages.sponsorLink));
+  console.log("");
+}
+
 /**
  * Asks the user to confirm the folder where the tool should search for BankFiles.
  * If a default folder has been set in config the user can confirm by pressing ENTER,
