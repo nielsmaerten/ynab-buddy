@@ -70,7 +70,7 @@ export const liveBankFilePatterns = [
 // Live tests config
 export const liveConfig: Configuration = {
   bankFilePatterns: liveBankFilePatterns,
-  initializationDone: true,
+  configurationDone: true,
   parsers: [],
   searchSubDirectories: true,
   ynab: {

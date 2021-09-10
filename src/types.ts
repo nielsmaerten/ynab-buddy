@@ -7,7 +7,7 @@ export type Configuration = {
     token: string;
     upload: boolean;
   };
-  initializationDone: boolean;
+  configurationDone: boolean;
 };
 
 export type BankFilePattern = {

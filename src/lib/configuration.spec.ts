@@ -53,11 +53,11 @@ describe("configuration.ts", () => {
           pattern: "BNP-export-IBAN01233456789-*.csv",
         },
       ],
-      initializationDone: false,
+      configurationDone: false,
       parsers: [
         {
-          columns: ["skip", "skip", "Memo", "Date", "Inflow", "skip"],
-          date_format: "%m/%d/%Y",
+          columns: ["skip", "skip", "memo", "date", "inflow", "skip"],
+          date_format: "L/d/YYYY",
           delimiter: ",",
           footer_rows: 0,
           header_rows: 2,

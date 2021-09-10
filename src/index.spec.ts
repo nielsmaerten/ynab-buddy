@@ -11,7 +11,7 @@ const mock_getConfiguration: Configuration = {
   },
   importPath: mock_importPath,
   searchSubDirectories: false,
-  initializationDone: true,
+  configurationDone: true,
 };
 const mocks = {
   parseBankFile: jest.fn(),

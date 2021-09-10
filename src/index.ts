@@ -10,8 +10,8 @@ import { BankFile } from "./types";
   const config = getConfiguration();
 
   // Display welcome message, exit if initialization has not yet been completed
-  displayWelcomeMessage({ isFirstRun: !config.initializationDone });
-  if (config.initializationDone === false) exit();
+  displayWelcomeMessage({ isFirstRun: !config.configurationDone });
+  if (!config.configurationDone) exit();
 
   // Confirm folder where the tool should look for bank files
   config.importPath = await confirmImportPath(config.importPath);

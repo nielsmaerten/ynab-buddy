@@ -65,6 +65,6 @@ const parseRawConfig = (rawConfig: any): Configuration => {
       upload: rawConfig.upload_to_ynab.upload_transactions,
     },
     parsers: rawConfig.parsers,
-    initializationDone: !rawConfig.show_config_prompt,
+    configurationDone: rawConfig.configuration_done !== false,
   };
 };

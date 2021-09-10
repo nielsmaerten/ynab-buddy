@@ -3,6 +3,7 @@ import chalk from "chalk";
 import prompts from "prompts";
 import { APP_NAME, APP_VERSION, messages } from "../constants";
 import { getConfigPath } from "./configuration";
+import { exit } from "process";
 
 export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
   const appVersion = chalk.bold.inverse(`${APP_NAME} [v${APP_VERSION}]\n`);
@@ -38,5 +39,6 @@ export async function confirmImportPath(defaultPath: string | undefined) {
       return valid;
     },
   });
+  if (response.path === undefined) exit()
   return response.path;
 }

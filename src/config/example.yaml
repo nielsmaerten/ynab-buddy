@@ -30,12 +30,12 @@ parsers:
     header_rows: 2
     footer_rows: 0
     delimiter: ","
-    columns: [skip, skip, Memo, Date, Inflow, skip]
-    date_format: "%m/%d/%Y"
+    columns: [skip, skip, memo, date, inflow, skip]
+    date_format: L/d/YYYY
 
 upload_to_ynab:
   upload_transactions: false
   ynab_token: ABC12345
 
 # Delete the following line:
-show_config_prompt: true
+configuration_done: false
