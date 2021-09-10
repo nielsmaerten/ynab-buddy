@@ -9,6 +9,7 @@ import path from "path";
 
 export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const csv = fs.readFileSync(source.path);
+  console.log(`\n${messages.parsing}`, source.path);
 
   // Configure parser to detect the right columns and delimiter
   const parser = parsers.find((p) => p.name === source.matchedParser)!;
@@ -34,9 +35,19 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
 export function buildTransaction(record: any, parser: Parser): Transaction {
   return {
     amount: parseAmount(record),
-    date: DateTime.fromFormat(record.Date, parser.date_format).toJSDate(),
+    date: parseDate(record, parser.date_format),
     memo: record.Memo,
   };
+}
+
+function parseDate(record: any, dateFormat: string) {
+  const {Date} = record
+  const dateTime = DateTime.fromFormat(Date, dateFormat);
+  if (dateTime.isValid) return dateTime.toJSDate();
+
+  const error = messages.parseDateError.join('\n');
+  console.error(chalk.redBright(error), Date, dateFormat);
+  throw "PARSING ERROR"
 }
 
 function parseAmount(record: any): number {
@@ -56,9 +67,8 @@ function parseAmount(record: any): number {
 }
 
 function logResult(txCount: number, sourcePath: string) {
-  const txCountLabel = chalk.blueBright(txCount);
-  const sourceLabel = chalk.blueBright(path.basename(sourcePath));
-  console.log(messages.parsingDone, txCountLabel, sourceLabel);
+  const msg = chalk.greenBright(messages.parsingDone);
+  console.log(msg,  txCount);
 }
 
 function noDuplicates<T>(value: T, index: number, self: Array<T>) {
