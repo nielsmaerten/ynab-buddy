@@ -20,5 +20,5 @@ export const messages = {
     "Unable to parse '%s'.",
     "The expected date format was: '%s'.",
     "You may want to check the format in your config.yaml file.",
-  ]
+  ],
 };

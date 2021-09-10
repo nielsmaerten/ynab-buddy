@@ -41,13 +41,13 @@ export function buildTransaction(record: any, parser: Parser): Transaction {
 }
 
 function parseDate(record: any, dateFormat: string) {
-  const {Date} = record
+  const { Date } = record;
   const dateTime = DateTime.fromFormat(Date, dateFormat);
   if (dateTime.isValid) return dateTime.toJSDate();
 
-  const error = messages.parseDateError.join('\n');
+  const error = messages.parseDateError.join("\n");
   console.error(chalk.redBright(error), Date, dateFormat);
-  throw "PARSING ERROR"
+  throw "PARSING ERROR";
 }
 
 function parseAmount(record: any): number {
@@ -68,7 +68,7 @@ function parseAmount(record: any): number {
 
 function logResult(txCount: number, sourcePath: string) {
   const msg = chalk.greenBright(messages.parsingDone);
-  console.log(msg,  txCount);
+  console.log(msg, txCount);
 }
 
 function noDuplicates<T>(value: T, index: number, self: Array<T>) {

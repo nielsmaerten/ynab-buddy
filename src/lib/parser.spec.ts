@@ -30,6 +30,19 @@ describe("parser", () => {
     expect(result.transactions).toHaveLength(3);
     result.transactions.forEach(validateTransaction);
   });
+
+  it("inverts Outflow", () => {
+    const cfg_inflow = { columns: ["", "Date", "Amount", "Memo", "Payee"] };
+    const cfg_outflow = { columns: ["", "Date", "Outflow", "Memo", "Payee"] };
+    const result_inflow = runParser(csvFixtures.customDelimiter, cfg_inflow);
+    const result_outflow = runParser(csvFixtures.customDelimiter, cfg_outflow);
+    debugger;
+    for (let i = 0; i < result_inflow.transactions.length; i++) {
+      const inflow = result_inflow.transactions[i].amount;
+      const outflow = result_outflow.transactions[i].amount;
+      expect(inflow).toEqual(-outflow);
+    }
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -44,6 +57,7 @@ enum csvFixtures {
   customDelimiter = 0,
   headerFooterEmptyLines = 1,
   decimalCommas = 2,
+  outflow = 3,
 }
 
 const validateTransaction = (tx: Transaction) => {

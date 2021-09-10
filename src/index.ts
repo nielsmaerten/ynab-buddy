@@ -45,24 +45,11 @@ import { BankFile } from "./types";
   //   }
   // }
 
-  // // Saving converted files...
-  // if (config.saveParsedFiles) {
-  //   parsedFiles.forEach(saveParsedFile);
-  // }
-  // // Deleting imported files...
-  // if (config.deleteOriginalFiles) {
-  //   parsedFiles.forEach((parsedFile) => {
-  //     if (parsedFile.uploaded || config.saveParsedFiles) {
-  //       deleteOriginalFile(parsedFile);
-  //     }
-  //   });
-  // }
-
   // displayGoodbyeMessage();
   // // All done! Check your YNAB budget to approve the newly imported transactions
   // // Did ynab buddy just save you some time? Then maybe consider buying me a coffee :)
   // // https://ko-fi/...
 })().catch((err) => {
-  console.error("Unhandled error: exiting.")
+  console.error("Unhandled error: exiting.");
   process.exit();
 });
