@@ -1,4 +1,5 @@
 import { exit } from "process";
+import { messages } from "./constants";
 import { confirmImportPath, displayWelcomeMessage } from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
 import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
@@ -18,6 +19,7 @@ import { BankFile } from "./types";
 
   // Find files eligible for conversion in the importPath
   const bankFiles = findBankFiles(config.importPath!, config);
+  console.log(messages.filesFound, bankFiles.length);
 
   // Parse and convert bankFiles
   const doParsing = (bf: BankFile) => parseBankFile(bf, config.parsers);
@@ -60,4 +62,7 @@ import { BankFile } from "./types";
   // // All done! Check your YNAB budget to approve the newly imported transactions
   // // Did ynab buddy just save you some time? Then maybe consider buying me a coffee :)
   // // https://ko-fi/...
-})();
+})().catch((err) => {
+  console.error("Unhandled error: exiting.")
+  process.exit();
+});

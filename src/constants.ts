@@ -13,5 +13,12 @@ export const messages = {
   usingConfigPath: "Using configuration file:",
   importFolderPrompt: "Where are your bank's files located?",
   folderNotFound: "Could not find folder:",
-  parsingDone: "Found %s transactions in %s",
+  filesFound: "Found %s file(s) eligible for parsing.",
+  parsingDone: "Success: %s transactions parsed.",
+  parsing: "Parsing: %s",
+  parseDateError: [
+    "Unable to parse '%s'.",
+    "The expected date format was: '%s'.",
+    "You may want to check the format in your config.yaml file.",
+  ]
 };

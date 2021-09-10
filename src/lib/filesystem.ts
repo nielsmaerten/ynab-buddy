@@ -7,7 +7,7 @@ import {
 import minimatch from "minimatch";
 import glob from "glob";
 import path from "path";
-import fs, { writeFileSync } from "fs";
+import fs, { rmSync, writeFileSync } from "fs";
 import csvStringify from "csv-stringify/lib/sync";
 import stringify from "csv-stringify";
 
@@ -87,5 +87,6 @@ export function exportCsv(result: ParsedBankFile) {
 }
 
 export function cleanup(result: ParsedBankFile) {
-  throw "todo";
+  const shouldDelete = result.source.matchedPattern?.delete_original_file;
+  if (shouldDelete) rmSync(result.source.path);
 }
