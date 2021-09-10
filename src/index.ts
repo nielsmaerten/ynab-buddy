@@ -35,7 +35,6 @@ import { BankFile } from "./types";
   const uploads = parsedFiles.map((parsedFile) => upload(parsedFile, config));
   await Promise.all(uploads);
 
-
   console.log("All done.");
 
   // displayGoodbyeMessage();

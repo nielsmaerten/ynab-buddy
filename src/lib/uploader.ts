@@ -52,7 +52,7 @@ export const sendToYnab = (TXs: any[], budgetId: string, token: string) => {
       const msg = messages.uploadError.join("\n");
       const detail = JSON.stringify(error);
       console.error(chalk.redBright(msg), detail);
-      throw "UPLOAD ERROR"
+      throw "UPLOAD ERROR";
     });
   return response;
 };

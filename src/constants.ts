@@ -24,7 +24,7 @@ export const messages = {
   uploadError: [
     "Error while uploading transactions to YNAB.",
     "Ensure your config file has a valid token, budgetID and accountID",
-    "Error detail: %s"
+    "Error detail: %s",
   ],
-  uploadSuccess: "Success: %s transactions uploaded to YNAB."
+  uploadSuccess: "Success: %s transactions uploaded to YNAB.",
 };
