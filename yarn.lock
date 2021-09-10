@@ -1824,7 +1824,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"encoding@npm:^0.1.12":
+"encoding@npm:^0.1.11, encoding@npm:^0.1.12":
   version: 0.1.13
   resolution: "encoding@npm:0.1.13"
   dependencies:
@@ -2543,6 +2543,13 @@ fsevents@^2.3.2:
   version: 1.0.1
   resolution: "is-potential-custom-element-name@npm:1.0.1"
   checksum: ced7bbbb6433a5b684af581872afe0e1767e2d1146b2207ca0068a648fb5cab9d898495d1ac0583524faaf24ca98176a7d9876363097c2d14fee6dd324f3a1ab
+  languageName: node
+  linkType: hard
+
+"is-stream@npm:^1.0.1":
+  version: 1.1.0
+  resolution: "is-stream@npm:1.1.0"
+  checksum: 063c6bec9d5647aa6d42108d4c59723d2bd4ae42135a2d4db6eadbd49b7ea05b750fd69d279e5c7c45cf9da753ad2c00d8978be354d65aa9f6bb434969c6a2ae
   languageName: node
   linkType: hard
 
@@ -3545,6 +3552,16 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
+"node-fetch@npm:^1.0.1":
+  version: 1.7.3
+  resolution: "node-fetch@npm:1.7.3"
+  dependencies:
+    encoding: ^0.1.11
+    is-stream: ^1.0.1
+  checksum: 3bb0528c05d541316ebe52770d71ee25a6dce334df4231fd55df41a644143e07f068637488c18a5b0c43f05041dbd3346752f9e19b50df50569a802484544d5b
+  languageName: node
+  linkType: hard
+
 "node-gyp@npm:latest":
   version: 8.2.0
   resolution: "node-gyp@npm:8.2.0"
@@ -3827,6 +3844,16 @@ fsevents@^2.3.2:
   dependencies:
     find-up: ^4.0.0
   checksum: 9863e3f35132bf99ae1636d31ff1e1e3501251d480336edb1c211133c8d58906bed80f154a1d723652df1fda91e01c7442c2eeaf9dc83157c7ae89087e43c8d6
+  languageName: node
+  linkType: hard
+
+"portable-fetch@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "portable-fetch@npm:3.0.0"
+  dependencies:
+    node-fetch: ^1.0.1
+    whatwg-fetch: ">=0.10.0"
+  checksum: 4b8a0efc2d26c26923187703ed2616c2124b339aabf4578684aa6584196334b6da5c72e24308da0562053cd1aaa6aed357891ffe1c36b88ba4cdd4baff825a63
   languageName: node
   linkType: hard
 
@@ -4684,6 +4711,13 @@ typescript@^4.4.2:
   languageName: node
   linkType: hard
 
+"whatwg-fetch@npm:>=0.10.0":
+  version: 3.6.2
+  resolution: "whatwg-fetch@npm:3.6.2"
+  checksum: ee976b7249e7791edb0d0a62cd806b29006ad7ec3a3d89145921ad8c00a3a67e4be8f3fb3ec6bc7b58498724fd568d11aeeeea1f7827e7e1e5eae6c8a275afed
+  languageName: node
+  linkType: hard
+
 "whatwg-mimetype@npm:^2.3.0":
   version: 2.3.0
   resolution: "whatwg-mimetype@npm:2.3.0"
@@ -4874,5 +4908,15 @@ typescript@^4.4.2:
     ts-jest: ^27.0.5
     ts-node: ^10.2.1
     typescript: ^4.4.2
+    ynab: ^1.25.0
   languageName: unknown
   linkType: soft
+
+"ynab@npm:^1.25.0":
+  version: 1.25.0
+  resolution: "ynab@npm:1.25.0"
+  dependencies:
+    portable-fetch: ^3.0.0
+  checksum: 8b3edd60e3053960b6c3ebc6da16d351661d83b74dd49b4b97c032483ac93ce9d4168997baf57c9359bceeb7eb7da43e2a58de711f823814554392d2687a428b
+  languageName: node
+  linkType: hard
