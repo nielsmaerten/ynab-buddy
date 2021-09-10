@@ -17,6 +17,7 @@ const mocks = {
   parseBankFile: jest.fn(),
   exportCsv: jest.fn(),
   cleanup: jest.fn(),
+  upload: jest.fn(),
   displayWelcomeMessage: jest.fn(),
   confirmImportPath: jest.fn().mockReturnValue(mock_importPath),
   findBankFiles: jest.fn().mockReturnValue(mock_bankFiles),
@@ -46,6 +47,11 @@ describe("index.ts", () => {
     jest.mock("./lib/parser", () => {
       return {
         parseBankFile: mocks.parseBankFile,
+      };
+    });
+    jest.mock("./lib/uploader", () => {
+      return {
+        upload: mocks.upload,
       };
     });
     require("./index");
@@ -79,5 +85,9 @@ describe("index.ts", () => {
   it("exports the resulting CSV files", () => {
     expect(mocks.exportCsv).toHaveBeenCalled();
     expect(mocks.cleanup).toHaveBeenCalled();
+  });
+
+  it("uploads transactions to ynab", () => {
+    expect(mocks.upload).toHaveBeenCalled();
   });
 });

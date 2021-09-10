@@ -39,3 +39,46 @@ export const parsedBankFile: ParsedBankFile = {
     },
   ],
 };
+
+export const expectedTransactions = [
+  {
+    amount: 420000,
+    memo: "tx1",
+    date: "1990-02-27",
+    import_id: "YNAB:420000:1990-02-27:1",
+    cleared: "cleared",
+    account_id: "testAccountId",
+    flag_color: "purple",
+    occurrence: 1,
+  },
+  {
+    amount: 420000,
+    memo: "tx2-sameDaySameAmount",
+    date: "1990-02-27",
+    import_id: "YNAB:420000:1990-02-27:2",
+    cleared: "cleared",
+    account_id: "testAccountId",
+    flag_color: "purple",
+    occurrence: 2,
+  },
+  {
+    amount: 69000,
+    memo: "tx3-sameDayDifferentAmount",
+    date: "1990-02-27",
+    import_id: "YNAB:69000:1990-02-27:1",
+    cleared: "cleared",
+    account_id: "testAccountId",
+    flag_color: "purple",
+    occurrence: 1,
+  },
+  {
+    amount: 69000,
+    memo: "tx4",
+    date: "2013-12-31",
+    import_id: "YNAB:69000:2013-12-31:1",
+    cleared: "cleared",
+    account_id: "testAccountId",
+    flag_color: "purple",
+    occurrence: 1,
+  },
+];
