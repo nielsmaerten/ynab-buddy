@@ -1,7 +1,7 @@
 import { BankFile, ParsedBankFile, Parser, Transaction } from "../types";
 import parseCsv from "csv-parse/lib/sync";
 import { Options as parseOptions } from "csv-parse";
-import { DateTime } from "luxon";
+import { DateTime, Zone } from "luxon";
 import fs from "fs";
 import chalk from "chalk";
 import { messages } from "../constants";
@@ -42,7 +42,7 @@ export function buildTransaction(record: any, parser: Parser): Transaction {
 
 function parseDate(record: any, dateFormat: string) {
   const { Date } = record;
-  const dateTime = DateTime.fromFormat(Date, dateFormat);
+  const dateTime = DateTime.fromFormat(Date, dateFormat, { zone: "UTC" });
   if (dateTime.isValid) return dateTime.toJSDate();
 
   const error = messages.parseDateError.join("\n");
