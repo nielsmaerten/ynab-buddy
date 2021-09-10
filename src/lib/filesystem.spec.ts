@@ -1,5 +1,6 @@
 import {
   liveConfig,
+  parsedBankFileFixture,
   testBankFilePatterns,
   testFiles,
 } from "./filesystem.spec.fixtures";
@@ -68,5 +69,38 @@ describe("findBankFiles", () => {
     const config = { ...liveConfig, searchSubDirectories: true };
     const result = findBankFiles(bankFilesDir, config);
     expect(result).toHaveLength(5);
+  });
+});
+
+describe("CSV Export (simulated)", () => {
+  // Patch writeFileSync so we can spy on what's getting exported
+  const fs = require("fs");
+  const writeFileSync_original = fs.writeFileSync;
+  const writeFileSync_mock = jest.fn();
+  beforeAll(() => {
+    delete fs.writeFileSync;
+    fs.writeFileSync = writeFileSync_mock;
+  });
+  afterAll(() => {
+    fs.writeFileSync = writeFileSync_original;
+  });
+
+  const { exportCsv } = require("./filesystem");
+  it("exports parsed file as YNAB.csv", () => {
+    exportCsv(parsedBankFileFixture);
+    expect(writeFileSync_mock).toHaveBeenCalled();
+
+    const actual = writeFileSync_mock.mock.calls[0][1];
+    const expected = `amount,date,memo
+420.69,1990-02-27T00:00:00.000Z,TEST MEMO
+`;
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("CSV Export (live)", () => {
+  it("writes exported file to disk", () => {
+    // TODO
   });
 });

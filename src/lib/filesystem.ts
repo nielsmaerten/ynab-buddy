@@ -1,8 +1,15 @@
-import { BankFile, Configuration, BankFilePattern } from "../types";
+import {
+  BankFile,
+  Configuration,
+  BankFilePattern,
+  ParsedBankFile,
+} from "../types";
 import minimatch from "minimatch";
 import glob from "glob";
 import path from "path";
-import fs from "fs";
+import fs, { writeFileSync } from "fs";
+import csvStringify from "csv-stringify/lib/sync";
+import stringify from "csv-stringify";
 
 /**
  * Finds all files eligible for parsing in the directory.
@@ -41,9 +48,40 @@ export function detectBank(file: string, patterns: BankFilePattern[]) {
   };
 }
 
+/**
+ * (Recursively) gets all files in a directory
+ */
 function getFiles(dir: string, recursive = false) {
   const pattern = path.join(dir, recursive ? "**/*" : "*");
   const matches = glob.sync(pattern);
   const files = matches.filter((match) => fs.lstatSync(match).isFile());
   return files;
+}
+
+/**
+ * Writes a YNAB-compatible CSV file to disk
+ */
+export function exportCsv(result: ParsedBankFile) {
+  const { source, transactions } = result;
+  const shouldExport = source.matchedPattern?.save_parsed_file;
+  if (!shouldExport) return;
+
+  // Produce a CSV file that can be read by YNAB
+  const castDate = (d: Date) => d.toISOString();
+  const exportConfig: stringify.Options = {
+    header: true,
+    cast: { date: castDate },
+  };
+  const csvText = csvStringify(transactions, exportConfig);
+
+  // Export file will be named: [ORIGINAL_FILENAME].YNAB.csv
+  // and saved to the same folder
+  const originalFileName = path.basename(
+    source.path,
+    path.extname(source.path)
+  );
+  const parentFolder = path.dirname(source.path);
+  const exportFileName = `${originalFileName}.YNAB.csv`;
+  const destination = path.join(parentFolder, exportFileName);
+  writeFileSync(destination, csvText);
 }

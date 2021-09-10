@@ -1,4 +1,4 @@
-import { BankFilePattern, Configuration } from "../types";
+import { BankFilePattern, Configuration, ParsedBankFile } from "../types";
 
 // (Fake) paths to test files that will have to be matched to a pattern
 export const testFiles = {
@@ -78,4 +78,23 @@ export const liveConfig: Configuration = {
     upload: false,
   },
   importPath: "",
+};
+
+export const parsedBankFileFixture: ParsedBankFile = {
+  source: {
+    isBankFile: true,
+    path: "/not/a/real/file.csv",
+    matchedPattern: {
+      delete_original_file: true,
+      save_parsed_file: true,
+    } as any,
+    matchedParser: "TEST",
+  },
+  transactions: [
+    {
+      amount: 420.69,
+      date: new Date("1990-02-27"),
+      memo: "TEST MEMO",
+    },
+  ],
 };
