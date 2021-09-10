@@ -36,7 +36,7 @@ describe("parser", () => {
     const cfg_outflow = { columns: ["", "Date", "Outflow", "Memo", "Payee"] };
     const result_inflow = runParser(csvFixtures.customDelimiter, cfg_inflow);
     const result_outflow = runParser(csvFixtures.customDelimiter, cfg_outflow);
-    debugger;
+
     for (let i = 0; i < result_inflow.transactions.length; i++) {
       const inflow = result_inflow.transactions[i].amount;
       const outflow = result_outflow.transactions[i].amount;

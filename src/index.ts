@@ -4,6 +4,7 @@ import { confirmImportPath, displayWelcomeMessage } from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
 import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
+import { upload } from "./lib/uploader";
 import { BankFile } from "./types";
 
 (async () => {
@@ -28,6 +29,7 @@ import { BankFile } from "./types";
   // Save parsed files, delete original files
   parsedFiles.forEach(exportCsv);
   parsedFiles.forEach(cleanup);
+  parsedFiles.forEach((parsedFile) => upload(parsedFile, config));
 
   console.log("All done.");
 
