@@ -85,3 +85,7 @@ export function exportCsv(result: ParsedBankFile) {
   const destination = path.join(parentFolder, exportFileName);
   writeFileSync(destination, csvText);
 }
+
+export function cleanup(result: ParsedBankFile) {
+  throw "todo";
+}

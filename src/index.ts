@@ -1,7 +1,7 @@
 import { exit } from "process";
 import { confirmImportPath, displayWelcomeMessage } from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
-import { findBankFiles } from "./lib/filesystem";
+import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { BankFile } from "./types";
 
@@ -22,6 +22,12 @@ import { BankFile } from "./types";
   // Parse and convert bankFiles
   const doParsing = (bf: BankFile) => parseBankFile(bf, config.parsers);
   const parsedFiles = bankFiles.map(doParsing);
+
+  // Save parsed files, delete original files
+  parsedFiles.forEach(exportCsv);
+  parsedFiles.forEach(cleanup);
+
+  console.log("All done.");
 
   // PSEUDOCODE
 

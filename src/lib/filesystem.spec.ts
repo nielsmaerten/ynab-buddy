@@ -84,6 +84,7 @@ describe("CSV Export (simulated)", () => {
   afterAll(() => {
     fs.writeFileSync = writeFileSync_original;
   });
+  beforeEach(writeFileSync_mock.mockReset);
 
   const { exportCsv } = require("./filesystem");
   it("exports parsed file as YNAB.csv", () => {
@@ -97,10 +98,11 @@ describe("CSV Export (simulated)", () => {
 
     expect(actual).toEqual(expected);
   });
-});
 
-describe("CSV Export (live)", () => {
-  it("writes exported file to disk", () => {
-    // TODO
+  it("skips files when saving is disabled", () => {
+    const fixture = { ...parsedBankFileFixture };
+    fixture.source.matchedPattern!.save_parsed_file = false;
+    exportCsv({ ...parsedBankFileFixture });
+    expect(writeFileSync_mock).not.toHaveBeenCalled();
   });
 });

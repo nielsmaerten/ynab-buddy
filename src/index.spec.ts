@@ -15,6 +15,8 @@ const mock_getConfiguration: Configuration = {
 };
 const mocks = {
   parseBankFile: jest.fn(),
+  exportCsv: jest.fn(),
+  cleanup: jest.fn(),
   displayWelcomeMessage: jest.fn(),
   confirmImportPath: jest.fn().mockReturnValue(mock_importPath),
   findBankFiles: jest.fn().mockReturnValue(mock_bankFiles),
@@ -37,6 +39,8 @@ describe("index.ts", () => {
     jest.mock("./lib/filesystem", () => {
       return {
         findBankFiles: mocks.findBankFiles,
+        exportCsv: mocks.exportCsv,
+        cleanup: mocks.cleanup,
       };
     });
     jest.mock("./lib/parser", () => {
@@ -70,5 +74,10 @@ describe("index.ts", () => {
 
   it("attempts to parse every bankFile", () => {
     expect(mocks.parseBankFile).toHaveBeenCalledTimes(mock_bankFiles.length);
+  });
+
+  it("exports the resulting CSV files", () => {
+    expect(mocks.exportCsv).toHaveBeenCalled();
+    expect(mocks.cleanup).toHaveBeenCalled();
   });
 });
