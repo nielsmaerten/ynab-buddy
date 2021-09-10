@@ -6,18 +6,24 @@ import { getConfigPath } from "./configuration";
 import { exit } from "process";
 
 export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
-  const appVersion = chalk.bold.inverse(`${APP_NAME} [v${APP_VERSION}]\n`);
-  console.log(appVersion);
+  const appLabel = `${APP_NAME} (v${APP_VERSION})`;
+  const border = new Array(appLabel.length).fill("*").join("");
+
+  console.log("");
+  console.log(border);
+  console.log(appLabel);
+  console.log(border);
+
   if (isFirstRun) {
-    console.log(chalk.blue(messages.intro));
-    console.log(
-      chalk.yellow(messages.notConfigured),
-      chalk.green(messages.gettingStarted),
-      chalk.green(getConfigPath())
-    );
+    console.log(chalk.dim(messages.intro));
+    console.log(chalk.yellow(messages.notConfigured));
+    console.log(chalk.yellow(messages.gettingStarted));
+    console.log(chalk.dim(getConfigPath()));
   } else {
-    console.log(messages.usingConfigPath, getConfigPath());
+    console.log(chalk.blueBright(messages.usingConfigPath));
+    console.log(getConfigPath());
   }
+  console.log("");
 }
 
 /**
@@ -39,6 +45,6 @@ export async function confirmImportPath(defaultPath: string | undefined) {
       return valid;
     },
   });
-  if (response.path === undefined) exit()
+  if (response.path === undefined) exit();
   return response.path;
 }
