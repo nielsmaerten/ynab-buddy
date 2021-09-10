@@ -33,20 +33,6 @@ import { BankFile } from "./types";
 
   console.log("All done.");
 
-  // PSEUDOCODE
-
-  // if (config.ynab.uploadTransactions !== false) {
-  //   for (let i = 0; i < parsedFiles.length; i++) {
-  //     const parsedFile = parsedFiles[i];
-  //     if (parsedFile.autoUpload) {
-  //       // Uploading 123 transactions from "csvfile1.csv" to YNAB
-  //       // Uploading 23 transactions from "csvfile2.csv" to YNAB
-  //       uploadTransactions(parsedFile, config);
-  //       parsedFile.uploaded = true;
-  //     }
-  //   }
-  // }
-
   // displayGoodbyeMessage();
   // // All done! Check your YNAB budget to approve the newly imported transactions
   // // Did ynab buddy just save you some time? Then maybe consider buying me a coffee :)
