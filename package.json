@@ -7,6 +7,9 @@
     "dist/",
     "assets/"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "build": "tsc",
