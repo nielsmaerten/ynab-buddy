@@ -1,6 +1,7 @@
 export const CONFIG_DIR = "~/ynab-buddy";
 export const CONFIG_FILE = "config.yaml";
-export const CONFIG_FILE_EXAMPLE = "src/config/example.yaml";
+export const CONFIG_FILE_EXAMPLE = "assets/config/example.yaml";
+export const TEST_BANKS_DIR = "assets/test-banks";
 export const APP_NAME = "YNAB Buddy";
 export const APP_VERSION = require("../package.json").version;
 

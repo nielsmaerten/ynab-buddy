@@ -6,6 +6,7 @@ import {
 } from "./filesystem.spec.fixtures";
 import { detectBank, findBankFiles } from "./filesystem";
 import path from "path";
+import { TEST_BANKS_DIR } from "../constants";
 
 describe("detectBank", () => {
   it("detects when a file is a BankFile", () => {
@@ -35,7 +36,7 @@ describe("detectBank", () => {
 
 describe("findBankFiles", () => {
   const cwd = process.cwd();
-  const bankFilesDir = path.join(cwd, "fixtures/bank-files");
+  const bankFilesDir = path.join(cwd, TEST_BANKS_DIR);
 
   it("finds files from bank A in top level", () => {
     const dir = path.join(bankFilesDir, "bankA/");
