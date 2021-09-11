@@ -12,6 +12,10 @@ export const messages = {
   gettingStarted:
     "To get started, open the following file and follow the instructions:",
   usingConfigPath: "Using configuration file:",
+  invalidConfig: [
+    "%s is not a valid config file.",
+    "To get a fresh config file, delete it and run this tool again.",
+  ],
   importFolderPrompt: "Where are your bank's files located?",
   folderNotFound: "Could not find folder:",
   filesFound: "Found %s file(s) eligible for parsing.",

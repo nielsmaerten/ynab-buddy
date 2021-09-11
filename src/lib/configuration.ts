@@ -1,9 +1,15 @@
 import fs from "fs";
 import path from "path";
+import chalk from "chalk";
 import { homedir } from "os";
 import { load } from "js-yaml";
 import { Configuration } from "../types";
-import { CONFIG_DIR, CONFIG_FILE, CONFIG_FILE_EXAMPLE } from "../constants";
+import {
+  CONFIG_DIR,
+  CONFIG_FILE,
+  CONFIG_FILE_EXAMPLE,
+  messages,
+} from "../constants";
 
 /**
  * Reads configuration from the default config file.
@@ -18,11 +24,17 @@ export function getConfiguration(): Configuration {
   const configFileExists = fs.existsSync(configFilePath);
   if (!configFileExists) createConfigFile();
 
-  // Read and parse the config file
-  const rawConfig = readConfigFile();
-  const config = parseRawConfig(rawConfig);
-
-  return config;
+  try {
+    // Read and parse the config file
+    const rawConfig = readConfigFile();
+    const config = parseRawConfig(rawConfig);
+    return config;
+  } catch (err) {
+    const msg = chalk.redBright(messages.invalidConfig.join("\n"));
+    console.error(msg, configFilePath);
+    console.error(chalk.redBright("Details:", err));
+    throw "CONFIG ERROR";
+  }
 }
 
 /**
