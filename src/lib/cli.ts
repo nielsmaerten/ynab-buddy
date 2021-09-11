@@ -2,12 +2,13 @@ import fs from "fs";
 import chalk from "chalk";
 import prompts from "prompts";
 import { APP_NAME, APP_VERSION, messages } from "../constants";
-import { getConfigPath } from "./configuration";
+import { getConfigPaths } from "./configuration";
 import { exit } from "process";
 
 export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
   const appLabel = `${APP_NAME} (v${APP_VERSION})`;
   const border = new Array(appLabel.length).fill("*").join("");
+  const configPath = getConfigPaths().fullPath;
 
   console.log("");
   console.log(border);
@@ -18,10 +19,10 @@ export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
     console.log(chalk.dim(messages.intro));
     console.log(chalk.yellow(messages.notConfigured));
     console.log(chalk.yellow(messages.gettingStarted));
-    console.log(chalk.dim(getConfigPath()));
+    console.log(chalk.dim(configPath));
   } else {
     console.log(chalk.blueBright(messages.usingConfigPath));
-    console.log(getConfigPath());
+    console.log(configPath);
   }
   console.log("");
 }

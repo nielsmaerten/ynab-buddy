@@ -2,9 +2,12 @@
   "name": "ynab-buddy",
   "version": "1.0.0-alpha.1",
   "description": "",
-  "main": "dist/_index.js",
+  "bin": "dist/index.js",
   "scripts": {
     "start": "ts-node ./src/index.ts",
+    "build": "tsc",
+    "package": "yarn pkg .",
+    "package:rebuild": "yarn build && yarn package",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check",
@@ -14,6 +17,23 @@
   "author": {
     "name": "Niels Maerten",
     "url": "https://github.com/nielsmaerten"
+  },
+  "pkg": {
+    "assets": [
+      "assets/config/example.yaml"
+    ],
+    "scripts": "build/**/*.js",
+    "targets": [
+      "linux",
+      "win",
+      "macos"
+    ],
+    "outputPath": "bin"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "license": "MIT",
   "devDependencies": {
@@ -31,11 +51,6 @@
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "dependencies": {
     "chalk": "^4.1.2",

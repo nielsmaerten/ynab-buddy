@@ -3,7 +3,7 @@ import path from "path";
 import { homedir } from "os";
 import { load } from "js-yaml";
 import { Configuration } from "../types";
-import { CONFIG_DIR, CONFIG_FILE } from "../constants";
+import { CONFIG_DIR, CONFIG_FILE, CONFIG_FILE_EXAMPLE } from "../constants";
 
 /**
  * Reads configuration from the default config file.
@@ -14,7 +14,7 @@ import { CONFIG_DIR, CONFIG_FILE } from "../constants";
  */
 export function getConfiguration(): Configuration {
   // Verify the config file exists, otherwise create it
-  const configFilePath = getConfigPath();
+  const configFilePath = getConfigPaths().fullPath;
   const configFileExists = fs.existsSync(configFilePath);
   if (!configFileExists) createConfigFile();
 
@@ -28,18 +28,26 @@ export function getConfiguration(): Configuration {
 /**
  * Returns the full path to the config file: ~/ynab-buddy/config.yaml
  */
-export const getConfigPath = () => {
+export const getConfigPaths = () => {
   const dir = path.resolve(CONFIG_DIR.replace("~", homedir()));
-  const file = CONFIG_FILE;
-  return path.join(dir, file);
+  const fileName = CONFIG_FILE;
+  const fullPath = path.join(dir, fileName);
+  const example = path.join(__dirname, CONFIG_FILE_EXAMPLE);
+  return {
+    example,
+    fullPath,
+    dir,
+    fileName,
+  };
 };
 
 /**
  * Writes the default config file to the default location
  */
 const createConfigFile = () => {
+  // FIXME
   const defaultConfigFilePath = path.resolve("./src/config/example.yaml");
-  const dest = getConfigPath();
+  const dest = getConfigPaths().fullPath;
   const destDir = path.join(dest, "../");
   if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
   return fs.copyFileSync(defaultConfigFilePath, dest);
@@ -49,7 +57,8 @@ const createConfigFile = () => {
  * Reads the config file from its default location
  */
 const readConfigFile = () => {
-  const buffer = fs.readFileSync(getConfigPath());
+  const configFile = getConfigPaths().fullPath;
+  const buffer = fs.readFileSync(configFile);
   const yamlText = buffer.toString();
   const rawConfig = load(yamlText);
   return rawConfig;

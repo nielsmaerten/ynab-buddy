@@ -5493,6 +5493,8 @@ typescript@^4.4.2:
     ts-node: ^10.2.1
     typescript: ^4.4.2
     ynab: ^1.25.0
+  bin:
+    ynab-buddy: dist/index.js
   languageName: unknown
   linkType: soft
 
