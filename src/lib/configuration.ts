@@ -44,7 +44,7 @@ export const getConfigPaths = () => {
   const dir = path.resolve(CONFIG_DIR.replace("~", homedir()));
   const fileName = CONFIG_FILE;
   const fullPath = path.join(dir, fileName);
-  const example = path.join(__dirname, CONFIG_FILE_EXAMPLE);
+  const example = path.join(__dirname, "../../", CONFIG_FILE_EXAMPLE);
   return {
     example,
     fullPath,
@@ -54,15 +54,18 @@ export const getConfigPaths = () => {
 };
 
 /**
- * Writes the default config file to the default location
+ * Writes an example config file to the default location
  */
 const createConfigFile = () => {
-  // FIXME
-  const defaultConfigFilePath = path.resolve("./src/config/example.yaml");
-  const dest = getConfigPaths().fullPath;
-  const destDir = path.join(dest, "../");
-  if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
-  return fs.copyFileSync(defaultConfigFilePath, dest);
+  const { fullPath, dir, example } = getConfigPaths();
+
+  // Ensure the config directory exists
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  // Write example config file to destination
+  fs.copyFileSync(example, fullPath);
 };
 
 /**
