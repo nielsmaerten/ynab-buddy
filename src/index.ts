@@ -41,7 +41,12 @@ import { BankFile } from "./types";
   // Uncaught errors will exit the app
 })().catch(handleError);
 
-function handleError() {
+function handleError(err: any) {
   console.error("Unhandled error: exiting.");
-  process.exit();
+
+  const isVerbose = process.argv.find((arg) => arg.toLowerCase() === "-v");
+  if (isVerbose) console.error(JSON.stringify(err));
+  else console.log("For details, run with flag `-v`");
+
+  process.exit(1);
 }

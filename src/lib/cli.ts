@@ -33,6 +33,12 @@ export function displayGoodbyeMessage() {
   console.log(messages.sponsor);
   console.log(chalk.bgBlueBright(messages.sponsorLink));
   console.log("");
+  console.log(messages.exit);
+
+  // Next keypress exits the app
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
+  process.stdin.on("data", process.exit.bind(process, 0));
 }
 
 /**
