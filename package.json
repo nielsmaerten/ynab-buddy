@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha.2",
   "description": "",
   "bin": "dist/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist/",
     "assets/"
