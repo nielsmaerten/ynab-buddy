@@ -15,6 +15,7 @@
     "build": "tsc",
     "package": "yarn pkg .",
     "package:rebuild": "yarn build && yarn package",
+    "publish": "np --no-cleanup --no-yarn",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check",
