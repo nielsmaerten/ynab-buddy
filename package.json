@@ -1,6 +1,6 @@
 {
   "name": "ynab-buddy",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "bin": "./dist/index.js",
