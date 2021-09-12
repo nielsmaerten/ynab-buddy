@@ -1,4 +1,5 @@
 # How to configure _ynab-buddy_
+
 I recommended you at least skim this doc before using ynab-buddy. It explains all possible options.
 
 ## Intro
@@ -9,7 +10,7 @@ When ynab-buddy runs the first time, it creates a file in `<your home directory>
 
 > PROTIP: Disable optional settings by putting a `#` in front of them, or by removing the line entirely.
 
-## General
+## (1/4) General
 
 ### `import_from` (optional)
 Example: _C:/Users/niels/Downloads (Windows)_ or _/home/niels/Downloads_ (Linux, Mac)
@@ -24,7 +25,8 @@ If true, recusively search through subfolders to find bank files. If false, only
 ### `configuration_done`
 Delete this line or set it to _true_ when you're done. ynab-buddy won't start until you do.
 
-## Bank Transaction Files
+## (2/4) Bank Transaction Files
+
 You should repeat this section for every bank file you'd like to import.  
 
 ### `account_name` (optional)
@@ -93,7 +95,7 @@ _true_ or _false_
 
 If true:  delete the original file from your bank once it's been processed
 
-## Parsers
+## (3/4) Parsers
 
 Parsers tell ynab-buddy how to read a file. You can re-use a parser for multiple accounts.
 
@@ -133,7 +135,8 @@ Example: _yyyy-M-dd_, _M/d/yyyy_
 
 Date format used in your bank's csv file. More info: [table of possible tokens](https://moment.github.io/luxon/#/parsing?id=table-of-tokens)
 
-## upload_to_ynab
+## (4/4) Upload to YNAB
+
 ### `upload_transactions`
 
 *true* or *false*
