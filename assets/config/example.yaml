@@ -27,7 +27,7 @@ parsers:
     footer_rows: 0
     delimiter: ","
     columns: [skip, skip, memo, date, inflow, skip]
-    date_format: M/d/YYYY
+    date_format: M/d/yyyy
 
 upload_to_ynab:
   upload_transactions: false

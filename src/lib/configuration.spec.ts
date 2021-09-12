@@ -5,6 +5,7 @@ import { Configuration } from "../types";
 describe("configuration.ts", () => {
   beforeAll(() => {
     const configFixture = getExampleConfig();
+    // FIXME: Mocking is not done correctly in these tests
     jest.mock("fs", () => {
       return {
         readFileSync: jest.fn().mockReturnValue(configFixture),
@@ -43,13 +44,13 @@ describe("configuration.ts", () => {
       bankFilePatterns: [
         {
           account_name: "BNP Checking Account",
-          ynab_account_id: "ABC1234",
-          ynab_budget_id: "XYZ7890",
+          ynab_account_id: "3c8922e0-625d-423b-ab77-810edfc460b2",
+          ynab_budget_id: "1c8cdd9e-c923-4e39-9960-28664a2cd4ae",
           ynab_flag_color: "purple",
           parser: "bnp-checking-parser",
           delete_original_file: true,
-          save_parsed_file: true,
-          upload: false,
+          save_parsed_file: false,
+          upload: true,
           pattern: "BNP-export-IBAN01233456789-*.csv",
         },
       ],
@@ -57,7 +58,7 @@ describe("configuration.ts", () => {
       parsers: [
         {
           columns: ["skip", "skip", "memo", "date", "inflow", "skip"],
-          date_format: "L/d/YYYY",
+          date_format: "M/d/yyyy",
           delimiter: ",",
           footer_rows: 0,
           header_rows: 2,
