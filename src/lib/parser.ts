@@ -14,8 +14,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   // Configure parser to detect the right columns and delimiter
   const parser = parsers.find((p) => p.name === source.matchedParser)!;
   const parseOptions = { ...baseParseOptions };
-  // FIXME: Fatal bug :(
-  parseOptions.columns = parser.columns.filter(noDuplicates);
+  parseOptions.columns = parser.columns.map(unifyColumns);
   parseOptions.delimiter = parser.delimiter;
 
   let records: any[] = parseCsv(csv, parseOptions);
@@ -72,8 +71,19 @@ function logResult(txCount: number, sourcePath: string) {
   console.log(msg, txCount);
 }
 
-function noDuplicates<T>(value: T, index: number, self: Array<T>) {
-  return self.indexOf(value) === index;
+/**
+ * Turns a list of column names into a list where only allowed columns exist.
+ * Ignored columns are kept, but receive a unique name.
+ * That way they are still parsed, but ignored later on.
+ * Example input: ['skip', 'memo', 'skip', 'Date', 'Inflow', 'Foobar'] ==>
+ * output: ['_0', 'memo', '_1', 'date', 'inflow', '_3']
+ */
+function unifyColumns(columnName: string, index: number) {
+  const columnLowerCase = columnName.toLowerCase();
+  const allowedColumns = ["date", "inflow", "outflow", "amount", "memo"];
+  const isAllowed = allowedColumns.includes(columnLowerCase);
+  if (isAllowed) return columnLowerCase;
+  else return `__${index}`;
 }
 
 const baseParseOptions: parseOptions = {
