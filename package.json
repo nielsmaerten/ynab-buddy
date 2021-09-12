@@ -12,7 +12,7 @@
     "build": "tsc",
     "package": "yarn pkg ./dist/index.js --config ./package.json",
     "package:rebuild": "yarn build && yarn package",
-    "publish": "np --no-cleanup --no-yarn",
+    "publish:np": "np --no-cleanup --no-yarn",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check",
