@@ -78,53 +78,82 @@ https://app.youneedabudget.com/1c8cdd9e-c923-4e39-9960-28664a2cd4ae/accounts/3c8
 
 Example: _1c8cdd9e-c923-4e39-9960-28664a2cd4ae_
 
-See: `ynab_account_id`
+See: `ynab_account_id`.
 
 ### `ynab_flag_color`
 
-Flag 
+Possible colors are: *blue, green, orange, purple, red and yellow.*  
 
- case "blue":
-
-   return ynab.SaveTransaction.FlagColorEnum.Blue;
-
-  case "green":
-
-   return ynab.SaveTransaction.FlagColorEnum.Green;
-
-  case "orange":
-
-   return ynab.SaveTransaction.FlagColorEnum.Orange;
-
-  case "purple":
-
-   return ynab.SaveTransaction.FlagColorEnum.Purple;
-
-  case "red":
-
-   return ynab.SaveTransaction.FlagColorEnum.Red;
-
-  case "yellow":
+Useful if you want to distinguish imported transactions from the ones you entered yourself. Disable this option (by putting an `#` in front of it) or remove it if you don't want to set a flag.
 
 ### `upload`
 
+_true_ or _false_
+
+If true:  transactions found in this file to will be uploaded YNAB.
+
 ### `save_parsed_file`
+
+_true_ or _false_
+
+If true:  ynab-buddy will save the result as `<original_filename>.ynab.csv` after conversion.
 
 ### `delete_original_file`
 
-parsers:
+_true_ or _false_
 
-  - name: bnp-checking-parser
-    header_rows: 2
-    footer_rows: 0
-    delimiter: ","
-    columns: [skip, skip, memo, date, inflow, skip]
-    date_format: M/d/YYYY
+If true:  delete the original file from your bank once it's been processed
 
-upload_to_ynab:
-  upload_transactions: false
-  ynab_token: ABC12345
+## parsers
 
-# When you're done configuring, delete the next line:
+Parsers tell ynab-buddy how to read a file. You can re-use a parser for multiple accounts.
 
-configuration_done: false
+### `name`
+
+Example: _bnp-checking-parser_
+
+Provide a unique name for each parser, then enter that name as the `parser` setting for every file you want to use this parser.
+
+### `header_rows`
+
+Example: 1
+
+If your bank adds a header to their CSV files (most do), set this to how many rows should be ignored.
+
+### `footer_rows`
+
+Same as `header_rows`, but sets how many lines from the bottom should be ignored.
+
+### `delimiter`
+
+The symbol used to separate columns in the CSV file. Often a comma (`,`) but can also be a semicolon (`;`), tab (`\t`) or something else.
+
+### `columns`
+
+Configure which columns contain the data that should be extracted.
+
+| Example CSV record                                           | `columns` setting               |
+| ------------------------------------------------------------ | ------------------------------- |
+| `02/21/2021;ID123;-420.69;Starlink;31415`<br />`02/23/2021;ID123;420.69;Amazon Refund;65196` | `date,skip,amount,memo,skip`    |
+| `tx112;Store name;2021-02-21;234.53;0`<br />`tx113;Employer name;2021-01-21;0;1234.53` | `skip,memo,date,outflow,inflow` |
+
+
+
+### `date_format`
+
+Example: _yyyy-M-dd_, _M/d/yyyy_
+
+Date format used in your bank's csv file. More info: [table of possible tokens](https://moment.github.io/luxon/#/parsing?id=table-of-tokens)
+
+## upload_to_ynab
+### `upload_transactions`
+
+*true* or *false*
+
+If true, transactions will be uploaded to YNAB by default. Can be overridden by the `upload` setting per-file
+
+### `ynab_token`
+
+Your YNAB Personal Access Token.  You can create one here: https://app.youneedabudget.com/settings/developer
+
+This token is only used to communicate with the YNAB API. It otherwise won't leave your system and doesn't get shared with anyone other than YNAB. If you suspect somebody knows your token other than yourself, you should revoke it from the link above.

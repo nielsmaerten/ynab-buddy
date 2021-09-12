@@ -9,13 +9,13 @@ Just download transactions from your bank, run ynab-buddy, and you're done. No m
 ## How to install
 
 * If you have NodeJS, the recommended way to get ynab-buddy is by running: `npm install -g ynab-buddy`
-* Don't have NodeJS? Download the tool from the [releases page](https://github.com/nielsmaerten/ynab-buddy/releases)
+* Don't have NodeJS? Download the executable from the [releases page](https://github.com/nielsmaerten/ynab-buddy/releases)
 
 ## How to use
 
 1. Download CSV-files containing your transactions from your bank
 2. Run `ynab-buddy` from your terminal/command line, or double-click the executable
-3. Done! Your transactions are now in your YNAB Budget. Start categorizing :)
+3. Done! Your transactions are now in YNAB. Start categorizing :)
 
 ## How to configure
 
@@ -28,10 +28,11 @@ If you have questions about the config file, read: [How to configure ynab-buddy]
 
 ## Where to get help
 
-* [Frequently Asked Questions](./docs/FAQ.md)
-* [How to configure ynab-buddy](./docs/how-to-configure.md)
+* [FAQs](./docs/FAQ.md)
+* [How to configure](./docs/how-to-configure.md)
 * For general help: [GitHub Discussions](https://github.com/nielsmaerten/ynab-buddy/discussions) 
 * For bugs: [GitHub Issues](https://github.com/nielsmaerten/ynab-buddy/issues)
+* ***DON'T*** contact YNAB Support. This is not an official YNAB product!
 
 ## Disclaimer
 
