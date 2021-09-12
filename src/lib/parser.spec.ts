@@ -32,8 +32,8 @@ describe("parser", () => {
   });
 
   it("inverts Outflow", () => {
-    const cfg_inflow = { columns: ["", "Date", "Amount", "Memo", "Payee"] };
-    const cfg_outflow = { columns: ["", "Date", "Outflow", "Memo", "Payee"] };
+    const cfg_inflow = { columns: ["", "date", "amount", "memo", "payee"] };
+    const cfg_outflow = { columns: ["", "date", "outflow", "memo", "payee"] };
     const result_inflow = runParser(csvFixtures.customDelimiter, cfg_inflow);
     const result_outflow = runParser(csvFixtures.customDelimiter, cfg_outflow);
 

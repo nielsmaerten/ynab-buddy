@@ -37,30 +37,30 @@ export function buildTransaction(record: any, parser: Parser): Transaction {
   return {
     amount: parseAmount(record),
     date: parseDate(record, parser.date_format),
-    memo: record.Memo,
+    memo: record.memo,
   };
 }
 
 function parseDate(record: any, dateFormat: string) {
-  const { Date } = record;
-  const dateTime = DateTime.fromFormat(Date, dateFormat, { zone: "UTC" });
+  const { date } = record;
+  const dateTime = DateTime.fromFormat(date, dateFormat, { zone: "UTC" });
   if (dateTime.isValid) return dateTime.toJSDate();
 
   const error = messages.parseDateError.join("\n");
-  console.error(chalk.redBright(error), Date, dateFormat);
+  console.error(chalk.redBright(error), date, dateFormat);
   throw "PARSING ERROR";
 }
 
 function parseAmount(record: any): number {
-  const { Inflow, Outflow, Amount } = record;
-  let value = Inflow || Outflow || Amount;
+  const { inflow, outflow, amount } = record;
+  let value = inflow || outflow || amount;
 
   if (typeof value === "string") {
     value = value.replace(",", "."); // "420,69" ==> "420.69"
     value = parseFloat(value); // "420.69" ==> 420.69
   }
 
-  if (Outflow !== undefined) {
+  if (outflow !== undefined) {
     value = -value; // 420.69 ==> -420.69
   }
 

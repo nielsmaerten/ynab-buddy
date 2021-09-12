@@ -30,7 +30,7 @@ invalid footer row
 export const defaultParser: Parser =
   // TODO: rename this to ParseCfg
   {
-    columns: ["", "Date", "Amount", "Memo", "Payee"],
+    columns: ["", "date", "amount", "memo", "payee"],
     date_format: "L/d/yyyy",
     delimiter: ";",
     footer_rows: 0,
