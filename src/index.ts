@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { exit } from "process";
 import { messages } from "./constants";
 import * as cli from "./lib/cli";
