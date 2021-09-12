@@ -1,7 +1,12 @@
 import fs from "fs";
 import chalk from "chalk";
 import prompts from "prompts";
-import { APP_NAME, APP_VERSION, messages } from "../constants";
+import {
+  APP_NAME,
+  APP_VERSION,
+  messages,
+  UPDATE_CHECK_URL,
+} from "../constants";
 import { getConfigPaths } from "./configuration";
 import { exit } from "process";
 
@@ -27,13 +32,14 @@ export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
   console.log("");
 }
 
-export function displayGoodbyeMessage() {
+export async function displayGoodbyeMessage() {
   console.log("");
   console.log(chalk.yellow(messages.goodbye));
   console.log("");
   console.log(messages.sponsor);
   console.log(chalk.bgBlueBright(messages.sponsorLink));
   console.log("");
+  await checkUpdate(APP_VERSION);
   console.log(messages.exit);
 
   // Next keypress exits the app
@@ -63,4 +69,22 @@ export async function confirmImportPath(defaultPath: string | undefined) {
   });
   if (response.path === undefined) exit();
   return response.path;
+}
+
+export async function checkUpdate(thisVersion: string) {
+  const timeoutMs = 3000;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  const requestOpts = { signal: controller.signal };
+
+  try {
+    const res = await fetch(UPDATE_CHECK_URL, requestOpts);
+    clearTimeout(timeoutId);
+    const latestVersion = (await res.json()).version;
+    if (latestVersion !== thisVersion) {
+      console.log(messages.newerVersion.join(" "));
+    }
+  } catch {
+    // Ignore update check errors
+  }
 }

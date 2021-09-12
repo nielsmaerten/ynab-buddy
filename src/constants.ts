@@ -4,6 +4,7 @@ export const CONFIG_FILE_EXAMPLE = "assets/config/example.yaml";
 export const TEST_BANKS_DIR = "assets/test-banks";
 export const APP_NAME = "YNAB Buddy";
 export const APP_VERSION = require("../package.json").version;
+export const UPDATE_CHECK_URL = "https://go.niels.me/ynab-buddy/package.json";
 
 export const messages = {
   intro:
@@ -38,4 +39,8 @@ export const messages = {
     "Did this tool just save you some time? Then maybe consider buying me a coffee:",
   sponsorLink: "https://go.niels.me/coffee",
   exit: "Press any key to exit",
+  newerVersion: [
+    "A newer version of ynab-buddy is available:",
+    "https://github.com/nielsmaerten/ynab-buddy/releases",
+  ],
 };

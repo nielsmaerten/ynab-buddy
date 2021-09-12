@@ -37,7 +37,7 @@ import { BankFile } from "./types";
   await Promise.all(uploads);
 
   // All done!
-  cli.displayGoodbyeMessage();
+  await cli.displayGoodbyeMessage();
 
   // Uncaught errors will exit the app
 })().catch(handleError);
