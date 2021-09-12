@@ -131,9 +131,12 @@ Configure which columns contain the data that should be extracted.
 
 ### `date_format`
 
-Example: _yyyy-M-dd_, _M/d/yyyy_
+Examples:
+* 1990-02-27 ==> yyyy-MM-dd
+* 2/27/1990 ==> M/d/yyyy
+* 27/02/1990 ==> dd/MM/yyyy
 
-Date format used in your bank's csv file. More info: [table of possible tokens](https://moment.github.io/luxon/#/parsing?id=table-of-tokens)
+Date format used in your bank's csv file. For all possibilities, visit [table of possible tokens](https://moment.github.io/luxon/#/parsing?id=table-of-tokens)
 
 ## (4/4) Upload to YNAB
 
