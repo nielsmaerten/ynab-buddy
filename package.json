@@ -2,19 +2,15 @@
   "name": "ynab-buddy",
   "version": "1.0.0-alpha.3",
   "description": "",
-  "bin": "dist/index.js",
   "main": "dist/index.js",
   "files": [
     "dist/",
     "assets/"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "build": "tsc",
-    "package": "yarn pkg .",
+    "package": "yarn pkg ./dist/index.js --config ./package.json",
     "package:rebuild": "yarn build && yarn package",
     "publish": "np --no-cleanup --no-yarn",
     "test": "jest",
