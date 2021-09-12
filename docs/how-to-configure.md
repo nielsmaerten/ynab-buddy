@@ -1,50 +1,41 @@
-> Work in progress!
-
-# ynab-buddy: How to configure
-
+# How to configure _ynab-buddy_
 I recommended you at least skim this doc before using ynab-buddy. It explains all possible options.
 
 ## Intro
-
 When ynab-buddy runs the first time, it creates a file in `<your home directory>/ynab-buddy/config.yaml`. This file tells ynab-buddy:
 
 * how to read files from your bank
-* where/whether to upload transactions
+* if it should upload your transactions and if so, to which budget/account
 
-Optional settings can be disabled by putting a `#` in front of them, or by removing the line entirely.
+> PROTIP: Disable optional settings by putting a `#` in front of them, or by removing the line entirely.
 
 ## General
 
 ### `import_from` (optional)
-
 Example: _C:/Users/niels/Downloads (Windows)_ or _/home/niels/Downloads_ (Linux, Mac)
 
 The folder where you'll download your bank's files. If not set, ynab-buddy uses the current working directory. You will always have the option to change the default folder before starting conversion.
 
 ### `search_subfolders`
-
 _true_ or _false_
 
 If true, recusively search through subfolders to find bank files. If false, only use the top folder.
 
 ### `configuration_done`
+Delete this line or set it to _true_ when you're done. ynab-buddy won't start until you do.
 
-_true_,  _false_ or not set
-Delete this line or set it to true when you're done. ynab-buddy won't start until you do.
-
-## bank_transaction_files
-
-Add a section for every account you want to import.
+## Bank Transaction Files
+You should repeat this section for every bank file you'd like to import.  
 
 ### `account_name` (optional)
+Example: "My BNP Checking Account"
 
-Example: "My BNP Checking Account"  
-This name is just to make it easy for you to keep the sections apart. ynab-buddy won't use it.
+This value is ignored by ynab-buddy. It's just to make it easier to tell different sections apart.
 
 ### `pattern`
-
 What do files for this account look like? You can (and probably should) use wildcards here.
-For example:
+
+Example:
 
 | Account      | Filename                         | Pattern                   |
 | ------------ | -------------------------------- | ------------------------- |
@@ -52,13 +43,12 @@ For example:
 | Visa Credit  | NM_VisaPersonal-23453423.csv     | `*_VisaPersonal-*.csv`    |
 | ING Savings  | export.csv                       | `ing/savings/export.csv`  |
 
-**Note:** For the ING account, you can't actually determine the account from the filename. If that's the case for you: create your own folder structure and save the file into the correct folder. Then provide that folder as part of your pattern.
+**Note:** For the ING account, we can't determine the account from the filename. If this is the case for you: create your own folder structure and save the file into the correct folder. Then provide that folder as part of your pattern.
 
 ### `parser`
+Example: *bnp-checking-parser*
 
-Example: *bnp-checking*
-
-Provide the name of the parser that should be used for this file. See the section on 'parsers' below.
+The name of the parser to use for files that match the above pattern. This name should correspond to the `name` setting of the `Parsers`-section 
 
 ### `ynab_account_id`
 
@@ -69,7 +59,6 @@ Open YNAB, and view the transaction history of the account to want to import to.
 ```
 https://app.youneedabudget.com/[BUDGET-ID]/accounts/[ACCOUNT-ID]
 ```
-
 ```
 https://app.youneedabudget.com/1c8cdd9e-c923-4e39-9960-28664a2cd4ae/accounts/3c8922e0-625d-423b-ab77-810edfc460b2
 ```
@@ -82,9 +71,9 @@ See: `ynab_account_id`.
 
 ### `ynab_flag_color`
 
-Possible colors are: *blue, green, orange, purple, red and yellow.*  
+Possible colors are: *blue, green, orange, purple, red* and *yellow.*  
 
-Useful if you want to distinguish imported transactions from the ones you entered yourself. Disable this option (by putting an `#` in front of it) or remove it if you don't want to set a flag.
+Useful if you want to distinguish imported transactions from the ones you entered yourself. If you don't want to set a flag, remove this line or disable this option by putting a `#` in front of it.
 
 ### `upload`
 
@@ -104,7 +93,7 @@ _true_ or _false_
 
 If true:  delete the original file from your bank once it's been processed
 
-## parsers
+## Parsers
 
 Parsers tell ynab-buddy how to read a file. You can re-use a parser for multiple accounts.
 
@@ -130,14 +119,13 @@ The symbol used to separate columns in the CSV file. Often a comma (`,`) but can
 
 ### `columns`
 
-Configure which columns contain the data that should be extracted.
+Configure which columns contain the data that should be extracted.  
+**Important:** Separate columns using a comma (,) even if your CSV file uses another delimiter!
 
 | Example CSV record                                           | `columns` setting               |
 | ------------------------------------------------------------ | ------------------------------- |
 | `02/21/2021;ID123;-420.69;Starlink;31415`<br />`02/23/2021;ID123;420.69;Amazon Refund;65196` | `date,skip,amount,memo,skip`    |
 | `tx112;Store name;2021-02-21;234.53;0`<br />`tx113;Employer name;2021-01-21;0;1234.53` | `skip,memo,date,outflow,inflow` |
-
-
 
 ### `date_format`
 
@@ -154,6 +142,8 @@ If true, transactions will be uploaded to YNAB by default. Can be overridden by 
 
 ### `ynab_token`
 
-Your YNAB Personal Access Token.  You can create one here: https://app.youneedabudget.com/settings/developer
+Your YNAB Personal Access Token. To create one, visit: https://app.youneedabudget.com/settings/developer
 
-This token is only used to communicate with the YNAB API. It otherwise won't leave your system and doesn't get shared with anyone other than YNAB. If you suspect somebody knows your token other than yourself, you should revoke it from the link above.
+This token is only used to communicate with the YNAB API. It otherwise won't leave your system and doesn't get send to anyone other than YNAB. If you suspect somebody knows your token other than yourself, you should revoke it from the link above.
+
+Required if you want ynab-buddy to upload transactions for you.
