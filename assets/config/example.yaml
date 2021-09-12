@@ -1,28 +1,24 @@
-# If undefined, interactively ask for the folder or press enter to use working dir
+#######################################
+##   YNAB BUDDY CONFIGURATION FILE   ##
+#######################################
+
+# This file tells ynab-buddy how to read your bank's files.
+#
+# To learn how to use this file, check out:
+# https://github.com/nielsmaerten/ynab-buddy/blob/main/docs/how-to-configure.md
+
 import_from: "c:/users/test/downloads"
-search_subfolders: false
+search_subfolders: true
 
-# At least 1 of these is required
 bank_transaction_files:
-  # the name is just for users, the script ignores it
   - account_name: BNP Checking Account
-    # pattern is a glob pattern that will collect files from the import folder
     pattern: BNP-export-IBAN01233456789-*.csv
-    ## parser tells which parser to use for any file that matches this pattern
     parser: bnp-checking-parser
-
-    ## required to upload to ynab, ignored if the file isn't uploaded
-    ynab_account_id: ABC1234
-    ynab_budget_id: XYZ7890
+    ynab_account_id: 3c8922e0-625d-423b-ab77-810edfc460b2
+    ynab_budget_id: 1c8cdd9e-c923-4e39-9960-28664a2cd4ae
     ynab_flag_color: purple
-
-    ## additional settings, not required
-    ## if undefined, default to 'upload_transactions' in the ynab section
-    upload: false
-    ## false by default, if true, save the parse result using a unique name
-    save_parsed_file: true
-    ## false by default, if true, delete the original file after processing
-    ## if true, either upload or save must be true, otherwise it will default back to false (don't delete)
+    upload: true
+    save_parsed_file: false
     delete_original_file: true
 
 parsers:
@@ -31,11 +27,11 @@ parsers:
     footer_rows: 0
     delimiter: ","
     columns: [skip, skip, memo, date, inflow, skip]
-    date_format: L/d/YYYY
+    date_format: M/d/YYYY
 
 upload_to_ynab:
   upload_transactions: false
   ynab_token: ABC12345
 
-# Delete the following line:
+# When you're done configuring, delete the next line:
 configuration_done: false
