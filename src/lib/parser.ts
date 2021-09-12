@@ -14,6 +14,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   // Configure parser to detect the right columns and delimiter
   const parser = parsers.find((p) => p.name === source.matchedParser)!;
   const parseOptions = { ...baseParseOptions };
+  // FIXME: Fatal bug :(
   parseOptions.columns = parser.columns.filter(noDuplicates);
   parseOptions.delimiter = parser.delimiter;
 

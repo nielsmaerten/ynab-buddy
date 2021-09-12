@@ -35,6 +35,11 @@ export function findBankFiles(dir: string, config: Configuration): BankFile[] {
  */
 export function detectBank(file: string, patterns: BankFilePattern[]) {
   function findMatch(pattern: string) {
+    // Already converted files (*.ynab.csv) should never match
+    const fileNameLowerCase = file.toLowerCase();
+    if (fileNameLowerCase.endsWith('.ynab.csv')) return false;
+
+    // Test if filename matches current pattern
     const endsWithPattern = "**/" + pattern.toLowerCase();
     return minimatch(file.toLowerCase(), endsWithPattern);
   }
