@@ -64,9 +64,8 @@ describe("index.ts", () => {
   });
 
   it("shows welcome message", () => {
-    expect(mocks.displayWelcomeMessage).toHaveBeenCalledWith({
-      isFirstRun: false,
-    });
+    const isFirstRun = !mock_getConfiguration.configurationDone;
+    expect(mocks.displayWelcomeMessage).toHaveBeenCalledWith(isFirstRun);
   });
 
   it("asks to confirm import path", () => {

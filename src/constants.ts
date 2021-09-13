@@ -7,9 +7,10 @@ export const APP_VERSION = require("../package.json").version;
 export const UPDATE_CHECK_URL = "https://go.niels.me/ynab-buddy/package.json";
 
 export const messages = {
-  intro:
-    "This tool converts your bank's files to YNAB-format and uploads them directly to your budget.",
-  notConfigured: "It looks like you haven't configured YNAB Buddy yet.",
+  disclaimer:
+    "Disclaimer: This is a community project, not an official service from YNAB.",
+  intro: "Convert CSV files from any bank; upload directly to YNAB",
+  notConfigured: "Looks like YNAB Buddy is not yet configured.",
   gettingStarted:
     "To get started, open the following file and follow the instructions:",
   usingConfigPath: "Using configuration file:",

@@ -13,7 +13,8 @@ import { BankFile } from "./types";
   const config = getConfiguration();
 
   // Display welcome message, exit if initialization has not yet been completed
-  cli.displayWelcomeMessage({ isFirstRun: !config.configurationDone });
+  const isFirstRun = !config.configurationDone;
+  cli.displayWelcomeMessage(isFirstRun);
   if (!config.configurationDone) exit();
 
   // Confirm folder where the tool should look for bank files

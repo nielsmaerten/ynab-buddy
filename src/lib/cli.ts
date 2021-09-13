@@ -10,7 +10,7 @@ import {
 import { getConfigPaths } from "./configuration";
 import { exit } from "process";
 
-export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
+export function displayWelcomeMessage(isFirstRun: boolean) {
   const appLabel = `${APP_NAME} (v${APP_VERSION})`;
   const border = new Array(appLabel.length).fill("*").join("");
   const configPath = getConfigPaths().fullPath;
@@ -22,6 +22,8 @@ export function displayWelcomeMessage({ isFirstRun }: { isFirstRun: boolean }) {
 
   if (isFirstRun) {
     console.log(chalk.dim(messages.intro));
+    console.log(chalk.blueBright(messages.disclaimer));
+    console.log("");
     console.log(chalk.yellow(messages.notConfigured));
     console.log(chalk.yellow(messages.gettingStarted));
     console.log(chalk.dim(configPath));
