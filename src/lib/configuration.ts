@@ -65,7 +65,9 @@ const createConfigFile = () => {
   }
 
   // Write example config file to destination
-  fs.copyFileSync(example, fullPath);
+  const content = fs.readFileSync(example);
+  const writeOpts = { flag: "w" };
+  fs.writeFileSync(fullPath, content, writeOpts);
 };
 
 /**
