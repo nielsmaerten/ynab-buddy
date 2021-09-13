@@ -20,6 +20,7 @@ const mocks = {
   upload: jest.fn(),
   displayWelcomeMessage: jest.fn(),
   displayGoodbyeMessage: jest.fn(),
+  exitApp: jest.fn(),
   confirmImportPath: jest.fn().mockReturnValue(mock_importPath),
   findBankFiles: jest.fn().mockReturnValue(mock_bankFiles),
   getConfiguration: jest.fn().mockReturnValue(mock_getConfiguration),
@@ -37,6 +38,7 @@ describe("index.ts", () => {
         confirmImportPath: mocks.confirmImportPath,
         displayWelcomeMessage: mocks.displayWelcomeMessage,
         displayGoodbyeMessage: mocks.displayGoodbyeMessage,
+        exitApp: mocks.exitApp
       };
     });
     jest.mock("./lib/filesystem", () => {
