@@ -44,10 +44,10 @@ describe("configuration.ts", () => {
       bankFilePatterns: [
         {
           account_name: "BNP Checking Account",
-          ynab_account_id: "3c8922e0-625d-423b-ab77-810edfc460b2",
-          ynab_budget_id: "1c8cdd9e-c923-4e39-9960-28664a2cd4ae",
+          ynab_account_id: "00000000-0000-0000-0000-000000000000",
+          ynab_budget_id: "00000000-0000-0000-0000-000000000000",
           ynab_flag_color: "purple",
-          parser: "bnp-checking-parser",
+          parser: "bnp-example-parser",
           delete_original_file: true,
           save_parsed_file: false,
           upload: true,
@@ -62,7 +62,7 @@ describe("configuration.ts", () => {
           delimiter: ",",
           footer_rows: 0,
           header_rows: 2,
-          name: "bnp-checking-parser",
+          name: "bnp-example-parser",
         },
       ],
       searchSubDirectories: false,
