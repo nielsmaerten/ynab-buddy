@@ -13,11 +13,10 @@
     "build": "tsc",
     "package": "yarn pkg ./dist/index.js --config ./package.json",
     "package:rebuild": "yarn build && yarn package",
-    "publish:np": "np --no-cleanup --no-yarn",
+    "publish:np": "yarn package:rebuild --compress Brotli && np --no-cleanup --no-yarn",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
-    "lint": "yarn prettier ./src --check",
-    "commit": "yarn cz"
+    "lint": "yarn prettier ./src --check"
   },
   "keywords": [],
   "author": {
