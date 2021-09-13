@@ -38,7 +38,7 @@ describe("index.ts", () => {
         confirmImportPath: mocks.confirmImportPath,
         displayWelcomeMessage: mocks.displayWelcomeMessage,
         displayGoodbyeMessage: mocks.displayGoodbyeMessage,
-        exitApp: mocks.exitApp
+        exitApp: mocks.exitApp,
       };
     });
     jest.mock("./lib/filesystem", () => {
