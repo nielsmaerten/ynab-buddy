@@ -1,41 +1,50 @@
-import { readFileSync } from "fs";
-import { CONFIG_FILE_EXAMPLE } from "../constants";
 import { Configuration } from "../types";
+import * as fixture from "./configuration.spec.fixture";
 
-describe("configuration.ts", () => {
+describe("configuration", () => {
+  let configFileExists = true;
   beforeAll(() => {
-    const configFixture = getExampleConfig();
-    // FIXME: Mocking is not done correctly in these tests
+    jest.mock("../constants", () => {
+      return fixture.constants;
+    });
     jest.mock("fs", () => {
       return {
-        readFileSync: jest.fn().mockReturnValue(configFixture),
-        copyFileSync: jest.fn(),
+        existsSync: jest.fn().mockImplementation(() => configFileExists),
+        readFileSync: jest.fn().mockImplementation(() => fixture.configFile),
+        writeFileSync: jest.fn(),
         mkdirSync: jest.fn(),
       };
     });
   });
 
-  it("attempts to find the config file", () => {
-    const fs = require("fs");
-    fs.existsSync = jest.fn();
+  it("checks if config file exists", () => {
+    configFileExists = true;
 
-    require("./configuration").getConfiguration();
-    expect(fs.existsSync).toHaveBeenCalled();
+    const module = require("./configuration");
+    module.getConfiguration();
+
+    const mockedExists: jest.Mock = require("fs").existsSync;
+    expect(mockedExists).toHaveBeenCalled();
+
+    const checkedConfPath: string = mockedExists.mock.calls[0][0];
+    const expectedConfPath = fixture.constants.CONFIG_FILE;
+    expect(checkedConfPath.endsWith(expectedConfPath)).toBeTruthy();
   });
 
-  it("attempts to write the default config file if none exists yet", () => {
-    const getConfiguration = require("./configuration").getConfiguration;
-    const fs = require("fs");
+  it("writes example config if no config file exists", () => {
+    configFileExists = false;
 
-    fs.copyFileSync = jest.fn();
-    fs.existsSync = jest.fn().mockReturnValue(false);
-    getConfiguration();
-    expect(fs.copyFileSync).toHaveBeenCalled();
+    const module = require("./configuration");
+    module.getConfiguration();
 
-    fs.copyFileSync = jest.fn();
-    fs.existsSync = jest.fn().mockReturnValue(true);
-    getConfiguration();
-    expect(fs.copyFileSync).not.toHaveBeenCalled();
+    const mockedWriteFile: jest.Mock = require("fs").writeFileSync;
+    expect(mockedWriteFile).toHaveBeenCalled();
+
+    const writeCall1 = mockedWriteFile.mock.calls[0];
+    const [writeArg1, writeArg2]: string[] = writeCall1;
+
+    expect(writeArg1.endsWith(fixture.constants.CONFIG_FILE)).toBeTruthy();
+    expect(writeArg2).toEqual(fixture.configFile);
   });
 
   it("parses the config file", () => {
@@ -76,7 +85,3 @@ describe("configuration.ts", () => {
     expect(expected).toMatchObject(actual);
   });
 });
-
-const getExampleConfig = () => {
-  return readFileSync(CONFIG_FILE_EXAMPLE).toString();
-};
