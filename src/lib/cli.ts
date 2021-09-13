@@ -8,7 +8,6 @@ import {
   UPDATE_CHECK_URL,
 } from "../constants";
 import { getConfigPaths } from "./configuration";
-import { exit } from "process";
 
 export function displayWelcomeMessage(isFirstRun: boolean) {
   const appLabel = `${APP_NAME} (v${APP_VERSION})`;
@@ -34,17 +33,27 @@ export function displayWelcomeMessage(isFirstRun: boolean) {
   console.log("");
 }
 
-export async function displayGoodbyeMessage() {
+export function displayGoodbyeMessage() {
   console.log("");
   console.log(chalk.yellow(messages.goodbye));
   console.log("");
   console.log(messages.sponsor);
   console.log(chalk.bgBlueBright(messages.sponsorLink));
   console.log("");
-  await checkUpdate(APP_VERSION);
-  console.log(messages.exit);
+}
 
-  // Next keypress exits the app
+export async function exitApp() {
+  // Print update notice if this is not the latest version
+  await checkUpdate(APP_VERSION);
+
+  // If the app was installed via NPM, exit immediately
+  // This will return control to the terminal
+  const isNpmApp = (process as any).pkg?.entrypoint === undefined;
+  if (isNpmApp) process.exit();
+
+  // Otherwise, wait for user to "press any key",
+  // then exiting will close the window
+  console.log(messages.exit);
   process.stdin.setRawMode(true);
   process.stdin.resume();
   process.stdin.on("data", process.exit.bind(process, 0));
@@ -69,7 +78,7 @@ export async function confirmImportPath(defaultPath: string | undefined) {
       return valid;
     },
   });
-  if (response.path === undefined) exit();
+  if (response.path === undefined) return exitApp();
   return response.path;
 }
 

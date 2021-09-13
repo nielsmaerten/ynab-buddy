@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { exit } from "process";
 import { messages } from "./constants";
 import * as cli from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
@@ -15,7 +14,7 @@ import { BankFile } from "./types";
   // Display welcome message, exit if initialization has not yet been completed
   const isFirstRun = !config.configurationDone;
   cli.displayWelcomeMessage(isFirstRun);
-  if (!config.configurationDone) exit();
+  if (!config.configurationDone) return cli.exitApp();
 
   // Confirm folder where the tool should look for bank files
   config.importPath = await cli.confirmImportPath(config.importPath);
@@ -38,9 +37,8 @@ import { BankFile } from "./types";
   await Promise.all(uploads);
 
   // All done!
-  await cli.displayGoodbyeMessage();
-
-  // Uncaught errors will exit the app
+  cli.displayGoodbyeMessage();
+  return cli.exitApp();
 })().catch(handleError);
 
 function handleError(err: any) {
@@ -50,5 +48,5 @@ function handleError(err: any) {
   if (isVerbose) console.error(JSON.stringify(err));
   else console.log("For details, run with flag `-v`");
 
-  process.exit(1);
+  return cli.exitApp();
 }
