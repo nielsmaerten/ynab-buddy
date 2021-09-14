@@ -1,7 +1,8 @@
 {
   "name": "ynab-buddy",
   "version": "1.0.4",
-  "description": "",
+  "description": "Upload & import CSV files from any bank into YNAB",
+  "keywords": ["ynab", "youneedabudget", "csv", "import"],
   "main": "dist/index.js",
   "bin": "./dist/index.js",
   "files": [
@@ -18,7 +19,6 @@
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check"
   },
-  "keywords": [],
   "author": {
     "name": "Niels Maerten",
     "url": "https://github.com/nielsmaerten"
