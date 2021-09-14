@@ -29,3 +29,5 @@ jobs:
     - run: yarn test
     - run: yarn lint
     - run: yarn package:rebuild
+    - name: Codecov
+      uses: codecov/codecov-action@v2.1.0
