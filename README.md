@@ -6,6 +6,7 @@ Just download transactions from your bank, run ynab-buddy, and you're done. Say 
 
 > By [@nielsmaerten](https://github.com/nielsmaerten)  
 > [![codecov](https://codecov.io/gh/nielsmaerten/ynab-buddy/branch/main/graph/badge.svg?token=W3P5UTSTU6)](https://codecov.io/gh/nielsmaerten/ynab-buddy)
+> [![Node.js CI](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/node.js.yml/badge.svg)](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/node.js.yml)
 
 ## How to install
 
