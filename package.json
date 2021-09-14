@@ -9,6 +9,16 @@
     "dist/",
     "assets/"
   ],
+  "license": "MIT",
+  "author": {
+    "name": "Niels Maerten",
+    "url": "https://github.com/nielsmaerten"
+  },
+  "homepage": "https://github.com/nielsmaerten/ynab-buddy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nielsmaerten/ynab-buddy"
+  },
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "build": "tsc",
@@ -18,10 +28,6 @@
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check"
-  },
-  "author": {
-    "name": "Niels Maerten",
-    "url": "https://github.com/nielsmaerten"
   },
   "pkg": {
     "assets": [
@@ -40,7 +46,6 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "license": "MIT",
   "devDependencies": {
     "@types/glob": "^7.1.4",
     "@types/jest": "^27.0.1",
