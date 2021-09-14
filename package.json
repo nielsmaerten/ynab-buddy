@@ -1,8 +1,13 @@
 {
   "name": "ynab-buddy",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Upload & import CSV files from any bank into YNAB",
-  "keywords": ["ynab", "youneedabudget", "csv", "import"],
+  "keywords": [
+    "ynab",
+    "youneedabudget",
+    "csv",
+    "import"
+  ],
   "main": "dist/index.js",
   "bin": "./dist/index.js",
   "files": [
