@@ -1,6 +1,7 @@
 import fs from "fs";
 import chalk from "chalk";
 import prompts from "prompts";
+import "abort-controller/polyfill";
 import {
   APP_NAME,
   APP_VERSION,
