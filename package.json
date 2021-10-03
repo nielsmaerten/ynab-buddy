@@ -29,7 +29,7 @@
     "build": "tsc",
     "package": "yarn pkg ./dist/index.js --config ./package.json",
     "package:rebuild": "yarn build && yarn package",
-    "publish:np": "yarn package:rebuild --compress Brotli && np --no-cleanup --no-yarn",
+    "publish:np": "yarn build && np --no-cleanup --no-yarn && yarn package --compress Brotli",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check"
