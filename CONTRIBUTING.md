@@ -38,7 +38,7 @@ The aim is to keep test coverage above 95%. Tests extensively use mocking to ens
 * Create a new Release on GitHub, and upload the binaries there
 * Users running an old version will receive a notification pointing to the Releases page on GitHub
 
-### Architecture (deep dive) (work in )
+### Architecture deep dive (work in progress)
 
 * When you run ynab-buddy for the first time, a config file is created in the home directory. The assets folder contains the template
 * This file tells ynab-buddy how to parse your bank's files, and where to upload transactions
