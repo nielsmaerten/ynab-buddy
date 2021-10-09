@@ -1,6 +1,6 @@
 {
   "name": "ynab-buddy",
-  "version": "1.0.8-4",
+  "version": "1.0.8",
   "description": "Upload & import CSV files from any bank into YNAB",
   "keywords": [
     "ynab",
