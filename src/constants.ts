@@ -40,8 +40,10 @@ export const messages = {
     "Did this tool just save you some time? Then maybe consider buying me a coffee:",
   sponsorLink: "https://go.niels.me/coffee",
   exit: "Press any key to exit",
-  newerVersion: [
-    "A newer version of ynab-buddy is available:",
-    "https://github.com/nielsmaerten/ynab-buddy/releases",
-  ],
+  newVersion: {
+    notice: "A newer version of ynab-buddy is available.",
+    releaseUrl:
+      "Download here: https://github.com/nielsmaerten/ynab-buddy/releases",
+    npmCommand: "To upgrade, run 'npm install -g ynab-buddy'",
+  },
 };

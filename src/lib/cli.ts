@@ -10,6 +10,9 @@ import {
 } from "../constants";
 import { getConfigPaths } from "./configuration";
 
+// When compiled using pkg, process will have the following property
+const isNpmApp = (process as any).pkg?.entrypoint === undefined;
+
 export function displayWelcomeMessage(isFirstRun: boolean) {
   const appLabel = `${APP_NAME} (v${APP_VERSION})`;
   const border = new Array(appLabel.length).fill("*").join("");
@@ -49,7 +52,6 @@ export async function exitApp() {
 
   // If the app was installed via NPM, exit immediately
   // This will return control to the terminal
-  const isNpmApp = (process as any).pkg?.entrypoint === undefined;
   if (isNpmApp) process.exit();
 
   // Otherwise, wait for user to "press any key",
@@ -93,8 +95,10 @@ export async function checkUpdate(thisVersion: string) {
     const res = await fetch(UPDATE_CHECK_URL, requestOpts);
     clearTimeout(timeoutId);
     const latestVersion = (await res.json()).version;
-    if (latestVersion !== thisVersion) {
-      console.log(messages.newerVersion.join(" "));
+    if (latestVersion == thisVersion) {
+      const { notice, npmCommand, releaseUrl } = messages.newVersion;
+      const whereToDownload = isNpmApp ? npmCommand : releaseUrl;
+      console.log(notice, whereToDownload);
     }
   } catch {
     // Ignore update check errors
