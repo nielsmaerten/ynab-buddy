@@ -1,8 +1,10 @@
 # ynab-buddy
 
-### Converts (csv) files from *any* bank; uploads them directly to your [YNAB](https://youneedabudget.com) Budget.
+### Convert (csv) files from *any* bank; upload them directly to your [YNAB](https://youneedabudget.com) Budget.
 
 Just download transactions from your bank, run ynab-buddy, and you're done. Say goodbye to csv-converters and manual file uploads!
+
+[![asciicast](https://asciinema.org/a/446464.svg)](https://asciinema.org/a/446464)
 
 > By [@nielsmaerten](https://github.com/nielsmaerten)  
 > [![codecov](https://codecov.io/gh/nielsmaerten/ynab-buddy/branch/main/graph/badge.svg?token=W3P5UTSTU6)](https://codecov.io/gh/nielsmaerten/ynab-buddy)
