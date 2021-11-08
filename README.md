@@ -40,7 +40,7 @@ I recommend you check out the [Configuration Guide](./docs/how-to-configure.md) 
 
 ## Disclaimer
 
-ynab-buddy is a **fan-made tool** for YNAB.  
-The YNAB support team, while awesome, cannot help you resolve issues with this tool.  
+ynab-buddy is a **community-made tool** for YNAB.  
+The YNAB support team cannot help you resolve issues with this tool.  
 
 This software is provided "as-is", without warranty of any kind. See the [full MIT License](./LICENSE)
