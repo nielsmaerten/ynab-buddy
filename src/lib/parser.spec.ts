@@ -43,6 +43,16 @@ describe("parser", () => {
       expect(inflow).toEqual(-outflow);
     }
   });
+
+  it("merges multiple memo columns together", () => {
+    const parseCfg = { columns: ["", "date", "amount", "memo", "memo2"] };
+    const result = runParser(csvFixtures.multipleMemoColumns, parseCfg);
+    expect(result.transactions).toHaveLength(3);
+    result.transactions.forEach(validateTransaction);
+    result.transactions.forEach((tx) => {
+      expect(tx.memo).toEqual("memo A memo B");
+    });
+  })
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -57,7 +67,7 @@ enum csvFixtures {
   customDelimiter = 0,
   headerFooterEmptyLines = 1,
   decimalCommas = 2,
-  outflow = 3,
+  multipleMemoColumns = 3,
 }
 
 const validateTransaction = (tx: Transaction) => {
