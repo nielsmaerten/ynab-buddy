@@ -1,7 +1,7 @@
 import { BankFile, ParsedBankFile, Parser, Transaction } from "../types";
 import parseCsv from "csv-parse/lib/sync";
 import { Options as parseOptions } from "csv-parse";
-import { DateTime, Zone } from "luxon";
+import { DateTime } from "luxon";
 import fs from "fs";
 import chalk from "chalk";
 import { messages } from "../constants";
@@ -33,7 +33,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
 
 export function buildTransaction(record: any, parser: Parser): Transaction {
   return {
-    amount: parseAmount(record),
+    amount: parseAmount(record, parser.outflow_indicator),
     date: parseDate(record, parser.date_format),
     memo: mergeMemoFields(record),
   };
@@ -58,8 +58,8 @@ function parseDate(record: any, dateFormat: string) {
   throw "PARSING ERROR";
 }
 
-function parseAmount(record: any): number {
-  const { inflow, outflow, amount } = record;
+function parseAmount(record: any, outflowIndicator?: string): number {
+  const { inflow, outflow, amount, in_out_flag } = record;
   let value = inflow || outflow || amount;
 
   if (typeof value === "string") {
@@ -67,7 +67,10 @@ function parseAmount(record: any): number {
     value = parseFloat(value); // "420.69" ==> 420.69
   }
 
-  if (outflow !== undefined) {
+  // If the outflow column exists, OR
+  // If the in_out_flag column exists AND it contains the outflow indicator
+  // invert the value of the amount
+  if (outflow !== undefined || in_out_flag?.startsWith(outflowIndicator)) {
     value = -value; // 420.69 ==> -420.69
   }
 
@@ -94,6 +97,7 @@ function unifyColumns(columnName: string, index: number) {
     /^outflow$/,
     /^amount$/,
     /^memo[0-9]*$/,
+    /^in_out_flag$/
   ];
   const isAllowed = allowedColumns.some((regex) =>
     columnLowerCase.match(regex)
