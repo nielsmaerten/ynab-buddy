@@ -97,7 +97,7 @@ function unifyColumns(columnName: string, index: number) {
     /^outflow$/,
     /^amount$/,
     /^memo[0-9]*$/,
-    /^in_out_flag$/
+    /^in_out_flag$/,
   ];
   const isAllowed = allowedColumns.some((regex) =>
     columnLowerCase.match(regex)

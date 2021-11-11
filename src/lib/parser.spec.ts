@@ -55,7 +55,10 @@ describe("parser", () => {
   });
 
   it("pulls credit/debit from a separate column", () => {
-    const parseCfg = { columns: ["", "date", "amount", "", "in_out_flag"], outflow_indicator: 'O' };
+    const parseCfg = {
+      columns: ["", "date", "amount", "", "in_out_flag"],
+      outflow_indicator: "O",
+    };
     const result = runParser(csvFixtures.inOutIndicator, parseCfg);
     expect(result.transactions[0].amount).toBeGreaterThan(0);
     expect(result.transactions[1].amount).toBeLessThan(0);
