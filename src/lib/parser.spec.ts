@@ -52,7 +52,7 @@ describe("parser", () => {
     result.transactions.forEach((tx) => {
       expect(tx.memo).toEqual("memo A memo B");
     });
-  })
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {

@@ -41,7 +41,9 @@ export function buildTransaction(record: any, parser: Parser): Transaction {
 
 function mergeMemoFields(record: any) {
   // Merge fields named memo, memo1, memo2, etc. into a single memo field
-  const memoFields = Object.keys(record).filter((key) => key.match(/^memo[0-9]*$/)).sort();
+  const memoFields = Object.keys(record)
+    .filter((key) => key.match(/^memo[0-9]*$/))
+    .sort();
   const allMemos = memoFields.map((key) => record[key]);
   return allMemos.join(" ");
 }
@@ -86,8 +88,16 @@ function logResult(txCount: number, sourcePath: string) {
  */
 function unifyColumns(columnName: string, index: number) {
   const columnLowerCase = columnName.toLowerCase();
-  const allowedColumns = [/^date$/, /^inflow$/, /^outflow$/, /^amount$/, /^memo[0-9]*$/];
-  const isAllowed = allowedColumns.some((regex) => columnLowerCase.match(regex));
+  const allowedColumns = [
+    /^date$/,
+    /^inflow$/,
+    /^outflow$/,
+    /^amount$/,
+    /^memo[0-9]*$/,
+  ];
+  const isAllowed = allowedColumns.some((regex) =>
+    columnLowerCase.match(regex)
+  );
   if (isAllowed) return columnLowerCase;
   else return `__${index}`;
 }
