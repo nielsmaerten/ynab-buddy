@@ -21,7 +21,7 @@ export function displayWelcomeMessage(isFirstRun: boolean) {
   console.log("");
   console.log(border);
   console.log(appLabel);
-  console.log(chalk.redBright(messages.preview))
+  console.log(chalk.redBright(messages.preview));
   console.log(border);
 
   if (isFirstRun) {
@@ -100,7 +100,7 @@ export async function checkUpdate(thisVersion: string) {
     if (latestVersion !== thisVersion) {
       const { notice, npmCommand, releaseUrl } = messages.newVersion;
       const whereToDownload = isNpmApp ? npmCommand : releaseUrl;
-     // console.log(notice, whereToDownload);
+      // console.log(notice, whereToDownload);
     }
   } catch {
     // Ignore update check errors

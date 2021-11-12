@@ -69,11 +69,11 @@ describe("parser", () => {
     const parseCfg = { columns: ["", "date", "outflow", "memo", "payee"] };
     const result = runParser(csvFixtures.payeeField, parseCfg);
     expect(result.transactions).toHaveLength(3);
-    result.transactions.forEach(tx => {
+    result.transactions.forEach((tx) => {
       expect(tx.payee_name).toBeDefined();
       expect(tx.payee_name!.length).toBeGreaterThan(0);
     });
-  })
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
