@@ -34,8 +34,8 @@ The aim is to keep test coverage above 95%. Tests extensively use mocking to ens
 * Run `yarn run publish:np`
 * The project gets built to dist/
 * `np` creates a new version on NPM and GitHub
-* After this is done, binaries are compiled with the new version number
-* Create a new Release on GitHub, and upload the binaries there
+* GitHub builds the binaries and adds them to a (new) release
+* Update this release notes using the previous release as a template
 * Users running an old version will receive a notification pointing to the Releases page on GitHub
 
 ### Architecture deep dive (work in progress)
