@@ -30,6 +30,11 @@ invalid footer row
   `1;9/27/2020;871.13;memo A;memo B
 2;11/26/2019;908.31;memo A;memo B
 3;3/6/2020;152.13;memo A;memo B`,
+
+  // Inflow/Outflow indicator in last column
+  `1;9/27/2020;871.13;Devpoint;In
+2;11/26/2019;908.31;Realcube;Out
+3;3/6/2020;152.13;Oyoloo;In`,
 ];
 
 export const defaultParser: Parser =

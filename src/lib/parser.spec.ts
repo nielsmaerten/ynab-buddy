@@ -53,6 +53,17 @@ describe("parser", () => {
       expect(tx.memo).toEqual("memo A memo B");
     });
   });
+
+  it("pulls credit/debit from a separate column", () => {
+    const parseCfg = {
+      columns: ["", "date", "amount", "", "in_out_flag"],
+      outflow_indicator: "Out",
+    };
+    const result = runParser(csvFixtures.inOutIndicator, parseCfg);
+    expect(result.transactions[0].amount).toBeGreaterThan(0);
+    expect(result.transactions[1].amount).toBeLessThan(0);
+    expect(result.transactions[2].amount).toBeGreaterThan(0);
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -68,6 +79,7 @@ enum csvFixtures {
   headerFooterEmptyLines = 1,
   decimalCommas = 2,
   multipleMemoColumns = 3,
+  inOutIndicator = 4,
 }
 
 const validateTransaction = (tx: Transaction) => {

@@ -52,4 +52,5 @@ export type Parser = {
   date_format: string;
   footer_rows: number;
   header_rows: number;
+  outflow_indicator?: string;
 };
