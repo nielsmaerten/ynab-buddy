@@ -57,9 +57,9 @@ pattern: ing/savings/export.csv
 
 | Pattern                   | Matches filenames such as:                                   |
 | ------------------------- | ------------------------------------------------------------ |
-| `BNP_IBAN323534643_*.csv` | BNP_IBAN323534643_2021-09-12.csv, BNP_IBAN323534643_2021-04-20.csv |
-| `*_VisaPersonal-*.csv`    | NM_VisaPersonal-23453423.csv, YourName_VisaPersonal-2020202.csv |
-| `ing/savings/export.csv`  | export.csv                                                   |
+| `BNP_IBAN323534643_*.csv` | `BNP_IBAN323534643_2021-09-12.csv`, `BNP_IBAN323534643_2021-04-20.csv` |
+| `*_VisaPersonal-*.csv`    | `NM_VisaPersonal-23453423.csv`, `YourName_VisaPersonal-2020202.csv` |
+| `ing/savings/export.csv`  | `export.csv`                                                 |
 
 **Notice:** the last pattern only matches files named "export.csv". If your bank does this, create a directory structure for your accounts (for example `downloads/ing/savings/`) and place files into the folder for their account.
 
