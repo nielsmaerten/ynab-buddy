@@ -177,7 +177,7 @@ The following columns are supported:
 | Field       | Notes                                                        |
 | ----------- | ------------------------------------------------------------ |
 | date        | Transaction's date. Set the format using `date_format`       |
-| skip        | Use to igno                                                  |
+| skip        | Use to ignore a column                                       |
 | inflow      | Use in combination with 'outflow'                            |
 | outflow     | Use in combination with 'inflow'                             |
 | amount      | If instead of separate 'inflow' and 'outflow' columns, your bank uses a single column: use 'amount'. Negative amounts are treated as outflow. |
