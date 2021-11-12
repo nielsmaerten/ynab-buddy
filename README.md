@@ -4,7 +4,8 @@
 
 Just download transactions from your bank, run ynab-buddy, and you're done. Say goodbye to csv-converters and manual file uploads!
 
-[![asciicast](https://asciinema.org/a/446464.svg)](https://asciinema.org/a/446464)
+![ynab-buddy demonstration](https://user-images.githubusercontent.com/4604406/141378280-28cc0996-bfc7-49ed-ac06-67a78516f9c4.gif)
+
 
 > By [@nielsmaerten](https://github.com/nielsmaerten)  
 > [![codecov](https://codecov.io/gh/nielsmaerten/ynab-buddy/branch/main/graph/badge.svg?token=W3P5UTSTU6)](https://codecov.io/gh/nielsmaerten/ynab-buddy)
