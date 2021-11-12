@@ -37,6 +37,7 @@ I recommend you check out the [Configuration Guide](./docs/how-to-configure.md) 
 * [Configuration Guide](./docs/how-to-configure.md) (how to set up this tool)
 * For general help: [GitHub Discussions](https://github.com/nielsmaerten/ynab-buddy/discussions) 
 * For bugs: [GitHub Issues](https://github.com/nielsmaerten/ynab-buddy/issues)
+* Tech docs (for developers): [CONTRIBUTING.md](./CONTRIBUTING.md)
 * Please **DO NOT** contact YNAB Support. This is a community project, not an official YNAB service.
 
 ## Disclaimer
