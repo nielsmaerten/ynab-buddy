@@ -64,6 +64,16 @@ describe("parser", () => {
     expect(result.transactions[1].amount).toBeLessThan(0);
     expect(result.transactions[2].amount).toBeGreaterThan(0);
   });
+
+  it("adds the Payee field", () => {
+    const parseCfg = { columns: ["", "date", "outflow", "memo", "payee"] };
+    const result = runParser(csvFixtures.payeeField, parseCfg);
+    expect(result.transactions).toHaveLength(3);
+    result.transactions.forEach((tx) => {
+      expect(tx.payee_name).toBeDefined();
+      expect(tx.payee_name!.length).toBeGreaterThan(0);
+    });
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -80,6 +90,7 @@ enum csvFixtures {
   decimalCommas = 2,
   multipleMemoColumns = 3,
   inOutIndicator = 4,
+  payeeField = 5,
 }
 
 const validateTransaction = (tx: Transaction) => {

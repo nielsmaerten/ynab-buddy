@@ -43,6 +43,7 @@ export type Transaction = {
   date: Date;
   account_id?: string;
   flag_color?: string;
+  payee_name?: string;
 };
 
 export type Parser = {

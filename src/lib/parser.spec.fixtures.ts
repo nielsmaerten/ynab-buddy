@@ -35,6 +35,11 @@ invalid footer row
   `1;9/27/2020;871.13;Devpoint;In
 2;11/26/2019;908.31;Realcube;Out
 3;3/6/2020;152.13;Oyoloo;In`,
+
+  // Payee field
+  `1;9/27/2020;98.99;Devpoint;YNAB
+2;11/26/2019;420.69;Realcube;Amazon
+3;3/6/2020;9.99;Oyoloo;Netflix`,
 ];
 
 export const defaultParser: Parser =
