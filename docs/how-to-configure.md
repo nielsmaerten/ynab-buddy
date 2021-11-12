@@ -172,14 +172,18 @@ columns: skip,memo,memo2,amount,in_out_flag;date  # id420;YNAB;USA;98.99;Out;202
 Configure which columns contain the data that should be extracted.  
 **Important:** Separate columns using a comma (,) even if your CSV file uses another delimiter!
 
-The following column names are supported:
+The following columns are supported:
 
-* date
-* inflow - used together with an 'outflow' column
-* outflow
-* amount - if your bank uses a single column for in- and outflow, and outflow is shown as a negative number
-* memo - can be multiple columns by naming them memo1, memo2, etc.
-* in_out_flag - while uncommon, some banks show all amounts as positive, and add an in_out_flag to indicate whether the money's going in or out of the account. if you use this column, you should also set the next option:
+| Field       | Notes                                                        |
+| ----------- | ------------------------------------------------------------ |
+| date        | Transaction's date. Set the format using `date_format`       |
+| skip        | Ignore this column                                           |
+| inflow      | Use in combination with 'outflow'                            |
+| outflow     | Use in combination with 'inflow'                             |
+| amount      | If instead of separate 'inflow' and 'outflow' columns, your bank uses a single column: use 'amount'. Negative amounts are treated as outflow. |
+| memo        | You can add multiple columns to the memo field by naming them memo1, memo2, etc. |
+| payee       | **Beta.** May create duplicate Payees in YNAB. If it does, I suggest adding your Payee as a *memo* field instead |
+| in_out_flag | While uncommon, some banks use a single 'amount' column with only positive numbers. A separate column, 'in_out_flag' indicates whether the money's going in or out of the account. If you use this column, you should also set the option `outflow_indicator` |
 
 ### `outflow_indicator`
 
