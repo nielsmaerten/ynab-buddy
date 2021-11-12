@@ -32,11 +32,13 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
 }
 
 export function buildTransaction(record: any, parser: Parser): Transaction {
-  return {
+  const tx: Transaction = {
     amount: parseAmount(record, parser.outflow_indicator),
     date: parseDate(record, parser.date_format),
     memo: mergeMemoFields(record),
   };
+  if (record.payee) tx.payee_name = record.payee;
+  return tx;
 }
 
 function mergeMemoFields(record: any) {
@@ -98,6 +100,7 @@ function unifyColumns(columnName: string, index: number) {
     /^amount$/,
     /^memo[0-9]*$/,
     /^in_out_flag$/,
+    /^payee$/,
   ];
   const isAllowed = allowedColumns.some((regex) =>
     columnLowerCase.match(regex)
