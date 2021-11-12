@@ -5,7 +5,6 @@ import { DateTime, Zone } from "luxon";
 import fs from "fs";
 import chalk from "chalk";
 import { messages } from "../constants";
-import path from "path";
 
 export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const csv = fs.readFileSync(source.path);
@@ -36,8 +35,17 @@ export function buildTransaction(record: any, parser: Parser): Transaction {
   return {
     amount: parseAmount(record),
     date: parseDate(record, parser.date_format),
-    memo: record.memo,
+    memo: mergeMemoFields(record),
   };
+}
+
+function mergeMemoFields(record: any) {
+  // Merge fields named memo, memo1, memo2, etc. into a single memo field
+  const memoFields = Object.keys(record)
+    .filter((key) => key.match(/^memo[0-9]*$/))
+    .sort();
+  const allMemos = memoFields.map((key) => record[key]);
+  return allMemos.join(" ");
 }
 
 function parseDate(record: any, dateFormat: string) {
@@ -75,13 +83,21 @@ function logResult(txCount: number, sourcePath: string) {
  * Turns a list of column names into a list where only allowed columns exist.
  * Ignored columns are kept, but receive a unique name.
  * That way they are still parsed, but ignored later on.
- * Example input: ['skip', 'memo', 'skip', 'Date', 'Inflow', 'Foobar'] ==>
- * output: ['_0', 'memo', '_1', 'date', 'inflow', '_3']
+ * Example input: ['skip', 'memo', 'skip', 'Date', 'Inflow', 'Foobar', 'memo2'] ==>
+ * output: ['_0', 'memo', '_1', 'date', 'inflow', '_3', 'memo2']
  */
 function unifyColumns(columnName: string, index: number) {
   const columnLowerCase = columnName.toLowerCase();
-  const allowedColumns = ["date", "inflow", "outflow", "amount", "memo"];
-  const isAllowed = allowedColumns.includes(columnLowerCase);
+  const allowedColumns = [
+    /^date$/,
+    /^inflow$/,
+    /^outflow$/,
+    /^amount$/,
+    /^memo[0-9]*$/,
+  ];
+  const isAllowed = allowedColumns.some((regex) =>
+    columnLowerCase.match(regex)
+  );
   if (isAllowed) return columnLowerCase;
   else return `__${index}`;
 }
