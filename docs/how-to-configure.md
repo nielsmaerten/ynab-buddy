@@ -192,7 +192,7 @@ outflow_indicator: Out
 # Only use this option if your CSV uses an in_out_flag
 ```
 
-If the value the column `in_out_flag` starts with the `outflow_indicator`, the amount is treated as outflow. Otherwise it's inflow.
+If the value in column `in_out_flag` starts with the `outflow_indicator`, the amount is treated as outflow. Otherwise it's inflow.
 
 ### `date_format`
 
