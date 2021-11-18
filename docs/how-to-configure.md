@@ -79,13 +79,14 @@ parser: bnp-checking-parser
 ynab_account_id: 3c8922e0-625d-423b-ab77-810edfc460b2
 ```
 
-Open YNAB, and view the transaction history of the account to want to import to. Check the URL in your browser. It should like this:
+To find your account_id and budget_id, visit YNAB and open up the transaction history of an account.
 
-```
-https://app.youneedabudget.com/[BUDGET-ID]/accounts/[ACCOUNT-ID]
-```
-```
+```yaml
+# The URL in your browser address bar should now look like this:
 https://app.youneedabudget.com/1c8cdd9e-c923-4e39-9960-28664a2cd4ae/accounts/3c8922e0-625d-423b-ab77-810edfc460b2
+
+# The first code is your budget_id, the second one is the account_id:
+https://app.youneedabudget.com/[BUDGET-ID]/accounts/[ACCOUNT-ID]
 ```
 
 ### `ynab_budget_id`
