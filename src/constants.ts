@@ -10,12 +10,6 @@ export const messages = {
   disclaimer:
     "Disclaimer: This is a community project, not an official service from YNAB.",
   intro: "Convert CSV files from any bank; upload directly to YNAB",
-  preview: `This is a preview release for:
-* payee fields
-* in_out_flag fields
-* multiple memos
-Beware of bugs!
-Update checks are disabled in this preview.`,
   notConfigured: "Looks like YNAB Buddy is not yet configured.",
   gettingStarted:
     "To get started, open the following file and follow the instructions:",

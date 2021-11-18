@@ -21,7 +21,6 @@ export function displayWelcomeMessage(isFirstRun: boolean) {
   console.log("");
   console.log(border);
   console.log(appLabel);
-  console.log(chalk.redBright(messages.preview));
   console.log(border);
 
   if (isFirstRun) {
@@ -87,7 +86,6 @@ export async function confirmImportPath(defaultPath: string | undefined) {
 }
 
 export async function checkUpdate(thisVersion: string) {
-  return;
   const timeoutMs = 3000;
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
