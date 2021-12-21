@@ -33,7 +33,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
 
 export function buildTransaction(record: any, parser: Parser): Transaction {
   const tx: Transaction = {
-    amount: parseAmount(record, parser.outflow_indicator),
+    amount: parseAmount(record, parser.outflow_indicator, parser.thousand_separator, parser.decimal_separator),
     date: parseDate(record, parser.date_format),
     memo: mergeMemoFields(record),
   };
@@ -60,12 +60,19 @@ function parseDate(record: any, dateFormat: string) {
   throw "PARSING ERROR";
 }
 
-function parseAmount(record: any, outflowIndicator?: string): number {
+function parseAmount(record: any, outflowIndicator?: string, thousandSeparator?: string, decimalSeparator?: string): number {
   const { inflow, outflow, amount, in_out_flag } = record;
   let value = inflow || outflow || amount;
 
   if (typeof value === "string") {
-    value = value.replace(",", "."); // "420,69" ==> "420.69"
+    if (thousandSeparator !== undefined) {
+      value = value.replace(thousandSeparator, "");
+    }
+
+    if (decimalSeparator !== undefined) {
+      value = value.replace(decimalSeparator, ".");
+    }
+
     value = parseFloat(value); // "420.69" ==> 420.69
   }
 

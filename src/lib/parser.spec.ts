@@ -80,6 +80,29 @@ describe("parser", () => {
     const result = runParser(csvFixtures.dateSurroundedBySpaces, parseCfg);
     expect(result.transactions).toHaveLength(3);
   });
+
+  it("can parse thousand separators in amounts field", () => {
+    const parseCfg = { 
+      columns: ["", "date", "amount", "payee", "memo"],
+      thousand_separator: ",",
+    };
+    const result = runParser(csvFixtures.thousandSeparators, parseCfg);
+    expect(result.transactions[0].amount).toEqual(8711.13);
+    expect(result.transactions[1].amount).toEqual(9081.31);
+    expect(result.transactions[2].amount).toEqual(212.13);
+  });
+
+  it("can parse localized separators in amounts field", () => {
+    const parseCfg = { 
+      columns: ["", "date", "amount", "payee", "memo"],
+      thousand_separator: ".",
+      decimal_separator: ",",
+    };
+    const result = runParser(csvFixtures.dotThousandSeparatorsCommaDecimalSeparator, parseCfg);
+    expect(result.transactions[0].amount).toEqual(8711.13);
+    expect(result.transactions[1].amount).toEqual(9081.31);
+    expect(result.transactions[2].amount).toEqual(212.13);
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -98,6 +121,8 @@ enum csvFixtures {
   inOutIndicator = 4,
   payeeField = 5,
   dateSurroundedBySpaces = 6,
+  thousandSeparators = 7,
+  dotThousandSeparatorsCommaDecimalSeparator = 8,
 }
 
 const validateTransaction = (tx: Transaction) => {
