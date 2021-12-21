@@ -52,7 +52,9 @@ function mergeMemoFields(record: any) {
 
 function parseDate(record: any, dateFormat: string) {
   const { date } = record;
-  const dateTime = DateTime.fromFormat(date, dateFormat, { zone: "UTC" });
+  const dateTime = DateTime.fromFormat(date.trim(), dateFormat, {
+    zone: "UTC",
+  });
   if (dateTime.isValid) return dateTime.toJSDate();
 
   const error = messages.parseDateError.join("\n");

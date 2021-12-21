@@ -40,6 +40,11 @@ invalid footer row
   `1;9/27/2020;98.99;Devpoint;YNAB
 2;11/26/2019;420.69;Realcube;Amazon
 3;3/6/2020;9.99;Oyoloo;Netflix`,
+
+  // Date surrounded by spaces
+  `1; 9/27/2020 ;871.13;Devpoint;IL95 2010 7730 7319 4618 209
+2; 11/26/2019 ;908.31;Realcube;GE78 WG91 9644 2111 5080 45
+3; 3/6/2020 ;152.13;Oyoloo;GR11 2705 328W VAZB OZUD NLWB DJT`,
 ];
 
 export const defaultParser: Parser =

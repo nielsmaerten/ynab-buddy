@@ -74,6 +74,12 @@ describe("parser", () => {
       expect(tx.payee_name!.length).toBeGreaterThan(0);
     });
   });
+
+  it("can parse dates surrounded by spaces without exceptions", () => {
+    const parseCfg = { columns: ["", "date", "amount", "memo", "memo2"] };
+    const result = runParser(csvFixtures.dateSurroundedBySpaces, parseCfg);
+    expect(result.transactions).toHaveLength(3);
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -91,6 +97,7 @@ enum csvFixtures {
   multipleMemoColumns = 3,
   inOutIndicator = 4,
   payeeField = 5,
+  dateSurroundedBySpaces = 6,
 }
 
 const validateTransaction = (tx: Transaction) => {
