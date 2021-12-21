@@ -77,6 +77,9 @@ function parseAmount(
   let value = inflow || outflow || amount;
 
   if (typeof value === "string") {
+    // TODO: If no thousand separator and no decimal separator are given
+    // the original behavior of replacing a , with a . should be preserved for backwards compatibility.
+
     if (thousandSeparator !== undefined) {
       value = value.replace(thousandSeparator, "");
     }
@@ -84,6 +87,9 @@ function parseAmount(
     if (decimalSeparator !== undefined) {
       value = value.replace(decimalSeparator, ".");
     }
+
+    // Remove non digit, non decimal separator, non minus characters
+    value = value.replace(/[^0-9-.]/g, "");
 
     value = parseFloat(value); // "420.69" ==> 420.69
   }

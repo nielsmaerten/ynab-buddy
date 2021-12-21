@@ -3,10 +3,11 @@ import * as fixtures from "./parser.spec.fixtures";
 
 // Patch readFileSync so it produces a different CSV for every test
 let csvFixtureBeingTested: number;
+let customCsv: string | undefined;
 jest.mock("fs", () => {
   return {
     readFileSync: () => {
-      return fixtures.csv[csvFixtureBeingTested];
+      return customCsv || fixtures.csv[csvFixtureBeingTested];
     },
   };
 });
@@ -79,6 +80,47 @@ describe("parser", () => {
     const parseCfg = { columns: ["", "date", "amount", "memo", "memo2"] };
     const result = runParser(csvFixtures.dateSurroundedBySpaces, parseCfg);
     expect(result.transactions).toHaveLength(3);
+  });
+
+  /**
+   * Instead of a full fixture, we only test using a single CSV line here.
+   * The text "AMOUNT" gets replaced with an amount in a number of different formats.
+   * Every amount should parse to the same value (1234.56).
+   * TODO: Clean this test up. It's a bit of a mess.
+   */
+  it("parses differently formatted amounts", () => {
+    const { parseBankFile } = require("./parser");
+    const parser = { ...fixtures.defaultParser, columns: ["date", "amount"] };
+    const customCsvTemplate = "9/27/2020;AMOUNT";
+    const expectedAmount = 1234.56;
+    const testData: string[][] = [
+      ["1234.56", "."],
+      ["1234,56", ","],
+      ["1234,56 EUR", ","],
+      ["1234.56 EUR", "."],
+      ["1,234.56", ".", ","],
+      ["1.234,56", ",", "."],
+      ["$1,234.56", ".", ","],
+      ["$1.234,56", ",", "."],
+      ["€ 1234.56", "."],
+      ["1,234.56 USD", ".", ","],
+    ];
+
+    const errors: string[][] = [];
+    testData.forEach((amount) => {
+      customCsv = customCsvTemplate.replace("AMOUNT", amount[0]);
+      parser.decimal_separator = amount[1] || undefined;
+      parser.thousand_separator = amount[2] || undefined;
+      const result = parseBankFile(fixtures.bankFile, [parser]);
+      const actualAmount = result.transactions[0].amount;
+      if (actualAmount !== expectedAmount) errors.push([actualAmount, amount]);
+    });
+    customCsv = undefined;
+    if (errors.length > 0) {
+      throw new Error(
+        `Amounts did not parse correctly: ${JSON.stringify(errors)}`
+      );
+    }
   });
 
   it("can parse thousand separators in amounts field", () => {
