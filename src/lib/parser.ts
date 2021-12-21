@@ -33,7 +33,12 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
 
 export function buildTransaction(record: any, parser: Parser): Transaction {
   const tx: Transaction = {
-    amount: parseAmount(record, parser.outflow_indicator, parser.thousand_separator, parser.decimal_separator),
+    amount: parseAmount(
+      record,
+      parser.outflow_indicator,
+      parser.thousand_separator,
+      parser.decimal_separator
+    ),
     date: parseDate(record, parser.date_format),
     memo: mergeMemoFields(record),
   };
@@ -62,7 +67,12 @@ function parseDate(record: any, dateFormat: string) {
   throw "PARSING ERROR";
 }
 
-function parseAmount(record: any, outflowIndicator?: string, thousandSeparator?: string, decimalSeparator?: string): number {
+function parseAmount(
+  record: any,
+  outflowIndicator?: string,
+  thousandSeparator?: string,
+  decimalSeparator?: string
+): number {
   const { inflow, outflow, amount, in_out_flag } = record;
   let value = inflow || outflow || amount;
 

@@ -82,7 +82,7 @@ describe("parser", () => {
   });
 
   it("can parse thousand separators in amounts field", () => {
-    const parseCfg = { 
+    const parseCfg = {
       columns: ["", "date", "amount", "payee", "memo"],
       thousand_separator: ",",
     };
@@ -93,12 +93,15 @@ describe("parser", () => {
   });
 
   it("can parse localized separators in amounts field", () => {
-    const parseCfg = { 
+    const parseCfg = {
       columns: ["", "date", "amount", "payee", "memo"],
       thousand_separator: ".",
       decimal_separator: ",",
     };
-    const result = runParser(csvFixtures.dotThousandSeparatorsCommaDecimalSeparator, parseCfg);
+    const result = runParser(
+      csvFixtures.dotThousandSeparatorsCommaDecimalSeparator,
+      parseCfg
+    );
     expect(result.transactions[0].amount).toEqual(8711.13);
     expect(result.transactions[1].amount).toEqual(9081.31);
     expect(result.transactions[2].amount).toEqual(212.13);
