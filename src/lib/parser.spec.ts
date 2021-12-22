@@ -3,10 +3,11 @@ import * as fixtures from "./parser.spec.fixtures";
 
 // Patch readFileSync so it produces a different CSV for every test
 let csvFixtureBeingTested: number;
+let customCsv: string | undefined;
 jest.mock("fs", () => {
   return {
     readFileSync: () => {
-      return fixtures.csv[csvFixtureBeingTested];
+      return customCsv || fixtures.csv[csvFixtureBeingTested];
     },
   };
 });
@@ -79,6 +80,60 @@ describe("parser", () => {
     const parseCfg = { columns: ["", "date", "amount", "memo", "memo2"] };
     const result = runParser(csvFixtures.dateSurroundedBySpaces, parseCfg);
     expect(result.transactions).toHaveLength(3);
+  });
+
+  /**
+   * This tests only uses a single line of CSV instead of a full fixture.
+   * The text "AMOUNT" gets replaced with an amount in a number of different formats.
+   * Every amount should parse to the same value (1234.56).
+   */
+  it("parses amounts in different formats", () => {
+    const expectedAmount = 1234.56;
+
+    // Create a simple parser for just 2 columns: date and amount
+    const { parseBankFile } = require("./parser");
+    const parser = { ...fixtures.defaultParser, columns: ["date", "amount"] };
+
+    // CSV text with a number of different amounts and separators
+    const customCsvTemplate = "9/27/2020;AMOUNT";
+    const testData: string[][] = [
+      /* [amount, decimal_separator, thousand_separator] */
+      ["1234.56"],
+      ["1234,56"],
+      ["1234.56", "."],
+      ["1234,56", ","],
+      ["1234,56 EUR", ","],
+      ["1234.56 EUR", "."],
+      ["1,234.56", ".", ","],
+      ["1.234,56", ",", "."],
+      ["$1,234.56", ".", ","],
+      ["$1.234,56", ",", "."],
+      ["€ 1234.56", "."],
+      ["1,234.56 USD", ".", ","],
+    ];
+
+    const errors: string[][] = [];
+    testData.forEach((amount) => {
+      // Set customCSV that will be returned by the mocked readFileSync
+      customCsv = customCsvTemplate.replace("AMOUNT", amount[0]);
+
+      // Configure the parser to use separators
+      parser.decimal_separator = amount[1] || undefined;
+      parser.thousand_separator = amount[2] || undefined;
+
+      // Parse the CSV and compare the result to the expected amount
+      const result = parseBankFile(fixtures.bankFile, [parser]);
+      const actualAmount = result.transactions[0].amount;
+      if (actualAmount !== expectedAmount) errors.push([actualAmount, amount]);
+    });
+
+    // Unset customCsv so the mock goes back using parser.spec.fixtures.ts
+    customCsv = undefined;
+    if (errors.length > 0) {
+      throw new Error(
+        `Amounts did not parse correctly: ${JSON.stringify(errors)}`
+      );
+    }
   });
 
   it("can parse thousand separators in amounts field", () => {
