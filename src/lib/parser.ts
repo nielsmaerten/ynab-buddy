@@ -36,8 +36,9 @@ export function buildTransaction(record: any, parser: Parser): Transaction {
     amount: parseAmount(record, parser.outflow_indicator),
     date: parseDate(record, parser.date_format),
     memo: mergeMemoFields(record),
+    payee_name: record.payee?.trim(),
   };
-  if (record.payee) tx.payee_name = record.payee;
+  if (!tx.payee_name) delete tx.payee_name;
   return tx;
 }
 
