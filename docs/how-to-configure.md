@@ -208,19 +208,22 @@ Date format used in your bank's csv file. For all possibilities, visit [table of
 ### `thousand_separator`
 
 ```yaml
-thousand_separator: "," # e.g. 1,234.00
-thousand_separator: "." # e.g. 1.234,00
+thousand_separator: "," # e.g. 1,234.00 (comma)
+thousand_separator: "." # e.g. 1.234,00 (dot)
+thousand_separator: ""  # e.g. 12345.00 (no separator)
 ```
 
-Optional, can be used to define the thousands separator format used by your bank
+The thousands separator used by your bank. Default: _no separator_.
 
 ### `decimal_separator`
 
 ```yaml
-decimal_separator: "," # e.g. 1.234,00
+decimal_separator: "," # e.g. 420,69 (comma)
+decimal_separator: "." # e.g. 420.69 (dot)
+decimal_separator: ""  # Auto-detect separator. Not recommended.
 ```
 
-Optional, can be used to define the decimals separator format used by your bank. If not defined, the tool uses dot "." as default
+The decimals separator used by your bank. The tool tries to auto-detect the separator if you don't set one **(not recommended)**.
 
 ## Upload to YNAB
 
