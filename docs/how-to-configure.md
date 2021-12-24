@@ -205,6 +205,26 @@ date_format: dd/MM/yyyy # e.g. 20/04/2020
 
 Date format used in your bank's csv file. For all possibilities, visit [table of possible tokens](https://moment.github.io/luxon/#/parsing?id=table-of-tokens)
 
+### `thousand_separator`
+
+```yaml
+thousand_separator: "," # e.g. 1,234.00 (comma)
+thousand_separator: "." # e.g. 1.234,00 (dot)
+thousand_separator: ""  # e.g. 12345.00 (no separator)
+```
+
+The thousands separator used by your bank. Default: _no separator_.
+
+### `decimal_separator`
+
+```yaml
+decimal_separator: "," # e.g. 420,69 (comma)
+decimal_separator: "." # e.g. 420.69 (dot)
+decimal_separator: ""  # Auto-detect separator. Not recommended.
+```
+
+The decimals separator used by your bank. The tool tries to auto-detect the separator if you don't set one **(not recommended)**.
+
 ## Upload to YNAB
 
 ### `upload_transactions`

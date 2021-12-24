@@ -33,7 +33,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
 
 export function buildTransaction(record: any, parser: Parser): Transaction {
   const tx: Transaction = {
-    amount: parseAmount(record, parser.outflow_indicator),
+    amount: parseAmount(record, parser),
     date: parseDate(record, parser.date_format),
     memo: mergeMemoFields(record),
     payee_name: record.payee?.trim(),
@@ -63,19 +63,35 @@ function parseDate(record: any, dateFormat: string) {
   throw "PARSING ERROR";
 }
 
-function parseAmount(record: any, outflowIndicator?: string): number {
+function parseAmount(record: any, parser: Parser): number {
+  const { thousand_separator, decimal_separator, outflow_indicator } = parser;
   const { inflow, outflow, amount, in_out_flag } = record;
   let value = inflow || outflow || amount;
 
   if (typeof value === "string") {
-    value = value.replace(",", "."); // "420,69" ==> "420.69"
+    if (thousand_separator) {
+      value = value.replace(thousand_separator, ""); // 69.420,00 -> 69420.00
+    }
+
+    if (decimal_separator) {
+      value = value.replace(decimal_separator, "."); // 69420,00 -> 69420.00
+    }
+
+    if (!decimal_separator && !thousand_separator) {
+      // Backwards compatibility: if value has a ',' convert it to a '.'
+      value = value.replace(",", ".");
+    }
+
+    // Remove non digit, non decimal separator, non minus characters
+    value = value.replace(/[^0-9-.]/g, ""); // $420.69 -> 420.69
+
     value = parseFloat(value); // "420.69" ==> 420.69
   }
 
   // If the outflow column exists, OR
   // If the in_out_flag column exists AND it contains the outflow indicator
   // invert the value of the amount
-  if (outflow !== undefined || in_out_flag?.startsWith(outflowIndicator)) {
+  if (outflow !== undefined || in_out_flag?.startsWith(outflow_indicator)) {
     value = -value; // 420.69 ==> -420.69
   }
 

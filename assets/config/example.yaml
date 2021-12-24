@@ -29,6 +29,8 @@ parsers:
     delimiter: ","
     columns: [skip, skip, memo, date, inflow, skip]
     date_format: M/d/yyyy
+    decimal_separator: "."
+    thousand_separator: ","
 
 upload_to_ynab:
   # This is the default. If you've set the 'upload' option on

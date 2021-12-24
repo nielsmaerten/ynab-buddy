@@ -54,4 +54,6 @@ export type Parser = {
   footer_rows: number;
   header_rows: number;
   outflow_indicator?: string;
+  thousand_separator?: string;
+  decimal_separator?: string;
 };
