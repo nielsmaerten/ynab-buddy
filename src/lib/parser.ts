@@ -91,7 +91,7 @@ function parseAmount(record: any, parser: Parser): number {
   // If the outflow column exists, OR
   // If the in_out_flag column exists AND it contains the outflow indicator
   // invert the value of the amount
-  if (outflow !== undefined || in_out_flag?.startsWith(outflow_indicator)) {
+  if (outflow || in_out_flag?.startsWith(outflow_indicator)) {
     value = -value; // 420.69 ==> -420.69
   }
 
