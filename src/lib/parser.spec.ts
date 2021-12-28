@@ -161,6 +161,17 @@ describe("parser", () => {
     expect(result.transactions[1].amount).toEqual(9081.31);
     expect(result.transactions[2].amount).toEqual(212.13);
   });
+
+  it("inverses amount in outflow column", () => {
+    const parseCfg = {
+      columns: ["date", "", "", "", "payee", "inflow", "outflow"],
+      delimiter: ",",
+      header_rows: 1,
+    };
+    const result = runParser(csvFixtures.inflowOutflowColumns, parseCfg);
+    expect(result.transactions[0].amount).toEqual(582.27);
+    expect(result.transactions[1].amount).toEqual(-582.27);
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -181,6 +192,7 @@ enum csvFixtures {
   dateSurroundedBySpaces = 6,
   thousandSeparators = 7,
   dotThousandSeparatorsCommaDecimalSeparator = 8,
+  inflowOutflowColumns = 9,
 }
 
 const validateTransaction = (tx: Transaction) => {
