@@ -21,7 +21,7 @@ export const parsedBankFile: ParsedBankFile = {
       amount: 420,
       date: new Date("1990-02-27"),
       memo: "tx1",
-      payee_name: "payee1",
+      payee: "payee1",
     },
     {
       amount: 420,
@@ -50,7 +50,7 @@ export const expectedTransactions = [
     cleared: "cleared",
     account_id: "testAccountId",
     flag_color: "purple",
-    payee_name: "payee1",
+    payee: "payee1",
     occurrence: 1,
   },
   {

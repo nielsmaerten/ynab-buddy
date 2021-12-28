@@ -71,8 +71,8 @@ describe("parser", () => {
     const result = runParser(csvFixtures.payeeField, parseCfg);
     expect(result.transactions).toHaveLength(3);
     result.transactions.forEach((tx) => {
-      expect(tx.payee_name).toBeDefined();
-      expect(tx.payee_name!.length).toBeGreaterThan(0);
+      expect(tx.payee).toBeDefined();
+      expect(tx.payee!.length).toBeGreaterThan(0);
     });
   });
 

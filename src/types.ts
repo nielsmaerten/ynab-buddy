@@ -20,6 +20,7 @@ export type BankFilePattern = {
   upload: boolean;
   save_parsed_file: boolean;
   delete_original_file: boolean;
+  currency_rate?: number;
 };
 
 export type BankFile = {
@@ -43,7 +44,7 @@ export type Transaction = {
   date: Date;
   account_id?: string;
   flag_color?: string;
-  payee_name?: string;
+  payee?: string;
 };
 
 export type Parser = {

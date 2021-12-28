@@ -1,4 +1,4 @@
-import { BankFile, ParsedBankFile, Parser, Transaction } from "../types";
+import { BankFile, BankFilePattern, ParsedBankFile, Parser, Transaction } from "../types";
 import parseCsv from "csv-parse/lib/sync";
 import { Options as parseOptions } from "csv-parse";
 import { DateTime } from "luxon";
@@ -23,7 +23,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const endRow = records.length - parser.footer_rows;
   records = records.slice(startRow, endRow);
 
-  const transactions = records.map((tx) => buildTransaction(tx, parser));
+  const transactions = records.map((tx) => buildTransaction(tx, parser, source.matchedPattern));
   logResult(transactions.length, source.path);
   return {
     transactions,
@@ -31,14 +31,14 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   } as ParsedBankFile;
 }
 
-export function buildTransaction(record: any, parser: Parser): Transaction {
+export function buildTransaction(record: any, parser: Parser, pattern?: BankFilePattern): Transaction {
   const tx: Transaction = {
-    amount: parseAmount(record, parser),
     date: parseDate(record, parser.date_format),
+    payee: record.payee?.trim(),
     memo: mergeMemoFields(record),
-    payee_name: record.payee?.trim(),
+    amount: parseAmount(record, parser, pattern?.currency_rate),
   };
-  if (!tx.payee_name) delete tx.payee_name;
+  if (!tx.payee) delete tx.payee;
   return tx;
 }
 
@@ -63,7 +63,7 @@ function parseDate(record: any, dateFormat: string) {
   throw "PARSING ERROR";
 }
 
-function parseAmount(record: any, parser: Parser): number {
+function parseAmount(record: any, parser: Parser, currencyRate: number = 1): number {
   const { thousand_separator, decimal_separator, outflow_indicator } = parser;
   const { inflow, outflow, amount, in_out_flag } = record;
   let value = inflow || outflow || amount;
@@ -91,11 +91,11 @@ function parseAmount(record: any, parser: Parser): number {
   // If the outflow column exists, OR
   // If the in_out_flag column exists AND it contains the outflow indicator
   // invert the value of the amount
-  if (outflow !== undefined || in_out_flag?.startsWith(outflow_indicator)) {
+  if (outflow || in_out_flag?.startsWith(outflow_indicator)) {
     value = -value; // 420.69 ==> -420.69
   }
 
-  return value;
+  return Math.round((value * currencyRate) * 100) / 100;
 }
 
 function logResult(txCount: number, sourcePath: string) {
