@@ -3,6 +3,7 @@ import {
   Configuration,
   BankFilePattern,
   ParsedBankFile,
+  Transaction,
 } from "../types";
 import minimatch from "minimatch";
 import glob from "glob";
@@ -77,7 +78,8 @@ export function exportCsv(result: ParsedBankFile) {
     header: true,
     cast: { date: castDate },
   };
-  const csvText = csvStringify(transactions, exportConfig);
+  const csvTransactions = prepForCsv(transactions);
+  const csvText = csvStringify(csvTransactions, exportConfig);
 
   // Export file will be named: [ORIGINAL_FILENAME].YNAB.csv
   // and saved to the same folder
@@ -90,6 +92,19 @@ export function exportCsv(result: ParsedBankFile) {
   const destination = path.join(parentFolder, exportFileName);
   writeFileSync(destination, csvText);
 }
+
+const prepForCsv = (transactions: Transaction[]) =>
+  // https://github.com/nielsmaerten/ynab-buddy/issues/36
+  transactions.map((tx) => {
+    const csvTx = {
+      Amount: tx.amount,
+      Date: tx.date.toISOString(),
+      Memo: tx.memo,
+      Payee: tx.payee_name,
+    }
+    if (!tx.payee_name) delete csvTx.Payee;
+    return csvTx
+  });
 
 export function cleanup(result: ParsedBankFile) {
   const shouldDelete = result.source.matchedPattern?.delete_original_file;
