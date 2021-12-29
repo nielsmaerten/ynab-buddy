@@ -101,9 +101,9 @@ const prepForCsv = (transactions: Transaction[]) =>
       Date: tx.date.toISOString(),
       Memo: tx.memo,
       Payee: tx.payee_name,
-    }
+    };
     if (!tx.payee_name) delete csvTx.Payee;
-    return csvTx
+    return csvTx;
   });
 
 export function cleanup(result: ParsedBankFile) {
