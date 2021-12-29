@@ -89,8 +89,7 @@ function parseAmount(record: any, parser: Parser): number {
   }
 
   // Invert the value if this transaction is an outflow
-  const hasOutflowFlag =
-    in_out_flag && in_out_flag.startsWith(outflow_indicator);
+  const hasOutflowFlag = Boolean(in_out_flag?.startsWith(outflow_indicator));
   const hasOutflowColumn = outflow?.length > 0;
   const hasInflowColumn = inflow?.length > 0;
   const isOutflow = (hasOutflowColumn && !hasInflowColumn) || hasOutflowFlag;
