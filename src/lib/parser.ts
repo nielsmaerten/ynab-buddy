@@ -88,11 +88,13 @@ function parseAmount(record: any, parser: Parser): number {
     value = parseFloat(value); // "420.69" ==> 420.69
   }
 
-  // If the outflow column exists, OR
-  // If the in_out_flag column exists AND it contains the outflow indicator
-  // invert the value of the amount
-  if (outflow !== undefined || in_out_flag?.startsWith(outflow_indicator)) {
-    value = -value; // 420.69 ==> -420.69
+  // Invert the value if this transaction is an outflow
+  const hasOutflowFlag = Boolean(in_out_flag?.startsWith(outflow_indicator));
+  const hasOutflowColumn = outflow?.length > 0;
+  const hasInflowColumn = inflow?.length > 0;
+  const isOutflow = (hasOutflowColumn && !hasInflowColumn) || hasOutflowFlag;
+  if (isOutflow) {
+    value = Math.abs(value) * -1;
   }
 
   return value;
