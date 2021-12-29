@@ -47,7 +47,7 @@ function mergeMemoFields(record: any) {
   const memoFields = Object.keys(record)
     .filter((key) => key.match(/^memo[0-9]*$/))
     .sort();
-  const allMemos = memoFields.map((key) => record[key]);
+  const allMemos = memoFields.map((key) => record[key]?.trim());
   return allMemos.join(" ");
 }
 
