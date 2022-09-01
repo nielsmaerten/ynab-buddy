@@ -36,7 +36,9 @@ export function buildTransaction(record: any, parser: Parser): Transaction {
     amount: parseAmount(record, parser),
     date: parseDate(record, parser.date_format),
     memo: mergeMemoFields(record),
-    payee_name: record.payee?.trim(),
+    // Payee_name longer than 99 chars breaks YNAB, so we truncate it
+    // https://github.com/nielsmaerten/ynab-buddy/discussions/42
+    payee_name: record.payee?.trim().slice(0, 99),
   };
   if (!tx.payee_name) delete tx.payee_name;
   return tx;
