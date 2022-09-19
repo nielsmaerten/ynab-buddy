@@ -135,6 +135,7 @@ function unifyColumns(columnName: string, index: number) {
 /**
  * If a CSV has columns with the same name, the parser will create an array of values.
  * If a prop on the record is an array, we take the first non-empty value.
+ * This is a fix for https://github.com/nielsmaerten/ynab-buddy/issues/45
  */
 function deduplicateColumns(record: any) {
   const deduplicatedRecord: any = {};
