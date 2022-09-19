@@ -172,6 +172,22 @@ describe("parser", () => {
     expect(result.transactions[0].amount).toEqual(582.27);
     expect(result.transactions[1].amount).toEqual(-582.27);
   });
+
+  it("passes GitHub issue #45", () => {
+    const parseCfg = {
+      columns: ["skip", "skip", "date", "payee", "inflow", "inflow", "skip"],
+      date_format: "dd/MM/yyyy",
+      decimal_separator: ".",
+      thousand_separator: "",
+      delimiter: ",",
+      header_rows: 1,
+    };
+    const result = runParser(csvFixtures.githubIssue45, parseCfg);
+    expect(result.transactions).toHaveLength(3);
+    expect(result.transactions[0].amount).toEqual(-7);
+    expect(result.transactions[1].amount).toEqual(-180);
+    expect(result.transactions[2].amount).toEqual(100);
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -193,6 +209,7 @@ enum csvFixtures {
   thousandSeparators = 7,
   dotThousandSeparatorsCommaDecimalSeparator = 8,
   inflowOutflowColumns = 9,
+  githubIssue45 = 10,
 }
 
 const validateTransaction = (tx: Transaction) => {
