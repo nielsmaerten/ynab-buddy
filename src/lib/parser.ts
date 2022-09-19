@@ -13,9 +13,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   // Configure parser to detect the right columns and delimiter
   const parser = parsers.find((p) => p.name === source.matchedParser)!;
   const parseOptions = { ...baseParseOptions };
-  parseOptions.columns = parser.columns
-    .map(unifyColumns)
-    .map(deduplicateColumns);
+  parseOptions.columns = parser.columns.map(unifyColumns);
   parseOptions.delimiter = parser.delimiter;
 
   let records: any[] = parseCsv(csv, parseOptions);
@@ -23,7 +21,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   // Delete header and footer rows
   const startRow = parser.header_rows;
   const endRow = records.length - parser.footer_rows;
-  records = records.slice(startRow, endRow).map(unifyInflowOutflow);
+  records = records.slice(startRow, endRow).map(deduplicateColumns);
 
   const transactions = records.map((tx) => buildTransaction(tx, parser));
   logResult(transactions.length, source.path);
@@ -135,51 +133,24 @@ function unifyColumns(columnName: string, index: number) {
 }
 
 /**
- * If a columns exists more than once, for example: two columns named "inflow",
- * rename them to "inflow", "inflow_1", "inflow_2", etc.
- * This is necessary because some banks can put inflows in multiple columns.
- * See GitHub issue #45
+ * If a CSV has columns with the same name, the parser will create an array of values.
+ * If a prop on the record is an array, we take the first non-empty value.
  */
-function deduplicateColumns(
-  columnName: string,
-  index: number,
-  columns: string[]
-) {
-  const columnCount = columns.filter((c) => c === columnName).length;
-  if (columnCount > 1) return `${columnName}_${index}`;
-  else return columnName;
-}
-
-/**
- * Some banks may put inflow/outflow in multiple columns.
- * See GitHub issue #45
- * If this is the case, records props will be named inflow, inflow_1, inflow_2, etc.
- * This function will find the one that is not empty, rename it to "inflow"
- * and delete the others.
- */
-function unifyInflowOutflow(record: any) {
-  const inflowColumns = Object.keys(record).filter((key) =>
-    key.match(/^inflow/)
-  );
-  const inflow = inflowColumns.find((key) => record[key]?.length > 0);
-  if (inflow) {
-    record.inflow = record[inflow];
-    inflowColumns.forEach((key) => delete record[key]);
-  }
-
-  const outflowColumns = Object.keys(record).filter((key) =>
-    key.match(/^outflow/)
-  );
-  const outflow = outflowColumns.find((key) => record[key]?.length > 0);
-  if (outflow) {
-    record.outflow = record[outflow];
-    outflowColumns.forEach((key) => delete record[key]);
-  }
-
-  return record;
+function deduplicateColumns(record: any) {
+  const deduplicatedRecord: any = {};
+  Object.keys(record).forEach((key) => {
+    const value = record[key];
+    if (Array.isArray(value)) {
+      deduplicatedRecord[key] = value.find((v) => v?.length > 0);
+    } else {
+      deduplicatedRecord[key] = value;
+    }
+  });
+  return deduplicatedRecord;
 }
 
 const baseParseOptions: parseOptions = {
   skipEmptyLines: true,
   relaxColumnCount: true,
+  columnsDuplicatesToArray: true,
 };
