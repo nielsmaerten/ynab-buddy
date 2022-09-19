@@ -62,10 +62,10 @@ invalid footer row
 12/09/2021,18:17:43,UTC,xyz,GBP to EUR - transfer between balances,,582.27,EUR,,,Completed,598.91,,,GBP balance,EUR balance,`,
 
   // Issue #45
-  // Multiple 'inflow' columns (here: "Entrate" and "Uscite")
+  // Multiple 'amount' columns (here: "Entrate" and "Uscite")
   `,Data contabile,Data valuta,Tipologia,Entrate,Uscite,Divisa
 ,,30/08/2020,POS-xxxxxxx,,-7.00,EUR
-,01/09/2020,01/09/2020,Disposizione - RIF:xxxxxxx,-180.00,,EUR
+,01/09/2020,01/09/2020,Disposizione - RIF:xxxxxxx,,-180.00,EUR
 ,01/09/2020,31/08/2020,Addebito canone -xxxxxxx,100.00,,EUR`,
 ];
 
