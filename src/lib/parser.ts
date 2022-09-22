@@ -21,7 +21,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   // Delete header and footer rows
   const startRow = parser.header_rows;
   const endRow = records.length - parser.footer_rows;
-  records = records.slice(startRow, endRow);
+  records = records.slice(startRow, endRow).map(deduplicateColumns);
 
   const transactions = records.map((tx) => buildTransaction(tx, parser));
   logResult(transactions.length, source.path);
@@ -132,7 +132,26 @@ function unifyColumns(columnName: string, index: number) {
   else return `__${index}`;
 }
 
+/**
+ * If a CSV has columns with the same name, the parser will create an array of values.
+ * If a prop on the record is an array, we take the first non-empty value.
+ * This is a fix for https://github.com/nielsmaerten/ynab-buddy/issues/45
+ */
+function deduplicateColumns(record: any) {
+  const deduplicatedRecord: any = {};
+  Object.keys(record).forEach((key) => {
+    const value = record[key];
+    if (Array.isArray(value)) {
+      deduplicatedRecord[key] = value.find((v) => v?.length > 0);
+    } else {
+      deduplicatedRecord[key] = value;
+    }
+  });
+  return deduplicatedRecord;
+}
+
 const baseParseOptions: parseOptions = {
   skipEmptyLines: true,
   relaxColumnCount: true,
+  columnsDuplicatesToArray: true,
 };
