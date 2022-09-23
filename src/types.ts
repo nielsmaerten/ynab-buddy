@@ -1,5 +1,6 @@
 export type Configuration = {
   importPath?: string; // FIXME: Can i remove the '?' ?
+  skipPathConfirmation?: boolean;
   searchSubDirectories: boolean;
   parsers: Parser[];
   bankFilePatterns: BankFilePattern[];

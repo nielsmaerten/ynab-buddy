@@ -84,6 +84,7 @@ const readConfigFile = () => {
 const parseRawConfig = (rawConfig: any): Configuration => {
   return {
     importPath: rawConfig.import_from,
+    skipPathConfirmation: !!rawConfig.skip_path_confirmation,
     searchSubDirectories: !!rawConfig.search_subdirectories,
     bankFilePatterns: rawConfig.bank_transaction_files,
     ynab: {

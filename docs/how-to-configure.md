@@ -22,6 +22,13 @@ import_from: "/home/niels/downloads"    # linux, mac os
 
 **Optional:** If no folder is set, ynab-buddy will ask where to find your files every time.
 
+### `skip_path_confirmation`
+
+Set to `true` to always use `import_from` without confirmation
+
+
+**Optional.**
+
 ### `search_subfolders`
 
 ```yaml
