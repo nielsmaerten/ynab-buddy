@@ -63,6 +63,7 @@ describe("configuration", () => {
           pattern: "BNP-export-IBAN01233456789-*.csv",
         },
       ],
+      skipPathConfirmation: false,
       configurationDone: false,
       parsers: [
         {

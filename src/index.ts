@@ -6,6 +6,7 @@ import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { upload } from "./lib/uploader";
 import { BankFile } from "./types";
+import fs from "fs";
 
 (async () => {
   // Ensure the tool has a valid configuration
@@ -17,7 +18,11 @@ import { BankFile } from "./types";
   if (!config.configurationDone) return cli.exitApp();
 
   // Confirm folder where the tool should look for bank files
-  config.importPath = await cli.confirmImportPath(config.importPath);
+  const importPathExists =
+    config.importPath && fs.existsSync(config.importPath);
+  if (!config.skipPathConfirmation || !importPathExists) {
+    config.importPath = await cli.confirmImportPath(config.importPath);
+  }
 
   // Find files eligible for conversion in the importPath
   const bankFiles = findBankFiles(config.importPath!, config);
