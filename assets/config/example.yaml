@@ -8,7 +8,7 @@
 # https://github.com/nielsmaerten/ynab-buddy/blob/main/docs/how-to-configure.md
 
 import_from: "c:/users/test/downloads"
-search_subfolders: true
+search_subdirectories: true
 
 bank_transaction_files:
   # Repeat the following block for every account:

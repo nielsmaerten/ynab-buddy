@@ -29,11 +29,11 @@ Set to `true` to always use `import_from` without confirmation
 
 **Optional.**
 
-### `search_subfolders`
+### `search_subdirectories`
 
 ```yaml
-search_subfolders: false # only search the top folder for bank files
-search_subfolders: true  # search underlying folders as well
+search_subdirectories: false # only search the top folder for bank files
+search_subdirectories: true  # search underlying folders as well
 ```
 
 ### `configuration_done`
