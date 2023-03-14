@@ -75,7 +75,7 @@ describe("configuration", () => {
           name: "bnp-example-parser",
         },
       ],
-      searchSubDirectories: false,
+      searchSubDirectories: true,
       importPath: "c:/users/test/downloads",
       ynab: {
         token: "ABC12345",
