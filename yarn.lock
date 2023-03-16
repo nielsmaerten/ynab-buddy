@@ -3953,7 +3953,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^3.0.4, minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
+"minimatch@npm:^3.0.4, minimatch@npm:^3.1.1":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
   dependencies:
@@ -3962,7 +3962,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^7.4.1":
+"minimatch@npm:^7.4.1, minimatch@npm:^7.4.2":
   version: 7.4.2
   resolution: "minimatch@npm:7.4.2"
   dependencies:
@@ -5719,7 +5719,7 @@ resolve@^1.20.0:
     jest: ^29.5.0
     js-yaml: ^4.1.0
     luxon: ^3.3.0
-    minimatch: ^3.1.2
+    minimatch: ^7.4.2
     pkg: ^5.8.1
     prettier: 2.8.4
     prompts: ^2.4.2
