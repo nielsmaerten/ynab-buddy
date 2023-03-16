@@ -55,7 +55,7 @@
     "@types/glob": "^8.1.0",
     "@types/jest": "^27.5.2",
     "@types/js-yaml": "^4.0.5",
-    "@types/luxon": "^2.4.0",
+    "@types/luxon": "^3.2.0",
     "@types/node": "^18.15.3",
     "@types/prompts": "^2.4.3",
     "commitizen": "^4.3.0",
@@ -74,7 +74,7 @@
     "csv-stringify": "^5.6.5",
     "glob": "^9.3.0",
     "js-yaml": "^4.1.0",
-    "luxon": "^2.5.2",
+    "luxon": "^3.3.0",
     "minimatch": "^3.1.2",
     "prompts": "^2.4.2",
     "ynab": "^1.47.0"

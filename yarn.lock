@@ -1192,10 +1192,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@types/luxon@npm:2.4.0"
-  checksum: eeb16a1bfe5440464c1a9635700d103cd18d3cd8da6063a1938478e435cfba6ab8e893aa80c95a407e541187c1e997c3e4481322726bc1258551cb8606d0e5ad
+"@types/luxon@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@types/luxon@npm:3.2.0"
+  checksum: 051bfbf841c6ce98728df6538342ce4aaddfcf0ec6e8b473e0195dcfc3ba6b1fe4b3ce17f2ba6d25344f41cb70032c1debe96da9e384e5f6e639665c1e6d368c
   languageName: node
   linkType: hard
 
@@ -4103,10 +4103,10 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"luxon@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "luxon@npm:2.5.2"
-  checksum: d8b671ffd2ff0b438af862ac11082a81b3aedd9f8b6a4ca636f944224f8dd381125cd4d274ca0a8aedcaf2cfca0fc2ca96fe4cc1b16a28b7af701afb95c0bff8
+"luxon@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "luxon@npm:3.3.0"
+  checksum: 50cf17a0dc155c3dcacbeae8c0b7e80db425e0ba97b9cbdf12a7fc142d841ff1ab1560919f033af46240ed44e2f70c49f76e3422524c7fc8bb8d81ca47c66187
   languageName: node
   linkType: hard
 
@@ -6184,7 +6184,7 @@ resolve@^1.20.0:
     "@types/glob": ^8.1.0
     "@types/jest": ^27.5.2
     "@types/js-yaml": ^4.0.5
-    "@types/luxon": ^2.4.0
+    "@types/luxon": ^3.2.0
     "@types/node": ^18.15.3
     "@types/prompts": ^2.4.3
     abort-controller: ^3.0.0
@@ -6196,7 +6196,7 @@ resolve@^1.20.0:
     glob: ^9.3.0
     jest: ^27.5.1
     js-yaml: ^4.1.0
-    luxon: ^2.5.2
+    luxon: ^3.3.0
     minimatch: ^3.1.2
     pkg: ^5.8.1
     prettier: 2.8.4
