@@ -52,32 +52,32 @@
     }
   },
   "devDependencies": {
-    "@types/glob": "^7.1.4",
-    "@types/jest": "^27.0.1",
-    "@types/js-yaml": "^4.0.3",
-    "@types/luxon": "^2.0.3",
-    "@types/node": "^16.7.4",
-    "@types/prompts": "^2.0.14",
-    "commitizen": "^4.2.4",
+    "@types/glob": "^7.2.0",
+    "@types/jest": "^27.5.2",
+    "@types/js-yaml": "^4.0.5",
+    "@types/luxon": "^2.4.0",
+    "@types/node": "^18.15.3",
+    "@types/prompts": "^2.4.3",
+    "commitizen": "^4.3.0",
     "cz-conventional-changelog": "3.3.0",
-    "jest": "^27.1.0",
-    "pkg": "^5.3.2",
-    "prettier": "2.3.2",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2"
+    "jest": "^27.5.1",
+    "pkg": "^5.8.1",
+    "prettier": "2.8.4",
+    "ts-jest": "^27.1.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
     "chalk": "^4.1.2",
     "csv-parse": "^4.16.3",
     "csv-stringify": "^5.6.5",
-    "glob": "^7.1.7",
+    "glob": "^7.2.3",
     "js-yaml": "^4.1.0",
-    "luxon": "^2.0.2",
-    "minimatch": "^3.0.4",
-    "prompts": "^2.4.1",
-    "ynab": "^1.25.0"
+    "luxon": "^2.5.2",
+    "minimatch": "^3.1.2",
+    "prompts": "^2.4.2",
+    "ynab": "^1.47.0"
   },
   "packageManager": "yarn@3.4.1"
 }

@@ -1131,7 +1131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/glob@npm:^7.1.4":
+"@types/glob@npm:^7.2.0":
   version: 7.2.0
   resolution: "@types/glob@npm:7.2.0"
   dependencies:
@@ -1175,7 +1175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^27.0.1":
+"@types/jest@npm:^27.5.2":
   version: 27.5.2
   resolution: "@types/jest@npm:27.5.2"
   dependencies:
@@ -1185,14 +1185,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/js-yaml@npm:^4.0.3":
+"@types/js-yaml@npm:^4.0.5":
   version: 4.0.5
   resolution: "@types/js-yaml@npm:4.0.5"
   checksum: 7dcac8c50fec31643cc9d6444b5503239a861414cdfaa7ae9a38bc22597c4d850c4b8cec3d82d73b3fbca408348ce223b0408d598b32e094470dfffc6d486b4d
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:^2.0.3":
+"@types/luxon@npm:^2.4.0":
   version: 2.4.0
   resolution: "@types/luxon@npm:2.4.0"
   checksum: eeb16a1bfe5440464c1a9635700d103cd18d3cd8da6063a1938478e435cfba6ab8e893aa80c95a407e541187c1e997c3e4481322726bc1258551cb8606d0e5ad
@@ -1213,10 +1213,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.7.4":
-  version: 16.18.16
-  resolution: "@types/node@npm:16.18.16"
-  checksum: 69c422450f046fbdf1904c4fdb9fbc80fda379768f6e5402ac1434fb5955b7b3d0082f02fb9bcd4979f57649ecd9a934277492d757c6ea88d080ba101c1ced48
+"@types/node@npm:^18.15.3":
+  version: 18.15.3
+  resolution: "@types/node@npm:18.15.3"
+  checksum: 31b1d92475a82c30de29aa6c0771b18a276552d191283b4423ba2d61b3f01159bf0d02576c0b7cc834b043997893800db6bb47f246083ed85aa45e79c80875d7
   languageName: node
   linkType: hard
 
@@ -1234,7 +1234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prompts@npm:^2.0.14":
+"@types/prompts@npm:^2.4.3":
   version: 2.4.3
   resolution: "@types/prompts@npm:2.4.3"
   dependencies:
@@ -1978,7 +1978,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitizen@npm:^4.2.4":
+"commitizen@npm:^4.3.0":
   version: 4.3.0
   resolution: "commitizen@npm:4.3.0"
   dependencies:
@@ -2799,7 +2799,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"glob@npm:7.2.3, glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.1.7":
+"glob@npm:7.2.3, glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.2.3":
   version: 7.2.3
   resolution: "glob@npm:7.2.3"
   dependencies:
@@ -3841,7 +3841,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"jest@npm:^27.1.0":
+"jest@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest@npm:27.5.1"
   dependencies:
@@ -4075,7 +4075,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"luxon@npm:^2.0.2":
+"luxon@npm:^2.5.2":
   version: 2.5.2
   resolution: "luxon@npm:2.5.2"
   checksum: d8b671ffd2ff0b438af862ac11082a81b3aedd9f8b6a4ca636f944224f8dd381125cd4d274ca0a8aedcaf2cfca0fc2ca96fe4cc1b16a28b7af701afb95c0bff8
@@ -4198,7 +4198,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^3.0.4, minimatch@npm:^3.1.1":
+"minimatch@npm:^3.0.4, minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
   dependencies:
@@ -4707,7 +4707,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"pkg@npm:^5.3.2":
+"pkg@npm:^5.8.1":
   version: 5.8.1
   resolution: "pkg@npm:5.8.1"
   dependencies:
@@ -4765,12 +4765,12 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.3.2":
-  version: 2.3.2
-  resolution: "prettier@npm:2.3.2"
+"prettier@npm:2.8.4":
+  version: 2.8.4
+  resolution: "prettier@npm:2.8.4"
   bin:
     prettier: bin-prettier.js
-  checksum: 17ce5784ac67621c292df58e2da60b2ee150c2d6aebea22a6ad9e52fcd6a5e66c349d0a8436ea3bd8ff9d778920a5f68000d7625b74f43558718a49755aa5259
+  checksum: c173064bf3df57b6d93d19aa98753b9b9dd7657212e33b41ada8e2e9f9884066bb9ca0b4005b89b3ab137efffdf8fbe0b462785aba20364798ff4303aadda57e
   languageName: node
   linkType: hard
 
@@ -4826,7 +4826,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"prompts@npm:^2.4.1":
+"prompts@npm:^2.4.2":
   version: 2.4.2
   resolution: "prompts@npm:2.4.2"
   dependencies:
@@ -5641,7 +5641,7 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^27.0.5":
+"ts-jest@npm:^27.1.5":
   version: 27.1.5
   resolution: "ts-jest@npm:27.1.5"
   dependencies:
@@ -5674,7 +5674,7 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.2.1":
+"ts-node@npm:^10.9.1":
   version: 10.9.1
   resolution: "ts-node@npm:10.9.1"
   dependencies:
@@ -5767,7 +5767,7 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.4.2":
+"typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -5777,7 +5777,7 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.4.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
@@ -6127,36 +6127,36 @@ resolve@^1.20.0:
   version: 0.0.0-use.local
   resolution: "ynab-buddy@workspace:."
   dependencies:
-    "@types/glob": ^7.1.4
-    "@types/jest": ^27.0.1
-    "@types/js-yaml": ^4.0.3
-    "@types/luxon": ^2.0.3
-    "@types/node": ^16.7.4
-    "@types/prompts": ^2.0.14
+    "@types/glob": ^7.2.0
+    "@types/jest": ^27.5.2
+    "@types/js-yaml": ^4.0.5
+    "@types/luxon": ^2.4.0
+    "@types/node": ^18.15.3
+    "@types/prompts": ^2.4.3
     abort-controller: ^3.0.0
     chalk: ^4.1.2
-    commitizen: ^4.2.4
+    commitizen: ^4.3.0
     csv-parse: ^4.16.3
     csv-stringify: ^5.6.5
     cz-conventional-changelog: 3.3.0
-    glob: ^7.1.7
-    jest: ^27.1.0
+    glob: ^7.2.3
+    jest: ^27.5.1
     js-yaml: ^4.1.0
-    luxon: ^2.0.2
-    minimatch: ^3.0.4
-    pkg: ^5.3.2
-    prettier: 2.3.2
-    prompts: ^2.4.1
-    ts-jest: ^27.0.5
-    ts-node: ^10.2.1
-    typescript: ^4.4.2
-    ynab: ^1.25.0
+    luxon: ^2.5.2
+    minimatch: ^3.1.2
+    pkg: ^5.8.1
+    prettier: 2.8.4
+    prompts: ^2.4.2
+    ts-jest: ^27.1.5
+    ts-node: ^10.9.1
+    typescript: ^4.9.5
+    ynab: ^1.47.0
   bin:
     ynab-buddy: ./dist/index.js
   languageName: unknown
   linkType: soft
 
-"ynab@npm:^1.25.0":
+"ynab@npm:^1.47.0":
   version: 1.47.0
   resolution: "ynab@npm:1.47.0"
   dependencies:
