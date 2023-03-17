@@ -79,5 +79,8 @@
     "prompts": "^2.4.2",
     "ynab": "^1.47.0"
   },
+  "resolutions": {
+    "minimist": "^1.2.7"
+  },
   "packageManager": "yarn@3.4.1"
 }
