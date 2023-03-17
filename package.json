@@ -70,7 +70,7 @@
   "dependencies": {
     "abort-controller": "^3.0.0",
     "chalk": "^4.1.2",
-    "csv-parse": "^4.16.3",
+    "csv-parse": "^5.3.6",
     "csv-stringify": "^5.6.5",
     "glob": "^9.3.0",
     "js-yaml": "^4.1.0",

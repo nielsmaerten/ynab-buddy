@@ -2065,10 +2065,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-parse@npm:^4.16.3":
-  version: 4.16.3
-  resolution: "csv-parse@npm:4.16.3"
-  checksum: 5ad7790fc31c32ca1623bad1a54906134ba44fa109e8dd2dfda440bf7e9fd93610d9076a78f45c872701bfafdf7f93c9b75500c09d7efd6611d863f1d45ec69f
+"csv-parse@npm:^5.3.6":
+  version: 5.3.6
+  resolution: "csv-parse@npm:5.3.6"
+  checksum: a6dcb61a0676121e84a29cdee4978a0516d1412fbe8895057d17e1a95a2013e6283b253135465ad562222d095988a74587d92b2fa04192bef15090acce2a0433
   languageName: node
   linkType: hard
 
@@ -5712,7 +5712,7 @@ resolve@^1.20.0:
     abort-controller: ^3.0.0
     chalk: ^4.1.2
     commitizen: ^4.3.0
-    csv-parse: ^4.16.3
+    csv-parse: ^5.3.6
     csv-stringify: ^5.6.5
     cz-conventional-changelog: 3.3.0
     glob: ^9.3.0
