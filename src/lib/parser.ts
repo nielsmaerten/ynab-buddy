@@ -27,10 +27,12 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const endRow = records.length - parser.footer_rows;
   records = records.slice(startRow, endRow).map(deduplicateColumns);
 
-  const transactions = records.map((record) => {
-    const tx = buildTransaction(record, parser);
-    return hooks.onTransaction(record, tx).filter((t) => t);
-  });
+  const transactions = records
+    .map((record) => {
+      const tx = buildTransaction(record, parser);
+      return hooks.onTransaction(record, tx);
+    })
+    .filter((tx) => tx);
   logResult(transactions.length, source.path);
   return {
     transactions,
