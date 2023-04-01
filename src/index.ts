@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { messages } from "./constants";
 import * as cli from "./lib/cli";
-import * as hooks from "./lib/hooks-loader";
 import { getConfiguration } from "./lib/configuration";
 import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
