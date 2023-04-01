@@ -1,0 +1,4 @@
+{
+    "description": "This is considered the latest stable version. Existing instances will check this file to see if they are up to date.",
+    "version": "1.3.1"
+}
