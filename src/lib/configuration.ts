@@ -4,6 +4,7 @@ import chalk from "chalk";
 import { homedir } from "os";
 import { load } from "js-yaml";
 import { Configuration } from "../types";
+import * as hooks from "./hooks-loader";
 import {
   CONFIG_DIR,
   CONFIG_FILE,
@@ -28,7 +29,7 @@ export function getConfiguration(): Configuration {
     // Read and parse the config file
     const rawConfig = readConfigFile();
     const config = parseRawConfig(rawConfig);
-    return config;
+    return hooks.onConfigurationLoaded(config);
   } catch (err) {
     const msg = chalk.redBright(messages.invalidConfig.join("\n"));
     console.error(msg, configFilePath);

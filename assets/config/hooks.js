@@ -18,11 +18,27 @@ function onConfigurationLoaded(config) {
   return config;
 }
 
+function onRecord(record) {
+  console.log(record);
+  return record;
+}
+
+function onBankFile(bankFile) {
+  console.log(bankFile);
+  return bankFile;
+}
+
+function onTransaction(record, transaction) {
+  console.log(transaction);
+  return transaction;
+}
+
 module.exports = {
   onCsvLoaded,
   onParseOptionsLoaded,
-  onRecordsParsed,
-  onTransactionsParsed,
   onConfigurationLoaded,
   onBankFilesFound,
+  onRecord,
+  onBankFile,
+  onTransaction,
 };

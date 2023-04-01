@@ -1,4 +1,6 @@
+import { Options } from "csv-parse";
 import fs from "fs";
+import { BankFile, Configuration, Transaction } from "../types";
 
 const externalHooks = (() => {
   // When debugging, we want to load the hooks file from the project root
@@ -22,7 +24,7 @@ export const onCsvLoaded = (csv: string) => {
   return csv;
 };
 
-export const onParseOptionsLoaded = (parseOptions: any) => {
+export const onParseOptionsLoaded = (parseOptions: Options) => {
   if (externalHooks && externalHooks.onParseOptionsLoaded) {
     return externalHooks.onParseOptionsLoaded(parseOptions);
   }
@@ -36,23 +38,23 @@ export const onRecord = (record: any) => {
   return record;
 };
 
-export const onTransaction = (record: any, tx: any) => {
+export const onTransaction = (record: any, tx: Transaction) => {
   if (externalHooks && externalHooks.onTransaction) {
     return externalHooks.onTransaction(record, tx);
   }
   return tx;
 };
 
-export const onConfigurationLoaded = (config: any) => {
+export const onConfigurationLoaded = (config: Configuration) => {
   if (externalHooks && externalHooks.onConfigurationLoaded) {
     return externalHooks.onConfigurationLoaded(config);
   }
   return config;
 };
 
-export const onBankFilesFound = (bankFiles: any) => {
-  if (externalHooks && externalHooks.onBankFilesFound) {
-    return externalHooks.onBankFilesFound(bankFiles);
+export const onBankFile = (bankFile: BankFile) => {
+  if (externalHooks && externalHooks.onBankFile) {
+    return externalHooks.onBankFile(bankFile);
   }
-  return bankFiles;
+  return bankFile;
 };

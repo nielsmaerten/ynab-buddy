@@ -6,13 +6,12 @@ import { getConfiguration } from "./lib/configuration";
 import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { upload } from "./lib/uploader";
-import { BankFile, ParsedBankFile } from "./types";
+import { BankFile } from "./types";
 import fs from "fs";
 
 (async () => {
   // Ensure the tool has a valid configuration
-  const _config = getConfiguration();
-  const config = hooks.onConfigurationLoaded(_config);
+  const config = getConfiguration();
 
   // Display welcome message, exit if initialization has not yet been completed
   const isFirstRun = !config.configurationDone;
@@ -27,8 +26,7 @@ import fs from "fs";
   }
 
   // Find files eligible for conversion in the importPath
-  const _bankFiles = findBankFiles(config.importPath!, config);
-  const bankFiles = hooks.onBankFilesFound(_bankFiles) as BankFile[];
+  const bankFiles = findBankFiles(config.importPath!, config);
   console.log(messages.filesFound, bankFiles.length);
 
   // Parse and convert bankFiles
