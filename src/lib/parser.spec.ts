@@ -9,6 +9,7 @@ jest.mock("fs", () => {
     readFileSync: () => {
       return customCsv || fixtures.csv[csvFixtureBeingTested];
     },
+    existsSync: () => false,
   };
 });
 

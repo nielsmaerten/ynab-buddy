@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 import { messages } from "./constants";
 import * as cli from "./lib/cli";
+import * as hooks from "./lib/hooks-loader";
 import { getConfiguration } from "./lib/configuration";
 import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { upload } from "./lib/uploader";
-import { BankFile } from "./types";
+import { BankFile, ParsedBankFile } from "./types";
 import fs from "fs";
 
 (async () => {
   // Ensure the tool has a valid configuration
-  const config = getConfiguration();
+  const _config = getConfiguration();
+  const config = hooks.onConfigurationLoaded(_config);
 
   // Display welcome message, exit if initialization has not yet been completed
   const isFirstRun = !config.configurationDone;
@@ -25,7 +27,8 @@ import fs from "fs";
   }
 
   // Find files eligible for conversion in the importPath
-  const bankFiles = findBankFiles(config.importPath!, config);
+  const _bankFiles = findBankFiles(config.importPath!, config);
+  const bankFiles = hooks.onBankFilesFound(_bankFiles) as BankFile[];
   console.log(messages.filesFound, bankFiles.length);
 
   // Parse and convert bankFiles
