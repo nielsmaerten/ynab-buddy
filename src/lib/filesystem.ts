@@ -11,6 +11,7 @@ import path from "path";
 import fs, { rmSync, writeFileSync } from "fs";
 import csvStringify from "csv-stringify/lib/sync";
 import stringify from "csv-stringify";
+import * as hooks from "./hooks-loader";
 
 /**
  * Finds all files eligible for parsing in the directory.
@@ -27,7 +28,10 @@ export function findBankFiles(dir: string, config: Configuration): BankFile[] {
   const bankFiles = allFiles.map((file) => detectBank(file, bankFilePatterns));
 
   // Discard files that are not from banks
-  const cleanedBankFiles = bankFiles.filter((f) => f.isBankFile);
+  const cleanedBankFiles = bankFiles
+    .filter((f) => f.isBankFile)
+    .map(hooks.onBankFile)
+    .filter((f) => f) as BankFile[];
   return cleanedBankFiles;
 }
 

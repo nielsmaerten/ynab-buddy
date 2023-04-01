@@ -5,17 +5,21 @@ import { DateTime } from "luxon";
 import fs from "fs";
 import chalk from "chalk";
 import { messages } from "../constants";
+import * as hooks from "./hooks-loader";
 
 export function parseBankFile(source: BankFile, parsers: Parser[]) {
-  const csv = fs.readFileSync(source.path);
+  const _csv = fs.readFileSync(source.path).toString();
   console.log(`\n${messages.parsing}`, source.path);
 
   // Configure parser to detect the right columns and delimiter
   const parser = parsers.find((p) => p.name === source.matchedParser)!;
-  const parseOptions = { ...baseParseOptions };
-  parseOptions.columns = parser.columns.map(unifyColumns);
-  parseOptions.delimiter = parser.delimiter;
+  const _parseOptions = { ...baseParseOptions };
+  _parseOptions.columns = parser.columns.map(unifyColumns);
+  _parseOptions.delimiter = parser.delimiter;
 
+  const csv = hooks.onCsvLoaded(_csv);
+  const parseOptions = hooks.onParseOptionsLoaded(_parseOptions);
+  parseOptions.onRecord = hooks.onRecord;
   let records: any[] = parseCsv(csv, parseOptions);
 
   // Delete header and footer rows
@@ -23,7 +27,12 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const endRow = records.length - parser.footer_rows;
   records = records.slice(startRow, endRow).map(deduplicateColumns);
 
-  const transactions = records.map((tx) => buildTransaction(tx, parser));
+  const transactions = records
+    .map((record) => {
+      const tx = buildTransaction(record, parser);
+      return hooks.onTransaction(record, tx);
+    })
+    .filter((tx) => tx);
   logResult(transactions.length, source.path);
   return {
     transactions,
