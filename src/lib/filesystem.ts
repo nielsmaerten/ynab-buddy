@@ -30,7 +30,8 @@ export function findBankFiles(dir: string, config: Configuration): BankFile[] {
   // Discard files that are not from banks
   const cleanedBankFiles = bankFiles
     .filter((f) => f.isBankFile)
-    .map(hooks.onBankFile);
+    .map(hooks.onBankFile)
+    .filter((f) => f) as BankFile[];
   return cleanedBankFiles;
 }
 
