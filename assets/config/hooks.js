@@ -78,14 +78,18 @@ function onBankFile(bankFile) {
 
 /**
  * Called for every transaction that is created from a CSV record, but before it has been saved to YNAB.
+ * The object returned should be a valid transaction object, as described here: https://api.youneedabudget.com/v1#/Transactions/createTransaction
  * To skip the transaction, return null.
  * Example input:
+ *
  * transaction: {
  * date: '2020-01-01',
  * payee_name: 'Payee 1',
  * amount: 1000,
  * memo: 'Memo 1',
+ * ...
  * }
+ *
  * record: {
  *  .. same as onRecord
  * }
