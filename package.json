@@ -72,7 +72,7 @@
     "chalk": "^4.1.2",
     "csv-parse": "^4.16.3",
     "csv-stringify": "^5.6.5",
-    "glob": "^9.3.0",
+    "glob": "^10.0.0",
     "js-yaml": "^4.1.0",
     "luxon": "^3.3.0",
     "minimatch": "^8.0.2",
