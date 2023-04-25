@@ -5721,11 +5721,11 @@ resolve@^1.20.0:
   linkType: soft
 
 "ynab@npm:^1.47.0":
-  version: 1.47.0
-  resolution: "ynab@npm:1.47.0"
+  version: 1.49.0
+  resolution: "ynab@npm:1.49.0"
   dependencies:
     fetch-ponyfill: ^7.1.0
-  checksum: 5e84d024d47cf3d4c4d6672f58dd96e0be21215aeafeb9365c5fed532776ac0dd573b820b241d88bfec3cff112257b16b0f0f7c16e7ca0d9af8bff850a3a6f90
+  checksum: 1ab01fc413e9b9fc873542c8638ab2446a904f0568f42c5fa1be5a942f5cb10b9de8e911fe9277e2696e5cfccfed42034805c9d1a5abd596db15c5aca907698d
   languageName: node
   linkType: hard
 
