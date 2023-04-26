@@ -23,11 +23,14 @@
  *
  * 1. We'll assume you're using VisualStudio Code.
  *    Run `yarn hooks` in a Javascript Debug Terminal. This terminal can be opened from the command palette (Ctrl+Shift+P) or (Cmd+Shift+P).
- *    This will perform a complete run of ynab-buddy, but using the config and hooks file found in the assets folder.
+ *    This will run ynab-buddy using the config and hooks file found in the assets folder.
  *
- * 2. Set breakpoints in your hooks where needed.
+ * 2. Paste your own configuration into the assets/config/example.yaml,
+ *    and make sure the import path is pointing a few files you can test with.
  *
- * 3. Once you're happy with your code, copy your hooks file into the ynab-buddy folder in your home directory.
+ * 3. Set breakpoints in your hooks where needed.
+ *
+ * 4. Once you're happy with your code, copy your hooks file into the ynab-buddy folder in your home directory.
  */
 
 // 1. Called after loading ynab-buddy configuration (config.yaml file in this folder)
