@@ -6,7 +6,7 @@ import { BankFile, Configuration, Transaction } from "../types";
 function importHooksModule() {
   // When debugging, load the hooks file from inside the repository
   const environment = process.env.NODE_ENV || "production";
-  const isDev = ["development", "test"].includes(environment);
+  const isDev = ["development", "test", "hooks"].includes(environment);
   if (isDev) return require(`${__dirname}/../../assets/config/hooks.js`);
 
   // In production, load the hooks file from the user's home directory
