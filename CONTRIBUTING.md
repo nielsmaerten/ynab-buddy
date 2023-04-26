@@ -4,6 +4,7 @@
 
 - [Getting Started](#getting-started)
 - [Setting Up Your Development Environment](#setting-up-your-development-environment)
+- [Hooks](#hooks)
 - [How ynab-buddy works (under the hood)](#how-ynab-buddy-works-under-the-hood)
 - [Code Style and Formatting](#code-style-and-formatting)
 - [Submitting a Pull Request](#submitting-a-pull-request)
@@ -47,6 +48,11 @@ If you prefer to set up your development environment manually, follow these step
 3. Open a terminal/command prompt in the project root folder and run `yarn` to install the project dependencies.
 
 Once the setup is complete, you're ready to start contributing to ynab-buddy!
+
+## Hooks
+
+Hooks allow you to customize the behavior of ynab-buddy by adding your own code.
+Check out the [hooks.js](./assets/config/hooks.js) file for more details.
 
 ---
 
