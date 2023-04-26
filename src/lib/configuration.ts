@@ -44,8 +44,10 @@ export function getConfiguration(): Configuration {
 export const getConfigPaths = () => {
   const dir = path.resolve(CONFIG_DIR.replace("~", homedir()));
   const fileName = CONFIG_FILE;
-  const fullPath = path.join(dir, fileName);
   const example = path.join(__dirname, "../../", CONFIG_FILE_EXAMPLE);
+  let fullPath = path.join(dir, fileName);
+  // When running an e2e hooks test, fullPath points to example config file
+  if (process.env.NODE_ENV === "hooks") fullPath = example;
   return {
     example,
     fullPath,
