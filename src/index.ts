@@ -18,6 +18,9 @@ import fs from "fs";
   cli.displayWelcomeMessage(isFirstRun);
   if (!config.configurationDone) return cli.exitApp();
 
+  // Collect stats (if enabled)
+  const statsPromise = collectStats(config);
+
   // Confirm folder where the tool should look for bank files
   const importPathExists =
     config.importPath && fs.existsSync(config.importPath);
@@ -42,11 +45,9 @@ import fs from "fs";
   const uploads = parsedFiles.map((parsedFile) => upload(parsedFile, config));
   await Promise.all(uploads);
 
-  // Collect stats
-  await collectStats(config);
-
   // All done!
   cli.displayGoodbyeMessage();
+  await statsPromise;
   return cli.exitApp();
 })().catch(handleError);
 
