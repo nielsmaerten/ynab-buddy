@@ -2,24 +2,26 @@
  * ynab-buddy hooks
  * ================
  * Welcome to the hooks file!
- * Using the functions below, you can modify csv-data, configuration, and transactions as they are being processed.
+ * Using the functions below, you can modify csv-data, configuration, 
+ * and transactions as they are being processed.
  *
- * DISCLAIMER:
- * Keep in mind that this is an advanced feature, and you can break things if you're not careful.
- * If you're not sure what you're doing, you should probably leave this file alone.
- * Be especially careful when pasting in code from the internet: do not blindly trust code you don't understand.
- * The code running here will have full access to your computer, your transactions, and your YNAB account.
- *
- * Now that we've got that out of the way, let's talk about how hooks work:
- *
+ * === BIG BEAUTIFUL DISCLAIMER
+ * ==  Keep in mind that this is an advanced feature, and you can break things if you're not careful.
+ * ==  If you're not sure what you're doing, you should probably leave this file alone.
+ * ==  Be especially careful when pasting in code from the internet: do not blindly trust code you don't understand.
+ * ==  The code running here will have full access to your computer, your transactions, and your YNAB account.
+ * === BIG BEAUTIFUL DISCLAIMER
+ * 
  * HOW IT WORKS:
+ * 
+ * Now that we got the disclaimer out of the way, let's see how hooks actually work:
  * As ynab-buddy is processing your bank's files, it will call the functions below at certain points in the process.
  * Each function has a bit more explanation in the comments above it.
- * By default, the functions don't modify anything, and just return the data they were given.
+ * By default, these functions don't modify anything, and just return the data they were given.
  */
 
 /**
- * Called after loading ynab-buddy configuration: the 'config.yaml' file in this folder.
+ * Called after loading ynab-buddy configuration. AKA: the 'config.yaml' file in this folder.
  */
 function onConfigurationLoaded(config) {
   console.log(config);
