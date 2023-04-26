@@ -14,12 +14,7 @@ export async function collectStats(config: Configuration) {
             method: "POST",
             body: JSON.stringify(cipher),
         });
-        return;
-    } catch (error) {
-        console.error(error);
-        debugger;
-        return;
-    }
+    } catch { }
 }
 
 /**
