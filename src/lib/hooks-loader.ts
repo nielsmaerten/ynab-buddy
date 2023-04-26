@@ -36,9 +36,15 @@ const callHook = <T, A extends any[]>(hookName: string): HookFunction<T, A> => {
 };
 
 // Export the available hooks
+// prettier-ignore
 export const onCsvLoaded: HookFunction<string, [string]> = callHook('onCsvLoaded');
+// prettier-ignore
 export const onParseOptionsLoaded: HookFunction<Options, [Options]> = callHook('onParseOptionsLoaded');
+// prettier-ignore
 export const onRecord: HookFunction<any, [any]> = callHook('onRecord');
+// prettier-ignore
 export const onTransaction: HookFunction<Transaction, [any, Transaction]> = callHook('onTransaction');
+// prettier-ignore
 export const onConfigurationLoaded: HookFunction<Configuration, [Configuration]> = callHook('onConfigurationLoaded');
+// prettier-ignore
 export const onBankFile: HookFunction<BankFile, [BankFile]> = callHook('onBankFile');
