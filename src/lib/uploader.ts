@@ -2,6 +2,7 @@ import { Configuration, ParsedBankFile, Transaction } from "../types";
 import * as ynab from "ynab";
 import chalk from "chalk";
 import { messages } from "../constants";
+import loadCategories from "./categories";
 
 export function upload(parsedFile: ParsedBankFile, config: Configuration) {
   const matchedPattern = parsedFile.source.matchedPattern!;
@@ -48,6 +49,7 @@ export const sendToYnab = (TXs: any[], budgetId: string, token: string) => {
     .then(() => {
       console.log(chalk.greenBright(messages.uploadSuccess), TXs.length);
     })
+    .then(() => loadCategories(API))
     .catch((error) => {
       const msg = messages.uploadError.join("\n");
       const detail = JSON.stringify(error);
