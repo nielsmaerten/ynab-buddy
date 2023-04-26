@@ -30,7 +30,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const transactions = records
     .map((record) => {
       const tx = buildTransaction(record, parser);
-      return hooks.onTransaction(record, tx);
+      return hooks.onTransaction(tx, record);
     })
     .filter((tx) => tx);
   logResult(transactions.length, source.path);
