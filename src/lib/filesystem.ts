@@ -63,7 +63,9 @@ export function detectBank(file: string, patterns: BankFilePattern[]) {
  */
 function getFiles(dir: string, recursive = false) {
   const pattern = path.join(dir, recursive ? "**/*" : "*");
-  const matches = glob.sync(pattern);
+  // The path must use forward slashes, even on Windows (since glob v8)
+  const normalizedPattern = pattern.replace(/\\/g, "/");
+  const matches = glob.sync(normalizedPattern);
   const files = matches.filter((match) => fs.lstatSync(match).isFile());
   return files;
 }
