@@ -2,7 +2,6 @@ import { Configuration, ParsedBankFile, Transaction } from "../types";
 import * as ynab from "ynab";
 import chalk from "chalk";
 import { messages } from "../constants";
-import loadCategories from "./categories";
 
 export function upload(parsedFile: ParsedBankFile, config: Configuration) {
   const matchedPattern = parsedFile.source.matchedPattern!;
@@ -49,7 +48,6 @@ export const sendToYnab = (TXs: any[], budgetId: string, token: string) => {
     .then(() => {
       console.log(chalk.greenBright(messages.uploadSuccess), TXs.length);
     })
-    .then(() => loadCategories(API))
     .catch((error) => {
       const msg = messages.uploadError.join("\n");
       const detail = JSON.stringify(error);
@@ -114,35 +112,3 @@ function getFlagColor(color: string) {
       return ynab.SaveTransaction.FlagColorEnum.Yellow;
   }
 }
-
-//       // Add ids to prevent duplicate imports
-//       .map(addImportId),
-//   };
-// };
-
-// const count = {};
-// /**
-//  * From YNAB's API docs: the import_id is a string property that can be added to Transactions.
-//  * It's used to match up Transactions that have been imported multiple times, or from different sources.
-//  * An importId has the following format: `YNAB:[milliunit_amount]:[iso_date]:[occurrence]`
-//  * Occurrence starts at 1, but if there's another transaction with the exact same amount on
-//  * the same day, it would have an Occurrence of 2.
-//  */
-// const addImportId = (t) => {
-//   // Build the first part of import_id (YNAB:date:amount)
-//   let milliunit_amount = t.amount;
-//   let iso_date = t.date;
-//   let amount_date = `YNAB:${milliunit_amount}:${iso_date}`;
-
-//   // If this import_id was not seen before, init it's count at 0
-//   if (count[amount_date] === undefined) {
-//     count[amount_date] = 0;
-//   }
-
-//   // Increment for this occurrence
-//   count[amount_date]++;
-
-//   // Set the full import_id (YNAB:date:amount:occurrence)
-//   t.import_id = `${amount_date}:${count[amount_date]}`;
-//   return t;
-// };

@@ -96,5 +96,6 @@ const parseRawConfig = (rawConfig: any): Configuration => {
     },
     parsers: rawConfig.parsers,
     configurationDone: rawConfig.configuration_done !== false,
+    stats: rawConfig.stats,
   };
 };

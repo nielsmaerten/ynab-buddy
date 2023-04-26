@@ -9,6 +9,7 @@ export type Configuration = {
     upload: boolean;
   };
   configurationDone: boolean;
+  stats: any;
 };
 
 export type BankFilePattern = {
