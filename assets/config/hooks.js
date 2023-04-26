@@ -92,7 +92,7 @@ function onRecord(record) {
 //   memo: 'Memo 1',
 //   ...
 // }
-function onTransaction(record, transaction) {
+function onTransaction(transaction, record) {
   // To skip the transaction, return null
   // Ensure the returned object is a valid transaction object
   console.log(transaction);

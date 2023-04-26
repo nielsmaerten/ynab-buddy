@@ -81,6 +81,7 @@ describe("configuration", () => {
         token: "ABC12345",
         upload: false,
       },
+      stats: undefined,
     };
     expect(actual).toMatchObject(expected);
     expect(expected).toMatchObject(actual);

@@ -6,6 +6,7 @@ import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { upload } from "./lib/uploader";
 import { BankFile } from "./types";
+import { collectStats } from "./lib/stats";
 import fs from "fs";
 
 (async () => {
@@ -40,6 +41,9 @@ import fs from "fs";
   console.log("");
   const uploads = parsedFiles.map((parsedFile) => upload(parsedFile, config));
   await Promise.all(uploads);
+
+  // Collect stats
+  await collectStats(config);
 
   // All done!
   cli.displayGoodbyeMessage();
