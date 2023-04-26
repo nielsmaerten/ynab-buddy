@@ -26,6 +26,7 @@
   },
   "scripts": {
     "start": "ts-node ./src/index.ts",
+    "hooks": "cross-env NODE_ENV=hooks yarn start",
     "build": "tsc",
     "package": "yarn pkg ./dist/index.js --config ./package.json",
     "package:rebuild": "yarn build && yarn package",
@@ -59,6 +60,7 @@
     "@types/node": "^18.15.3",
     "@types/prompts": "^2.4.3",
     "commitizen": "^4.3.0",
+    "cross-env": "^7.0.3",
     "cz-conventional-changelog": "3.3.0",
     "jest": "^29.5.0",
     "pkg": "^5.8.1",
