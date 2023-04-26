@@ -1,13 +1,20 @@
 # How to configure _ynab-buddy_
 
-ynab-buddy is configured using a file in `<your home directory>/ynab-buddy/config.yaml`. 
+## Deprecated
+
+Note: this file has been replaced with documentation inside the config file itself.  
+The information below may not be up-to-date.
+
+---
+
+ynab-buddy is configured using a file in `<your home directory>/ynab-buddy/config.yaml`.
 
 This document explains all options. Use it as a guide when adjusting your configuration to work with your bank.
 
 ### Good to know
 
-* An example config file is automatically created when ynab-buddy runs for the first time
-* Disable optional settings by typing a hashtag (`#`) in front of them. Or remove the line completely.
+- An example config file is automatically created when ynab-buddy runs for the first time
+- Disable optional settings by typing a hashtag (`#`) in front of them. Or remove the line completely.
 
 ## General settings
 
@@ -25,7 +32,6 @@ import_from: "/home/niels/downloads"    # linux, mac os
 ### `skip_path_confirmation`
 
 Set to `true` to always use `import_from` without confirmation
-
 
 **Optional.**
 
@@ -62,11 +68,11 @@ pattern: *_VisaPersonal-*.csv
 pattern: ing/savings/export.csv
 ```
 
-| Pattern                   | Matches filenames such as:                                   |
-| ------------------------- | ------------------------------------------------------------ |
+| Pattern                   | Matches filenames such as:                                             |
+| ------------------------- | ---------------------------------------------------------------------- |
 | `BNP_IBAN323534643_*.csv` | `BNP_IBAN323534643_2021-09-12.csv`, `BNP_IBAN323534643_2021-04-20.csv` |
-| `*_VisaPersonal-*.csv`    | `NM_VisaPersonal-23453423.csv`, `YourName_VisaPersonal-2020202.csv` |
-| `ing/savings/export.csv`  | `export.csv`                                                 |
+| `*_VisaPersonal-*.csv`    | `NM_VisaPersonal-23453423.csv`, `YourName_VisaPersonal-2020202.csv`    |
+| `ing/savings/export.csv`  | `export.csv`                                                           |
 
 **Notice:** the last pattern only matches files named "export.csv". If your bank does this, create a directory structure for your accounts (for example `downloads/ing/savings/`) and place files into the folder for their account.
 
@@ -75,7 +81,7 @@ ynab-buddy will now be able to use the directory name + pattern to identify the 
 ### `parser`
 
 ```yaml
-parser: bnp-checking-parser 
+parser: bnp-checking-parser
 # the name of the parser to use for this file
 # parsers are defined in the section 'parsers'
 ```
@@ -107,7 +113,7 @@ See: `ynab_account_id`.
 ### `ynab_flag_color`
 
 ```yaml
-ynab_flag_color: blue 
+ynab_flag_color: blue
 # possible colors are: blue, green, orange, purple, red and yellow
 ```
 
@@ -150,7 +156,7 @@ name: bnp-checking-parser
 ### `header_rows`
 
 ```yaml
-header_rows: 1 
+header_rows: 1
 # The number of header rows your bank adds to their CSV files (most banks do this)
 # This is the number of lines ynab-buddy will ignore when parsing
 ```
@@ -167,7 +173,7 @@ delimiter: '\t' # tab separated
 delimiter: ';'  # semicolon separated
 ```
 
-The symbol used to separate columns in the CSV file. 
+The symbol used to separate columns in the CSV file.
 
 ### `columns`
 
@@ -182,21 +188,21 @@ Configure which columns contain the data that should be extracted.
 
 The following columns are supported:
 
-| Field       | Notes                                                        |
-| ----------- | ------------------------------------------------------------ |
-| date        | Transaction's date. Set the format using `date_format`       |
-| skip        | Use to ignore a column                                       |
-| inflow      | Use in combination with 'outflow'                            |
-| outflow     | Use in combination with 'inflow'                             |
-| amount      | If instead of separate 'inflow' and 'outflow' columns, your bank uses a single column: use 'amount'. Negative amounts are treated as outflow. |
-| memo        | You can add multiple columns to the memo field by naming them memo1, memo2, etc. |
-| payee       | **Beta.** May create duplicate Payees in YNAB. If it does, I suggest adding your Payee as a *memo* field instead |
+| Field       | Notes                                                                                                                                                                                                                                                         |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| date        | Transaction's date. Set the format using `date_format`                                                                                                                                                                                                        |
+| skip        | Use to ignore a column                                                                                                                                                                                                                                        |
+| inflow      | Use in combination with 'outflow'                                                                                                                                                                                                                             |
+| outflow     | Use in combination with 'inflow'                                                                                                                                                                                                                              |
+| amount      | If instead of separate 'inflow' and 'outflow' columns, your bank uses a single column: use 'amount'. Negative amounts are treated as outflow.                                                                                                                 |
+| memo        | You can add multiple columns to the memo field by naming them memo1, memo2, etc.                                                                                                                                                                              |
+| payee       | **Beta.** May create duplicate Payees in YNAB. If it does, I suggest adding your Payee as a _memo_ field instead                                                                                                                                              |
 | in_out_flag | While uncommon, some banks use a single 'amount' column with only positive numbers. A separate column, 'in_out_flag' indicates whether the money's going in or out of the account. If you use this column, you should also set the option `outflow_indicator` |
 
 ### `outflow_indicator`
 
 ```yaml
-outflow_indicator: Out 
+outflow_indicator: Out
 # Only use this option if your CSV uses an in_out_flag
 ```
 
