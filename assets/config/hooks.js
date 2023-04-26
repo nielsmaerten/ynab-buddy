@@ -21,8 +21,8 @@
  *
  * HOW TO DEBUG:
  *
- * 1. Open a Javascript Debug Terminal and run the command `yarn hooks`.
- *    A debug terminal can be opened by pressing F1 and typing "Javascript Debug Terminal".
+ * 1. We'll assume you're using VisualStudio Code.
+ *    Run `yarn hooks` in a Javascript Debug Terminal. This terminal can be opened from the command palette (Ctrl+Shift+P) or (Cmd+Shift+P).
  *    This will perform a complete run of ynab-buddy, but using the config and hooks file found in the assets folder.
  *
  * 2. Set breakpoints in your hooks where needed.
