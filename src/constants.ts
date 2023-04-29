@@ -56,4 +56,6 @@ export const messages = {
       "Download here: https://github.com/nielsmaerten/ynab-buddy/releases",
     npmCommand: "To upgrade, run 'npm install -g ynab-buddy'",
   },
+  yourVersion: "Your version:",
+  latestVersion: "Latest version:"
 };

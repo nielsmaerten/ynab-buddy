@@ -94,11 +94,14 @@ export async function checkUpdate(thisVersion: string) {
   try {
     const res = await fetch(UPDATE_CHECK_URL, requestOpts);
     clearTimeout(timeoutId);
-    const latestVersion = (await res.json()).version;
-    if (latestVersion !== thisVersion) {
+    const json = await res.json();
+    const { updateAvailable, latest } = json;
+    if (updateAvailable) {
       const { notice, npmCommand, releaseUrl } = messages.newVersion;
       const whereToDownload = isNpmApp ? npmCommand : releaseUrl;
       console.log(notice, whereToDownload);
+      console.log(messages.yourVersion, thisVersion);
+      console.log(messages.latestVersion, latest);
     }
   } catch {
     // Ignore update check errors
