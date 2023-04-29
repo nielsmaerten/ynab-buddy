@@ -67,7 +67,7 @@
     "prettier": "2.8.8",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
