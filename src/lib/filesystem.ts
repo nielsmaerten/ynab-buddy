@@ -6,7 +6,7 @@ import {
   Transaction,
 } from "../types";
 import minimatch from "minimatch";
-import glob from "glob";
+import { sync as globSync } from "glob";
 import path from "path";
 import fs, { rmSync, writeFileSync } from "fs";
 import csvStringify from "csv-stringify/lib/sync";
@@ -65,7 +65,7 @@ function getFiles(dir: string, recursive = false) {
   const pattern = path.join(dir, recursive ? "**/*" : "*");
   // The path must use forward slashes, even on Windows (since glob v8)
   const normalizedPattern = pattern.replace(/\\/g, "/");
-  const matches = glob.sync(normalizedPattern);
+  const matches = globSync(normalizedPattern);
   const files = matches.filter((match) => fs.lstatSync(match).isFile());
   return files;
 }
