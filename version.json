@@ -1,6 +1,7 @@
 {
-    "description": "This is considered the latest stable version. Existing instances will check this file to see if they are up to date.",
+    "_comment1": "This file must be updated manually to indicate the latest stable and prerelease versions.",
+    "_comment2": "Versions <2 will check the 'version' key, while later version use 'stable' and 'prerelease'. 'version' is deprecated.",
     "version": "1.3.1",
     "stable": "1.3.1",
-    "prerelease": "2.0.0-beta.2"
+    "prerelease": "2.0.0-beta.3"
 }
