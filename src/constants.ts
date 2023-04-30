@@ -57,5 +57,5 @@ export const messages = {
     npmCommand: "To upgrade, run 'npm install -g ynab-buddy'",
   },
   yourVersion: "Your version:",
-  latestVersion: "Latest version:"
+  latestVersion: "Latest version:",
 };
