@@ -33,6 +33,7 @@ jobs:
       - run: yarn test
       - run: yarn lint
       - run: yarn package:rebuild --compress Brotli
+        if: matrix.node-version == '18.x'
 
       - name: Codecov
         if: matrix.node-version == '18.x' && matrix.os == 'ubuntu-latest'
