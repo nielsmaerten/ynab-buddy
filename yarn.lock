@@ -2008,6 +2008,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "chalk@npm:5.2.0"
+  checksum: 03d8060277de6cf2fd567dc25fcf770593eb5bb85f460ce443e49255a30ff1242edd0c90a06a03803b0466ff0687a939b41db1757bec987113e83de89a003caa
+  languageName: node
+  linkType: hard
+
 "char-regex@npm:^1.0.2":
   version: 1.0.2
   resolution: "char-regex@npm:1.0.2"
@@ -7504,7 +7511,7 @@ resolve@^1.20.0:
     "@types/node": ^18.15.3
     "@types/prompts": ^2.4.3
     abort-controller: ^3.0.0
-    chalk: ^4.1.2
+    chalk: ^5.2.0
     commitizen: ^4.3.0
     cross-env: ^7.0.3
     csv-parse: ^4.16.3
