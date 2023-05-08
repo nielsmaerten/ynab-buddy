@@ -2378,10 +2378,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-stringify@npm:^5.6.5":
-  version: 5.6.5
-  resolution: "csv-stringify@npm:5.6.5"
-  checksum: f93e1444857416081de3d86765b62e4c4f7c110974ad6bbcb0031d7db39b6624847ac9ee5705726e7011346f32f3696f27299b74b23a6c2b083adff0dd2755fe
+"csv-stringify@npm:^6.3.4":
+  version: 6.3.4
+  resolution: "csv-stringify@npm:6.3.4"
+  checksum: e0c2bc9cbeaa060224fee6153a7d359da190fd920f0f9851e979aa381e2022368a833e55f15f7700f1a4d614e819778cfc307af9b35fa3a43a07c03fd60866b3
   languageName: node
   linkType: hard
 
@@ -7508,7 +7508,7 @@ resolve@^1.20.0:
     commitizen: ^4.3.0
     cross-env: ^7.0.3
     csv-parse: ^4.16.3
-    csv-stringify: ^5.6.5
+    csv-stringify: ^6.3.4
     cz-conventional-changelog: 3.3.0
     glob: ^10.2.2
     jest: ^29.5.0
