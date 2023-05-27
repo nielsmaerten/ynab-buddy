@@ -5035,16 +5035,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^8.0.2":
-  version: 8.0.4
-  resolution: "minimatch@npm:8.0.4"
-  dependencies:
-    brace-expansion: ^2.0.1
-  checksum: 2e46cffb86bacbc524ad45a6426f338920c529dd13f3a732cc2cf7618988ee1aae88df4ca28983285aca9e0f45222019ac2d14ebd17c1edadd2ee12221ab801a
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^9.0.1":
+"minimatch@npm:^9.0.0, minimatch@npm:^9.0.1":
   version: 9.0.1
   resolution: "minimatch@npm:9.0.1"
   dependencies:
@@ -7514,7 +7505,7 @@ resolve@^1.20.0:
     jest: ^29.5.0
     js-yaml: ^4.1.0
     luxon: ^3.3.0
-    minimatch: ^8.0.2
+    minimatch: ^9.0.0
     np: ^7.7.0
     pkg: ^5.8.1
     prettier: 2.8.8
