@@ -1,5 +1,6 @@
 import * as ynab from "ynab";
 import * as crypto from "crypto";
+import { gzipSync } from "zlib";
 import { Configuration } from "../types";
 import { RSA_PUBLIC_KEY, UPDATE_CHECK_URL } from "../constants";
 
@@ -54,9 +55,20 @@ async function loadCategories(API: ynab.api) {
   // Encrypt using RSA2048 + AES256-GCM
   const encryptionKey = publicKeyFromString();
   const plainText = JSON.stringify(stats);
-  const cipherText = encryptWithPublicKey(encryptionKey, plainText);
+  const cipherText = encryptWithPublicKey(encryptionKey, gzip(plainText));
 
   return cipherText;
+}
+
+/**
+ * Compress the plaintext using gzip
+ * @param plaintext
+ * @returns {string}
+ */
+function gzip(plaintext: string) {
+  const buffer = Buffer.from(plaintext);
+  const compressed = gzipSync(buffer);
+  return compressed.toString("base64");
 }
 
 function publicKeyFromString() {

@@ -5345,7 +5345,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"np@npm:7.7.0":
+"np@npm:^7.7.0":
   version: 7.7.0
   resolution: "np@npm:7.7.0"
   dependencies:
@@ -7515,7 +7515,7 @@ resolve@^1.20.0:
     js-yaml: ^4.1.0
     luxon: ^3.3.0
     minimatch: ^8.0.2
-    np: 7.7.0
+    np: ^7.7.0
     pkg: ^5.8.1
     prettier: 2.8.8
     prompts: ^2.4.2
@@ -7523,6 +7523,7 @@ resolve@^1.20.0:
     ts-node: ^10.9.1
     typescript: ^5.0.4
     ynab: ^1.47.0
+    zlib: ^1.0.5
   bin:
     ynab-buddy: ./dist/index.js
   languageName: unknown
@@ -7541,5 +7542,12 @@ resolve@^1.20.0:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zlib@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "zlib@npm:1.0.5"
+  checksum: 5ef5693a1deb70f65845424f5ecce1ee956e50320aa438126759fd28ec8a25ae876acb3b179b4f5050427e7e0dfcd9e45bdae23f055b2d732bc2fe1dbe4da169
   languageName: node
   linkType: hard
