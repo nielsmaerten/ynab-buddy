@@ -13,13 +13,13 @@ import fs from "fs";
   // Ensure the tool has a valid configuration
   const config = getConfiguration();
 
-  // Display welcome message, exit if initialization has not yet been completed
+  // Exit if the config file is not set up yet
   const isFirstRun = !config.configurationDone;
-  cli.displayWelcomeMessage(isFirstRun);
   if (!config.configurationDone) return cli.exitApp();
 
-  // Collect stats (if enabled)
+  // Display welcome message and collect stats (if allowed)
   const statsPromise = collectStats(config);
+  cli.displayWelcomeMessage(isFirstRun);
 
   // Confirm folder where the tool should look for bank files
   const importPathExists =

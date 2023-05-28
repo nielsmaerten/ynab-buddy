@@ -95,7 +95,7 @@ export async function checkUpdate(thisVersion: string) {
     const res = await fetch(UPDATE_CHECK_URL, requestOpts);
     clearTimeout(timeoutId);
     const json = await res.json();
-    const { updateAvailable, latest } = json;
+    const { updateAvailable, latest, custom_message } = json;
     if (updateAvailable) {
       const { notice, npmCommand, releaseUrl } = messages.newVersion;
       const whereToDownload = isNpmApp ? npmCommand : releaseUrl;
@@ -103,6 +103,7 @@ export async function checkUpdate(thisVersion: string) {
       console.log(messages.yourVersion, thisVersion);
       console.log(messages.latestVersion, latest);
     }
+    if (custom_message) console.log(custom_message);
   } catch {
     // Ignore update check errors
   }

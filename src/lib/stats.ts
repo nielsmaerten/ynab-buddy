@@ -19,15 +19,18 @@ export async function collectStats(config: Configuration) {
 }
 
 /**
- * This creates a list of your category names that will be shared as part
- * of the stats. Your transaction data will not be shared, and everything will be end-to-end encrypted.
- * As a Budget Nerd🤓 just love seeing other people's categories.
- * They'll only be viewable by me, nobody else.
+ * This function makes a list of your category names and shares them with me (Niels)
+ * over an encrypted connection. It is disabled by default.
+ * If you want to help a fellow budget-nerd in building the 'ultimate community category list',
+ * you can turn on stats reporting in your config file.
+ * Of course, only I (Niels) will ever see your category names, no one else.
+ * Transactions, account number and any personally identifiable information will NEVER be shared.
  */
 async function loadCategories(API: ynab.api) {
   // Get a list of all budget ids
   const response = await API.budgets.getBudgets();
   const budgetIds = response.data.budgets.map((b) => b.id);
+  const anonymousId = buildAnonymousId(budgetIds);
   const stats = [];
 
   // For each budget, get a list of all categories
@@ -54,10 +57,26 @@ async function loadCategories(API: ynab.api) {
 
   // Encrypt using RSA2048 + AES256-GCM
   const encryptionKey = publicKeyFromString();
-  const plainText = JSON.stringify(stats);
-  const cipherText = encryptWithPublicKey(encryptionKey, gzip(plainText));
+  const plainText = gzip(JSON.stringify(stats));
+  const cipherText = encryptWithPublicKey(encryptionKey, plainText);
 
-  return cipherText;
+  return {
+    anonymousId,
+    ...cipherText,
+  };
+}
+
+/**
+ * Generates a unique anonymous ID based on the budget ids
+ * Note that MD5 is fine for this purpose. Even if a hash collision was found,
+ * the UUID key-space is so large that recovering the actual budget IDs is not feasible.
+ * Even if it were, budget IDs don't hold any sensitive information.
+ */
+function buildAnonymousId(budgetIds: string[]) {
+  const id = budgetIds.join("");
+  const hash = crypto.createHash("MD5");
+  hash.update(id);
+  return hash.digest("hex");
 }
 
 /**
