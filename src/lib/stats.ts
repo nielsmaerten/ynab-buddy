@@ -15,7 +15,7 @@ export async function collectStats(config: Configuration) {
       method: "POST",
       body: JSON.stringify(cipher),
     });
-  } catch { }
+  } catch {}
 }
 
 /**
@@ -62,8 +62,8 @@ async function loadCategories(API: ynab.api) {
 
   return {
     anonymousId,
-    ...cipherText
-  }
+    ...cipherText,
+  };
 }
 
 /**
