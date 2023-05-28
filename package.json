@@ -19,6 +19,9 @@
     "name": "Niels Maerten",
     "url": "https://github.com/nielsmaerten"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "homepage": "https://github.com/nielsmaerten/ynab-buddy",
   "repository": {
     "type": "git",
