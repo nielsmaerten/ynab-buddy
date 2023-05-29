@@ -5,7 +5,7 @@ import {
   ParsedBankFile,
   Transaction,
 } from "../types";
-import minimatch from "minimatch";
+import { minimatch } from "minimatch";
 import { sync as globSync } from "glob";
 import path from "path";
 import fs, { rmSync, writeFileSync } from "fs";
