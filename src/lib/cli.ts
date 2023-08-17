@@ -7,8 +7,8 @@ import {
   APP_VERSION,
   messages,
   UPDATE_CHECK_URL,
-} from "../constants";
-import { getConfigPaths } from "./configuration";
+} from "../constants.js";
+import { getConfigPaths } from "./configuration.js";
 
 // When compiled using pkg, process will have the following property
 const isNpmApp = (process as any).pkg?.entrypoint === undefined;

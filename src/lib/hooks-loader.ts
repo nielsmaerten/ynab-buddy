@@ -1,9 +1,9 @@
 import { Options } from "csv-parse";
 import fs from "fs";
-import { BankFile, Configuration, Transaction } from "../types";
+import { BankFile, Configuration, Transaction } from "../types.js";
 
 // First, let's import the javascript file that contains the hooks:
-function importHooksModule() {
+async function importHooksModule() {
   // When debugging, load the hooks file from inside the repository
   const environment = process.env.NODE_ENV || "production";
   const isDev = ["development", "test", "hooks"].includes(environment);
@@ -13,11 +13,11 @@ function importHooksModule() {
   const userHomeDir = require("os").homedir();
   const hooksPath = `${userHomeDir}/ynab-buddy/hooks.js`;
   if (fs.existsSync(hooksPath)) {
-    return require(hooksPath);
+    return await import(hooksPath);
   }
   return null;
 }
-const hooks = importHooksModule();
+const hooks = await importHooksModule();
 
 // A HookFunction is a function that can be called with any number of arguments,
 // and returns a value of type T.

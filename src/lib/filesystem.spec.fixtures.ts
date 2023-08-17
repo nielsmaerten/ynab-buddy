@@ -1,4 +1,4 @@
-import { BankFilePattern, Configuration, ParsedBankFile } from "../types";
+import { BankFilePattern, Configuration, ParsedBankFile } from "../types.js";
 
 // (Fake) paths to test files that will have to be matched to a pattern
 export const testFiles = {

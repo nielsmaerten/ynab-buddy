@@ -3,14 +3,14 @@ import path from "path";
 import chalk from "chalk";
 import { homedir } from "os";
 import { load } from "js-yaml";
-import { Configuration } from "../types";
-import * as hooks from "./hooks-loader";
+import { Configuration } from "../types.js";
+import * as hooks from "./hooks-loader.js";
 import {
   CONFIG_DIR,
   CONFIG_FILE,
   CONFIG_FILE_EXAMPLE,
   messages,
-} from "../constants";
+} from "../constants.js";
 
 /**
  * Reads configuration from the default config file.

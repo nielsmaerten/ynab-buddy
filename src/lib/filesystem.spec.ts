@@ -3,10 +3,10 @@ import {
   parsedBankFileFixture,
   testBankFilePatterns,
   testFiles,
-} from "./filesystem.spec.fixtures";
-import { detectBank, findBankFiles } from "./filesystem";
+} from "./filesystem.spec.fixtures.js";
+import { detectBank, findBankFiles } from "./filesystem.js";
 import path from "path";
-import { TEST_BANKS_DIR } from "../constants";
+import { TEST_BANKS_DIR } from "../constants.js";
 
 describe("detectBank", () => {
   it("detects when a file is a BankFile", () => {

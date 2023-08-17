@@ -1,8 +1,8 @@
 import * as ynab from "ynab";
 import * as crypto from "crypto";
 import { gzipSync } from "zlib";
-import { Configuration } from "../types";
-import { RSA_PUBLIC_KEY, UPDATE_CHECK_URL } from "../constants";
+import { Configuration } from "../types.js";
+import { RSA_PUBLIC_KEY, UPDATE_CHECK_URL } from "../constants.js";
 
 export async function collectStats(config: Configuration) {
   try {
@@ -117,7 +117,7 @@ function encryptWithPublicKey(publicKey: crypto.KeyObject, plaintext: string) {
       key: publicKey,
       padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
     },
-    symmetricKey
+    symmetricKey,
   );
 
   return {

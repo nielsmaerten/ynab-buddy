@@ -1,7 +1,7 @@
 import * as ynab from "ynab";
-import { Configuration } from "../types";
-import { collectStats } from "./stats";
-import { UPDATE_CHECK_URL } from "../constants";
+import { Configuration } from "../types.js";
+import { collectStats } from "./stats.js";
+import { UPDATE_CHECK_URL } from "../constants.js";
 
 jest.mock("ynab");
 
@@ -51,7 +51,7 @@ describe("collectStats", () => {
     expect(mockAPI.budgets.getBudgets).toHaveBeenCalled();
     expect((global as any).fetch).toHaveBeenCalledWith(
       UPDATE_CHECK_URL,
-      expect.any(Object)
+      expect.any(Object),
     );
   });
 

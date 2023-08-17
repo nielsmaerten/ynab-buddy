@@ -1,4 +1,4 @@
-import * as fixture from "./uploader.spec.fixtures";
+import * as fixture from "./uploader.spec.fixtures.js";
 
 describe("uploader", () => {
   // Patch sendToYnab so we can spy on what the uploader spits out

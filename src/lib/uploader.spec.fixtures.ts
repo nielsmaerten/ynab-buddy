@@ -1,4 +1,4 @@
-import { Configuration, ParsedBankFile } from "../types";
+import { Configuration, ParsedBankFile } from "../types.js";
 
 export const config: Configuration = {
   ynab: {

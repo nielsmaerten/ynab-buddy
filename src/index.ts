@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-import { messages } from "./constants";
-import * as cli from "./lib/cli";
-import { getConfiguration } from "./lib/configuration";
-import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
-import { parseBankFile } from "./lib/parser";
-import { upload } from "./lib/uploader";
-import { BankFile } from "./types";
-import { collectStats } from "./lib/stats";
+import { messages } from "./constants.js";
+import * as cli from "./lib/cli.js";
+import { getConfiguration } from "./lib/configuration.js";
+import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem.js";
+import { parseBankFile } from "./lib/parser.js";
+import { upload } from "./lib/uploader.js";
+import { BankFile } from "./types.js";
+import { collectStats } from "./lib/stats.js";
 import fs from "fs";
 
-(async () => {
+async function main() {
   // Ensure the tool has a valid configuration
   const config = getConfiguration();
 
@@ -48,7 +48,7 @@ import fs from "fs";
   // All done!
   cli.displayGoodbyeMessage();
   return cli.exitApp();
-})().catch(handleError);
+}
 
 function handleError(err: any) {
   console.error("Unhandled error: exiting.");
@@ -59,3 +59,5 @@ function handleError(err: any) {
 
   return cli.exitApp();
 }
+
+main().catch(handleError);

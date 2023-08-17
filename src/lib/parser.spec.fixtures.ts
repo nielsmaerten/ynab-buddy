@@ -1,4 +1,4 @@
-import { BankFile, Parser } from "../types";
+import { BankFile, Parser } from "../types.js";
 
 // IMPORTANT NOTE ON CSV FIXTURES FOR TESTING
 // Every CSV must:

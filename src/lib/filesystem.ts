@@ -4,14 +4,13 @@ import {
   BankFilePattern,
   ParsedBankFile,
   Transaction,
-} from "../types";
+} from "../types.js";
 import { minimatch } from "minimatch";
 import { sync as globSync } from "glob";
 import path from "path";
 import fs, { rmSync, writeFileSync } from "fs";
-import csvStringify from "csv-stringify/lib/sync";
-import stringify from "csv-stringify";
-import * as hooks from "./hooks-loader";
+import { Options as StringifyOptions, stringify } from "csv-stringify/sync";
+import * as hooks from "./hooks-loader.js";
 
 /**
  * Finds all files eligible for parsing in the directory.
@@ -80,18 +79,18 @@ export function exportCsv(result: ParsedBankFile) {
 
   // Produce a CSV file that can be read by YNAB
   const castDate = (d: Date) => d.toISOString();
-  const exportConfig: stringify.Options = {
+  const exportConfig: StringifyOptions = {
     header: true,
     cast: { date: castDate },
   };
   const csvTransactions = prepForCsv(transactions);
-  const csvText = csvStringify(csvTransactions, exportConfig);
+  const csvText = stringify(csvTransactions, exportConfig);
 
   // Export file will be named: [ORIGINAL_FILENAME].YNAB.csv
   // and saved to the same folder
   const originalFileName = path.basename(
     source.path,
-    path.extname(source.path)
+    path.extname(source.path),
   );
   const parentFolder = path.dirname(source.path);
   const exportFileName = `${originalFileName}.YNAB.csv`;

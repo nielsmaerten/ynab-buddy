@@ -1,5 +1,5 @@
-import { Configuration } from "../types";
-import * as fixture from "./configuration.spec.fixture";
+import { Configuration } from "../types.js";
+import * as fixture from "./configuration.spec.fixture.js";
 
 describe("configuration", () => {
   let configFileExists = true;

@@ -1,11 +1,10 @@
-import { BankFile, ParsedBankFile, Parser, Transaction } from "../types";
-import parseCsv from "csv-parse/lib/sync";
-import { Options as parseOptions } from "csv-parse";
+import { BankFile, ParsedBankFile, Parser, Transaction } from "../types.js";
+import { parse as parseCsv, Options as ParseOptions } from "csv-parse/sync";
 import { DateTime } from "luxon";
 import fs from "fs";
 import chalk from "chalk";
-import { messages } from "../constants";
-import * as hooks from "./hooks-loader";
+import { messages } from "../constants.js";
+import * as hooks from "./hooks-loader.js";
 
 export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const _csv = fs.readFileSync(source.path).toString();
@@ -135,7 +134,7 @@ function unifyColumns(columnName: string, index: number) {
     /^payee$/,
   ];
   const isAllowed = allowedColumns.some((regex) =>
-    columnLowerCase.match(regex)
+    columnLowerCase.match(regex),
   );
   if (isAllowed) return columnLowerCase;
   else return `__${index}`;
@@ -159,8 +158,7 @@ function deduplicateColumns(record: any) {
   return deduplicatedRecord;
 }
 
-const baseParseOptions: parseOptions = {
+const baseParseOptions: ParseOptions = {
   skipEmptyLines: true,
   relaxColumnCount: true,
-  columnsDuplicatesToArray: true,
 };

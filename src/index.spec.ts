@@ -1,4 +1,4 @@
-import { Configuration } from "./types";
+import { Configuration } from "./types.js";
 
 const mock_importPath = Math.random().toString();
 const mock_bankFiles = [Math.random().toString()];
@@ -77,7 +77,7 @@ describe("index.ts", () => {
   it("looks for bank files in import path", () => {
     expect(mocks.findBankFiles).toHaveBeenCalledWith(
       mock_importPath,
-      mock_getConfiguration
+      mock_getConfiguration,
     );
   });
 

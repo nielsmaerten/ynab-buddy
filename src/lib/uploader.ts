@@ -1,7 +1,7 @@
-import { Configuration, ParsedBankFile, Transaction } from "../types";
+import { Configuration, ParsedBankFile, Transaction } from "../types.js";
 import * as ynab from "ynab";
 import chalk from "chalk";
-import { messages } from "../constants";
+import { messages } from "../constants.js";
 
 export function upload(parsedFile: ParsedBankFile, config: Configuration) {
   const matchedPattern = parsedFile.source.matchedPattern!;
@@ -15,7 +15,7 @@ export function upload(parsedFile: ParsedBankFile, config: Configuration) {
   if (!shouldUpload(uploadFile, uploadGeneral)) return;
 
   const transactions = parsedFile.transactions.map((tx) =>
-    addYnabProps(tx, accountId, flagColor)
+    addYnabProps(tx, accountId, flagColor),
   );
 
   transactions.sort((a, b) => {
