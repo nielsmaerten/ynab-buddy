@@ -2016,6 +2016,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "chalk@npm:5.3.0"
+  checksum: 623922e077b7d1e9dedaea6f8b9e9352921f8ae3afe739132e0e00c275971bdd331268183b2628cf4ab1727c45ea1f28d7e24ac23ce1db1eb653c414ca8a5a80
+  languageName: node
+  linkType: hard
+
 "char-regex@npm:^1.0.2":
   version: 1.0.2
   resolution: "char-regex@npm:1.0.2"
@@ -2379,17 +2386,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-parse@npm:^4.16.3":
-  version: 4.16.3
-  resolution: "csv-parse@npm:4.16.3"
-  checksum: 5ad7790fc31c32ca1623bad1a54906134ba44fa109e8dd2dfda440bf7e9fd93610d9076a78f45c872701bfafdf7f93c9b75500c09d7efd6611d863f1d45ec69f
+"csv-parse@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "csv-parse@npm:5.4.0"
+  checksum: e9c2f23953f628849c476adeb9f500e9c03fcfe98fea7b732366e3c2ed0b07a5e67f32ca12a0132db6eb71601c080b4935b5921296db3625a597e24caa16f633
   languageName: node
   linkType: hard
 
-"csv-stringify@npm:^5.6.5":
-  version: 5.6.5
-  resolution: "csv-stringify@npm:5.6.5"
-  checksum: f93e1444857416081de3d86765b62e4c4f7c110974ad6bbcb0031d7db39b6624847ac9ee5705726e7011346f32f3696f27299b74b23a6c2b083adff0dd2755fe
+"csv-stringify@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "csv-stringify@npm:6.4.0"
+  checksum: 4d68c34a8f9ec52ec7b2da8a67c2c4b658431f4ba8f816a5e9b4664dc09ec37e5cf65a41dae13500488d38bd8b416b1dc179aad8275ba54e7b1735e21bbf2830
   languageName: node
   linkType: hard
 
@@ -5947,12 +5954,12 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.8.8":
-  version: 2.8.8
-  resolution: "prettier@npm:2.8.8"
+"prettier@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "prettier@npm:3.0.2"
   bin:
-    prettier: bin-prettier.js
-  checksum: b49e409431bf129dd89238d64299ba80717b57ff5a6d1c1a8b1a28b590d998a34e083fa13573bc732bb8d2305becb4c9a4407f8486c81fa7d55100eb08263cf8
+    prettier: bin/prettier.cjs
+  checksum: 118b59ddb6c80abe2315ab6d0f4dd1b253be5cfdb20622fa5b65bb1573dcd362e6dd3dcf2711dd3ebfe64aecf7bdc75de8a69dc2422dcd35bdde7610586b677a
   languageName: node
   linkType: hard
 
@@ -7589,11 +7596,11 @@ resolve@^1.20.0:
     "@types/node": ^18.15.3
     "@types/prompts": ^2.4.3
     abort-controller: ^3.0.0
-    chalk: ^4.1.2
+    chalk: ^5.3.0
     commitizen: ^4.3.0
     cross-env: ^7.0.3
-    csv-parse: ^4.16.3
-    csv-stringify: ^5.6.5
+    csv-parse: ^5.4.0
+    csv-stringify: ^6.4.0
     cz-conventional-changelog: 3.3.0
     glob: ^10.2.2
     jest: ^29.5.0
@@ -7602,19 +7609,19 @@ resolve@^1.20.0:
     minimatch: ^9.0.0
     np: ^7.7.0
     pkg: ^5.8.1
-    prettier: 2.8.8
+    prettier: ^3.0.2
     prompts: ^2.4.2
     ts-jest: ^29.0.5
     ts-node: ^10.9.1
     typescript: ^5.0.4
-    ynab: ^1.47.0
+    ynab: ^1.55.0
     zlib: ^1.0.5
   bin:
     ynab-buddy: ./dist/index.js
   languageName: unknown
   linkType: soft
 
-"ynab@npm:^1.47.0":
+"ynab@npm:^1.55.0":
   version: 1.55.0
   resolution: "ynab@npm:1.55.0"
   dependencies:
