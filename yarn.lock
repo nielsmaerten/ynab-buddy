@@ -1347,12 +1347,12 @@ __metadata:
   linkType: hard
 
 "@types/jest@npm:^29.4.4":
-  version: 29.5.9
-  resolution: "@types/jest@npm:29.5.9"
+  version: 29.5.10
+  resolution: "@types/jest@npm:29.5.10"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: 02245cff5f5b5ef46cc8c28acc516674aa167f2398bc4042752db7c763555928c5d62d56b3510eb8a2e5e25eea921f34866ef1c5515edfe16699b4a1e99ed4e1
+  checksum: ef385905787db528de9b6beb2688865c0bb276e64256ed60b9a1a6ffc0b75737456cb5e27e952a3241c5845b6a1da487470010dd30f3ca59c8581624c564a823
   languageName: node
   linkType: hard
 
@@ -1387,20 +1387,20 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 20.9.3
-  resolution: "@types/node@npm:20.9.3"
+  version: 20.9.4
+  resolution: "@types/node@npm:20.9.4"
   dependencies:
     undici-types: ~5.26.4
-  checksum: 0cfbfd2a8bd18acc75aa4d7685c7dcf56344f48addd4041d306dc194f3132f8014d56fd49fcb26bcdf400b883f9527e5e2beaf52dfce029cef15c69b8ed2e72a
+  checksum: 619144cfee8235f692009e4268a8b80ef4ec496670273ab1cef04e4a053b471f391af6701e65f2f91a107256933d902b6caec079d551b109e981b0b706624815
   languageName: node
   linkType: hard
 
 "@types/node@npm:^18.15.3":
-  version: 18.18.11
-  resolution: "@types/node@npm:18.18.11"
+  version: 18.18.12
+  resolution: "@types/node@npm:18.18.12"
   dependencies:
     undici-types: ~5.26.4
-  checksum: e4c2c5b792023c86248013589820d157ced46a35dcd60b15a3133a8f67f6b54c8870f245ecccbe7a12c49f1991ea84401946ddbb3f44894ec042642233e616d5
+  checksum: 59bb2e94b096761647fe70c79a3134f4d5f6017a493884beeeb525a9047c055db41dc5b0deb91e92160891cb84290f4da8a8ab4cc037f5341ec6ad48eb24ce10
   languageName: node
   linkType: hard
 
