@@ -1,7 +1,6 @@
 import fs from "fs";
 import chalk from "chalk";
 import prompts from "prompts";
-import "abort-controller/polyfill";
 import {
   APP_NAME,
   APP_VERSION,
@@ -87,6 +86,8 @@ export async function confirmImportPath(defaultPath: string | undefined) {
 
 export async function checkUpdate(thisVersion: string) {
   const timeoutMs = 3000;
+  // @TODO: Does AbortController still work after removing
+  // abort-controller polyfill from package.json?
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   const requestOpts = { signal: controller.signal };
