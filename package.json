@@ -57,7 +57,7 @@
     "@types/jest": "^29.4.4",
     "@types/js-yaml": "^4.0.5",
     "@types/luxon": "^3.2.0",
-    "@types/node": "^18.15.3",
+    "@types/node": "^20.11.19",
     "@types/prompts": "^2.4.3",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
