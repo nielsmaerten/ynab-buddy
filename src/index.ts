@@ -11,6 +11,8 @@ import fs from "fs";
 
 (async () => {
   // Ensure the tool has a valid configuration
+  console.log("EXPERIMENTAL ES2022 VERSION");
+  console.log("===========================");
   const config = getConfiguration();
 
   // Exit if the config file is not set up yet
