@@ -26,10 +26,10 @@
     "url": "https://github.com/nielsmaerten/ynab-buddy"
   },
   "scripts": {
-    "start": "ts-node ./src/index.ts",
     "hooks": "cross-env NODE_ENV=hooks yarn start",
     "check-types": "tsc --noEmit",
     "build": "parcel build ./src/index.ts --dist-dir dist",
+    "dev": "yarn build && node --inspect dist/index.mjs",
     "package": "yarn pkg ./dist/index.js --config ./package.json",
     "package:rebuild": "yarn build && yarn package",
     "publish:np": "yarn build && np --no-cleanup --no-yarn && yarn package --compress Brotli",
@@ -70,7 +70,6 @@
     "pkg": "^5.8.1",
     "prettier": "2.8.8",
     "ts-jest": "^29.0.5",
-    "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
