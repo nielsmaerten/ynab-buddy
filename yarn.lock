@@ -9799,19 +9799,19 @@ resolve@^1.20.0:
     ts-jest: ^29.0.5
     ts-node: ^10.9.1
     typescript: ^5.0.4
-    ynab: ^1.47.0
+    ynab: ^2.2.0
     zlib: ^1.0.5
   bin:
     ynab-buddy: ./dist/index.mjs
   languageName: unknown
   linkType: soft
 
-"ynab@npm:^1.47.0":
-  version: 1.55.0
-  resolution: "ynab@npm:1.55.0"
+"ynab@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "ynab@npm:2.2.0"
   dependencies:
     fetch-ponyfill: ^7.1.0
-  checksum: e12148816a83052f633f4cc00b4d6c0187672b15443a4ac5eaa59b20b3e5fb0ad2822114921a32ac8cdead1dbfa41ef75d55714a286b9dc4198f777f042f3f43
+  checksum: 74caf5c5ff02bd292b21e32b0bdac102793a5eb725388bc61faa1374b4d448582ee10d1243841f3fdb2b6753293cc6f4320c0fd7e9c33cad282eaeb24792793d
   languageName: node
   linkType: hard
 

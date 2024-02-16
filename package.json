@@ -82,7 +82,7 @@
     "luxon": "^3.3.0",
     "minimatch": "^9.0.0",
     "prompts": "^2.4.2",
-    "ynab": "^1.47.0",
+    "ynab": "^2.2.0",
     "zlib": "^1.0.5"
   },
   "resolutions": {
