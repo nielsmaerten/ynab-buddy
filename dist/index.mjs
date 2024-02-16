@@ -1,5 +1,5 @@
-import * as $hgUW1$process from "process";
 import $hgUW1$fs, {writeFileSync as $hgUW1$writeFileSync, rmSync as $hgUW1$rmSync} from "fs";
+import * as $hgUW1$process from "process";
 import $hgUW1$chalk from "chalk";
 import $hgUW1$prompts from "prompts";
 import $hgUW1$path from "path";
@@ -10,7 +10,7 @@ import {sync as $hgUW1$sync} from "glob";
 import {stringify as $hgUW1$stringify} from "csv-stringify/sync";
 import {parse as $hgUW1$parse} from "csv-parse/sync";
 import {DateTime as $hgUW1$DateTime} from "luxon";
-import {API as $hgUW1$API, SaveTransaction as $hgUW1$SaveTransaction} from "ynab";
+import $hgUW1$ynab, {API as $hgUW1$API} from "ynab";
 import {Buffer as $hgUW1$Buffer} from "buffer";
 import {createHash as $hgUW1$createHash, createPublicKey as $hgUW1$createPublicKey, randomBytes as $hgUW1$randomBytes, createCipheriv as $hgUW1$createCipheriv, publicEncrypt as $hgUW1$publicEncrypt, constants as $hgUW1$constants} from "crypto";
 import {gzipSync as $hgUW1$gzipSync} from "zlib";
@@ -50,7 +50,7 @@ if (parcelRequire == null) {
 
 var parcelRegister = parcelRequire.register;
 parcelRegister("jb6Pn", function(module, exports) {
-module.exports = JSON.parse('{"name":"ynab-buddy","version":"3.0.0-alpha.1","description":"Upload & import CSV files from any bank into YNAB","keywords":["ynab","youneedabudget","csv","import"],"type":"module","module":"./dist/index.mjs","bin":"./dist/index.mjs","files":["dist/","assets/"],"license":"MIT","author":{"name":"Niels Maerten","url":"https://github.com/nielsmaerten"},"homepage":"https://github.com/nielsmaerten/ynab-buddy","repository":{"type":"git","url":"https://github.com/nielsmaerten/ynab-buddy"},"scripts":{"start":"ts-node ./src/index.ts","hooks":"cross-env NODE_ENV=hooks yarn start","check-types":"tsc --noEmit","build":"parcel build ./src/index.ts --dist-dir dist","package":"yarn pkg ./dist/index.js --config ./package.json","package:rebuild":"yarn build && yarn package","publish:np":"yarn build && np --no-cleanup --no-yarn && yarn package --compress Brotli","test":"jest","lint:fix":"yarn prettier ./src --write","lint":"yarn prettier ./src --check"},"pkg":{"assets":["assets/config/example.yaml"],"scripts":"build/**/*.js","targets":["linux","win","macos"],"outputPath":"bin"},"config":{"commitizen":{"path":"./node_modules/cz-conventional-changelog"}},"devDependencies":{"@types/glob":"^8.1.0","@types/jest":"^29.4.4","@types/js-yaml":"^4.0.5","@types/luxon":"^3.2.0","@types/node":"^20.11.19","@types/prompts":"^2.4.3","commitizen":"^4.3.0","cross-env":"^7.0.3","cz-conventional-changelog":"3.3.0","jest":"^29.5.0","np":"^8.0.0","parcel":"^2.11.0","pkg":"^5.8.1","prettier":"2.8.8","ts-jest":"^29.0.5","ts-node":"^10.9.1","typescript":"^5.0.4"},"dependencies":{"chalk":"^4.1.2","csv-parse":"^5.5.3","csv-stringify":"^6.4.5","glob":"^10.2.2","js-yaml":"^4.1.0","luxon":"^3.3.0","minimatch":"^9.0.0","prompts":"^2.4.2","ynab":"^1.47.0","zlib":"^1.0.5"},"resolutions":{"minimist":"^1.2.7"},"packageManager":"yarn@3.8.0"}');
+module.exports = JSON.parse('{"name":"ynab-buddy","version":"3.0.0-alpha.1","description":"Upload & import CSV files from any bank into YNAB","keywords":["ynab","youneedabudget","csv","import"],"type":"module","module":"./dist/index.mjs","bin":"./dist/index.mjs","files":["dist/","assets/"],"license":"MIT","author":{"name":"Niels Maerten","url":"https://github.com/nielsmaerten"},"homepage":"https://github.com/nielsmaerten/ynab-buddy","repository":{"type":"git","url":"https://github.com/nielsmaerten/ynab-buddy"},"scripts":{"hooks":"cross-env NODE_ENV=hooks yarn start","check-types":"tsc --noEmit","build":"parcel build ./src/index.ts --dist-dir dist","dev":"yarn build && node --inspect dist/index.mjs","package":"yarn pkg ./dist/index.js --config ./package.json","package:rebuild":"yarn build && yarn package","publish:np":"yarn build && np --no-cleanup --no-yarn && yarn package --compress Brotli","test":"jest","lint:fix":"yarn prettier ./src --write","lint":"yarn prettier ./src --check"},"pkg":{"assets":["assets/config/example.yaml"],"scripts":"build/**/*.js","targets":["linux","win","macos"],"outputPath":"bin"},"config":{"commitizen":{"path":"./node_modules/cz-conventional-changelog"}},"devDependencies":{"@types/glob":"^8.1.0","@types/jest":"^29.4.4","@types/js-yaml":"^4.0.5","@types/luxon":"^3.2.0","@types/node":"^20.11.19","@types/prompts":"^2.4.3","commitizen":"^4.3.0","cross-env":"^7.0.3","cz-conventional-changelog":"3.3.0","jest":"^29.5.0","np":"^8.0.0","parcel":"^2.11.0","pkg":"^5.8.1","prettier":"2.8.8","ts-jest":"^29.0.5","typescript":"^5.0.4"},"dependencies":{"chalk":"^4.1.2","csv-parse":"^5.5.3","csv-stringify":"^6.4.5","glob":"^10.2.2","js-yaml":"^4.1.0","luxon":"^3.3.0","minimatch":"^9.0.0","prompts":"^2.4.2","ynab":"^2.2.0","zlib":"^1.0.5"},"resolutions":{"minimist":"^1.2.7"},"packageManager":"yarn@3.8.0"}');
 
 });
 
@@ -562,7 +562,7 @@ const $aca99e081e3432a7$export$e924fecc31593d2c = (TXs, budgetId, token)=>{
     const payload = {
         transactions: TXs
     };
-    const API = new $hgUW1$API(token);
+    const API = new (0, $hgUW1$ynab).API(token);
     const response = API.transactions.createTransactions(budgetId, payload);
     response.then(()=>{
         console.log((0, $hgUW1$chalk).greenBright((0, $234747a9630b4642$export$defe85febe8b728c).uploadSuccess), TXs.length);
@@ -599,7 +599,7 @@ const $aca99e081e3432a7$export$e924fecc31593d2c = (TXs, budgetId, token)=>{
         date: yyyymmdd,
         import_id: importId,
         amount: milliunits,
-        cleared: $hgUW1$SaveTransaction.ClearedEnum.Cleared,
+        cleared: "cleared",
         account_id: accountId,
         flag_color: $aca99e081e3432a7$var$getFlagColor(flagColor),
         memo: tx.memo.substring(0, 200),
@@ -607,21 +607,18 @@ const $aca99e081e3432a7$export$e924fecc31593d2c = (TXs, budgetId, token)=>{
     };
 }
 function $aca99e081e3432a7$var$getFlagColor(color) {
-    if (!color) return undefined;
-    switch(color.toLowerCase().trim()){
-        case "blue":
-            return $hgUW1$SaveTransaction.FlagColorEnum.Blue;
-        case "green":
-            return $hgUW1$SaveTransaction.FlagColorEnum.Green;
-        case "orange":
-            return $hgUW1$SaveTransaction.FlagColorEnum.Orange;
-        case "purple":
-            return $hgUW1$SaveTransaction.FlagColorEnum.Purple;
-        case "red":
-            return $hgUW1$SaveTransaction.FlagColorEnum.Red;
-        case "yellow":
-            return $hgUW1$SaveTransaction.FlagColorEnum.Yellow;
-    }
+    const allowedColors = [
+        "blue",
+        "green",
+        "orange",
+        "purple",
+        "red",
+        "yellow"
+    ];
+    const colorLowercase = color.toLowerCase().trim();
+    const isAllowed = allowedColors.includes(colorLowercase);
+    if (isAllowed) return colorLowercase;
+    else return undefined;
 }
 
 
@@ -669,7 +666,7 @@ async function $4196e1a261aff8e7$export$4c16e0a96e02cb69(config) {
         stats.push(categoryNames);
     }
     // Get stats on the current OS
-    const locale = undefined;
+    const locale = "en_US.UTF-8";
     const nodeVersion = $hgUW1$versions.node;
     const os = $hgUW1$platform;
     const osStats = {
@@ -738,11 +735,10 @@ function $4196e1a261aff8e7$var$encryptWithPublicKey(publicKey, plaintext) {
 
 
 
-
-(async ()=>{
+async function $149c1bd638913645$var$main() {
     // Ensure the tool has a valid configuration
-    console.log("EXPERIMENTAL ES2022 VERSION");
-    console.log("===========================");
+    console.log("EXPERIMENTAL ESM VERSION");
+    console.log("========================");
     const config = (0, $0e1e2b2fa84204ab$export$3de01744a82b21a4)();
     // Exit if the config file is not set up yet
     const isFirstRun = !config.configurationDone;
@@ -772,14 +768,17 @@ function $4196e1a261aff8e7$var$encryptWithPublicKey(publicKey, plaintext) {
     // All done!
     $c85895e77784e9fc$export$4537ca2decc9a0c();
     return $c85895e77784e9fc$export$9947cb5a2de76e2();
-})().catch($149c1bd638913645$var$handleError);
-function $149c1bd638913645$var$handleError(err) {
-    console.error("Unhandled error: exiting.");
-    const isVerbose = $hgUW1$argv.find((arg)=>arg.toLowerCase() === "-v");
-    if (isVerbose) console.error(JSON.stringify(err));
-    else console.log("For details, run with flag `-v`");
-    return $c85895e77784e9fc$export$9947cb5a2de76e2();
 }
+// Run the main function and catch any unhandled errors
+$149c1bd638913645$var$main().catch((err)=>{
+    console.error("Unhandled error: exiting.");
+    //const isVerbose = process.argv.find((arg) => arg.toLowerCase() === "-v");
+    //if (isVerbose) console.error(JSON.stringify(err));
+    //else console.log("For details, run with flag `-v`");
+    // @TODO: experimental version always prints the error
+    console.error(JSON.stringify(err));
+    return $c85895e77784e9fc$export$9947cb5a2de76e2();
+});
 
 
 //# sourceMappingURL=index.mjs.map

@@ -9,10 +9,10 @@ import { BankFile } from "./types";
 import { collectStats } from "./lib/stats";
 import fs from "fs";
 
-(async () => {
+async function main(): Promise<void> {
   // Ensure the tool has a valid configuration
-  console.log("EXPERIMENTAL ES2022 VERSION");
-  console.log("===========================");
+  console.log("EXPERIMENTAL ESM VERSION");
+  console.log("========================");
   const config = getConfiguration();
 
   // Exit if the config file is not set up yet
@@ -50,14 +50,17 @@ import fs from "fs";
   // All done!
   cli.displayGoodbyeMessage();
   return cli.exitApp();
-})().catch(handleError);
+}
 
-function handleError(err: any) {
+// Run the main function and catch any unhandled errors
+main().catch((err) => {
   console.error("Unhandled error: exiting.");
 
-  const isVerbose = process.argv.find((arg) => arg.toLowerCase() === "-v");
-  if (isVerbose) console.error(JSON.stringify(err));
-  else console.log("For details, run with flag `-v`");
+  //const isVerbose = process.argv.find((arg) => arg.toLowerCase() === "-v");
+  //if (isVerbose) console.error(JSON.stringify(err));
+  //else console.log("For details, run with flag `-v`");
+  // @TODO: experimental version always prints the error
+  console.error(JSON.stringify(err));
 
   return cli.exitApp();
-}
+});

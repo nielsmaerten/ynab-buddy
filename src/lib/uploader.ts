@@ -1,5 +1,5 @@
 import { Configuration, ParsedBankFile, Transaction } from "../types";
-import * as ynab from "ynab";
+import ynab, { TransactionFlagColor } from "ynab";
 import chalk from "chalk";
 import { messages } from "../constants";
 
@@ -87,7 +87,7 @@ function addYnabProps(tx: Transaction, accountId: string, flagColor: string) {
     date: yyyymmdd,
     import_id: importId,
     amount: milliunits,
-    cleared: ynab.SaveTransaction.ClearedEnum.Cleared,
+    cleared: "cleared",
     account_id: accountId,
     flag_color: getFlagColor(flagColor),
     memo: tx.memo.substring(0, 200),
@@ -95,20 +95,10 @@ function addYnabProps(tx: Transaction, accountId: string, flagColor: string) {
   };
 }
 
-function getFlagColor(color: string) {
-  if (!color) return undefined;
-  switch (color.toLowerCase().trim()) {
-    case "blue":
-      return ynab.SaveTransaction.FlagColorEnum.Blue;
-    case "green":
-      return ynab.SaveTransaction.FlagColorEnum.Green;
-    case "orange":
-      return ynab.SaveTransaction.FlagColorEnum.Orange;
-    case "purple":
-      return ynab.SaveTransaction.FlagColorEnum.Purple;
-    case "red":
-      return ynab.SaveTransaction.FlagColorEnum.Red;
-    case "yellow":
-      return ynab.SaveTransaction.FlagColorEnum.Yellow;
-  }
+function getFlagColor(color: string): TransactionFlagColor | undefined {
+  const allowedColors = ["blue", "green", "orange", "purple", "red", "yellow"];
+  const colorLowercase = color.toLowerCase().trim();
+  const isAllowed = allowedColors.includes(colorLowercase);
+  if (isAllowed) return colorLowercase as TransactionFlagColor;
+  else return undefined;
 }
