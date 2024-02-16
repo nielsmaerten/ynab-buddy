@@ -10,6 +10,7 @@ import {
 import { getConfigPaths } from "./configuration";
 
 // When compiled using pkg, process will have the following property
+// @TODO: This won't work if I stop using pkg
 const isNpmApp = (process as any).pkg?.entrypoint === undefined;
 
 export function displayWelcomeMessage(isFirstRun: boolean) {

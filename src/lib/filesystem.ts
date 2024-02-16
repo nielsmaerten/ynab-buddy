@@ -9,8 +9,7 @@ import { minimatch } from "minimatch";
 import { sync as globSync } from "glob";
 import path from "path";
 import fs, { rmSync, writeFileSync } from "fs";
-import csvStringify from "csv-stringify/lib/sync";
-import stringify from "csv-stringify";
+import { stringify, Options } from "csv-stringify/sync";
 import * as hooks from "./hooks-loader";
 
 /**
@@ -80,12 +79,12 @@ export function exportCsv(result: ParsedBankFile) {
 
   // Produce a CSV file that can be read by YNAB
   const castDate = (d: Date) => d.toISOString();
-  const exportConfig: stringify.Options = {
+  const exportConfig: Options = {
     header: true,
     cast: { date: castDate },
   };
   const csvTransactions = prepForCsv(transactions);
-  const csvText = csvStringify(csvTransactions, exportConfig);
+  const csvText = stringify(csvTransactions, exportConfig);
 
   // Export file will be named: [ORIGINAL_FILENAME].YNAB.csv
   // and saved to the same folder

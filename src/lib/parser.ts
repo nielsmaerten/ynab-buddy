@@ -1,6 +1,5 @@
 import { BankFile, ParsedBankFile, Parser, Transaction } from "../types";
-import parseCsv from "csv-parse/lib/sync";
-import { Options as parseOptions } from "csv-parse";
+import { parse, Options } from "csv-parse/sync";
 import { DateTime } from "luxon";
 import fs from "fs";
 import chalk from "chalk";
@@ -20,7 +19,7 @@ export function parseBankFile(source: BankFile, parsers: Parser[]) {
   const csv = hooks.onCsvLoaded(_csv);
   const parseOptions = hooks.onParseOptionsLoaded(_parseOptions);
   parseOptions.onRecord = hooks.onRecord;
-  let records: any[] = parseCsv(csv, parseOptions);
+  let records: any[] = parse(csv, parseOptions);
 
   // Delete header and footer rows
   const startRow = parser.header_rows;
@@ -159,8 +158,9 @@ function deduplicateColumns(record: any) {
   return deduplicatedRecord;
 }
 
-const baseParseOptions: parseOptions = {
+const baseParseOptions: Options = {
   skipEmptyLines: true,
   relaxColumnCount: true,
-  columnsDuplicatesToArray: true,
+  groupColumnsByName: true, // @TODO: New option, check if this still works
+  // columnsDuplicatesToArray: true, // Deprecated
 };
