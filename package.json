@@ -86,5 +86,5 @@
   "resolutions": {
     "minimist": "^1.2.7"
   },
-  "packageManager": "yarn@3.8.0"
+  "packageManager": "yarn@3.8.1"
 }
