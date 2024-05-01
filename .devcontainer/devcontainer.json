@@ -3,7 +3,9 @@
 {
 	"name": "ynab-buddy",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"github-cli": "latest",
