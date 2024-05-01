@@ -79,7 +79,7 @@ export function exportCsv(result: ParsedBankFile) {
   if (!shouldExport) return;
 
   // Produce a CSV file that can be read by YNAB
-  const castDate = (d: Date) => d.toISOString();
+  const castDate = (d: Date) => d.toISOString().substring(0, 10);
   const exportConfig: stringify.Options = {
     header: true,
     cast: { date: castDate },
