@@ -94,7 +94,7 @@ describe("CSV Export (simulated)", () => {
 
     const actual = writeFileSync_mock.mock.calls[0][1];
     const expected = `Amount,Date,Memo
-420.69,1990-02-27T00:00:00.000Z,TEST MEMO
+420.69,1990-02-27,TEST MEMO
 `;
 
     expect(actual).toEqual(expected);

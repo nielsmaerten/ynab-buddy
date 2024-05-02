@@ -79,10 +79,8 @@ export function exportCsv(result: ParsedBankFile) {
   if (!shouldExport) return;
 
   // Produce a CSV file that can be read by YNAB
-  const castDate = (d: Date) => d.toISOString().substring(0, 10);
   const exportConfig: stringify.Options = {
     header: true,
-    cast: { date: castDate },
   };
   const csvTransactions = prepForCsv(transactions);
   const csvText = csvStringify(csvTransactions, exportConfig);
@@ -104,7 +102,7 @@ const prepForCsv = (transactions: Transaction[]) =>
   transactions.map((tx) => {
     const csvTx = {
       Amount: tx.amount,
-      Date: tx.date.toISOString(),
+      Date: tx.date.toISOString().substring(0, 10),
       Memo: tx.memo,
       Payee: tx.payee_name,
     };
