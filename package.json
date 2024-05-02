@@ -30,7 +30,8 @@
     "build": "tsc",
     "package": "yarn pkg ./dist/index.js --config ./package.json",
     "package:rebuild": "yarn build && yarn package",
-    "publish:np": "yarn build && np --no-cleanup && yarn package --compress Brotli",
+    "publish:np": "yarn np",
+    "postpublish": "yarn package --compress Brotli",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
     "lint": "yarn prettier ./src --check"
@@ -86,5 +87,9 @@
   "resolutions": {
     "minimist": "^1.2.7"
   },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.1.1",
+  "np": {
+    "testScript": "yarn package:rebuild && yarn test",
+    "cleanup": false
+  }
 }
