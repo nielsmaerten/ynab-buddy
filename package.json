@@ -9,7 +9,9 @@
     "import"
   ],
   "main": "dist/index.js",
-  "bin": "./dist/index.js",
+  "bin": {
+    "ynab-buddy": "dist/index.js"
+  },
   "files": [
     "dist/",
     "assets/"
@@ -22,7 +24,7 @@
   "homepage": "https://github.com/nielsmaerten/ynab-buddy",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nielsmaerten/ynab-buddy"
+    "url": "git+https://github.com/nielsmaerten/ynab-buddy.git"
   },
   "scripts": {
     "start": "ts-node ./src/index.ts",
