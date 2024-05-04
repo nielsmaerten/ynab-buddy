@@ -7841,7 +7841,7 @@ __metadata:
     ynab: "npm:^1.47.0"
     zlib: "npm:^1.0.5"
   bin:
-    ynab-buddy: ./dist/index.js
+    ynab-buddy: dist/index.js
   languageName: unknown
   linkType: soft
 
