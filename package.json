@@ -28,9 +28,9 @@
     "start": "ts-node ./src/index.ts",
     "hooks": "cross-env NODE_ENV=hooks yarn start",
     "build": "tsc",
-    "package": "yarn pkg ./dist/index.js --config ./package.json",
-    "package:rebuild": "yarn build && yarn package",
-    "publish:np": "yarn np",
+    "package": "yarn build && yarn pkg ./dist/index.js --config ./package.json",
+    "publish": "yarn np",
+    "prepublish": "yarn package && yarn test",
     "postpublish": "yarn package --compress Brotli",
     "test": "jest",
     "lint:fix": "yarn prettier ./src --write",
@@ -89,7 +89,6 @@
   },
   "packageManager": "yarn@4.2.1",
   "np": {
-    "testScript": "yarn package:rebuild && yarn test",
     "cleanup": false
   }
 }
