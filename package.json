@@ -1,6 +1,6 @@
 {
   "name": "ynab-buddy",
-  "version": "2.0.2-2",
+  "version": "2.0.2-3",
   "description": "Upload & import CSV files from any bank into YNAB",
   "keywords": [
     "ynab",
@@ -89,6 +89,7 @@
   },
   "packageManager": "yarn@4.2.1",
   "np": {
-    "cleanup": false
+    "cleanup": false,
+    "no-publish": true
   }
 }
