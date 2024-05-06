@@ -51,7 +51,6 @@ export const expectedTransactions = [
     account_id: "testAccountId",
     flag_color: "purple",
     payee_name: "payee1",
-    occurrence: 1,
   },
   {
     amount: 420000,
@@ -61,7 +60,6 @@ export const expectedTransactions = [
     cleared: "cleared",
     account_id: "testAccountId",
     flag_color: "purple",
-    occurrence: 2,
   },
   {
     amount: 69000,
@@ -71,7 +69,6 @@ export const expectedTransactions = [
     cleared: "cleared",
     account_id: "testAccountId",
     flag_color: "purple",
-    occurrence: 1,
   },
   {
     amount: 69000,
@@ -81,6 +78,5 @@ export const expectedTransactions = [
     cleared: "cleared",
     account_id: "testAccountId",
     flag_color: "purple",
-    occurrence: 1,
   },
 ];

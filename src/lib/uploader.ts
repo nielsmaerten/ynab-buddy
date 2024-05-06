@@ -1,9 +1,10 @@
 import { Configuration, ParsedBankFile, Transaction } from "../types";
-import * as ynab from "ynab";
+import * as YNAB from "ynab";
 import chalk from "chalk";
 import { messages } from "../constants";
 
 export function upload(parsedFile: ParsedBankFile, config: Configuration) {
+  // Get config values required for uploading
   const matchedPattern = parsedFile.source.matchedPattern!;
   const flagColor = matchedPattern.ynab_flag_color;
   const accountId = matchedPattern.ynab_account_id;
@@ -12,37 +13,43 @@ export function upload(parsedFile: ParsedBankFile, config: Configuration) {
   const uploadGeneral = config.ynab.upload;
   const token = config.ynab.token;
 
+  // Bail if upload is disabled for this file, or globally
   if (!shouldUpload(uploadFile, uploadGeneral)) return;
 
-  const transactions = parsedFile.transactions.map((tx) =>
-    addYnabProps(tx, accountId, flagColor)
+  // Add YNAB-specific props to each transaction
+  // This turns a BuddyTransaction into a YNAB.SaveTransaction
+  const transactions: YNAB.SaveTransaction[] = parsedFile.transactions.map(
+    (tx) => addYnabProps(tx, accountId, flagColor)
   );
 
-  transactions.sort((a, b) => {
-    if (a.import_id > b.import_id) return 1;
-    else if (a.import_id < b.import_id) return -1;
-    return 0;
+  // Group transactions by import_id
+  const txByImportId: { [importId: string]: YNAB.SaveTransaction[] } = {};
+  transactions.forEach((tx) => {
+    if (!txByImportId[tx.import_id!]) txByImportId[tx.import_id!] = [];
+    txByImportId[tx.import_id!].push(tx);
   });
 
-  for (let i = 0; i < transactions.length; i++) {
-    const tx = transactions[i];
-    const prev_tx = transactions[i - 1] || {};
-    const sameAmount = tx.amount === prev_tx.amount;
-    const sameDate = tx.date === prev_tx.date;
-    if (sameAmount && sameDate) {
-      tx.occurrence = prev_tx.occurrence + 1;
-    }
-    tx.import_id = `${tx.import_id}${tx.occurrence}`;
-  }
+  // Add occurrence to import_id
+  Object.values(txByImportId).forEach((txs) => {
+    txs.forEach((tx, i) => {
+      tx.import_id = `${tx.import_id}:${i + 1}`;
+    });
+  });
 
-  return sendToYnab(transactions, budgetId, token);
+  // Flatten the array of transactions
+  const uniqueTransactions = Object.values(txByImportId).flat();
+  return sendToYnab(uniqueTransactions, budgetId, token);
 }
 
-export const sendToYnab = (TXs: any[], budgetId: string, token: string) => {
-  const payload = {
+export const sendToYnab = (
+  TXs: YNAB.SaveTransaction[],
+  budgetId: string,
+  token: string
+) => {
+  const payload: YNAB.PostTransactionsWrapper = {
     transactions: TXs,
   };
-  const API = new ynab.API(token);
+  const API = new YNAB.API(token);
   const response = API.transactions.createTransactions(budgetId, payload);
   response
     .then(() => {
@@ -74,41 +81,37 @@ function shouldUpload(uploadFile?: boolean, uploadGeneral?: boolean) {
  * Modify the props on a Transaction so they can be sent to the YNAB API
  * Refer to the YNAB API docs for more info on milliunits and the importId
  */
-function addYnabProps(tx: Transaction, accountId: string, flagColor: string) {
+function addYnabProps(
+  tx: Transaction,
+  accountId: string,
+  flagColor: string
+): YNAB.SaveTransaction {
   // Amount is expressed in milliunits. Any precision beyond 0.001 is discarded
   const milliunits = Math.floor(tx.amount * 1000);
 
-  // This is only a partial importId. Occurrence will be added in the next step
+  // YNAB expects a unique import_id for each transaction to allow for idempotent uploads.
+  // The import_id can be any string, but it's convention to use the format:
+  // `YNAB:${milliunits}:${yyyymmdd}:${occurrence}`
+  // This lets ynab-buddy play nicely with other tools that might
+  // upload the same transactions, including YNAB's own Auto Import feature.
+  // Note that occurrence is no yet included here, but will be added later.
   const yyyymmdd = tx.date.toISOString().substring(0, 10);
-  const importId = `YNAB:${milliunits}:${yyyymmdd}:`;
+  const importId = `YNAB:${milliunits}:${yyyymmdd}`;
 
   return {
     ...tx,
     date: yyyymmdd,
     import_id: importId,
     amount: milliunits,
-    cleared: ynab.SaveTransaction.ClearedEnum.Cleared,
+    cleared: "cleared",
     account_id: accountId,
     flag_color: getFlagColor(flagColor),
     memo: tx.memo.substring(0, 200),
-    occurrence: 1,
   };
 }
 
-function getFlagColor(color: string) {
-  if (!color) return undefined;
-  switch (color.toLowerCase().trim()) {
-    case "blue":
-      return ynab.SaveTransaction.FlagColorEnum.Blue;
-    case "green":
-      return ynab.SaveTransaction.FlagColorEnum.Green;
-    case "orange":
-      return ynab.SaveTransaction.FlagColorEnum.Orange;
-    case "purple":
-      return ynab.SaveTransaction.FlagColorEnum.Purple;
-    case "red":
-      return ynab.SaveTransaction.FlagColorEnum.Red;
-    case "yellow":
-      return ynab.SaveTransaction.FlagColorEnum.Yellow;
-  }
+function getFlagColor(color: string): YNAB.TransactionFlagColor | undefined {
+  const validColor: string[] = Object.values(YNAB.TransactionFlagColor);
+  if (validColor.includes(color)) return color as YNAB.TransactionFlagColor;
+  else return undefined;
 }
