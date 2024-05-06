@@ -7838,19 +7838,19 @@ __metadata:
     ts-jest: "npm:^29.0.5"
     ts-node: "npm:^10.9.1"
     typescript: "npm:^5.0.4"
-    ynab: "npm:^1.47.0"
+    ynab: "npm:^2.0.0"
     zlib: "npm:^1.0.5"
   bin:
     ynab-buddy: dist/index.js
   languageName: unknown
   linkType: soft
 
-"ynab@npm:^1.47.0":
-  version: 1.55.0
-  resolution: "ynab@npm:1.55.0"
+"ynab@npm:^2.0.0":
+  version: 2.2.0
+  resolution: "ynab@npm:2.2.0"
   dependencies:
     fetch-ponyfill: "npm:^7.1.0"
-  checksum: 10c0/1604f97a6968cef4f1dd861aaf670998d5eda20778e6a03b087fed5b3660613646edadc02e4d03ee358f9ceaa9983aa68696b6b92d768f49e7a3749110a4f6ab
+  checksum: 10c0/8670ba92c5d9265efaae15fe8e87d895498f61fcd509312b6262c4e659e818f0ca7786cdd81478aa416b5477c711a6dd340322aed815a649b34db4f1d696c2ef
   languageName: node
   linkType: hard
 
