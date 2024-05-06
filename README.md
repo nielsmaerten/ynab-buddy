@@ -27,13 +27,20 @@ https://user-images.githubusercontent.com/4604406/192013081-5b00b20c-9b67-4a74-8
 
 1. **Download** CSV-files containing your transactions from your bank
 2. **Run** `ynab-buddy` from your terminal/command line, or double-click the executable
-3. **Done**! Your transactions are now in YNAB. Start categorizing and take control of your finances :)
+3. Close the window and find the configutation file "config.yaml" in your home directory i.e. for windows this is located at "C:/Users/[username]/ynab-buddy"
+4. Edit and Fill in the config file. (use / for directories, not \). Save it in the same location. 
+5. Now again **Run** `ynab-buddy` from your terminal/command line, or double-click the executable
+6. **Done**! Your transactions are now in YNAB. Start categorizing and take control of your finances :)
+
+
 
 ## ⚙️ How to Configure
 
 When you run ynab-buddy for the first time, a configuration file will be created in your home directory. This file helps ynab-buddy understand the structure of your bank's files and how to process them.
 
 To make ynab-buddy work seamlessly with your bank, open the config file and follow the instructions provided in the comments.
+
+*Note that YNAB does not filter our duplicates with this method, so use the flag colour to distinguish newly imported transactions.
 
 ## 🆘 Where to Get Help
 
