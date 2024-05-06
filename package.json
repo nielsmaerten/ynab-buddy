@@ -1,6 +1,6 @@
 {
   "name": "ynab-buddy",
-  "version": "2.0.2-1",
+  "version": "2.0.2-2",
   "description": "Upload & import CSV files from any bank into YNAB",
   "keywords": [
     "ynab",
@@ -29,7 +29,7 @@
     "hooks": "cross-env NODE_ENV=hooks yarn start",
     "build": "tsc",
     "package": "yarn build && yarn pkg ./dist/index.js --config ./package.json",
-    "publish": "yarn np",
+    "release": "yarn np",
     "prepublish": "yarn package && yarn test",
     "postpublish": "yarn package --compress Brotli",
     "test": "jest",
