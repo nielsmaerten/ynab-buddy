@@ -40,7 +40,7 @@ When you run ynab-buddy for the first time, a configuration file will be created
 
 To make ynab-buddy work seamlessly with your bank, open the config file and follow the instructions provided in the comments.
 
-*Note that YNAB does not filter our duplicates with this method, so use the flag colour to distinguish newly imported transactions.
+*Note that YNAB does not filter out duplicates with this method, so use the flag colour to distinguish newly imported transactions.
 
 ## 🆘 Where to Get Help
 
