@@ -15,7 +15,10 @@ import fs from "fs";
 
   // Exit if the config file is not set up yet
   const isFirstRun = !config.configurationDone;
-  if (!config.configurationDone) return cli.exitApp();
+  if (isFirstRun) {
+    cli.displayWelcomeMessage(isFirstRun);
+    return cli.exitApp();
+  }
 
   // Display welcome message and collect stats (if allowed)
   const statsPromise = collectStats(config);
