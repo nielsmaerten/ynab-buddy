@@ -29,7 +29,7 @@
     "hooks": "cross-env NODE_ENV=hooks yarn start",
     "build": "tsc",
     "package": "yarn build && yarn pkg ./dist/index.js --config ./package.json",
-    "release": "yarn np",
+    "release": "yarn np && npm publish",
     "prepublish": "yarn package && yarn test",
     "postpublish": "yarn package --compress Brotli",
     "test": "jest",
@@ -90,6 +90,6 @@
   "packageManager": "yarn@4.2.1",
   "np": {
     "cleanup": false,
-    "no-publish": true
+    "publish": false
   }
 }

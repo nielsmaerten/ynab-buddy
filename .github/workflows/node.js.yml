@@ -31,7 +31,7 @@ jobs:
       - run: yarn
       - run: yarn test
       - run: yarn lint
-      - run: yarn package:rebuild --compress Brotli
+      - run: yarn package --compress Brotli
         if: matrix.node-version == '20.x'
 
       - name: Codecov
