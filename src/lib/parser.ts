@@ -74,10 +74,20 @@ function parseDate(record: any, dateFormat: string) {
   throw "PARSING ERROR";
 }
 
+function getValue(inflow: any, outflow: any, amount: any) {
+  if (inflow !== undefined && inflow !== "0" && inflow !== 0) {
+    return inflow;
+  } else if (outflow !== undefined && outflow !== "0" && outflow !== 0) {
+    return outflow;
+  } else {
+    return amount;
+  }
+}
+
 function parseAmount(record: any, parser: Parser): number {
   const { thousand_separator, decimal_separator, outflow_indicator } = parser;
   const { inflow, outflow, amount, in_out_flag } = record;
-  let value = inflow || outflow || amount;
+  let value = getValue(inflow, outflow, amount);
 
   if (typeof value === "string") {
     if (thousand_separator) {
@@ -101,9 +111,17 @@ function parseAmount(record: any, parser: Parser): number {
 
   // Invert the value if this transaction is an outflow
   const hasOutflowFlag = Boolean(in_out_flag?.startsWith(outflow_indicator));
-  const hasOutflowColumn = outflow?.length > 0;
-  const hasInflowColumn = inflow?.length > 0;
-  const isOutflow = (hasOutflowColumn && !hasInflowColumn) || hasOutflowFlag;
+  const hasOutflowValue =
+    outflow?.length > 0 &&
+    outflow !== undefined &&
+    outflow !== "0" &&
+    outflow !== 0;
+  const hasInflowValue =
+    inflow?.length > 0 &&
+    inflow !== undefined &&
+    inflow !== "0" &&
+    inflow !== 0;
+  const isOutflow = (hasOutflowValue && !hasInflowValue) || hasOutflowFlag;
   if (isOutflow) {
     value = Math.abs(value) * -1;
   }
