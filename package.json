@@ -59,6 +59,7 @@
     "@types/js-yaml": "^4.0.5",
     "@types/luxon": "^3.2.0",
     "@types/node": "^20.0.0",
+    "@types/pako": "^2",
     "@types/prompts": "^2.4.3",
     "@yao-pkg/pkg": "^5.8.1",
     "commitizen": "^4.3.0",
@@ -80,9 +81,9 @@
     "js-yaml": "^4.1.0",
     "luxon": "^3.3.0",
     "minimatch": "^9.0.0",
+    "pako": "^2.1.0",
     "prompts": "^2.4.2",
-    "ynab": "^2.0.0",
-    "zlib": "^1.0.5"
+    "ynab": "^2.0.0"
   },
   "resolutions": {
     "minimist": "^1.2.7"

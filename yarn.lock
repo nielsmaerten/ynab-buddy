@@ -1462,6 +1462,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/pako@npm:^2":
+  version: 2.0.3
+  resolution: "@types/pako@npm:2.0.3"
+  checksum: 10c0/45119ac3c4e8a77317c35493327039b74e333562f06ce038048228918d8ddfaa7958125aab960d1565b3861046022754c414dba1eecb210c44a32c415956bee2
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
@@ -6015,6 +6022,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pako@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "pako@npm:2.1.0"
+  checksum: 10c0/8e8646581410654b50eb22a5dfd71159cae98145bd5086c9a7a816ec0370b5f72b4648d08674624b3870a521e6a3daffd6c2f7bc00fdefc7063c9d8232ff5116
+  languageName: node
+  linkType: hard
+
 "parent-module@npm:^1.0.0":
   version: 1.0.1
   resolution: "parent-module@npm:1.0.1"
@@ -7821,6 +7835,7 @@ __metadata:
     "@types/js-yaml": "npm:^4.0.5"
     "@types/luxon": "npm:^3.2.0"
     "@types/node": "npm:^20.0.0"
+    "@types/pako": "npm:^2"
     "@types/prompts": "npm:^2.4.3"
     "@yao-pkg/pkg": "npm:^5.8.1"
     abort-controller: "npm:^3.0.0"
@@ -7836,13 +7851,13 @@ __metadata:
     luxon: "npm:^3.3.0"
     minimatch: "npm:^9.0.0"
     np: "npm:^10.0.0"
+    pako: "npm:^2.1.0"
     prettier: "npm:2.8.8"
     prompts: "npm:^2.4.2"
     ts-jest: "npm:^29.0.5"
     ts-node: "npm:^10.9.1"
     typescript: "npm:^5.0.4"
     ynab: "npm:^2.0.0"
-    zlib: "npm:^1.0.5"
   bin:
     ynab-buddy: dist/index.js
   languageName: unknown
@@ -7861,12 +7876,5 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
-  languageName: node
-  linkType: hard
-
-"zlib@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "zlib@npm:1.0.5"
-  checksum: 10c0/34bd33f4fdcda34f57a1ab628ceb423bdf8ef07290f46cd944eedd9a66458cc24ccf3c770da73dc0f8d28016607d861290ac5c53d49113177f7c321838df2913
   languageName: node
   linkType: hard
