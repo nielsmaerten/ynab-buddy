@@ -75,9 +75,9 @@ function parseDate(record: any, dateFormat: string) {
 }
 
 function getValue(inflow: any, outflow: any, amount: any) {
-  if (inflow !== undefined && inflow !== "0" && inflow !== 0) {
+  if (inflow && inflow !== "0" && inflow !== 0) {
     return inflow;
-  } else if (outflow !== undefined && outflow !== "0" && outflow !== 0) {
+  } else if (outflow && outflow !== "0" && outflow !== 0) {
     return outflow;
   } else {
     return amount;
@@ -112,15 +112,9 @@ function parseAmount(record: any, parser: Parser): number {
   // Invert the value if this transaction is an outflow
   const hasOutflowFlag = Boolean(in_out_flag?.startsWith(outflow_indicator));
   const hasOutflowValue =
-    outflow?.length > 0 &&
-    outflow !== undefined &&
-    outflow !== "0" &&
-    outflow !== 0;
+    outflow?.length > 0 && outflow && outflow !== "0" && outflow !== 0;
   const hasInflowValue =
-    inflow?.length > 0 &&
-    inflow !== undefined &&
-    inflow !== "0" &&
-    inflow !== 0;
+    inflow?.length > 0 && inflow && inflow !== "0" && inflow !== 0;
   const isOutflow = (hasOutflowValue && !hasInflowValue) || hasOutflowFlag;
   if (isOutflow) {
     value = Math.abs(value) * -1;
