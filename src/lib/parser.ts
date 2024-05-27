@@ -74,14 +74,12 @@ function parseDate(record: any, dateFormat: string) {
   throw "PARSING ERROR";
 }
 
-function getValue(inflow: any, outflow: any, amount: any) {
-  if (inflow && inflow !== "0" && inflow !== 0) {
-    return inflow;
-  } else if (outflow && outflow !== "0" && outflow !== 0) {
-    return outflow;
-  } else {
-    return amount;
-  }
+/**
+ * Finds the first value that's not: "0" (string) or falsy (undefined, null, "")
+ * @see https://github.com/nielsmaerten/ynab-buddy/pull/269
+ */
+function getValue(...args: any[]) {
+  return args.find((value) => value && value !== "0");
 }
 
 function parseAmount(record: any, parser: Parser): number {
@@ -109,15 +107,14 @@ function parseAmount(record: any, parser: Parser): number {
     value = parseFloat(value); // "420.69" ==> 420.69
   }
 
-  // Invert the value if this transaction is an outflow
+  // If this is an outflow transaction, make the amount negative
   const hasOutflowFlag = Boolean(in_out_flag?.startsWith(outflow_indicator));
-  const hasOutflowValue =
-    outflow?.length > 0 && outflow && outflow !== "0" && outflow !== 0;
-  const hasInflowValue =
-    inflow?.length > 0 && inflow && inflow !== "0" && inflow !== 0;
-  const isOutflow = (hasOutflowValue && !hasInflowValue) || hasOutflowFlag;
-  if (isOutflow) {
-    value = Math.abs(value) * -1;
+  const isOutflow = Boolean(getValue(outflow));
+  const isInflow = Boolean(getValue(inflow));
+
+  const isOutflowTransaction = (isOutflow && !isInflow) || hasOutflowFlag;
+  if (isOutflowTransaction) {
+    value = Math.abs(value) * -1; // 420.69 -> -420.69
   }
 
   return value;
