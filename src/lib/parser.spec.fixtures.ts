@@ -68,15 +68,14 @@ invalid footer row
 ,01/09/2020,01/09/2020,Disposizione - RIF:xxxxxxx,,-180.00,EUR
 ,01/09/2020,31/08/2020,Addebito canone -xxxxxxx,100.00,,EUR`,
 
-// https://github.com/nielsmaerten/ynab-buddy/pull/269
+  // https://github.com/nielsmaerten/ynab-buddy/pull/269
   // This demonstrates a bug discovered by @tobim-dev:
-  // If there's an inflow column containing "0", 
+  // If there's an inflow column containing "0",
   // the parser should ignore it if there's also an outflow column.
   // Use case: bank uses inflow/outflow columns,
   // and in case of outflow writes "0" in inflow column:
   `index,date,inflow,outflow,payee
-  1,9/27/2020,0,420.69,Devpoint`
-
+  1,9/27/2020,0,420.69,Devpoint`,
 ];
 
 export const defaultParser: Parser =
