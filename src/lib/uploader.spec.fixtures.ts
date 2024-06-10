@@ -80,3 +80,15 @@ export const expectedTransactions = [
     flag_color: "purple",
   },
 ];
+
+export const emptyTransactionsParsedBankFile: ParsedBankFile = {
+  source: {
+    matchedPattern: {
+      upload: true,
+      ynab_account_id: "testAccountId",
+      ynab_budget_id: "testBudgetId",
+      ynab_flag_color: "purple",
+    },
+  } as any,
+  transactions: [],
+};

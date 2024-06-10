@@ -23,4 +23,10 @@ describe("uploader", () => {
     const transactions = sendToYnab.mock.calls[0][0];
     expect(transactions).toEqual(fixture.expectedTransactions);
   });
+
+  it("skips sending transactions to YNAB if no transactions are parsed.", () => {
+    const sendToYnab = uploader.sendToYnab as jest.Mock;
+    uploader.upload(fixture.emptyTransactionsParsedBankFile, fixture.config);
+    expect(sendToYnab).not.toHaveBeenCalled();
+  });
 });
