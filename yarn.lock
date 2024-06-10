@@ -1528,8 +1528,8 @@ __metadata:
   linkType: hard
 
 "@yao-pkg/pkg@npm:^5.8.1":
-  version: 5.11.5
-  resolution: "@yao-pkg/pkg@npm:5.11.5"
+  version: 5.12.0
+  resolution: "@yao-pkg/pkg@npm:5.12.0"
   dependencies:
     "@babel/generator": "npm:7.23.0"
     "@babel/parser": "npm:7.23.0"
@@ -1540,6 +1540,7 @@ __metadata:
     globby: "npm:^11.1.0"
     into-stream: "npm:^6.0.0"
     is-core-module: "npm:2.9.0"
+    minimatch: "npm:9.0.4"
     minimist: "npm:^1.2.6"
     multistream: "npm:^4.1.0"
     prebuild-install: "npm:7.1.1"
@@ -1547,7 +1548,7 @@ __metadata:
     stream-meter: "npm:^1.0.4"
   bin:
     pkg: lib-es5/bin.js
-  checksum: 10c0/6544045055846e825c17645c2ab27b29139a48945b878578d9d1efff4ee5602c92ab78ea77780f433050469084a530f096f2506a29e4f7225a9de18e0ebeb620
+  checksum: 10c0/73a61ae5ec3b87620aa1495929a0a94a0723fd2f1e629f5390d7ffc766ca8a3fe2ec0bd0adb564ad58c92e07189f02b591b7082edfbf5e40df28e17dd778bada
   languageName: node
   linkType: hard
 
@@ -5431,21 +5432,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimatch@npm:9.0.4, minimatch@npm:^9.0.0, minimatch@npm:^9.0.4":
+  version: 9.0.4
+  resolution: "minimatch@npm:9.0.4"
+  dependencies:
+    brace-expansion: "npm:^2.0.1"
+  checksum: 10c0/2c16f21f50e64922864e560ff97c587d15fd491f65d92a677a344e970fe62aafdbeafe648965fa96d33c061b4d0eabfe0213466203dd793367e7f28658cf6414
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:^3.0.4, minimatch@npm:^3.1.1":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
   dependencies:
     brace-expansion: "npm:^1.1.7"
   checksum: 10c0/0262810a8fc2e72cca45d6fd86bd349eee435eb95ac6aa45c9ea2180e7ee875ef44c32b55b5973ceabe95ea12682f6e3725cbb63d7a2d1da3ae1163c8b210311
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^9.0.0, minimatch@npm:^9.0.4":
-  version: 9.0.4
-  resolution: "minimatch@npm:9.0.4"
-  dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: 10c0/2c16f21f50e64922864e560ff97c587d15fd491f65d92a677a344e970fe62aafdbeafe648965fa96d33c061b4d0eabfe0213466203dd793367e7f28658cf6414
   languageName: node
   linkType: hard
 
