@@ -51,7 +51,7 @@ describe("collectStats", () => {
     expect(mockAPI.budgets.getBudgets).toHaveBeenCalled();
     expect((global as any).fetch).toHaveBeenCalledWith(
       UPDATE_CHECK_URL,
-      expect.any(Object)
+      expect.any(Object),
     );
   });
 

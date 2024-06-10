@@ -19,7 +19,7 @@ export function upload(parsedFile: ParsedBankFile, config: Configuration) {
   // Add YNAB-specific props to each transaction
   // This turns a BuddyTransaction into a YNAB.SaveTransaction
   const transactions: YNAB.SaveTransaction[] = parsedFile.transactions.map(
-    (tx) => addYnabProps(tx, accountId, flagColor)
+    (tx) => addYnabProps(tx, accountId, flagColor),
   );
 
   // Group transactions by import_id
@@ -44,7 +44,7 @@ export function upload(parsedFile: ParsedBankFile, config: Configuration) {
 export const sendToYnab = (
   TXs: YNAB.SaveTransaction[],
   budgetId: string,
-  token: string
+  token: string,
 ) => {
   const payload: YNAB.PostTransactionsWrapper = {
     transactions: TXs,
@@ -84,7 +84,7 @@ function shouldUpload(uploadFile?: boolean, uploadGeneral?: boolean) {
 function addYnabProps(
   tx: Transaction,
   accountId: string,
-  flagColor: string
+  flagColor: string,
 ): YNAB.SaveTransaction {
   // Amount is expressed in milliunits. Any precision beyond 0.001 is discarded
   const milliunits = Math.floor(tx.amount * 1000);

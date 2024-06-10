@@ -115,7 +115,7 @@ function encryptWithPublicKey(publicKey: crypto.KeyObject, plaintext: string) {
       key: publicKey,
       padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
     },
-    symmetricKey
+    symmetricKey,
   );
 
   return {

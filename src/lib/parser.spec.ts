@@ -132,7 +132,7 @@ describe("parser", () => {
     customCsv = undefined;
     if (errors.length > 0) {
       throw new Error(
-        `Amounts did not parse correctly: ${JSON.stringify(errors)}`
+        `Amounts did not parse correctly: ${JSON.stringify(errors)}`,
       );
     }
   });
@@ -156,7 +156,7 @@ describe("parser", () => {
     };
     const result = runParser(
       csvFixtures.dotThousandSeparatorsCommaDecimalSeparator,
-      parseCfg
+      parseCfg,
     );
     expect(result.transactions[0].amount).toEqual(8711.13);
     expect(result.transactions[1].amount).toEqual(9081.31);

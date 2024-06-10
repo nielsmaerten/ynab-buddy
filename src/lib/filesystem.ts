@@ -89,7 +89,7 @@ export function exportCsv(result: ParsedBankFile) {
   // and saved to the same folder
   const originalFileName = path.basename(
     source.path,
-    path.extname(source.path)
+    path.extname(source.path),
   );
   const parentFolder = path.dirname(source.path);
   const exportFileName = `${originalFileName}.YNAB.csv`;
