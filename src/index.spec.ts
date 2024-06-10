@@ -77,7 +77,7 @@ describe("index.ts", () => {
   it("looks for bank files in import path", () => {
     expect(mocks.findBankFiles).toHaveBeenCalledWith(
       mock_importPath,
-      mock_getConfiguration
+      mock_getConfiguration,
     );
   });
 

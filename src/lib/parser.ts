@@ -144,7 +144,7 @@ function unifyColumns(columnName: string, index: number) {
     /^payee$/,
   ];
   const isAllowed = allowedColumns.some((regex) =>
-    columnLowerCase.match(regex)
+    columnLowerCase.match(regex),
   );
   if (isAllowed) return columnLowerCase;
   else return `__${index}`;
