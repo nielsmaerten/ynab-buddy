@@ -5720,8 +5720,8 @@ __metadata:
   linkType: hard
 
 "np@npm:^10.0.0":
-  version: 10.0.5
-  resolution: "np@npm:10.0.5"
+  version: 10.0.6
+  resolution: "np@npm:10.0.6"
   dependencies:
     chalk: "npm:^5.3.0"
     chalk-template: "npm:^1.1.0"
@@ -5761,7 +5761,7 @@ __metadata:
     update-notifier: "npm:^7.0.0"
   bin:
     np: source/cli.js
-  checksum: 10c0/fdc9347a988bf3b8b9c60da7e8db743be8412a9c595bbd061752dcfeca66c3e06d33d8ee1905cf2a9ceda7b83ddbf3baf7b6d3356750bd3ff94a6d72dc07a10d
+  checksum: 10c0/4eb318771919cb55dacc95e763b16a78b06d51afdf460426d630881dfd5afbf3cb8767a4a35fa67559192680e827c2a0a9cb67556c1c2b78a67728988e937034
   languageName: node
   linkType: hard
 
