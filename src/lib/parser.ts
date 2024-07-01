@@ -79,7 +79,7 @@ function parseDate(record: any, dateFormat: string) {
  * @see https://github.com/nielsmaerten/ynab-buddy/pull/269
  */
 function getValue(...args: any[]) {
-  return args.find((value) => value && value !== "0");
+  return args.find((value) => value && value !== "0") || 0;
 }
 
 function parseAmount(record: any, parser: Parser): number {

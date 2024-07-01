@@ -200,6 +200,17 @@ describe("parser", () => {
     const result = runParser(csvFixtures.inflow0, parseCfg);
     expect(result.transactions[0].amount).toEqual(-420.69);
   });
+
+  it("handles an inflow and outflow column containing '0'", () => {
+    const parseCfg = {
+      columns: ["", "date", "inflow", "outflow", "payee"],
+      decimal_separator: ".",
+      delimiter: ",",
+      header_rows: 1,
+    };
+    const result = runParser(csvFixtures.inflowOutflow0, parseCfg);
+    expect(result.transactions[0].amount).toEqual(0);
+  });
 });
 
 const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
@@ -223,6 +234,7 @@ enum csvFixtures {
   inflowOutflowColumns = 9,
   githubIssue45 = 10,
   inflow0 = 11,
+  inflowOutflow0 = 12
 }
 
 const validateTransaction = (tx: Transaction) => {
