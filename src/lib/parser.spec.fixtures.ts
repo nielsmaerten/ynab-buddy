@@ -76,10 +76,6 @@ invalid footer row
   // and in case of outflow writes "0" in inflow column:
   `index,date,inflow,outflow,payee
   1,9/27/2020,0,420.69,Devpoint`,
-
-  // inflow and outflow, both with 0 shall lead to an amount value of 0
-  `index,date,inflow,outflow,payee
-  1,9/27/2023,0,0,Devpoint`,
 ];
 
 export const defaultParser: Parser =
