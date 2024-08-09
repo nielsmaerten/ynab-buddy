@@ -38,6 +38,11 @@ export const parsedBankFile: ParsedBankFile = {
       date: new Date("2013-12-31"),
       memo: "tx4",
     },
+    {
+      amount: 0,
+      date: new Date("2024-08-04"),
+      memo: "tx4",
+    },
   ],
 };
 
