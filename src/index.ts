@@ -6,7 +6,6 @@ import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { upload } from "./lib/uploader";
 import { BankFile } from "./types";
-import { collectStats } from "./lib/stats";
 import fs from "fs";
 
 (async () => {
@@ -20,8 +19,7 @@ import fs from "fs";
     return cli.exitApp();
   }
 
-  // Display welcome message and collect stats (if allowed)
-  const statsPromise = collectStats(config);
+  // Display welcome message
   cli.displayWelcomeMessage(isFirstRun);
 
   // Confirm folder where the tool should look for bank files
@@ -46,7 +44,7 @@ import fs from "fs";
   // Upload to YNAB
   console.log("");
   const uploads = parsedFiles.map((parsedFile) => upload(parsedFile, config));
-  await Promise.all([uploads, statsPromise]);
+  await Promise.all(uploads);
 
   // All done!
   cli.displayGoodbyeMessage();

@@ -6,15 +6,6 @@ export const APP_NAME = "YNAB Buddy";
 export const APP_VERSION = require("../package.json").version;
 export const UPDATE_CHECK_URL =
   "https://api.niels.me/ynab-buddy/check-updates?version=" + APP_VERSION;
-export const RSA_PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsEdgc6Ug6/Ao1JHenEIj
-xEzaFxYwlexMhPoVoMMeKKSTkbzF8MMvHtifw8DZ97Kbinard9EZu5jxbNkpfVwm
-k04HUEQgs/H7mj8omMqbFEbzdBrkUvS1exFdL/LivOEnJ/ZN7PrgQYcnZQCb/S9m
-wZvd9A9M93BRkZoEfgDJYfml6AKTrKyfl5l7YZLIYGMwQ63Zp7ixd7Js4tZqp8FE
-g89CzzIASLXx4QHSbx+M2tVKgz1woC+vBnBvMSu0UHun9mVEkn97qZtAvdCYoDSv
-pVAg1iqCtsxjhxuTFkjVeV+1YNSBlFwPMdmt3SnzXL33PtgYt3Z5ribNa+FJbgtK
-VQIDAQAB
------END PUBLIC KEY-----`;
 
 export const messages = {
   disclaimer:
