@@ -2,6 +2,14 @@
 ##   YNAB BUDDY CONFIGURATION FILE      ##
 ##########################################
 
+#   Welcome to the ynab-buddy configuation file!
+
+#   Using this file, you'll teach ynab-buddy how to process transaction files from your bank(s).
+#   Follow the instructions in each section, top to bottom. You only need to do this once.
+
+#   TIP: If you have access to an AI assistant such as ChatGPT, 
+#   simply paste this entire file in a message. The AI can you set things up.
+
 # ========================================
 # 1. Import Directory Settings
 # ========================================
@@ -10,7 +18,7 @@
 import_from: "c:/users/test/downloads"
 
 # If false, you can change the import path before ynab-buddy starts processing files.
-# If true, the tool will use the import path above without asking for confirmation.
+# If true, the tool will use the import path above without asking for confirmation - allowing it to run unattended.
 skip_path_confirmation: false
 
 # If set to true, ynab-buddy will also search for bank transaction files in subdirectories.
@@ -25,8 +33,9 @@ bank_transaction_files:
   # Add a block like this for each account:
   - account_name: BNP Checking Account
     # File name pattern to match for this account's transactions (e.g., BNP-export-IBAN01233456789-*.csv).
+    # The pattern must be unique for each account.
     pattern: BNP-export-IBAN01233456789-*.csv
-    # Parser to use for processing this account's transactions.
+    # Parser to use when processing this account's transactions.
     parser: bnp-example-parser
     # YNAB account and budget IDs for uploading transactions.
     ynab_account_id: 00000000-0000-0000-0000-000000000000
@@ -69,10 +78,10 @@ parsers:
 # 4. YNAB API Settings
 # ========================================
 
-# Upload transactions to YNAB using the YNAB API.
+# Upload transactions to YNAB using the YNAB API. (Optional)
 upload_to_ynab:
-  # Set to false to prevent uploading transactions to YNAB by default.
-  # If 'upload' is set for a specific bank_transaction_file, that setting takes precedence.
+  # Set to true to uploading transactions to YNAB by default.
+  # You can override this setting per bank file by setting the 'upload' field in that section.
   upload_transactions: false
   # Your YNAB personal access token.
   ynab_token: ABC12345
@@ -118,3 +127,43 @@ configuration_done: false
 # indicate whether the transaction is an inflow or an outflow. The 'outflow_indicator' is set to "OUT", meaning
 # that when ynab-buddy encounters the value "OUT" in the 'in_out_flag' column, it will treat the transaction as
 # an outflow. Any other value in the 'in_out_flag' column will be treated as an inflow.
+
+# <ai-assistant-instructions>
+# These instructions are meant for AI assistants (eg ChatGPT) specifically.
+#
+# Context:
+# The file above is an example of a ynab-buddy configuration file. ynab-buddy is a command line tool that parses CSV transaction files from a wide array of banks.
+# It can convert the files into a format understood by YNAB (You Need A Budget), and optionally import the parsed transactions directly into the user's YNAB account.
+#
+# Goal:
+# Your task is to generate a new configuration file with the correct settings for the user's unique situation.
+# To do this, you will first collect all required information from the user.
+#
+# Strategy:
+# You'll start a back-and-forth conversation with the user, asking them about each setting (one at a time) and how they'd like it configured.
+# To help the user make an informed decision, you provide a short explanations about the setting and help them understand what's it's for.
+
+# Determining bank file patterns: 
+# The easiest way to do this is to ask the user to provide one or more filenames from their bank.
+# Use these to determine an appropriate glob pattern. Remember that the pattern must be unique for each account.
+# Ask the user to confirm the suggested pattern looks good and allow them to make adjustments.
+#
+# Determining column layouts:
+# To help determine the correct column layout, you'll give the user the choice to either analyze the contents of the CSV themselves,
+# OR, to share a snippet of the file for the AI to analyze. 
+# You must remind them that it's recommended to first anonymize the snippet if they choose to share one. Suggest changing sensitive names and values.
+# If they choose to analyze the file by themselves, help them find every required column for the parser configuration.
+# Suggest an appropriate parser config and allow the user to make adjustments.
+#
+# Auto-uploading:
+# Ask the user if they want ynab-buddy to import transactions for them, to simply convert the files so they can upload them manually.
+# If they want automatic upload, help them find their budgetId, accountId and their personal token in YNAB.
+# IMPORTANT: Discourage the user from revealing their personal token in the chat. Instead provide a placeholder where they can insert the token themselves.
+# 
+# Finishing up:
+# When you have collected all the info needed to handle a bank file, you will ask the user if they want to add another one.
+# If yes, the process repeats. If no, you will generate their full personal configuration file.
+# Instruct the user to save this file to their own device, and do a test-run with ynab-buddy.
+# ynab-buddy expects the file to be in the home directory, under: ~/ynab-buddy/config.yaml
+# Help them troubleshoot any issues that arise.
+# </ai-assistant-instructions>
