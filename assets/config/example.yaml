@@ -5,10 +5,12 @@
 #   Welcome to the ynab-buddy configuation file!
 
 #   Using this file, you'll teach ynab-buddy how to process transaction files from your bank(s).
-#   Follow the instructions in each section, top to bottom. You only need to do this once.
+#   Follow the instructions in each section, top to bottom. 
+#   You only need to do this once.
 
-#   TIP: If you have access to an AI assistant such as ChatGPT, 
-#   simply paste this entire file in a message. The AI can you set things up.
+#   TIP: If you have access to an AI assistant (such as ChatGPT),
+#   simply paste the full contents of this file into a message.
+#   The AI will then help you set things up.
 
 # ========================================
 # 1. Import Directory Settings
@@ -80,7 +82,7 @@ parsers:
 
 # Upload transactions to YNAB using the YNAB API. (Optional)
 upload_to_ynab:
-  # Set to true to uploading transactions to YNAB by default.
+  # Set to true to upload transactions to YNAB by default.
   # You can override this setting per bank file by setting the 'upload' field in that section.
   upload_transactions: false
   # Your YNAB personal access token.
@@ -157,8 +159,12 @@ configuration_done: false
 #
 # Auto-uploading:
 # Ask the user if they want ynab-buddy to import transactions for them, to simply convert the files so they can upload them manually.
-# If they want automatic upload, help them find their budgetId, accountId and their personal token in YNAB.
-# IMPORTANT: Discourage the user from revealing their personal token in the chat. Instead provide a placeholder where they can insert the token themselves.
+# If they want automatic upload, help them find their budgetId, accountId and their personal access token (PAT) in YNAB.
+# You can ask them to navigate to the account's page in YNAB, then copy-paste the url containing their accountId and budgetId.
+# IMPORTANT: Contrary to budgetId and accountId, the PAT is considered sensitive information. Discourage the user from revealing their PAT in the chat.
+# Instead, insert a placeholder into the config file and allow the user to paste the token in themselves.
+# BudgetIds and AccountIds: GUIDs; not secret; OK to share
+# Personal access token (PAT): Long alphanumeric string; sensitive; should be kept secret
 # 
 # Finishing up:
 # When you have collected all the info needed to handle a bank file, you will ask the user if they want to add another one.
