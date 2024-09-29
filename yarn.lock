@@ -5598,7 +5598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.6, node-fetch@npm:~2.6.1":
+"node-fetch@npm:^2.6.6":
   version: 2.6.9
   resolution: "node-fetch@npm:2.6.9"
   dependencies:
@@ -5609,6 +5609,20 @@ __metadata:
     encoding:
       optional: true
   checksum: 10c0/7a4a0e027e509b741bec4172749103f158da23187ff251cb988dd54ea7267519c3fa11838971da0f5f3c54e79da3174e7bd72aa2179c9f69887511ece16c9c0f
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:~2.6.1":
+  version: 2.6.13
+  resolution: "node-fetch@npm:2.6.13"
+  dependencies:
+    whatwg-url: "npm:^5.0.0"
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: 10c0/39719aa365a76e5a338f20e156917ffb5c8aa8ffbe14a494f96bad785a267f3b320bf704d3481fd6df3d24d02f09cbfb8cd62fbe8f5d3ab32a812ecb7748dcac
   languageName: node
   linkType: hard
 
@@ -7825,18 +7839,18 @@ __metadata:
     ts-jest: "npm:^29.0.5"
     ts-node: "npm:^10.9.1"
     typescript: "npm:^5.0.4"
-    ynab: "npm:^2.0.0"
+    ynab: "npm:2.2"
   bin:
     ynab-buddy: dist/index.js
   languageName: unknown
   linkType: soft
 
-"ynab@npm:^2.0.0":
-  version: 2.6.0
-  resolution: "ynab@npm:2.6.0"
+"ynab@npm:2.2":
+  version: 2.2.0
+  resolution: "ynab@npm:2.2.0"
   dependencies:
     fetch-ponyfill: "npm:^7.1.0"
-  checksum: 10c0/5f05b03287e657921de0d993b9e45423ae30e42cb016609640df4d4b6594a0bb1a75d3a09f6ef7fd393b81a04f2cb09bf85efb8bd116c68fca0056ffa2a6a363
+  checksum: 10c0/8670ba92c5d9265efaae15fe8e87d895498f61fcd509312b6262c4e659e818f0ca7786cdd81478aa416b5477c711a6dd340322aed815a649b34db4f1d696c2ef
   languageName: node
   linkType: hard
 
