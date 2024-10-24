@@ -61,7 +61,7 @@
     "@types/node": "^20.0.0",
     "@types/pako": "^2",
     "@types/prompts": "^2.4.3",
-    "@yao-pkg/pkg": "^5.8.1",
+    "@yao-pkg/pkg": "^6.0.0",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "3.3.0",
