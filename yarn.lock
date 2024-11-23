@@ -1484,20 +1484,20 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 22.8.7
-  resolution: "@types/node@npm:22.8.7"
+  version: 22.9.3
+  resolution: "@types/node@npm:22.9.3"
   dependencies:
     undici-types: "npm:~6.19.8"
-  checksum: 10c0/14372885db80059ed6e92c320b2bcd8f7dc271698adce11f51aa0f424a3f82aa1749a4f66321b87043791b894346b2458d514cbb65ce70167c2fd8a78a124947
+  checksum: 10c0/954ec72bf29436ea62425a9563914a9c1e93f97b18194acd51d74d13998a701977547ed2985ed3a0e97211b785436d28377116e5f613bfcf3182d9bd81d784dc
   languageName: node
   linkType: hard
 
 "@types/node@npm:^20.0.0":
-  version: 20.17.6
-  resolution: "@types/node@npm:20.17.6"
+  version: 20.17.7
+  resolution: "@types/node@npm:20.17.7"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/5918c7ff8368bbe6d06d5e739c8ae41a9db41628f28760c60cda797be7d233406f07c4d0e6fdd960a0a342ec4173c2217eb6624e06bece21c1f1dd1b92805c15
+  checksum: 10c0/e1fbc69ed34515da8a8a5cf4427e473f9c378f4cfe291f20635dda10a51a9854c687f5ab91eafdcbec2a0d52a1590e53ec6d49e53c1bc0e35ddde4f159246fcd
   languageName: node
   linkType: hard
 
