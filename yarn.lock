@@ -2543,10 +2543,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-parse@npm:^4.16.3":
-  version: 4.16.3
-  resolution: "csv-parse@npm:4.16.3"
-  checksum: 10c0/40771fda105b10c3e44551fa4dbeab462315400deb572f2918c19d5848addd95ea3479aaaeaaf3bbd9235593a6d798dd90b9e6ba5c4ce570979bafc4bb1ba5f0
+"csv-parse@npm:^5.0.0":
+  version: 5.6.0
+  resolution: "csv-parse@npm:5.6.0"
+  checksum: 10c0/52f5e6c45359902e0c8e57fc2eeed41366dc6b6d283b495b538dd50c8e8510413d6f924096ea056319cbbb8ed26e111c3a3485d7985c021bcf5abaa9e92425c7
   languageName: node
   linkType: hard
 
@@ -7653,7 +7653,7 @@ __metadata:
     chalk: "npm:^4.1.2"
     commitizen: "npm:^4.3.0"
     cross-env: "npm:^7.0.3"
-    csv-parse: "npm:^4.16.3"
+    csv-parse: "npm:^5.0.0"
     csv-stringify: "npm:^5.6.5"
     cz-conventional-changelog: "npm:3.3.0"
     glob: "npm:^10.2.2"
