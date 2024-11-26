@@ -51,6 +51,14 @@ Did ynab-buddy save you some time? If so, consider showing your support by buyin
 
 Thank you for your support! 🙌
 
+## ⭐ GitHub Star
+
+If you like this tool, please leave a star on GitHub! Your support helps others discover this tool and motivates me to keep improving it.
+
+[⭐ Leave a star on GitHub](https://github.com/nielsmaerten/ynab-buddy)
+
+Thank you for your support! 🙌
+
 ## ⚠️ Disclaimer
 
 ynab-buddy is a **community-made tool** for YNAB.  

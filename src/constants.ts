@@ -40,6 +40,7 @@ export const messages = {
   sponsor:
     "Did this tool just save you some time? Then maybe consider buying me a coffee:",
   sponsorLink: "https://go.niels.me/coffee",
+  githubStar: "If you like this tool, please leave a star on GitHub: https://github.com/nielsmaerten/ynab-buddy",
   exit: "Press any key to exit",
   newVersion: {
     notice: "A newer version of ynab-buddy is available.",
