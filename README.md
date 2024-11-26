@@ -43,11 +43,12 @@ To make ynab-buddy work seamlessly with your bank, open the config file and foll
 - Tech docs (for developers): [CONTRIBUTING.md](./CONTRIBUTING.md)
 - Please **DO NOT** contact YNAB Support. This is a community project, not an official YNAB service.
 
-## 😊 Coffee?
+## ☕ budget nerd + coffee = ynab-buddy 
 
 Did ynab-buddy save you some time? If so, consider showing your support by buying me a coffee! Your kind gesture helps me continue improving and maintaining this tool for the YNAB community.
 
-[☕ Buy me a coffee](https://ko-fi.com/nielsmaerten)
+[☕ Buy me a coffee](https://ko-fi.com/nielsmaerten)  
+[⭐ Leave a star on GitHub](https://github.com/nielsmaerten/ynab-buddy)
 
 Thank you for your support! 🙌
 
