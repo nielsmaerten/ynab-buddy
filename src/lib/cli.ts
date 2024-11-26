@@ -45,6 +45,7 @@ export function displayGoodbyeMessage() {
   console.log(chalk.bgBlueBright(messages.sponsorLink));
   console.log("");
   console.log(messages.githubStar);
+  console.log(chalk.bgBlueBright(messages.githubLink));
   console.log("");
 }
 
