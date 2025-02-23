@@ -6106,12 +6106,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.3.3":
-  version: 3.3.3
-  resolution: "prettier@npm:3.3.3"
+"prettier@npm:3.5.2":
+  version: 3.5.2
+  resolution: "prettier@npm:3.5.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/b85828b08e7505716324e4245549b9205c0cacb25342a030ba8885aba2039a115dbcf75a0b7ca3b37bc9d101ee61fab8113fc69ca3359f2a226f1ecc07ad2e26
+  checksum: 10c0/d7b597ed33f39c32ace675896ad187f06a3e48dc8a1e80051b5c5f0dae3586d53981704b8fda5ac3b080e6c2e0e197d239131b953702674f044351621ca5e1ac
   languageName: node
   linkType: hard
 
@@ -7757,23 +7757,23 @@ __metadata:
     minimatch: "npm:^9.0.0"
     np: "npm:^10.0.0"
     pako: "npm:^2.1.0"
-    prettier: "npm:3.3.3"
+    prettier: "npm:3.5.2"
     prompts: "npm:^2.4.2"
     ts-jest: "npm:^29.0.5"
     ts-node: "npm:^10.9.1"
     typescript: "npm:^5.0.4"
-    ynab: "npm:2.2"
+    ynab: "npm:2.6"
   bin:
     ynab-buddy: dist/index.js
   languageName: unknown
   linkType: soft
 
-"ynab@npm:2.2":
-  version: 2.2.0
-  resolution: "ynab@npm:2.2.0"
+"ynab@npm:2.6":
+  version: 2.6.0
+  resolution: "ynab@npm:2.6.0"
   dependencies:
     fetch-ponyfill: "npm:^7.1.0"
-  checksum: 10c0/8670ba92c5d9265efaae15fe8e87d895498f61fcd509312b6262c4e659e818f0ca7786cdd81478aa416b5477c711a6dd340322aed815a649b34db4f1d696c2ef
+  checksum: 10c0/5f05b03287e657921de0d993b9e45423ae30e42cb016609640df4d4b6594a0bb1a75d3a09f6ef7fd393b81a04f2cb09bf85efb8bd116c68fca0056ffa2a6a363
   languageName: node
   linkType: hard
 
