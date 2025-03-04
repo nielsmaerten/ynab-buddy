@@ -1643,21 +1643,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^22.0.0":
   version: 22.13.9
   resolution: "@types/node@npm:22.13.9"
   dependencies:
     undici-types: "npm:~6.20.0"
   checksum: 10c0/eb6acd04169a076631dcaab712128d492cd17a1b3f10daae4a377f3d439c860c3cd3e32f4ef221671f56183b976ac7c4089f4193457314a88675ead4663438a4
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^20.0.0":
-  version: 20.17.23
-  resolution: "@types/node@npm:20.17.23"
-  dependencies:
-    undici-types: "npm:~6.19.2"
-  checksum: 10c0/4f7da7383ee8516b2e580d772a196fd76487670bd9d32a296621c5df63b077cc7d06c2a0040885b3e4a28c1751f9ad3d5ed55cff15d50b707e3d454993bfe33a
   languageName: node
   linkType: hard
 
@@ -7363,13 +7354,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~6.19.2":
-  version: 6.19.8
-  resolution: "undici-types@npm:6.19.8"
-  checksum: 10c0/078afa5990fba110f6824823ace86073b4638f1d5112ee26e790155f481f2a868cc3e0615505b6f4282bdf74a3d8caad715fd809e870c2bb0704e3ea6082f344
-  languageName: node
-  linkType: hard
-
 "undici-types@npm:~6.20.0":
   version: 6.20.0
   resolution: "undici-types@npm:6.20.0"
@@ -7739,7 +7723,7 @@ __metadata:
     "@types/jest": "npm:^29.4.4"
     "@types/js-yaml": "npm:^4.0.5"
     "@types/luxon": "npm:^3.2.0"
-    "@types/node": "npm:^20.0.0"
+    "@types/node": "npm:^22.0.0"
     "@types/pako": "npm:^2"
     "@types/prompts": "npm:^2.4.3"
     "@yao-pkg/pkg": "npm:^5.8.1"

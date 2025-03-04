@@ -58,7 +58,7 @@
     "@types/jest": "^29.4.4",
     "@types/js-yaml": "^4.0.5",
     "@types/luxon": "^3.2.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^22.0.0",
     "@types/pako": "^2",
     "@types/prompts": "^2.4.3",
     "@yao-pkg/pkg": "^5.8.1",
