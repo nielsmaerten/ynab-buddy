@@ -1644,20 +1644,20 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 22.15.24
-  resolution: "@types/node@npm:22.15.24"
+  version: 22.15.29
+  resolution: "@types/node@npm:22.15.29"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/16c38e98168fa6c3d2f2b6e95f14f80878d969b39093bc5384385a884d73a7fe361c563b36f14bc27536b337f5baad74321f717b31d2c061b9c48074567eb8c6
+  checksum: 10c0/602cc88c6150780cd9b5b44604754e0ce13983ae876a538861d6ecfb1511dff289e5576fffd26c841cde2142418d4bb76e2a72a382b81c04557ccb17cff29e1d
   languageName: node
   linkType: hard
 
 "@types/node@npm:^20.0.0":
-  version: 20.17.52
-  resolution: "@types/node@npm:20.17.52"
+  version: 20.17.57
+  resolution: "@types/node@npm:20.17.57"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/564d8655d9eb0cdc28b015afe9fd2b38e30c55a6e1a19cd1b67864afe8227513b77a54f84c1c0f9b236fae9cb3c23414d7f9be7c1f78a25e49ee9076eee8a4ba
+  checksum: 10c0/c04f3b6c4f335ad50bd3af62cd9e64a86c355cb6b363cb0e618511db4c6801c8539781c3786076eca6f56e999d6c7fc4748e43393a107aad57e65e3ffd1f73bf
   languageName: node
   linkType: hard
 
@@ -6106,12 +6106,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.3.3":
-  version: 3.3.3
-  resolution: "prettier@npm:3.3.3"
+"prettier@npm:3.5.3":
+  version: 3.5.3
+  resolution: "prettier@npm:3.5.3"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/b85828b08e7505716324e4245549b9205c0cacb25342a030ba8885aba2039a115dbcf75a0b7ca3b37bc9d101ee61fab8113fc69ca3359f2a226f1ecc07ad2e26
+  checksum: 10c0/3880cb90b9dc0635819ab52ff571518c35bd7f15a6e80a2054c05dbc8a3aa6e74f135519e91197de63705bcb38388ded7e7230e2178432a1468005406238b877
   languageName: node
   linkType: hard
 
@@ -7765,23 +7765,23 @@ __metadata:
     minimatch: "npm:^9.0.0"
     np: "npm:^10.0.0"
     pako: "npm:^2.1.0"
-    prettier: "npm:3.3.3"
+    prettier: "npm:3.5.3"
     prompts: "npm:^2.4.2"
     ts-jest: "npm:^29.0.5"
     ts-node: "npm:^10.9.1"
     typescript: "npm:^5.0.4"
-    ynab: "npm:2.2"
+    ynab: "npm:2.9"
   bin:
     ynab-buddy: dist/index.js
   languageName: unknown
   linkType: soft
 
-"ynab@npm:2.2":
-  version: 2.2.0
-  resolution: "ynab@npm:2.2.0"
+"ynab@npm:2.9":
+  version: 2.9.0
+  resolution: "ynab@npm:2.9.0"
   dependencies:
     fetch-ponyfill: "npm:^7.1.0"
-  checksum: 10c0/8670ba92c5d9265efaae15fe8e87d895498f61fcd509312b6262c4e659e818f0ca7786cdd81478aa416b5477c711a6dd340322aed815a649b34db4f1d696c2ef
+  checksum: 10c0/40f767e71857e86f51dcb893ef971ca9ec338671d2e35e026f61073fd45c0ad19e29c8cf3de0624c9cc2df802fd48578b84d00a8b0ba9d37e9d7fb9db553c08c
   languageName: node
   linkType: hard
 
