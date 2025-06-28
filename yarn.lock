@@ -1652,12 +1652,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.0.0":
-  version: 20.19.2
-  resolution: "@types/node@npm:20.19.2"
+"@types/node@npm:^22.0.0":
+  version: 22.15.34
+  resolution: "@types/node@npm:22.15.34"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/85195d2435a215c886b3dabb2a93c557397e2b933a18803c6dd4fb3f87c3de9c8290fe78f08b52ebeb3b14063a00b217f66b4f9c0192581dc7a677c4f8663a9c
+  checksum: 10c0/fb6a6b36daaa1b484aaba3d33b4d1e7b37ea993e29f20b7a676affa76ed6ff6acd2ded4d5003469bc8dbc815b3d224533b4560896037ef6d5b5d552721ab7d57
   languageName: node
   linkType: hard
 
@@ -7749,7 +7749,7 @@ __metadata:
     "@types/jest": "npm:^29.4.4"
     "@types/js-yaml": "npm:^4.0.5"
     "@types/luxon": "npm:^3.2.0"
-    "@types/node": "npm:^20.0.0"
+    "@types/node": "npm:^22.0.0"
     "@types/pako": "npm:^2"
     "@types/prompts": "npm:^2.4.3"
     "@yao-pkg/pkg": "npm:^5.8.1"
