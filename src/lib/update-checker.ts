@@ -49,7 +49,6 @@ async function fetchLatestReleaseVersion(
     const releaseRes = await fetch(releaseUrl, requestOpts);
 
     if (!releaseRes.ok) {
-      clearTimeout(timeoutId);
       return null;
     }
 
@@ -57,14 +56,12 @@ async function fetchLatestReleaseVersion(
     const tagName = releaseJson.tag_name;
 
     if (!tagName) {
-      clearTimeout(timeoutId);
       return null;
     }
 
     // Fetch package.json from the tagged commit
     const packageUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${tagName}/package.json`;
     const packageRes = await fetch(packageUrl, requestOpts);
-    clearTimeout(timeoutId);
 
     if (!packageRes.ok) {
       return null;
@@ -73,8 +70,9 @@ async function fetchLatestReleaseVersion(
     const packageJson = await packageRes.json();
     return packageJson.version || null;
   } catch {
-    clearTimeout(timeoutId);
     return null;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
