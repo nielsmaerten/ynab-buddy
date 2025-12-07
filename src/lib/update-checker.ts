@@ -28,32 +28,50 @@ function compareVersions(version1: string, version2: string): number {
 }
 
 /**
- * Fetches the latest release information from GitHub.
+ * Fetches the version from package.json of the latest release.
  * @param owner Repository owner
  * @param repo Repository name
  * @param timeout Timeout in milliseconds
- * @returns Release information with tag_name, or null if failed
+ * @returns Version string from package.json, or null if failed
  */
-async function fetchLatestRelease(
+async function fetchLatestReleaseVersion(
   owner: string,
   repo: string,
   timeout: number,
-): Promise<{ tag_name: string } | null> {
+): Promise<string | null> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
   const requestOpts = { signal: controller.signal };
 
   try {
-    const url = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
-    const res = await fetch(url, requestOpts);
-    clearTimeout(timeoutId);
+    // First, get the latest release to find the tag name
+    const releaseUrl = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
+    const releaseRes = await fetch(releaseUrl, requestOpts);
 
-    if (!res.ok) {
+    if (!releaseRes.ok) {
+      clearTimeout(timeoutId);
       return null;
     }
 
-    const json = await res.json();
-    return json;
+    const releaseJson = await releaseRes.json();
+    const tagName = releaseJson.tag_name;
+
+    if (!tagName) {
+      clearTimeout(timeoutId);
+      return null;
+    }
+
+    // Fetch package.json from the tagged commit
+    const packageUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${tagName}/package.json`;
+    const packageRes = await fetch(packageUrl, requestOpts);
+    clearTimeout(timeoutId);
+
+    if (!packageRes.ok) {
+      return null;
+    }
+
+    const packageJson = await packageRes.json();
+    return packageJson.version || null;
   } catch {
     clearTimeout(timeoutId);
     return null;
@@ -75,13 +93,16 @@ export async function checkForUpdate(
   timeoutMs: number = 3000,
 ): Promise<{ updateAvailable: boolean; latest: string } | null> {
   try {
-    const release = await fetchLatestRelease(owner, repo, timeoutMs);
+    const latestVersion = await fetchLatestReleaseVersion(
+      owner,
+      repo,
+      timeoutMs,
+    );
 
-    if (!release || !release.tag_name) {
+    if (!latestVersion) {
       return null;
     }
 
-    const latestVersion = release.tag_name;
     const updateAvailable = compareVersions(currentVersion, latestVersion) < 0;
 
     return {
