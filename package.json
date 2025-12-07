@@ -30,7 +30,7 @@
     "start": "bun run src/index.ts",
     "hooks": "bun x cross-env NODE_ENV=hooks bun run src/index.ts",
     "typecheck": "bun x tsc --noEmit",
-    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "clean": "rimraf dist",
     "build": "bun run clean && bun x tsc",
     "build:bin:linux": "bun build --compile --define:process.env.YNAB_BUNDLED=\"true\" --target=bun-linux-x64 --outfile=bin/ynab-buddy-linux src/index.ts",
     "build:bin:macos": "bun build --compile --define:process.env.YNAB_BUNDLED=\"true\" --target=bun-darwin-x64 --outfile=bin/ynab-buddy-macos src/index.ts",
@@ -57,13 +57,14 @@
     "@types/node": "^20.0.0",
     "@types/pako": "^2",
     "@types/prompts": "^2.4.3",
+    "bun-types": "^1.3.4",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "3.3.0",
     "np": "^10.0.0",
     "prettier": "3.3.3",
-    "typescript": "^5.0.4",
-    "bun-types": "^1.3.4"
+    "rimraf": "^6.1.2",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
