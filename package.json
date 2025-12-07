@@ -48,7 +48,7 @@
     }
   },
   "devDependencies": {
-    "@types/glob": "^8.1.0",
+    "@types/glob": "^9.0.0",
     "@types/js-yaml": "^4.0.5",
     "@types/luxon": "^3.2.0",
     "@types/node": "^20.0.0",
