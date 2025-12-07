@@ -40,10 +40,10 @@ export function displayGoodbyeMessage() {
   console.log(chalk.yellow(messages.goodbye));
   console.log("");
   console.log(messages.sponsor);
-  console.log(chalk.bgBlueBright(messages.sponsorLink));
+  console.log(chalk.blue(messages.sponsorLink));
   console.log("");
   console.log(messages.githubStar);
-  console.log(chalk.bgBlueBright(messages.githubLink));
+  console.log(chalk.blue(messages.githubLink));
   console.log("");
 }
 
