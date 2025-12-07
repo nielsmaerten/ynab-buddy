@@ -20,8 +20,13 @@ https://user-images.githubusercontent.com/4604406/192013081-5b00b20c-9b67-4a74-8
 
 ## 🚀 How to Install
 
-- **Node.js users (npm)**: `npm install -g ynab-buddy` (ships compiled JS + assets)
-- **Single-file executable**: download the latest release for your OS from [GitHub Releases](https://github.com/nielsmaerten/ynab-buddy/releases/latest) (Bun-compiled, self-contained).
+- If you've got Node.js installed, running ynab-buddy is as easy as:
+
+  ```bash
+  npx ynab-buddy
+  ```
+- Don't have Node.js? No worries! Download a pre-built executable for your OS from the [releases page](https://github.com/nielsmaerten/ynab-buddy/releases/latest).
+  
 
 ## 📈 How to Use
 
@@ -43,7 +48,7 @@ To make ynab-buddy work seamlessly with your bank, open the config file and foll
 - [FAQs](./docs/FAQ.md)
 - For general help: [GitHub Discussions](https://github.com/nielsmaerten/ynab-buddy/discussions)
 - For bugs: [GitHub Issues](https://github.com/nielsmaerten/ynab-buddy/issues)
-- Tech docs (for developers): [CONTRIBUTING.md](./CONTRIBUTING.md)
+- Tech docs (for developers): [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 - Please **DO NOT** contact YNAB Support. This is a community project, not an official YNAB service.
 
 ## ☕ budget nerd + coffee = ynab-buddy 
