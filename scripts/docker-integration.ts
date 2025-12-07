@@ -37,6 +37,11 @@ const binaryPath = resolve(repoRoot, "bin/ynab-buddy-linux");
 const packageJsonPath = resolve(repoRoot, "package.json");
 
 function main() {
+  const isCI = Boolean(process.env.CI);
+  if (isCI) {
+    console.log("Running in CI mode: Docker integration tests disabled.");
+    return;
+  }
   ensureCommand(dockerBin, ["--version"], "Docker is required for integration tests");
   ensureBuilds();
 
