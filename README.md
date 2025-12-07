@@ -20,8 +20,8 @@ https://user-images.githubusercontent.com/4604406/192013081-5b00b20c-9b67-4a74-8
 
 ## 🚀 How to Install
 
-- If you have NodeJS, run the following command: `npm install -g ynab-buddy`
-- If you don't have NodeJS, [download](https://github.com/nielsmaerten/ynab-buddy/releases/latest) the latest release of ynab-buddy from GitHub
+- **Node.js users (npm)**: `npm install -g ynab-buddy` (ships compiled JS + assets)
+- **Single-file executable**: download the latest release for your OS from [GitHub Releases](https://github.com/nielsmaerten/ynab-buddy/releases/latest) (Bun-compiled, self-contained).
 
 ## 📈 How to Use
 
@@ -34,6 +34,9 @@ https://user-images.githubusercontent.com/4604406/192013081-5b00b20c-9b67-4a74-8
 When you run ynab-buddy for the first time, a configuration file will be created in your home directory. This file helps ynab-buddy understand the structure of your bank's files and how to process them.
 
 To make ynab-buddy work seamlessly with your bank, open the config file and follow the instructions provided in the comments.
+
+- Config location: `~/ynab-buddy/config.yaml` (auto-created on first run)
+- Hooks (optional): place `~/ynab-buddy/hooks.js` to customize parsing. To create a starter hooks file, run `ynab-buddy --setup-hooks`. If the file is absent, hooks are simply disabled.
 
 ## 🆘 Where to Get Help
 

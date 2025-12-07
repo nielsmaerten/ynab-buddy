@@ -39,13 +39,19 @@ To set up the environment, follow these steps:
 
 The container will build and launch, setting up your development environment with all the necessary tools and dependencies.
 
-### 3. Manual Setup (Yarn)
+### 3. Manual Setup (Bun)
 
 If you prefer to set up your development environment manually, follow these steps:
 
-1. Ensure you have the latest version of Node.js and Yarn installed on your machine. Visit the [official Yarn website](https://yarnpkg.com/) for installation instructions.
+1. Install [Bun](https://bun.sh) (v1.3+). On macOS/Linux you can use `curl -fsSL https://bun.sh/install | bash`.
 2. Clone the project repository to your local machine.
-3. Open a terminal/command prompt in the project root folder and run `yarn` to install the project dependencies.
+3. Open a terminal/command prompt in the project root folder and run `bun install` to install dependencies.
+4. Useful commands:
+   - `bun run build` — compile TypeScript to `dist/`
+   - `bun test` — run the test suite (bun:test)
+   - `bun run test:integration` — Dockerized end-to-end check (requires Docker)
+   - `bun run build:bin` — build self-contained executables (Linux/macOS/Windows)
+   - `bun run lint` — Prettier check (`bun run lint:fix` to format)
 
 Once the setup is complete, you're ready to start contributing to ynab-buddy!
 
@@ -85,7 +91,7 @@ Please let us know if you would like more information or clarification on any pa
 
 ## Code Style and Formatting
 
-To maintain consistency and readability throughout the ynab-buddy project, we use [Prettier](https://prettier.io/) for code formatting. Prettier is included in the project's `devDependencies` and you can run it using `yarn lint`.
+To maintain consistency and readability throughout the ynab-buddy project, we use [Prettier](https://prettier.io/) for code formatting. Prettier is included in the project's `devDependencies` and you can run it using `bun run lint`.
 
 If you're using Visual Studio Code, we recommend installing the [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension. This extension will automatically format your code according to the project's Prettier configuration when you save your files.
 
