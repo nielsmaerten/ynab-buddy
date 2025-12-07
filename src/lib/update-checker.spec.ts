@@ -164,6 +164,22 @@ describe("checkForUpdate", () => {
     });
   });
 
+  it("should handle pre-release versions by comparing base version only", async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ tag_name: "v2.0.5-beta" }),
+    });
+
+    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
+    jest.runAllTimers();
+    const result = await promise;
+
+    expect(result).toEqual({
+      updateAvailable: false,
+      latest: "v2.0.5-beta",
+    });
+  });
+
   it("should use correct GitHub API URL", async () => {
     (global.fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
