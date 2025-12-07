@@ -1,0 +1,79 @@
+name: Version Check and Draft Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  check-version-and-create-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check if version changed and create draft release
+        id: version-check
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+
+          if ! PREVIOUS_PACKAGE_JSON=$(git show HEAD~1:package.json 2>&1); then
+            echo "Could not get package.json from previous commit (first commit or file didn't exist): $PREVIOUS_PACKAGE_JSON"
+            exit 0
+          fi
+          PREVIOUS_VERSION=$(node -p "JSON.parse(process.argv[1]).version" "$PREVIOUS_PACKAGE_JSON")
+
+          echo "Previous version: $PREVIOUS_VERSION"
+
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "Version has changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
+            echo "version-changed=true" >> $GITHUB_OUTPUT
+            echo "new-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          else
+            echo "Version has not changed, skipping draft release creation"
+            echo "version-changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if tag already exists
+        if: steps.version-check.outputs.version-changed == 'true'
+        id: tag-check
+        run: |
+          VERSION="${{ steps.version-check.outputs.new-version }}"
+          TAG="v$VERSION"
+
+          if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists in remote, skipping"
+            echo "tag-exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tag $TAG does not exist yet"
+            echo "tag-exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create tag
+        if: steps.version-check.outputs.version-changed == 'true' && steps.tag-check.outputs.tag-exists == 'false'
+        run: |
+          VERSION="${{ steps.version-check.outputs.new-version }}"
+          TAG="v$VERSION"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+
+      - name: Create draft release
+        if: steps.version-check.outputs.version-changed == 'true' && steps.tag-check.outputs.tag-exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version-check.outputs.new-version }}
+          name: Release v${{ steps.version-check.outputs.new-version }}
+          draft: true
+          generate_release_notes: true

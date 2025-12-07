@@ -7,7 +7,7 @@ No more hassle with csv-converters and manual file uploads! Just download transa
 https://user-images.githubusercontent.com/4604406/192013081-5b00b20c-9b67-4a74-83b0-f8ba7b728f5e.mp4
 
 > Created with ☕ by [@nielsmaerten](https://github.com/nielsmaerten)  
-> [![codecov](https://codecov.io/gh/nielsmaerten/ynab-buddy/branch/main/graph/badge.svg?token=W3P5UTSTU6)](https://codecov.io/gh/nielsmaerten/ynab-buddy) [![Node.js CI](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/node.js.yml/badge.svg)](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/node.js.yml)
+> [![codecov](https://codecov.io/gh/nielsmaerten/ynab-buddy/branch/main/graph/badge.svg?token=W3P5UTSTU6)](https://codecov.io/gh/nielsmaerten/ynab-buddy) [![Test](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/test.yml/badge.svg)](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/test.yml)
 
 ## 📚 Table of Contents
 
