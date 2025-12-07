@@ -12,7 +12,8 @@ function importHooksModule() {
   const environment = process.env.NODE_ENV || "production";
   const isBundled =
     Boolean((process as any).pkg) || process.env.YNAB_BUNDLED === "true";
-  const isDev = !isBundled && ["development", "test", "hooks"].includes(environment);
+  const isDev =
+    !isBundled && ["development", "test", "hooks"].includes(environment);
   const devHooksPath = `${__dirname}/../../assets/config/hooks.js`;
   if (isDev && fs.existsSync(devHooksPath)) return require(devHooksPath);
 

@@ -35,9 +35,9 @@
     "build:bin": "bun run build:bin:linux && bun run build:bin:macos && bun run build:bin:win",
     "package": "bun run build && bun run build:bin",
     "release": "bun x np --no-publish && npm publish",
-    "prepublishOnly": "bun run package && bun test --coverage --max-concurrency=1",
+    "prepublishOnly": "bun run package && bun test --coverage --max-concurrency=1 src",
     "postpublish": "echo \"Binaries built via bun build --compile\"",
-    "test": "bun test --coverage --max-concurrency=1",
+    "test": "bun test --coverage --max-concurrency=1 src",
     "test:integration": "bun run scripts/docker-integration.ts",
     "lint:fix": "bun x prettier ./src --write",
     "lint": "bun x prettier ./src --check"
