@@ -20,10 +20,15 @@ describe("configuration", () => {
   const readFileSyncOriginal = fs.readFileSync;
   const writeFileSyncOriginal = fs.writeFileSync;
   const mkdirSyncOriginal = fs.mkdirSync;
-  const existsSyncMock = mock(() => configFileExists);
-  const readFileSyncMock = mock(() => fixture.configFile);
-  const writeFileSyncMock = mock();
-  const mkdirSyncMock = mock();
+  const existsSyncMock: Mock<(path: string) => boolean> = mock(
+    () => configFileExists,
+  );
+  const readFileSyncMock: Mock<(path: string) => any> = mock(
+    () => fixture.configFile,
+  );
+  const writeFileSyncMock: Mock<(path: string, data: any, opts?: any) => any> =
+    mock();
+  const mkdirSyncMock: Mock<(path: string, opts?: any) => any> = mock();
 
   beforeAll(() => {
     mock.module("../constants", () => {
@@ -57,10 +62,10 @@ describe("configuration", () => {
     const module = require("./configuration");
     module.getConfiguration();
 
-    const mockedExists: Mock = existsSyncMock;
+    const mockedExists: Mock<any> = existsSyncMock;
     expect(mockedExists).toHaveBeenCalled();
 
-    const checkedConfPath: string = mockedExists.mock.calls[0][0];
+    const checkedConfPath: string = mockedExists.mock.calls[0][0] as string;
     const expectedConfPath = fixture.constants.CONFIG_FILE;
     expect(checkedConfPath.endsWith(expectedConfPath)).toBeTruthy();
   });
@@ -72,11 +77,11 @@ describe("configuration", () => {
     const module = require("./configuration");
     module.getConfiguration();
 
-    const mockedWriteFile: Mock = writeFileSyncMock;
+    const mockedWriteFile: Mock<any> = writeFileSyncMock;
     expect(mockedWriteFile).toHaveBeenCalled();
 
-    const writeCall1 = mockedWriteFile.mock.calls[0];
-    const [writeArg1, writeArg2]: string[] = writeCall1;
+    const writeCall1 = mockedWriteFile.mock.calls[0] as any[];
+    const [writeArg1, writeArg2]: string[] = writeCall1 as string[];
 
     expect(writeArg1.endsWith(fixture.constants.CONFIG_FILE)).toBeTruthy();
     expect(writeArg2).toEqual(fixture.configFile);

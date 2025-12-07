@@ -29,25 +29,17 @@
     "hooks": "bun x cross-env NODE_ENV=hooks bun run src/index.ts",
     "typecheck": "bun x tsc --noEmit",
     "build": "bun x tsc",
-    "package": "bun run build && bun x pkg ./dist/index.js --config ./package.json",
+    "build:bin:linux": "bun build --compile --target=bun-linux-x64 --outfile=bin/ynab-buddy-linux src/index.ts",
+    "build:bin:macos": "bun build --compile --target=bun-darwin-x64 --outfile=bin/ynab-buddy-macos src/index.ts",
+    "build:bin:win": "bun build --compile --target=bun-windows-x64 --outfile=bin/ynab-buddy-win.exe src/index.ts",
+    "build:bin": "bun run build:bin:linux && bun run build:bin:macos && bun run build:bin:win",
+    "package": "bun run build && bun run build:bin",
     "release": "bun x np --no-publish && npm publish",
     "prepublishOnly": "bun run package && bun test --coverage --max-concurrency=1",
-    "postpublish": "bun x pkg ./dist/index.js --config ./package.json --compress Brotli",
+    "postpublish": "echo \"Binaries built via bun build --compile\"",
     "test": "bun test --coverage --max-concurrency=1",
     "lint:fix": "bun x prettier ./src --write",
     "lint": "bun x prettier ./src --check"
-  },
-  "pkg": {
-    "assets": [
-      "assets/config/example.yaml"
-    ],
-    "scripts": "build/**/*.js",
-    "targets": [
-      "linux",
-      "win",
-      "macos"
-    ],
-    "outputPath": "bin"
   },
   "config": {
     "commitizen": {
@@ -61,7 +53,6 @@
     "@types/node": "^20.0.0",
     "@types/pako": "^2",
     "@types/prompts": "^2.4.3",
-    "@yao-pkg/pkg": "^5.8.1",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "3.3.0",

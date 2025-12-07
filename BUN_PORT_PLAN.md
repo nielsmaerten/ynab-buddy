@@ -46,3 +46,9 @@
 - Updated package scripts to Bun equivalents; `bun test` now runs with `--max-concurrency=1` for isolation.
 - Migrated all Jest tests to `bun:test` (rewrote mocks/spies/timers), adjusted filesystem/parser tests to avoid global module mocks, and refactored `src/index.ts` to export `runApp` for dependency injection in tests.
 - Switched `filesystem.ts` to use `fs.*` calls for easier mocking; `tsconfig` now references `bun-types`; Jest config/deps removed.
+- Replaced pkg packaging scripts with `bun build --compile` targets for Linux/macOS/Windows (`build:bin*`), and wired `package` to run both JS build and binaries.
+
+## Next steps (remaining)
+- Ensure compiled binaries are self-contained with embedded config/hooks assets and runtime detection of Bun binary vs Node JS; adjust config loading to read embedded example config when filesystem asset is absent.
+- Decide npm publish shape: ship transpiled JS + assets (preferred) vs wrapper downloader; update files array/main/bin accordingly.
+- Update CI/release workflow to Bun (install/test/lint/build binaries/upload), and refresh docs/RELEASE.md for new commands.

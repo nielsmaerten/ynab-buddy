@@ -11,8 +11,8 @@ import type { Mock } from "bun:test";
 import { checkForUpdate } from "./update-checker";
 
 // Mock fetch globally
-global.fetch = mock();
-const fetchMock = global.fetch as Mock;
+const fetchMock: Mock<any> = mock();
+global.fetch = fetchMock as any;
 
 describe("checkForUpdate", () => {
   beforeEach(() => {
@@ -30,11 +30,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.1.0" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.1.0" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -51,11 +51,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.0.5" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -72,11 +72,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.0" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.0.0" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -93,11 +93,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.1.0" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.1.0" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("v2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -123,7 +123,7 @@ describe("checkForUpdate", () => {
     fetchMock.mockResolvedValueOnce({
       ok: false,
       status: 404,
-    });
+    } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -136,7 +136,7 @@ describe("checkForUpdate", () => {
     fetchMock.mockResolvedValueOnce({
       ok: true,
       json: async () => ({}),
-    });
+    } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -150,11 +150,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: false,
         status: 404,
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -168,11 +168,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({}),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -186,11 +186,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v3.0.0" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "3.0.0" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -207,11 +207,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.1.0" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.1.0" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -228,11 +228,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.6" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.0.6" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -249,11 +249,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5-beta" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.0.5-beta" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -270,11 +270,11 @@ describe("checkForUpdate", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
-      })
+      } as any)
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ version: "2.0.5" }),
-      });
+      } as any);
 
     const promise = checkForUpdate("2.0.5", "owner", "repo");
     jest.runAllTimers();

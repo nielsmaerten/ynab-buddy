@@ -37,7 +37,7 @@ const mocks = {
   displayWelcomeMessage: mock(),
   displayGoodbyeMessage: mock(),
   exitApp: mock(),
-  confirmImportPath: mock(() => mock_importPath),
+  confirmImportPath: mock(async () => mock_importPath),
   findBankFiles: mock(() => mock_bankFiles),
   getConfiguration: mock(() => mock_getConfiguration),
 };
