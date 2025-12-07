@@ -2,7 +2,9 @@ export const constants = {
   CONFIG_FILE_EXAMPLE: "/example/testExampleConfig.yaml",
   CONFIG_DIR: "/test/ynab-buddy",
   CONFIG_FILE: "testConfig.yaml",
-  messages: {},
+  messages: {
+    invalidConfig: ["%s is not a valid config file."],
+  },
 };
 
 export const configFile = `#######################################

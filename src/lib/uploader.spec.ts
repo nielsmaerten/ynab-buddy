@@ -1,22 +1,34 @@
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  mock,
+  spyOn,
+} from "bun:test";
 import * as fixture from "./uploader.spec.fixtures";
 
+mock.restore();
+
 describe("uploader", () => {
-  // Patch sendToYnab so we can spy on what the uploader spits out
-  const uploader = require("./uploader");
-  const original_sendToYnab = uploader.sendToYnab;
+  let uploader: typeof import("./uploader");
+  let sendToYnab: ReturnType<typeof spyOn>;
+
   beforeAll(() => {
-    delete uploader.sendToYnab;
-    uploader.sendToYnab = jest.fn();
+    delete require.cache[require.resolve("./uploader")];
+    uploader = require("./uploader");
+    sendToYnab = spyOn(uploader, "sendToYnab");
   });
   beforeEach(() => {
-    jest.resetAllMocks();
+    sendToYnab.mockReset();
   });
   afterAll(() => {
-    uploader.sendToYnab = original_sendToYnab;
+    sendToYnab.mockRestore();
   });
 
   it("sends transactions to YNAB", () => {
-    const sendToYnab = uploader.sendToYnab as jest.Mock;
     uploader.upload(fixture.parsedBankFile, fixture.config);
 
     expect(sendToYnab).toHaveBeenCalled();
@@ -25,7 +37,6 @@ describe("uploader", () => {
   });
 
   it("skips sending transactions to YNAB if no transactions are parsed.", () => {
-    const sendToYnab = uploader.sendToYnab as jest.Mock;
     uploader.upload(fixture.emptyTransactionsParsedBankFile, fixture.config);
     expect(sendToYnab).not.toHaveBeenCalled();
   });

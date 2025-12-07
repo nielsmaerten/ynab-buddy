@@ -1,0 +1,120 @@
+##########################################
+##   YNAB BUDDY CONFIGURATION FILE      ##
+##########################################
+
+# ========================================
+# 1. Import Directory Settings
+# ========================================
+
+# Set the directory where ynab-buddy should look for bank transaction files.
+import_from: "c:/users/test/downloads"
+
+# If false, you can change the import path before ynab-buddy starts processing files.
+# If true, the tool will use the import path above without asking for confirmation.
+skip_path_confirmation: false
+
+# If set to true, ynab-buddy will also search for bank transaction files in subdirectories.
+search_subdirectories: true
+
+# ========================================
+# 2. Bank Account & Transaction File Settings
+# ========================================
+
+# List your bank accounts and their associated transaction files.
+bank_transaction_files:
+  # Add a block like this for each account:
+  - account_name: BNP Checking Account
+    # File name pattern to match for this account's transactions (e.g., BNP-export-IBAN01233456789-*.csv).
+    pattern: BNP-export-IBAN01233456789-*.csv
+    # Parser to use for processing this account's transactions.
+    parser: bnp-example-parser
+    # YNAB account and budget IDs for uploading transactions.
+    ynab_account_id: 00000000-0000-0000-0000-000000000000
+    ynab_budget_id: 00000000-0000-0000-0000-000000000000
+    # Optional flag color for uploaded transactions in YNAB (e.g., purple, blue, green, yellow, red, orange).
+    # Place a # in front of the line to use the default (no flag).
+    ynab_flag_color: purple
+    # Set to true to upload transactions to YNAB; false to skip uploading.
+    # Place a # in front of the line to use the default (see 'upload_transactions' below).
+    upload: true
+    # Set to true to save a parsed file (in YNAB CSV format) after processing; false to skip saving.
+    save_parsed_file: false
+    # Set to true to delete the original bank transaction file after processing; false to keep the file.
+    delete_original_file: true
+
+# ========================================
+# 3. Parser Settings
+# ========================================
+
+# Define parsers for processing bank transaction files.
+parsers:
+  - name: bnp-example-parser
+    # Number of header and footer rows to skip when parsing the file.
+    header_rows: 2
+    footer_rows: 0
+    # Delimiter used to separate columns in the CSV file (e.g., ";", ",", "\t").
+    delimiter: ";"
+    # Define the columns in the CSV file.
+    # Use 'skip' to ignore a column.
+    # Use 'amount' if both inflow and outflow are in the same column. Negative amounts will be treated as outflows.
+    columns: [skip, skip, memo, date, skip, inflow, outflow, payee]
+    # Date format used in the CSV file (e.g., M/d/yyyy, d-M-yyyy).
+    # See https://moment.github.io/luxon/#/parsing?id=table-of-tokens for a list of supported formats.
+    date_format: M/d/yyyy
+    # Decimal and thousand separators used in the CSV file (e.g., ".", ",").
+    decimal_separator: "."
+    thousand_separator: "," # Leave empty if not used
+
+# ========================================
+# 4. YNAB API Settings
+# ========================================
+
+# Upload transactions to YNAB using the YNAB API.
+upload_to_ynab:
+  # Set to false to prevent uploading transactions to YNAB by default.
+  # If 'upload' is set for a specific bank_transaction_file, that setting takes precedence.
+  upload_transactions: false
+  # Your YNAB personal access token.
+  ynab_token: ABC12345
+
+# ========================================
+# 5. Configuration Done Flag
+# ========================================
+
+# IMPORTANT: Set 'configuration_done' to true when you are done configuring.
+# ynab-buddy won't start until you do.
+configuration_done: false
+# ========================================
+# Frequently Asked Questions (FAQ)
+# ========================================
+
+# Where can I find my YNAB token and budget/account IDs?
+# ------------------------------------------------------
+# To find your ynab_account_id and ynab_budget_id, visit YNAB and open up the transaction history of an account.
+# The URL in your browser address bar should now look like this:
+# https://app.ynab.com/1c8cdd9e-c923-4e39-9960-28664a2cd4ae/accounts/3c8922e0-625d-423b-ab77-810edfc460b2
+# The first code is your budget_id, the second one is the account_id:
+# https://app.ynab.com/[BUDGET-ID]/accounts/[ACCOUNT-ID]
+
+# How do I find my personal access token?
+# ---------------------------------------
+# To find your personal access token, visit https://app.youneedabudget.com/settings/developer
+# and click on the "Create New Token" button. Copy the token and paste it into the configuration file.
+# ynab-buddy won't share your token with anyone. It is only used to upload transactions to YNAB.
+
+# What if my bank uses a single column for both inflow and outflow transactions, and they're all positive values?
+# --------------------------------------------------------------------------------------------------------------
+# If your bank uses a single column for both inflow and outflow transactions with positive values, you'll need to use
+# the 'in_out_flag' column in your parser configuration. You will also need an 'outflow_indicator' to help
+# ynab-buddy distinguish between inflow and outflow transactions.
+#
+# Here's an example of how to set up the parser for such a case:
+# parsers:
+#   - name: example-parser
+#     columns: [skip, skip, memo, date, amount, in_out_flag]
+#     outflow_indicator: "OUT"
+#
+# In this example, the 'in_out_amount' column will hold the transaction amount, and the 'in_out_flag' column will
+# indicate whether the transaction is an inflow or an outflow. The 'outflow_indicator' is set to "OUT", meaning
+# that when ynab-buddy encounters the value "OUT" in the 'in_out_flag' column, it will treat the transaction as
+# an outflow. Any other value in the 'in_out_flag' column will be treated as an inflow.

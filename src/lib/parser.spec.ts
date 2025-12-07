@@ -1,19 +1,53 @@
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  mock,
+} from "bun:test";
 import { ParsedBankFile, Parser, Transaction } from "../types";
 import * as fixtures from "./parser.spec.fixtures";
 
-// Patch readFileSync so it produces a different CSV for every test
-let csvFixtureBeingTested: number;
-let customCsv: string | undefined;
-jest.mock("fs", () => {
-  return {
-    readFileSync: () => {
-      return customCsv || fixtures.csv[csvFixtureBeingTested];
-    },
-    existsSync: () => false,
-  };
-});
+mock.restore();
 
 describe("parser", () => {
+  // Patch readFileSync so it produces a different CSV for every test
+  const fs = require("fs");
+  const readFileSyncOriginal = fs.readFileSync;
+  const existsSyncOriginal = fs.existsSync;
+  let csvFixtureBeingTested: number;
+  let customCsv: string | undefined;
+  const readFileSyncMock = mock(() => {
+    return customCsv || fixtures.csv[csvFixtureBeingTested];
+  });
+  const existsSyncMock = mock(() => false);
+
+  beforeAll(() => {
+    fs.readFileSync = readFileSyncMock;
+    fs.existsSync = existsSyncMock;
+  });
+
+  beforeEach(() => {
+    readFileSyncMock.mockClear();
+    existsSyncMock.mockClear();
+    customCsv = undefined;
+  });
+
+  afterAll(() => {
+    fs.readFileSync = readFileSyncOriginal;
+    fs.existsSync = existsSyncOriginal;
+  });
+
+  const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
+    const fullParseCfg = { ...fixtures.defaultParser, ...parseCfg };
+    csvFixtureBeingTested = fixtureId;
+    delete require.cache[require.resolve("./parser")];
+    const { parseBankFile } = require("./parser");
+    return parseBankFile(fixtures.bankFile, [fullParseCfg]) as ParsedBankFile;
+  };
+
   it("accepts custom delimiters", () => {
     const result = runParser(csvFixtures.customDelimiter);
     expect(result.transactions).toHaveLength(3);
@@ -201,13 +235,6 @@ describe("parser", () => {
     expect(result.transactions[0].amount).toEqual(-420.69);
   });
 });
-
-const runParser = (fixtureId: number, parseCfg?: Partial<Parser>) => {
-  const fullParseCfg = { ...fixtures.defaultParser, ...parseCfg };
-  csvFixtureBeingTested = fixtureId;
-  const { parseBankFile } = require("./parser");
-  return parseBankFile(fixtures.bankFile, [fullParseCfg]) as ParsedBankFile;
-};
 
 enum csvFixtures {
   // Indexes on the csv fixtures array in parser.spec.fixtures

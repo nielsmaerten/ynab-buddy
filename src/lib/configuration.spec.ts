@@ -1,29 +1,63 @@
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  mock,
+} from "bun:test";
+import type { Mock } from "bun:test";
 import { Configuration } from "../types";
 import * as fixture from "./configuration.spec.fixture";
 
+mock.restore();
+
 describe("configuration", () => {
   let configFileExists = true;
+  const fs = require("fs");
+  const existsSyncOriginal = fs.existsSync;
+  const readFileSyncOriginal = fs.readFileSync;
+  const writeFileSyncOriginal = fs.writeFileSync;
+  const mkdirSyncOriginal = fs.mkdirSync;
+  const existsSyncMock = mock(() => configFileExists);
+  const readFileSyncMock = mock(() => fixture.configFile);
+  const writeFileSyncMock = mock();
+  const mkdirSyncMock = mock();
+
   beforeAll(() => {
-    jest.mock("../constants", () => {
+    mock.module("../constants", () => {
       return fixture.constants;
     });
-    jest.mock("fs", () => {
-      return {
-        existsSync: jest.fn().mockImplementation(() => configFileExists),
-        readFileSync: jest.fn().mockImplementation(() => fixture.configFile),
-        writeFileSync: jest.fn(),
-        mkdirSync: jest.fn(),
-      };
-    });
+    fs.existsSync = existsSyncMock;
+    fs.readFileSync = readFileSyncMock;
+    fs.writeFileSync = writeFileSyncMock;
+    fs.mkdirSync = mkdirSyncMock;
+  });
+
+  afterAll(() => {
+    fs.existsSync = existsSyncOriginal;
+    fs.readFileSync = readFileSyncOriginal;
+    fs.writeFileSync = writeFileSyncOriginal;
+    fs.mkdirSync = mkdirSyncOriginal;
+    mock.restore();
+  });
+
+  beforeEach(() => {
+    existsSyncMock.mockClear();
+    readFileSyncMock.mockClear();
+    writeFileSyncMock.mockClear();
+    mkdirSyncMock.mockClear();
   });
 
   it("checks if config file exists", () => {
     configFileExists = true;
 
+    delete require.cache[require.resolve("./configuration")];
     const module = require("./configuration");
     module.getConfiguration();
 
-    const mockedExists: jest.Mock = require("fs").existsSync;
+    const mockedExists: Mock = existsSyncMock;
     expect(mockedExists).toHaveBeenCalled();
 
     const checkedConfPath: string = mockedExists.mock.calls[0][0];
@@ -34,10 +68,11 @@ describe("configuration", () => {
   it("writes example config if no config file exists", () => {
     configFileExists = false;
 
+    delete require.cache[require.resolve("./configuration")];
     const module = require("./configuration");
     module.getConfiguration();
 
-    const mockedWriteFile: jest.Mock = require("fs").writeFileSync;
+    const mockedWriteFile: Mock = writeFileSyncMock;
     expect(mockedWriteFile).toHaveBeenCalled();
 
     const writeCall1 = mockedWriteFile.mock.calls[0];
@@ -48,6 +83,8 @@ describe("configuration", () => {
   });
 
   it("parses the config file", () => {
+    configFileExists = true;
+    delete require.cache[require.resolve("./configuration")];
     const actual: Configuration = require("./configuration").getConfiguration();
     const expected: Configuration = {
       bankFilePatterns: [

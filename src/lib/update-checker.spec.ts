@@ -1,11 +1,22 @@
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+  mock,
+} from "bun:test";
+import type { Mock } from "bun:test";
 import { checkForUpdate } from "./update-checker";
 
 // Mock fetch globally
-global.fetch = jest.fn();
+global.fetch = mock();
+const fetchMock = global.fetch as Mock;
 
 describe("checkForUpdate", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    mock.clearAllMocks();
     jest.useFakeTimers();
   });
 
@@ -15,7 +26,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return updateAvailable: true when a newer version is available", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.1.0" }),
@@ -36,7 +47,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return updateAvailable: false when current version is latest", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
@@ -57,7 +68,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return updateAvailable: false when current version is newer", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.0" }),
@@ -78,7 +89,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should handle versions with 'v' prefix in current version", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.1.0" }),
@@ -99,9 +110,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return null when fetch fails", async () => {
-    (global.fetch as jest.Mock).mockRejectedValueOnce(
-      new Error("Network error"),
-    );
+    fetchMock.mockRejectedValueOnce(new Error("Network error"));
 
     const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
     jest.runAllTimers();
@@ -111,7 +120,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return null when API returns non-ok response", async () => {
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    fetchMock.mockResolvedValueOnce({
       ok: false,
       status: 404,
     });
@@ -124,7 +133,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return null when release has no tag_name", async () => {
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    fetchMock.mockResolvedValueOnce({
       ok: true,
       json: async () => ({}),
     });
@@ -137,7 +146,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return null when package.json fetch fails", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
@@ -155,7 +164,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should return null when package.json has no version field", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
@@ -173,7 +182,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should compare major version correctly", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v3.0.0" }),
@@ -194,7 +203,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should compare minor version correctly", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.1.0" }),
@@ -215,7 +224,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should compare patch version correctly", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.6" }),
@@ -236,7 +245,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should handle pre-release versions by comparing base version only", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5-beta" }),
@@ -257,7 +266,7 @@ describe("checkForUpdate", () => {
   });
 
   it("should use correct GitHub API URL", async () => {
-    (global.fetch as jest.Mock)
+    fetchMock
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tag_name: "v2.0.5" }),
@@ -271,12 +280,12 @@ describe("checkForUpdate", () => {
     jest.runAllTimers();
     await promise;
 
-    expect(global.fetch).toHaveBeenNthCalledWith(
+    expect(fetchMock).toHaveBeenNthCalledWith(
       1,
       "https://api.github.com/repos/owner/repo/releases/latest",
       expect.any(Object),
     );
-    expect(global.fetch).toHaveBeenNthCalledWith(
+    expect(fetchMock).toHaveBeenNthCalledWith(
       2,
       "https://raw.githubusercontent.com/owner/repo/v2.0.5/package.json",
       expect.any(Object),

@@ -1,32 +1,72 @@
 #!/usr/bin/env node
+import fs from "fs";
 import { messages } from "./constants";
 import * as cli from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
-import { exportCsv, findBankFiles, cleanup } from "./lib/filesystem";
+import { cleanup, exportCsv, findBankFiles } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { upload } from "./lib/uploader";
 import { BankFile } from "./types";
-import fs from "fs";
 
-(async () => {
+type AppDeps = {
+  getConfiguration: typeof getConfiguration;
+  displayWelcomeMessage: typeof cli.displayWelcomeMessage;
+  displayGoodbyeMessage: typeof cli.displayGoodbyeMessage;
+  confirmImportPath: typeof cli.confirmImportPath;
+  exitApp: typeof cli.exitApp;
+  findBankFiles: typeof findBankFiles;
+  parseBankFile: typeof parseBankFile;
+  exportCsv: typeof exportCsv;
+  cleanup: typeof cleanup;
+  upload: typeof upload;
+};
+
+const defaultDeps: AppDeps = {
+  getConfiguration,
+  displayWelcomeMessage: cli.displayWelcomeMessage,
+  displayGoodbyeMessage: cli.displayGoodbyeMessage,
+  confirmImportPath: cli.confirmImportPath,
+  exitApp: cli.exitApp,
+  findBankFiles,
+  parseBankFile,
+  exportCsv,
+  cleanup,
+  upload,
+};
+
+export async function runApp(overrides: Partial<AppDeps> = {}) {
+  const deps = { ...defaultDeps, ...overrides };
+  const {
+    getConfiguration,
+    displayWelcomeMessage,
+    displayGoodbyeMessage,
+    confirmImportPath,
+    exitApp,
+    findBankFiles,
+    parseBankFile,
+    exportCsv,
+    cleanup,
+    upload,
+  } = deps;
+
   // Ensure the tool has a valid configuration
   const config = getConfiguration();
 
   // Exit if the config file is not set up yet
   const isFirstRun = !config.configurationDone;
   if (isFirstRun) {
-    cli.displayWelcomeMessage(isFirstRun);
-    return cli.exitApp();
+    displayWelcomeMessage(isFirstRun);
+    return exitApp();
   }
 
   // Display welcome message
-  cli.displayWelcomeMessage(isFirstRun);
+  displayWelcomeMessage(isFirstRun);
 
   // Confirm folder where the tool should look for bank files
   const importPathExists =
     config.importPath && fs.existsSync(config.importPath);
   if (!config.skipPathConfirmation || !importPathExists) {
-    config.importPath = await cli.confirmImportPath(config.importPath);
+    config.importPath = await confirmImportPath(config.importPath);
   }
 
   // Find files eligible for conversion in the importPath
@@ -47,16 +87,23 @@ import fs from "fs";
   await Promise.all(uploads);
 
   // All done!
-  cli.displayGoodbyeMessage();
-  return cli.exitApp();
-})().catch(handleError);
+  displayGoodbyeMessage();
+  return exitApp();
+}
 
-function handleError(err: any) {
+function handleError(
+  err: any,
+  exitApp: AppDeps["exitApp"] = defaultDeps.exitApp,
+) {
   console.error("Unhandled error: exiting.");
 
   const isVerbose = process.argv.find((arg) => arg.toLowerCase() === "-v");
   if (isVerbose) console.error(JSON.stringify(err));
   else console.log("For details, run with flag `-v`");
 
-  return cli.exitApp();
+  return exitApp();
+}
+
+if (process.env.YNAB_BUDDY_DISABLE_AUTO_RUN !== "true") {
+  runApp().catch((err) => handleError(err));
 }

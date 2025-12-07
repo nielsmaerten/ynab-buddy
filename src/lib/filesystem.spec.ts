@@ -1,15 +1,31 @@
 import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  mock,
+} from "bun:test";
+import {
   liveConfig,
   parsedBankFileFixture,
   testBankFilePatterns,
   testFiles,
 } from "./filesystem.spec.fixtures";
-import { detectBank, findBankFiles } from "./filesystem";
 import path from "path";
 import { TEST_BANKS_DIR } from "../constants";
 
+mock.restore();
+
+const loadFilesystem = () => {
+  delete require.cache[require.resolve("./filesystem")];
+  return require("./filesystem") as typeof import("./filesystem");
+};
+
 describe("detectBank", () => {
   it("detects when a file is a BankFile", () => {
+    const { detectBank } = loadFilesystem();
     const result = detectBank(testFiles.bankFile, testBankFilePatterns);
     expect(result.isBankFile).toBeTruthy();
     expect(result.matchedParser).toBeDefined();
@@ -18,6 +34,7 @@ describe("detectBank", () => {
   });
 
   it("detects a nested file", () => {
+    const { detectBank } = loadFilesystem();
     const result = detectBank(testFiles.nestedBankFile, testBankFilePatterns);
     expect(result.isBankFile).toBeTruthy();
     expect(result.matchedParser).toBeDefined();
@@ -26,6 +43,7 @@ describe("detectBank", () => {
   });
 
   it("returns isBankFile = false when no bank is detected", () => {
+    const { detectBank } = loadFilesystem();
     const result = detectBank(testFiles.notBankFile, testBankFilePatterns);
     expect(result.isBankFile).toBeFalsy();
     expect(result.matchedParser).toBeUndefined();
@@ -41,6 +59,7 @@ describe("findBankFiles", () => {
   it("finds files from bank A in top level", () => {
     const dir = path.join(bankFilesDir, "bankA/");
     const config = { ...liveConfig, searchSubDirectories: false };
+    const { findBankFiles } = loadFilesystem();
     const result = findBankFiles(dir, config);
     expect(result).toHaveLength(1);
   });
@@ -48,6 +67,7 @@ describe("findBankFiles", () => {
   it("finds files from bank A in nested folders", () => {
     const dir = path.join(bankFilesDir, "bankA/");
     const config = { ...liveConfig, searchSubDirectories: true };
+    const { findBankFiles } = loadFilesystem();
     const result = findBankFiles(dir, config);
     expect(result).toHaveLength(2);
   });
@@ -55,6 +75,7 @@ describe("findBankFiles", () => {
   it("finds files from bank B", () => {
     const dir = path.join(bankFilesDir, "bankB/");
     const config = { ...liveConfig, searchSubDirectories: false };
+    const { findBankFiles } = loadFilesystem();
     const result = findBankFiles(dir, config);
     expect(result).toHaveLength(1);
   });
@@ -62,12 +83,14 @@ describe("findBankFiles", () => {
   it("finds files from bank C", () => {
     const dir = path.join(bankFilesDir, "bankC/");
     const config = { ...liveConfig, searchSubDirectories: true };
+    const { findBankFiles } = loadFilesystem();
     const result = findBankFiles(dir, config);
     expect(result).toHaveLength(2);
   });
 
   it("finds all test files", () => {
     const config = { ...liveConfig, searchSubDirectories: true };
+    const { findBankFiles } = loadFilesystem();
     const result = findBankFiles(bankFilesDir, config);
     expect(result).toHaveLength(5);
   });
@@ -77,17 +100,17 @@ describe("CSV Export (simulated)", () => {
   // Patch writeFileSync so we can spy on what's getting exported
   const fs = require("fs");
   const writeFileSync_original = fs.writeFileSync;
-  const writeFileSync_mock = jest.fn();
+  const writeFileSync_mock = mock();
+  let exportCsv: typeof import("./filesystem").exportCsv;
   beforeAll(() => {
-    delete fs.writeFileSync;
     fs.writeFileSync = writeFileSync_mock;
+    delete require.cache[require.resolve("./filesystem")];
+    exportCsv = loadFilesystem().exportCsv;
   });
   afterAll(() => {
     fs.writeFileSync = writeFileSync_original;
   });
-  beforeEach(writeFileSync_mock.mockReset);
-
-  const { exportCsv } = require("./filesystem");
+  beforeEach(() => writeFileSync_mock.mockReset());
   it("exports parsed file as YNAB.csv", () => {
     exportCsv(parsedBankFileFixture);
     expect(writeFileSync_mock).toHaveBeenCalled();

@@ -8,7 +8,7 @@ import {
 import { minimatch } from "minimatch";
 import { sync as globSync } from "glob";
 import path from "path";
-import fs, { rmSync, writeFileSync } from "fs";
+import fs from "fs";
 import csvStringify from "csv-stringify/lib/sync";
 import stringify from "csv-stringify";
 import * as hooks from "./hooks-loader";
@@ -94,7 +94,7 @@ export function exportCsv(result: ParsedBankFile) {
   const parentFolder = path.dirname(source.path);
   const exportFileName = `${originalFileName}.YNAB.csv`;
   const destination = path.join(parentFolder, exportFileName);
-  writeFileSync(destination, csvText);
+  fs.writeFileSync(destination, csvText);
 }
 
 const prepForCsv = (transactions: Transaction[]) =>
@@ -112,5 +112,5 @@ const prepForCsv = (transactions: Transaction[]) =>
 
 export function cleanup(result: ParsedBankFile) {
   const shouldDelete = result.source.matchedPattern?.delete_original_file;
-  if (shouldDelete) rmSync(result.source.path);
+  if (shouldDelete) fs.rmSync(result.source.path);
 }

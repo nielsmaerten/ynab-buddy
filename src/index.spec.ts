@@ -1,7 +1,23 @@
-import { Configuration } from "./types";
+import { beforeAll, describe, expect, it, mock } from "bun:test";
+import { runApp } from "./index";
+import { BankFile, Configuration, ParsedBankFile } from "./types";
 
 const mock_importPath = Math.random().toString();
-const mock_bankFiles = [Math.random().toString()];
+const mock_bankFiles: BankFile[] = [
+  { isBankFile: true, path: mock_importPath, matchedParser: "TEST" } as any,
+];
+const mock_parsedFile: ParsedBankFile = {
+  source: {
+    isBankFile: true,
+    matchedParser: "TEST",
+    matchedPattern: {
+      save_parsed_file: true,
+      delete_original_file: false,
+    } as any,
+    path: mock_importPath,
+  },
+  transactions: [],
+};
 const mock_getConfiguration: Configuration = {
   parsers: [],
   bankFilePatterns: [],
@@ -14,51 +30,22 @@ const mock_getConfiguration: Configuration = {
   configurationDone: true,
 };
 const mocks = {
-  parseBankFile: jest.fn(),
-  exportCsv: jest.fn(),
-  cleanup: jest.fn(),
-  upload: jest.fn(),
-  displayWelcomeMessage: jest.fn(),
-  displayGoodbyeMessage: jest.fn(),
-  exitApp: jest.fn(),
-  confirmImportPath: jest.fn().mockReturnValue(mock_importPath),
-  findBankFiles: jest.fn().mockReturnValue(mock_bankFiles),
-  getConfiguration: jest.fn().mockReturnValue(mock_getConfiguration),
+  parseBankFile: mock(() => mock_parsedFile),
+  exportCsv: mock(),
+  cleanup: mock(),
+  upload: mock(),
+  displayWelcomeMessage: mock(),
+  displayGoodbyeMessage: mock(),
+  exitApp: mock(),
+  confirmImportPath: mock(() => mock_importPath),
+  findBankFiles: mock(() => mock_bankFiles),
+  getConfiguration: mock(() => mock_getConfiguration),
 };
 
 describe("index.ts", () => {
-  beforeAll(() => {
-    jest.mock("./lib/configuration", () => {
-      return {
-        getConfiguration: mocks.getConfiguration,
-      };
-    });
-    jest.mock("./lib/cli", () => {
-      return {
-        confirmImportPath: mocks.confirmImportPath,
-        displayWelcomeMessage: mocks.displayWelcomeMessage,
-        displayGoodbyeMessage: mocks.displayGoodbyeMessage,
-        exitApp: mocks.exitApp,
-      };
-    });
-    jest.mock("./lib/filesystem", () => {
-      return {
-        findBankFiles: mocks.findBankFiles,
-        exportCsv: mocks.exportCsv,
-        cleanup: mocks.cleanup,
-      };
-    });
-    jest.mock("./lib/parser", () => {
-      return {
-        parseBankFile: mocks.parseBankFile,
-      };
-    });
-    jest.mock("./lib/uploader", () => {
-      return {
-        upload: mocks.upload,
-      };
-    });
-    require("./index");
+  beforeAll(async () => {
+    process.env.YNAB_BUDDY_DISABLE_AUTO_RUN = "true";
+    await runApp(mocks);
   });
 
   it("gets configuration object", () => {
