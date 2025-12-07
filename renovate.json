@@ -11,6 +11,7 @@
       "groupName": "automerge",
       "automerge": true,
       "matchUpdateTypes": [
+        "major",
         "minor",
         "patch",
         "pin",
