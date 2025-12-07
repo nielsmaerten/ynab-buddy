@@ -2,13 +2,9 @@ import fs from "fs";
 import chalk from "chalk";
 import prompts from "prompts";
 import "abort-controller/polyfill";
-import {
-  APP_NAME,
-  APP_VERSION,
-  messages,
-  UPDATE_CHECK_URL,
-} from "../constants";
+import { APP_NAME, APP_VERSION, messages } from "../constants";
 import { getConfigPaths } from "./configuration";
+import { checkForUpdate } from "./update-checker";
 
 // When compiled using pkg, process will have the following property
 const isNpmApp = (process as any).pkg?.entrypoint === undefined;
@@ -89,24 +85,21 @@ export async function confirmImportPath(defaultPath: string | undefined) {
 }
 
 export async function checkUpdate(thisVersion: string) {
-  const timeoutMs = 3000;
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-  const requestOpts = { signal: controller.signal };
-
   try {
-    const res = await fetch(UPDATE_CHECK_URL, requestOpts);
-    clearTimeout(timeoutId);
-    const json = await res.json();
-    const { updateAvailable, latest, custom_message } = json;
-    if (updateAvailable) {
+    const result = await checkForUpdate(
+      thisVersion,
+      "nielsmaerten",
+      "ynab-buddy",
+      3000,
+    );
+
+    if (result && result.updateAvailable) {
       const { notice, npmCommand, releaseUrl } = messages.newVersion;
       const whereToDownload = isNpmApp ? npmCommand : releaseUrl;
       console.log(notice, whereToDownload);
       console.log(messages.yourVersion, thisVersion);
-      console.log(messages.latestVersion, latest);
+      console.log(messages.latestVersion, result.latest);
     }
-    if (custom_message) console.log(custom_message);
   } catch {
     // Ignore update check errors
   }

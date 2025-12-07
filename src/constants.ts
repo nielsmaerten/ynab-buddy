@@ -4,8 +4,6 @@ export const CONFIG_FILE_EXAMPLE = "assets/config/example.yaml";
 export const TEST_BANKS_DIR = "assets/test-banks";
 export const APP_NAME = "YNAB Buddy";
 export const APP_VERSION = require("../package.json").version;
-export const UPDATE_CHECK_URL =
-  "https://api.niels.me/ynab-buddy/check-updates?version=" + APP_VERSION;
 
 export const messages = {
   disclaimer:
