@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 - `src/`: TypeScript source. CLI entry at `src/index.ts`; helpers in `src/lib/`.
-- `assets/`: User-facing templates (`config/example.yaml`, `config/hooks.js`, test CSVs).
+- `assets/`: User-facing templates (`config/config.yaml`, `config/hooks.js`, test CSVs).
 - `dist/`: Build output from `bun run build`.
 - `bin/`: Bun-compiled executables (`bun run build:bin*`).
 - `docs/`: Contributor and usage docs (configuration, hooks, release, contributing).

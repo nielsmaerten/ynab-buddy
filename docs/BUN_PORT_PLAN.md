@@ -11,7 +11,7 @@
 - Build/package: `tsc` to `dist/`; `@yao-pkg/pkg` creates binaries to `bin/` from `dist/index.js`; runtime uses `process.pkg` to detect pkg build for exit/update UX.
 - Tests: Jest + ts-jest config (`jest.config.js`, `tsconfig` types include jest); coverage via Jest.
 - CI/release: GitHub Actions with `yarn install/test/lint/pkg`, uploads `bin/*` on tags.
-- Assets/hooks: `assets/config/example.yaml` copied to home config; hooks loader reads `assets/config/hooks.js` in dev/test and `~/ynab-buddy/hooks.js` at runtime.
+- Assets/hooks: `assets/config/config.yaml` copied to home config; hooks loader reads `assets/config/hooks.js` in dev/test and `~/ynab-buddy/hooks.js` at runtime.
 - Docs: README/CONTRIBUTING/RELEASE mention Yarn workflows.
 
 ## Work Plan
@@ -29,7 +29,7 @@
 - Remove Jest/ts-jest configs and deps; update `tsconfig` types to Bun/Node.
 
 4) Assets & hooks
-- Ensure `assets/config/example.yaml` and `assets/config/hooks.js` remain loadable from filesystem; avoid bundling them away in compiled build.
+- Ensure `assets/config/config.yaml` and `assets/config/hooks.js` remain loadable from filesystem; avoid bundling them away in compiled build.
 - Confirm compiled binary can read `~/ynab-buddy/hooks.js` dynamically.
 
 5) npm publish strategy

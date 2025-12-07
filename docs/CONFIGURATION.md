@@ -1,6 +1,6 @@
 # Configuration Guide
 
-The config lives at `~/ynab-buddy/config.yaml`. It is created on first run (or with the compiled binary) using the template in `assets/config/example.yaml`. You can also reset it by deleting the file and running `ynab-buddy` again.
+The config lives at `~/ynab-buddy/config.yaml`. It is created on first run (or with the compiled binary) using the template in `assets/config/config.yaml`. You can also reset it by deleting the file and running `ynab-buddy` again.
 
 ## Required fields
 
