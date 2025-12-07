@@ -23,12 +23,11 @@ jobs:
           echo "Current version: $CURRENT_VERSION"
           
           # Get previous version from package.json in the previous commit
-          git checkout HEAD~1 -- package.json 2>/dev/null || {
+          PREVIOUS_PACKAGE_JSON=$(git show HEAD~1:package.json 2>/dev/null) || {
             echo "First commit or no previous version, skipping"
             exit 0
           }
-          PREVIOUS_VERSION=$(node -p "require('./package.json').version")
-          git checkout HEAD -- package.json
+          PREVIOUS_VERSION=$(echo "$PREVIOUS_PACKAGE_JSON" | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8')).version")
           
           echo "Previous version: $PREVIOUS_VERSION"
           
@@ -49,8 +48,9 @@ jobs:
           VERSION="${{ steps.version-check.outputs.new-version }}"
           TAG="v$VERSION"
           
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "Tag $TAG already exists, skipping"
+          # Check if tag exists in remote repository
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG$"; then
+            echo "Tag $TAG already exists in remote, skipping"
             echo "tag-exists=true" >> $GITHUB_OUTPUT
           else
             echo "Tag $TAG does not exist yet"
