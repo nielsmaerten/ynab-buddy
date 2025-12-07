@@ -1,12 +1,13 @@
-name: Node.js CI
+name: Test
 
 on:
   push:
     branches: [main]
-    tags:
-      - "v*.*.*"
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -37,11 +38,3 @@ jobs:
       - name: Codecov
         if: matrix.node-version == '20.x' && matrix.os == 'ubuntu-latest'
         uses: codecov/codecov-action@v4.5.0
-
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/') && matrix.node-version == '20.x' && matrix.os == 'ubuntu-latest'
-        with:
-          draft: true
-          fail_on_unmatched_files: true
-          files: bin/*
