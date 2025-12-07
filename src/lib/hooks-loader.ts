@@ -1,19 +1,24 @@
 import { Options } from "csv-parse";
 import fs from "fs";
+import path from "path";
+import { homedir } from "os";
 import { BankFile, Configuration, Transaction } from "../types";
+
+export const USER_HOOKS_PATH = path.join(homedir(), "ynab-buddy/hooks.js");
 
 // First, let's import the javascript file that contains the hooks:
 function importHooksModule() {
   // When debugging, load the hooks file from inside the repository
   const environment = process.env.NODE_ENV || "production";
-  const isDev = ["development", "test", "hooks"].includes(environment);
-  if (isDev) return require(`${__dirname}/../../assets/config/hooks.js`);
+  const isBundled =
+    Boolean((process as any).pkg) || process.env.YNAB_BUNDLED === "true";
+  const isDev = !isBundled && ["development", "test", "hooks"].includes(environment);
+  const devHooksPath = `${__dirname}/../../assets/config/hooks.js`;
+  if (isDev && fs.existsSync(devHooksPath)) return require(devHooksPath);
 
   // In production, load the hooks file from the user's home directory
-  const userHomeDir = require("os").homedir();
-  const hooksPath = `${userHomeDir}/ynab-buddy/hooks.js`;
-  if (fs.existsSync(hooksPath)) {
-    return require(hooksPath);
+  if (fs.existsSync(USER_HOOKS_PATH)) {
+    return require(USER_HOOKS_PATH);
   }
   return null;
 }

@@ -11,6 +11,7 @@ import {
   CONFIG_FILE_EXAMPLE,
   messages,
 } from "../constants";
+import { EMBEDDED_EXAMPLE_CONFIG } from "./embedded-assets";
 
 /**
  * Reads configuration from the default config file.
@@ -68,7 +69,13 @@ const createConfigFile = () => {
   }
 
   // Write example config file to destination
-  const content = fs.readFileSync(example);
+  let content: string | Buffer;
+  try {
+    content = fs.readFileSync(example);
+  } catch {
+    // Fallback for compiled binary when assets are not on disk
+    content = EMBEDDED_EXAMPLE_CONFIG;
+  }
   const writeOpts = { flag: "w" };
   fs.writeFileSync(fullPath, content, writeOpts);
 };

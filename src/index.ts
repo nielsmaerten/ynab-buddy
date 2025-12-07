@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "fs";
+import path from "path";
 import { messages } from "./constants";
 import * as cli from "./lib/cli";
 import { getConfiguration } from "./lib/configuration";
@@ -7,6 +8,8 @@ import { cleanup, exportCsv, findBankFiles } from "./lib/filesystem";
 import { parseBankFile } from "./lib/parser";
 import { upload } from "./lib/uploader";
 import { BankFile } from "./types";
+import { EMBEDDED_HOOKS } from "./lib/embedded-assets";
+import { USER_HOOKS_PATH } from "./lib/hooks-loader";
 
 type AppDeps = {
   getConfiguration: typeof getConfiguration;
@@ -50,6 +53,12 @@ export async function runApp(overrides: Partial<AppDeps> = {}) {
   } = deps;
 
   // Ensure the tool has a valid configuration
+  if (process.argv.includes("--setup-hooks")) {
+    setupHooksFile();
+    console.log("Hooks file written to:", USER_HOOKS_PATH);
+    return;
+  }
+
   const config = getConfiguration();
 
   // Exit if the config file is not set up yet
@@ -106,4 +115,12 @@ function handleError(
 
 if (process.env.YNAB_BUDDY_DISABLE_AUTO_RUN !== "true") {
   runApp().catch((err) => handleError(err));
+}
+
+function setupHooksFile() {
+  const hooksDir = path.dirname(USER_HOOKS_PATH);
+  if (!fs.existsSync(hooksDir)) {
+    fs.mkdirSync(hooksDir, { recursive: true });
+  }
+  fs.writeFileSync(USER_HOOKS_PATH, EMBEDDED_HOOKS, { flag: "w" });
 }

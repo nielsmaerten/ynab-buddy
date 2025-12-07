@@ -6,8 +6,10 @@ import { APP_NAME, APP_VERSION, messages } from "../constants";
 import { getConfigPaths } from "./configuration";
 import { checkForUpdate } from "./update-checker";
 
-// When compiled using pkg, process will have the following property
-const isNpmApp = (process as any).pkg?.entrypoint === undefined;
+// Detect whether we're running as a packaged/bundled binary (pkg or bun --compile)
+const isBundledBinary =
+  Boolean((process as any).pkg) || process.env.YNAB_BUNDLED === "true";
+const isNpmApp = !isBundledBinary;
 
 export function displayWelcomeMessage(isFirstRun: boolean) {
   const appLabel = `${APP_NAME} (v${APP_VERSION})`;
