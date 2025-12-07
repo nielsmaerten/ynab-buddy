@@ -8,8 +8,10 @@
     "csv",
     "import"
   ],
-  "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "main": "./dist/index.js",
+  "bin": {
+    "ynab-buddy": "./dist/index.js"
+  },
   "files": [
     "dist/",
     "assets/"
