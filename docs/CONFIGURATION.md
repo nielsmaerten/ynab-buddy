@@ -1,262 +1,66 @@
-# How to configure _ynab-buddy_
+# Configuration Guide
 
-## Deprecated
+The config lives at `~/ynab-buddy/config.yaml`. It is created on first run (or with the compiled binary) using the template in `assets/config/example.yaml`. You can also reset it by deleting the file and running `ynab-buddy` again.
 
-Note: this file has been replaced with documentation inside the config file itself.  
-The information below may not be up-to-date.
-
----
-
-ynab-buddy is configured using a file in `<your home directory>/ynab-buddy/config.yaml`.
-
-This document explains all options. Use it as a guide when adjusting your configuration to work with your bank.
-
-### Good to know
-
-- An example config file is automatically created when ynab-buddy runs for the first time
-- Disable optional settings by typing a hashtag (`#`) in front of them. Or remove the line completely.
-
-## General settings
-
-### `import_from`
-
-The folder where you'll download CSV files from your bank.
+## Required fields
 
 ```yaml
-import_from: "c:/users/niels/downloads" # windows
-import_from: "/home/niels/downloads"    # linux, mac os
+import_from: "/path/to/your/downloads"   # folder containing bank CSVs
+skip_path_confirmation: false            # set true to skip the prompt
+search_subdirectories: true              # recurse into subfolders
+
+bank_transaction_files:
+  - account_name: Example Checking
+    pattern: BNP-export-IBAN01233456789-*.csv   # glob-style pattern
+    parser: bnp-example-parser                  # must match a parser name
+    ynab_account_id: 00000000-0000-0000-0000-000000000000
+    ynab_budget_id: 00000000-0000-0000-0000-000000000000
+    ynab_flag_color: purple                     # optional: purple/blue/green/yellow/red/orange
+    upload: true                                # overrides upload_transactions
+    save_parsed_file: false                     # write <file>.YNAB.csv
+    delete_original_file: true                  # remove source after processing
+
+parsers:
+  - name: bnp-example-parser
+    header_rows: 2
+    footer_rows: 0
+    delimiter: ";"
+    columns: [skip, skip, memo, date, skip, inflow, outflow, payee]
+    date_format: M/d/yyyy
+    decimal_separator: "."
+    thousand_separator: ","
+
+upload_to_ynab:
+  upload_transactions: false
+  ynab_token: ABC12345
+
+configuration_done: false
 ```
 
-**Optional:** If no folder is set, ynab-buddy will ask where to find your files every time.
-
-### `skip_path_confirmation`
-
-Set to `true` to always use `import_from` without confirmation
-
-**Optional.**
-
-### `search_subdirectories`
-
-```yaml
-search_subdirectories: false # only search the top folder for bank files
-search_subdirectories: true  # search underlying folders as well
-```
-
-### `configuration_done`
-
-**IMPORTANT: Delete this line or set it to _true_ when you're done. ynab-buddy won't start until you do.**
-
-## Bank Transaction Files
-
-Repeat this section for every account.
-
-### `account_name`
-
-```yaml
-account_name: My BNP Checking Account
-# optional, you can name accounts so you can keep them apart
-# ynab-buddy does not use this value.
-```
-
-### `pattern`
-
-Use wildcard patterns to tell ynab-buddy what your bank's files look like:
-
-```yaml
-pattern: BNP_IBAN323534643_*.csv
-pattern: *_VisaPersonal-*.csv
-pattern: ing/savings/export.csv
-```
-
-| Pattern                   | Matches filenames such as:                                             |
-| ------------------------- | ---------------------------------------------------------------------- |
-| `BNP_IBAN323534643_*.csv` | `BNP_IBAN323534643_2021-09-12.csv`, `BNP_IBAN323534643_2021-04-20.csv` |
-| `*_VisaPersonal-*.csv`    | `NM_VisaPersonal-23453423.csv`, `YourName_VisaPersonal-2020202.csv`    |
-| `ing/savings/export.csv`  | `export.csv`                                                           |
-
-**Notice:** the last pattern only matches files named "export.csv". If your bank does this, create a directory structure for your accounts (for example `downloads/ing/savings/`) and place files into the folder for their account.
-
-ynab-buddy will now be able to use the directory name + pattern to identify the correct account for each file.
-
-### `parser`
-
-```yaml
-parser: bnp-checking-parser
-# the name of the parser to use for this file
-# parsers are defined in the section 'parsers'
-```
-
-### `ynab_account_id`
-
-```yaml
-ynab_account_id: 3c8922e0-625d-423b-ab77-810edfc460b2
-```
-
-To find your account_id and budget_id, visit YNAB and open up the transaction history of an account.
-
-```yaml
-# The URL in your browser address bar should now look like this:
-https://app.youneedabudget.com/1c8cdd9e-c923-4e39-9960-28664a2cd4ae/accounts/3c8922e0-625d-423b-ab77-810edfc460b2
-
-# The first code is your budget_id, the second one is the account_id:
-https://app.youneedabudget.com/[BUDGET-ID]/accounts/[ACCOUNT-ID]
-```
-
-### `ynab_budget_id`
-
-```yaml
-ynab_budget_id: 1c8cdd9e-c923-4e39-9960-28664a2cd4ae
-```
-
-See: `ynab_account_id`.
-
-### `ynab_flag_color`
-
-```yaml
-ynab_flag_color: blue
-# possible colors are: blue, green, orange, purple, red and yellow
-```
-
-Useful if you want to distinguish imported transactions from the ones you entered yourself. If you don't want to set a flag, remove this line or disable this option by typing a `#` in front of it.
-
-### `upload`
-
-```yaml
-upload: true  # transactions from this file will be uploaded to YNAB
-upload: false # don't upload transactions from this file to YNAB
-# Note: this option overrides the option 'upload_transactions'
-```
-
-### `save_parsed_file`
-
-```yaml
-save_parsed_file: true  # save the converted file as <original_filename>.YNAB.csv
-save_parsed_file: false # don't save the converted file
-```
-
-### `delete_original_file`
-
-```yaml
-delete_original_file: true  # delete the bank file once it's processed
-delete_original_file: false # keep the bank file after processing
-```
-
-## Parsers
-
-Parsers tell ynab-buddy how to read a file. You can re-use a parser for multiple accounts.
-
-### `name`
-
-```yaml
-name: bnp-checking-parser
-# Provide a unique name for every parser.
-# Then enter that name as the 'parser' for every bank file that should use it.
-```
-
-### `header_rows`
-
-```yaml
-header_rows: 1
-# The number of header rows your bank adds to their CSV files (most banks do this)
-# This is the number of lines ynab-buddy will ignore when parsing
-```
-
-### `footer_rows`
-
-Same as `header_rows`, but sets how many lines from the bottom should be ignored.
-
-### `delimiter`
-
-```yaml
-delimiter: ','  # comma separated (most common)
-delimiter: '\t' # tab separated
-delimiter: ';'  # semicolon separated
-```
-
-The symbol used to separate columns in the CSV file.
-
-### `columns`
-
-```yaml
-columns: date,skip,amount,memo,skip               # 02/21/2021;ID123;-420.69;Starlink;31415
-columns: skip,memo,date,outflow,inflow            # tx112;Store name;2021-02-21;234.53;0
-columns: skip,memo,memo2,amount,in_out_flag;date  # id420;YNAB;USA;98.99;Out;2020-04-20
-```
-
-Configure which columns contain the data that should be extracted.  
-**Important:** Separate columns using a comma (,) even if your CSV file uses another delimiter!
-
-The following columns are supported:
-
-| Field       | Notes                                                                                                                                                                                                                                                         |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| date        | Transaction's date. Set the format using `date_format`                                                                                                                                                                                                        |
-| skip        | Use to ignore a column                                                                                                                                                                                                                                        |
-| inflow      | Use in combination with 'outflow'                                                                                                                                                                                                                             |
-| outflow     | Use in combination with 'inflow'                                                                                                                                                                                                                              |
-| amount      | If instead of separate 'inflow' and 'outflow' columns, your bank uses a single column: use 'amount'. Negative amounts are treated as outflow.                                                                                                                 |
-| memo        | You can add multiple columns to the memo field by naming them memo1, memo2, etc.                                                                                                                                                                              |
-| payee       | **Beta.** May create duplicate Payees in YNAB. If it does, I suggest adding your Payee as a _memo_ field instead                                                                                                                                              |
-| in_out_flag | While uncommon, some banks use a single 'amount' column with only positive numbers. A separate column, 'in_out_flag' indicates whether the money's going in or out of the account. If you use this column, you should also set the option `outflow_indicator` |
-
-### `outflow_indicator`
-
-```yaml
-outflow_indicator: Out
-# Only use this option if your CSV uses an in_out_flag
-```
-
-If the value in column `in_out_flag` starts with the `outflow_indicator`, the amount is treated as outflow. Otherwise it's inflow.
-
-### `date_format`
-
-```yaml
-date_format: yyyy-MM-dd # e.g. 2020-04-20
-date_format: M/d/yyyy   # e.g. 4/20/2020
-date_format: dd/MM/yyyy # e.g. 20/04/2020
-```
-
-Date format used in your bank's csv file. For all possibilities, visit [table of possible tokens](https://moment.github.io/luxon/#/parsing?id=table-of-tokens)
-
-### `thousand_separator`
-
-```yaml
-thousand_separator: "," # e.g. 1,234.00 (comma)
-thousand_separator: "." # e.g. 1.234,00 (dot)
-thousand_separator: ""  # e.g. 12345.00 (no separator)
-```
-
-The thousands separator used by your bank. Default: _no separator_.
-
-### `decimal_separator`
-
-```yaml
-decimal_separator: "," # e.g. 420,69 (comma)
-decimal_separator: "." # e.g. 420.69 (dot)
-decimal_separator: ""  # Auto-detect separator. Not recommended.
-```
-
-The decimals separator used by your bank. The tool tries to auto-detect the separator if you don't set one **(not recommended)**.
-
-## Upload to YNAB
-
-### `upload_transactions`
-
-```yaml
-upload_transactions: true  # Upload transactions to YNAB after processing
-upload_transactions: false # Don't upload
-```
-
-**Note:** If a file has the 'upload' option set, it will override this setting.
-
-### `ynab_token`
-
-```yaml
-ynab_token: 1c8cdd9e-c923-N0P3-9960-28664a2cd4ae
-```
-
-Your YNAB Personal Access Token. To create one, visit: https://app.youneedabudget.com/settings/developer
-
-This token is only used to communicate with the YNAB API. It otherwise won't leave your system and doesn't get send to anyone other than YNAB. If you suspect somebody knows your token other than yourself, you should revoke it using the link above.
-
-Required if you want ynab-buddy to upload transactions for you.
+## Field reference
+
+- `import_from`: Directory to scan for bank files.
+- `skip_path_confirmation`: If `true`, uses `import_from` without prompting.
+- `search_subdirectories`: If `true`, includes subfolders.
+- `bank_transaction_files`: One entry per account. Each needs:
+  - `pattern`: Glob-style filename pattern (supports subpaths).
+  - `parser`: Name of a parser defined in `parsers`.
+  - `ynab_budget_id`, `ynab_account_id`: IDs from the YNAB URL.
+  - `ynab_flag_color`: Optional; one of purple/blue/green/yellow/red/orange.
+  - `upload`: Overrides `upload_transactions` for this file.
+  - `save_parsed_file`: Write `<original>.YNAB.csv`.
+  - `delete_original_file`: Remove the source after processing.
+- `parsers`: Defines how to read a bank’s CSV.
+  - `columns`: Use `date`, `inflow`, `outflow`, `amount`, `memo`, `memo2`, `payee`, `in_out_flag`, or `skip`. Separate with commas regardless of CSV delimiter.
+  - `date_format`: Luxon format string (e.g., `M/d/yyyy`, `yyyy-MM-dd`).
+  - `thousand_separator` / `decimal_separator`: Set as needed (leave empty to skip thousands).
+  - `outflow_indicator`: Required only if using `in_out_flag`.
+- `upload_to_ynab`:
+  - `upload_transactions`: Default upload behavior; can be overridden per file with `upload`.
+  - `ynab_token`: Personal access token (https://app.youneedabudget.com/settings/developer).
+- `configuration_done`: Set to `true` when finished; otherwise the app will stop and show setup instructions.
+
+## Tips
+
+- If your bank uses a single `amount` column with only positive numbers, add `in_out_flag` and `outflow_indicator` to the parser.
+- To reset the template, delete `~/ynab-buddy/config.yaml` and run `ynab-buddy` again (or use `--setup-hooks` to eject hooks, which also ensures the config exists).
