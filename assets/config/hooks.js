@@ -1,3 +1,5 @@
+// See docs/HOOKS.md for how to customize these hooks.
+
 function onConfigurationLoaded(config) {
   return config;
 }

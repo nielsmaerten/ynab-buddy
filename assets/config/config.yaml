@@ -1,3 +1,4 @@
+# See docs/CONFIGURATION.md for the full configuration guide.
 import_from: "c:/users/test/downloads"
 skip_path_confirmation: false
 search_subdirectories: true

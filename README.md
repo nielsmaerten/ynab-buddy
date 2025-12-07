@@ -1,68 +1,99 @@
 # ynab-buddy
 
-### Easily convert (csv) files from _any_ bank and upload them directly to your [YNAB](https://ynab.com) Budget.
+Turn cryptic bank downloads into clean, YNAB-ready transactions. Works with *any* bank.
 
-No more hassle with csv-converters and manual file uploads! Just download transactions from your bank, run ynab-buddy, and watch your transactions appear in YNAB.
+---
 
-https://user-images.githubusercontent.com/4604406/192013081-5b00b20c-9b67-4a74-83b0-f8ba7b728f5e.mp4
+## What it does
 
-> Created with ☕ by [@nielsmaerten](https://github.com/nielsmaerten)  
-> [![codecov](https://codecov.io/gh/nielsmaerten/ynab-buddy/branch/main/graph/badge.svg?token=W3P5UTSTU6)](https://codecov.io/gh/nielsmaerten/ynab-buddy) [![Test](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/test.yml/badge.svg)](https://github.com/nielsmaerten/ynab-buddy/actions/workflows/test.yml)
+* Converts CSV files from **any bank** into files the YNAB can understand.
+* Uploads transactions directly to **YNAB**, or exports a YNAB‑friendly CSV.
+* Works on **macOS, Windows, and Linux** via the CLI or bundled executables.
 
-## 📚 Table of Contents
+---
 
-- [🚀 How to Install](#how-to-install)
-- [📈 How to Use](#how-to-use)
-- [⚙️ How to Configure](#how-to-configure)
-- [🆘 Where to Get Help](#where-to-get-help)
-- [😊 Coffee?](#😊-coffee)
-- [⚠️ Disclaimer](#disclaimer)
+## Quick start
 
-## 🚀 How to Install
+### 1) Install
 
-- If you've got Node.js installed, running ynab-buddy is as easy as:
+* **With Node.js:**
 
   ```bash
   npx ynab-buddy
   ```
-- Don't have Node.js? No worries! Download a pre-built executable for your OS from the [releases page](https://github.com/nielsmaerten/ynab-buddy/releases/latest).
-  
+* **Without Node:** download the latest release for your system: [https://github.com/nielsmaerten/ynab-buddy/releases/latest](https://github.com/nielsmaerten/ynab-buddy/releases/latest)
 
-## 📈 How to Use
+### 2) Configure your bank file
 
-1. **Download** CSV-files containing your transactions from your bank
-2. **Run** `ynab-buddy` from your terminal/command line, or double-click the executable
-3. **Done**! Your transactions are now in YNAB. Start categorizing and take control of your finances :)
+When you run ynab-buddy for the first time, it creates a config file in:
 
-## ⚙️ How to Configure
+```
+~/ynab-buddy/config.yaml
+```
 
-When you run ynab-buddy for the first time, a configuration file will be created in your home directory. This file helps ynab-buddy understand the structure of your bank's files and how to process them.
+Open it and follow the instructions. You'll set:
 
-To make ynab-buddy work seamlessly with your bank, open the config file and follow the instructions provided in the comments.
+* Where your bank downloads land.
+* How your bank's CSV is structured.
+* Which YNAB budget + account the transactions go to.
 
-- Config location: `~/ynab-buddy/config.yaml` (auto-created on first run)
-- Hooks (optional): place `~/ynab-buddy/hooks.js` to customize parsing. To create a starter hooks file, run `ynab-buddy --setup-hooks`. If the file is absent, hooks are simply disabled.
+Need a walkthrough? See the **Configuration Guide**: `docs/CONFIGURATION.md`.
 
-## 🆘 Where to Get Help
+### 3) Import into YNAB
 
-- [FAQs](./docs/FAQ.md)
-- For general help: [GitHub Discussions](https://github.com/nielsmaerten/ynab-buddy/discussions)
-- For bugs: [GitHub Issues](https://github.com/nielsmaerten/ynab-buddy/issues)
-- Tech docs (for developers): [CONTRIBUTING.md](docs/CONTRIBUTING.md)
-- Please **DO NOT** contact YNAB Support. This is a community project, not an official YNAB service.
+Download your bank CSVs, then run:
 
-## ☕ budget nerd + coffee = ynab-buddy 
+```bash
+ynab-buddy
+```
 
-Did ynab-buddy save you some time? If so, consider showing your support by buying me a coffee! Your kind gesture helps me continue improving and maintaining this tool for the YNAB community.
+ynab-buddy will:
 
-[☕ Buy me a coffee](https://ko-fi.com/nielsmaerten)  
-[⭐ Leave a star on GitHub](https://github.com/nielsmaerten/ynab-buddy)
+1. Parse the CSV using your template.
+2. Upload transactions to your chosen YNAB account.
 
-Thank you for your support! 🙌
+Prefer reviewing first? Set `upload: false` in your config, and ynab‑buddy will generate a `.YNAB.csv` for manual import.
 
-## ⚠️ Disclaimer
+---
 
-ynab-buddy is a **community-made tool** for YNAB.  
-The YNAB support team, while awesome, cannot help you resolve issues with this tool.
+## Optional: customize with hooks
 
-This software is provided "as-is", without warranty of any kind. See the [full MIT License](./LICENSE)
+Want to adjust payees, categories, amounts, or apply your own rules? Advanced users can customize pretty much every step of the process. Just run
+
+```
+ynab-buddy --setup-hooks
+```
+
+This will provide you with a starter file in:
+
+```bash
+~/ynab-buddy/hooks.js
+```
+
+See `docs/HOOKS.md` to learn more.
+
+---
+
+## Where to get help
+
+* **FAQ:** `docs/FAQ.md`
+* **Discussions:** [https://github.com/nielsmaerten/ynab-buddy/discussions](https://github.com/nielsmaerten/ynab-buddy/discussions)
+* **Bug reports:** [https://github.com/nielsmaerten/ynab-buddy/issues](https://github.com/nielsmaerten/ynab-buddy/issues)
+* Advanced setup / development: `docs/CONTRIBUTING.md`
+
+> Please avoid contacting YNAB Support about this project. It’s community‑maintained.
+
+---
+
+## Support the project
+
+If ynab‑buddy is saving you some time:
+
+* Buy me a coffee: [https://ko-fi.com/nielsmaerten](https://ko-fi.com/nielsmaerten)
+* Leave a star on GitHub: [https://github.com/nielsmaerten/ynab-buddy](https://github.com/nielsmaerten/ynab-buddy)
+
+---
+
+## Disclaimer
+
+ynab‑buddy is community software, provided as‑is with no warranty. See the MIT License for details.
