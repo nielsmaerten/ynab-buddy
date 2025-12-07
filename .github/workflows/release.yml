@@ -26,23 +26,37 @@ jobs:
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           
-          # Get the previous release tag
-          PREVIOUS_TAG=$(git tag --sort=-version:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | head -n 2 | tail -n 1)
+          # Get the release tag name (e.g., v2.0.5)
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+          RELEASE_VERSION="${RELEASE_TAG#v}"
           
-          if [ -z "$PREVIOUS_TAG" ]; then
-            echo "No previous release found, proceeding with release"
+          echo "Package.json version: $CURRENT_VERSION"
+          echo "Release tag version: $RELEASE_VERSION"
+          
+          # Check if package.json version matches the release tag
+          if [ "$CURRENT_VERSION" != "$RELEASE_VERSION" ]; then
+            echo "ERROR: Version mismatch! package.json ($CURRENT_VERSION) does not match release tag ($RELEASE_VERSION)"
+            echo "should-release=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Get all previous release tags
+          TAGS=$(git tag --sort=-version:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | grep -v "^${RELEASE_TAG}$")
+          
+          if [ -z "$TAGS" ]; then
+            echo "First release, proceeding"
             echo "should-release=true" >> $GITHUB_OUTPUT
             exit 0
           fi
           
-          # Get version from previous tag (remove 'v' prefix)
+          # Get the most recent previous tag
+          PREVIOUS_TAG=$(echo "$TAGS" | head -n 1)
           PREVIOUS_VERSION="${PREVIOUS_TAG#v}"
           
-          echo "Current version: $CURRENT_VERSION"
-          echo "Previous version: $PREVIOUS_VERSION"
+          echo "Previous release version: $PREVIOUS_VERSION"
           
           if [ "$CURRENT_VERSION" = "$PREVIOUS_VERSION" ]; then
-            echo "Version has not changed, skipping release"
+            echo "Version has not changed from previous release, skipping"
             echo "should-release=false" >> $GITHUB_OUTPUT
           else
             echo "Version has changed, proceeding with release"
