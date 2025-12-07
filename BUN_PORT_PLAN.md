@@ -56,3 +56,6 @@
 - Document hooks behavior and `--setup-hooks`, and confirm runtime gracefully disables hooks when the file is absent.
 - Decide npm publish shape: ship transpiled JS + assets (preferred) vs wrapper downloader; update files array/main/bin accordingly.
 - Update CI/release workflow to Bun (install/test/lint/build binaries/upload), wire in dockerized integration tests, and refresh docs/RELEASE.md for new commands.
+
+## Pending prerelease
+- Plan: tag/publish `3.0.0-preview.1` (npm `dist-tag next` for prerelease; stable skips the tag) after merging to `main`, letting Bun workflows build binaries and push npm (JS+assets) via GitHub OIDC trusted publisher. Validate on target systems manually.

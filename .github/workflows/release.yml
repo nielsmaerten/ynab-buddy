@@ -120,12 +120,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install
         run: bun install --frozen-lockfile
+      - name: Build JS
+        run: bun run build
 
-      - name: Publish to npm
-        run: npm publish
+      - name: Compute publish args
+        id: publish-args
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [[ "$VERSION" == *-* ]]; then
+            echo "publish-args=--tag next" >> $GITHUB_OUTPUT
+            echo "Publishing prerelease with --tag next"
+          else
+            echo "publish-args=" >> $GITHUB_OUTPUT
+            echo "Publishing stable without extra tag"
+          fi
+
+      - name: Publish to npm (OIDC)
+        run: npm publish ${{ steps.publish-args.outputs.publish-args }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
