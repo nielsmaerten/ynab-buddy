@@ -74,7 +74,7 @@
     "minimatch": "^9.0.0",
     "pako": "^2.1.0",
     "prompts": "^2.4.2",
-    "ynab": "2.2"
+    "ynab": "2.10.0"
   },
   "resolutions": {
     "minimist": "^1.2.7"

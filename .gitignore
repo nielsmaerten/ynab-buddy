@@ -18,3 +18,4 @@ coverage/
 # Editor/OS noise
 .vscode/
 .DS_Store
+package-lock.json

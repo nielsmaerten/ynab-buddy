@@ -19,13 +19,13 @@ export function upload(parsedFile: ParsedBankFile, config: Configuration) {
   // Bail if there are no transactions for this file
   if (!parsedFile.transactions.length) return;
 
-  // Convert internal Transactions to YNAB.SaveTransactions
-  const transactions: YNAB.SaveTransaction[] = parsedFile.transactions
+  // Convert internal Transactions to YNAB.NewTransactions
+  const transactions: YNAB.NewTransaction[] = parsedFile.transactions
     .filter((tx) => tx.amount) // Discard transactions with an amount of 0 (PR#295)
     .map((tx) => addYnabProps(tx, accountId, flagColor)); // Add YNAB-specific properties
 
   // Group transactions by import_id
-  const txByImportId: { [importId: string]: YNAB.SaveTransaction[] } = {};
+  const txByImportId: { [importId: string]: YNAB.NewTransaction[] } = {};
   transactions.forEach((tx) => {
     if (!txByImportId[tx.import_id!]) txByImportId[tx.import_id!] = [];
     txByImportId[tx.import_id!].push(tx);
@@ -44,7 +44,7 @@ export function upload(parsedFile: ParsedBankFile, config: Configuration) {
 }
 
 export const sendToYnab = (
-  TXs: YNAB.SaveTransaction[],
+  TXs: YNAB.NewTransaction[],
   budgetId: string,
   token: string,
 ) => {
@@ -87,7 +87,7 @@ function addYnabProps(
   tx: Transaction,
   accountId: string,
   flagColor: string,
-): YNAB.SaveTransaction {
+): YNAB.NewTransaction {
   // Amount is expressed in milliunits. Any precision beyond 0.001 is discarded
   const milliunits = Math.floor(tx.amount * 1000);
 
