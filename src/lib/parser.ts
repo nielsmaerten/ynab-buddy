@@ -1,6 +1,5 @@
 import { BankFile, ParsedBankFile, Parser, Transaction } from "../types";
-import parseCsv from "csv-parse/lib/sync";
-import { Options as parseOptions } from "csv-parse";
+import { parse as parseCsv, Options as parseOptions } from "csv-parse/sync";
 import { DateTime } from "luxon";
 import fs from "fs";
 import chalk from "chalk";
@@ -171,5 +170,5 @@ function deduplicateColumns(record: any) {
 const baseParseOptions: parseOptions = {
   skipEmptyLines: true,
   relaxColumnCount: true,
-  columnsDuplicatesToArray: true,
+  group_columns_by_name: true,
 };

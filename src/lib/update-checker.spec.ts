@@ -1,12 +1,4 @@
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  jest,
-  mock,
-} from "bun:test";
+import { beforeEach, describe, expect, it, mock } from "bun:test";
 import type { Mock } from "bun:test";
 import { checkForUpdate } from "./update-checker";
 
@@ -16,13 +8,7 @@ global.fetch = fetchMock as any;
 
 describe("checkForUpdate", () => {
   beforeEach(() => {
-    mock.clearAllMocks();
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
+    fetchMock.mockReset();
   });
 
   it("should return updateAvailable: true when a newer version is available", async () => {
@@ -36,9 +22,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.1.0" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: true,
@@ -57,9 +45,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.0.5" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: false,
@@ -78,9 +68,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.0.0" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: false,
@@ -99,9 +91,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.1.0" }),
       } as any);
 
-    const promise = checkForUpdate("v2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "v2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: true,
@@ -112,9 +106,11 @@ describe("checkForUpdate", () => {
   it("should return null when fetch fails", async () => {
     fetchMock.mockRejectedValueOnce(new Error("Network error"));
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toBeNull();
   });
@@ -125,9 +121,11 @@ describe("checkForUpdate", () => {
       status: 404,
     } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toBeNull();
   });
@@ -138,9 +136,11 @@ describe("checkForUpdate", () => {
       json: async () => ({}),
     } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toBeNull();
   });
@@ -156,9 +156,11 @@ describe("checkForUpdate", () => {
         status: 404,
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toBeNull();
   });
@@ -174,9 +176,11 @@ describe("checkForUpdate", () => {
         json: async () => ({}),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toBeNull();
   });
@@ -192,9 +196,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "3.0.0" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: true,
@@ -213,9 +219,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.1.0" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: true,
@@ -234,9 +242,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.0.6" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: true,
@@ -255,9 +265,11 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.0.5-beta" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "nielsmaerten", "ynab-buddy");
-    jest.runAllTimers();
-    const result = await promise;
+    const result = await checkForUpdate(
+      "2.0.5",
+      "nielsmaerten",
+      "ynab-buddy",
+    );
 
     expect(result).toEqual({
       updateAvailable: false,
@@ -276,9 +288,7 @@ describe("checkForUpdate", () => {
         json: async () => ({ version: "2.0.5" }),
       } as any);
 
-    const promise = checkForUpdate("2.0.5", "owner", "repo");
-    jest.runAllTimers();
-    await promise;
+    await checkForUpdate("2.0.5", "owner", "repo");
 
     expect(fetchMock).toHaveBeenNthCalledWith(
       1,
