@@ -15,7 +15,7 @@
         "minimatch": "^9.0.0",
         "pako": "^2.1.0",
         "prompts": "^2.4.2",
-        "ynab": "2.2",
+        "ynab": "2.10.0",
       },
       "devDependencies": {
         "@types/js-yaml": "^4.0.5",
@@ -698,7 +698,7 @@
 
     "xdg-basedir": ["xdg-basedir@5.1.0", "", {}, "sha512-GCPAHLvrIH13+c0SuacwvRYj2SxJXQ4kaVTT5xgL3kPrz56XxkF21IGhjSE1+W0aw7gpBWRGXLCPnPby6lSpmQ=="],
 
-    "ynab": ["ynab@2.2.0", "", { "dependencies": { "fetch-ponyfill": "^7.1.0" } }, "sha512-07RFqEqhoIxge1JzYriMDxTyX2yEhKhUxHATzIx2V81hQYQs0UV7ieZ5dvUaSbE+05wWAg+tbScfh2PxghmkwA=="],
+    "ynab": ["ynab@2.10.0", "", { "dependencies": { "fetch-ponyfill": "^7.1.0" } }, "sha512-zDH++4mbFpVDbDW1qIYS3pG3sPVtdth7c45aEfU7pVNqIcK6aVzK8eSksyOarrzaPKSq4OA9AXq1ixC7WGdpow=="],
 
     "yoctocolors": ["yoctocolors@2.1.2", "", {}, "sha512-CzhO+pFNo8ajLM2d2IW/R93ipy99LWjtwblvC1RsoSUMZgyLbYFr221TnSNT7GjGdYui6P459mw9JH/g/zW2ug=="],
 
