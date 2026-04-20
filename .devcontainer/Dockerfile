@@ -1,5 +1,5 @@
 # [Choice] Node.js version
-FROM mcr.microsoft.com/devcontainers/typescript-node:20
+FROM mcr.microsoft.com/devcontainers/typescript-node:24
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
