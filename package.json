@@ -59,7 +59,7 @@
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "3.3.0",
     "np": "^10.0.0",
-    "prettier": "3.9.9",
+    "prettier": "3.9.10",
     "rimraf": "^6.1.2",
     "typescript": "^5.0.4"
   },
@@ -79,7 +79,7 @@
   "resolutions": {
     "minimist": "^1.2.7"
   },
-  "packageManager": "bun@1.4.2",
+  "packageManager": "bun@1.4.3",
   "np": {
     "cleanup": false
   }
