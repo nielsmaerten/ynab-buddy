@@ -79,7 +79,7 @@
   "resolutions": {
     "minimist": "^1.2.7"
   },
-  "packageManager": "bun@1.4.3",
+  "packageManager": "bun@1.4.4",
   "np": {
     "cleanup": false
   }
